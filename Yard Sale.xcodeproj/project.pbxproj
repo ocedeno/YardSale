@@ -97,12 +97,13 @@
 		061FF0681E7ED5FF0075F033 /* Yard Sale */ = {
 			isa = PBXGroup;
 			children = (
+				061FF09C1E7F1C710075F033 /* New Group */,
 				061FF0691E7ED5FF0075F033 /* AppDelegate.swift */,
-				061FF06B1E7ED5FF0075F033 /* ViewController.swift */,
-				061FF06D1E7ED5FF0075F033 /* Main.storyboard */,
-				061FF0701E7ED5FF0075F033 /* Assets.xcassets */,
-				061FF0721E7ED5FF0075F033 /* LaunchScreen.storyboard */,
-				061FF0751E7ED5FF0075F033 /* Info.plist */,
+				061FF09B1E7F1C5F0075F033 /* Views */,
+				061FF09A1E7F1C550075F033 /* Model */,
+				061FF0991E7F1C4D0075F033 /* Controllers */,
+				061FF0971E7EDAC90075F033 /* Assets */,
+				061FF0981E7EDAD00075F033 /* Supporting Files */,
 			);
 			path = "Yard Sale";
 			sourceTree = "<group>";
@@ -123,6 +124,53 @@
 				061FF08B1E7ED5FF0075F033 /* Info.plist */,
 			);
 			path = "Yard SaleUITests";
+			sourceTree = "<group>";
+		};
+		061FF0971E7EDAC90075F033 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				061FF06D1E7ED5FF0075F033 /* Main.storyboard */,
+				061FF0721E7ED5FF0075F033 /* LaunchScreen.storyboard */,
+				061FF0701E7ED5FF0075F033 /* Assets.xcassets */,
+			);
+			name = Assets;
+			sourceTree = "<group>";
+		};
+		061FF0981E7EDAD00075F033 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				061FF0751E7ED5FF0075F033 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		061FF0991E7F1C4D0075F033 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				061FF06B1E7ED5FF0075F033 /* ViewController.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		061FF09A1E7F1C550075F033 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		061FF09B1E7F1C5F0075F033 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		061FF09C1E7F1C710075F033 /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "New Group";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
