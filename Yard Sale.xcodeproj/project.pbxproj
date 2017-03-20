@@ -14,10 +14,10 @@
 		061FF0741E7ED5FF0075F033 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 061FF0721E7ED5FF0075F033 /* LaunchScreen.storyboard */; };
 		061FF07F1E7ED5FF0075F033 /* Yard_SaleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 061FF07E1E7ED5FF0075F033 /* Yard_SaleTests.swift */; };
 		061FF08A1E7ED5FF0075F033 /* Yard_SaleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 061FF0891E7ED5FF0075F033 /* Yard_SaleUITests.swift */; };
-		06A44B4B1E7F4ABB007ECDC0 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06A44B491E7F4ABB007ECDC0 /* Realm.framework */; };
-		06A44B4C1E7F4ABB007ECDC0 /* Realm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 06A44B491E7F4ABB007ECDC0 /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		06A44B4D1E7F4ABB007ECDC0 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06A44B4A1E7F4ABB007ECDC0 /* RealmSwift.framework */; };
-		06A44B4E1E7F4ABB007ECDC0 /* RealmSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 06A44B4A1E7F4ABB007ECDC0 /* RealmSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		06A44B541E808380007ECDC0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 06A44B531E808380007ECDC0 /* GoogleService-Info.plist */; };
+		314FBD6D89F76338468C9E6C /* Pods_Yard_Sale.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12F91F444C7A938EACA6AE3D /* Pods_Yard_Sale.framework */; };
+		3410EA02D7526A37F4DAA1CE /* Pods_Yard_SaleUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F67BBF3D063DDA42386B4DF /* Pods_Yard_SaleUITests.framework */; };
+		3DC06E68638FC3E7CCEEF161 /* Pods_Yard_SaleTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85969B8D32E85771FD84BB2E /* Pods_Yard_SaleTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,8 +44,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				06A44B4E1E7F4ABB007ECDC0 /* RealmSwift.framework in Embed Frameworks */,
-				06A44B4C1E7F4ABB007ECDC0 /* Realm.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -66,8 +64,16 @@
 		061FF0851E7ED5FF0075F033 /* Yard SaleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Yard SaleUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		061FF0891E7ED5FF0075F033 /* Yard_SaleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Yard_SaleUITests.swift; sourceTree = "<group>"; };
 		061FF08B1E7ED5FF0075F033 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		06A44B491E7F4ABB007ECDC0 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Realm.framework; sourceTree = "<group>"; };
-		06A44B4A1E7F4ABB007ECDC0 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RealmSwift.framework; sourceTree = "<group>"; };
+		06A44B531E808380007ECDC0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		12F91F444C7A938EACA6AE3D /* Pods_Yard_Sale.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Yard_Sale.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		197B33F84B91DB4F3471D44F /* Pods-Yard SaleUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Yard SaleUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Yard SaleUITests/Pods-Yard SaleUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		3731C5412FF82B366F8826BC /* Pods-Yard SaleUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Yard SaleUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Yard SaleUITests/Pods-Yard SaleUITests.release.xcconfig"; sourceTree = "<group>"; };
+		67F2EBF0BE4790C51E97CD54 /* Pods-Yard SaleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Yard SaleTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Yard SaleTests/Pods-Yard SaleTests.debug.xcconfig"; sourceTree = "<group>"; };
+		85969B8D32E85771FD84BB2E /* Pods_Yard_SaleTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Yard_SaleTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8F67BBF3D063DDA42386B4DF /* Pods_Yard_SaleUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Yard_SaleUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A172870025ABAA9E171632A2 /* Pods-Yard SaleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Yard SaleTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Yard SaleTests/Pods-Yard SaleTests.release.xcconfig"; sourceTree = "<group>"; };
+		F6E601D115674BFB3AD44103 /* Pods-Yard Sale.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Yard Sale.release.xcconfig"; path = "Pods/Target Support Files/Pods-Yard Sale/Pods-Yard Sale.release.xcconfig"; sourceTree = "<group>"; };
+		F896DD8403579E103020CD16 /* Pods-Yard Sale.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Yard Sale.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Yard Sale/Pods-Yard Sale.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,8 +81,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				06A44B4D1E7F4ABB007ECDC0 /* RealmSwift.framework in Frameworks */,
-				06A44B4B1E7F4ABB007ECDC0 /* Realm.framework in Frameworks */,
+				314FBD6D89F76338468C9E6C /* Pods_Yard_Sale.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -84,6 +89,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3DC06E68638FC3E7CCEEF161 /* Pods_Yard_SaleTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -91,6 +97,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3410EA02D7526A37F4DAA1CE /* Pods_Yard_SaleUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -100,12 +107,12 @@
 		061FF05D1E7ED5FE0075F033 = {
 			isa = PBXGroup;
 			children = (
-				06A44B491E7F4ABB007ECDC0 /* Realm.framework */,
-				06A44B4A1E7F4ABB007ECDC0 /* RealmSwift.framework */,
 				061FF0681E7ED5FF0075F033 /* Yard Sale */,
 				061FF07D1E7ED5FF0075F033 /* Yard SaleTests */,
 				061FF0881E7ED5FF0075F033 /* Yard SaleUITests */,
 				061FF0671E7ED5FF0075F033 /* Products */,
+				835E0D75BD8D2ED5F49355D5 /* Pods */,
+				978134E0C9853DD2250DD5CF /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -165,6 +172,7 @@
 			isa = PBXGroup;
 			children = (
 				061FF0751E7ED5FF0075F033 /* Info.plist */,
+				06A44B531E808380007ECDC0 /* GoogleService-Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -198,6 +206,29 @@
 			name = Utility;
 			sourceTree = "<group>";
 		};
+		835E0D75BD8D2ED5F49355D5 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F896DD8403579E103020CD16 /* Pods-Yard Sale.debug.xcconfig */,
+				F6E601D115674BFB3AD44103 /* Pods-Yard Sale.release.xcconfig */,
+				67F2EBF0BE4790C51E97CD54 /* Pods-Yard SaleTests.debug.xcconfig */,
+				A172870025ABAA9E171632A2 /* Pods-Yard SaleTests.release.xcconfig */,
+				197B33F84B91DB4F3471D44F /* Pods-Yard SaleUITests.debug.xcconfig */,
+				3731C5412FF82B366F8826BC /* Pods-Yard SaleUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		978134E0C9853DD2250DD5CF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				12F91F444C7A938EACA6AE3D /* Pods_Yard_Sale.framework */,
+				85969B8D32E85771FD84BB2E /* Pods_Yard_SaleTests.framework */,
+				8F67BBF3D063DDA42386B4DF /* Pods_Yard_SaleUITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -205,11 +236,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 061FF08E1E7ED5FF0075F033 /* Build configuration list for PBXNativeTarget "Yard Sale" */;
 			buildPhases = (
+				987EA1991B453F23021E2842 /* [CP] Check Pods Manifest.lock */,
 				061FF0621E7ED5FE0075F033 /* Sources */,
 				061FF0631E7ED5FE0075F033 /* Frameworks */,
 				061FF0641E7ED5FE0075F033 /* Resources */,
 				06A44B4F1E7F4ABB007ECDC0 /* Embed Frameworks */,
-				06A44B501E7F4AE6007ECDC0 /* ShellScript */,
+				06A44B501E7F4AE6007ECDC0 /* Run Script */,
+				244942556386257F181F6E7F /* [CP] Embed Pods Frameworks */,
+				41B86008FA192991F9E0D59F /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -224,9 +258,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 061FF0911E7ED5FF0075F033 /* Build configuration list for PBXNativeTarget "Yard SaleTests" */;
 			buildPhases = (
+				6F77ED511BFD9D2F0CF626C9 /* [CP] Check Pods Manifest.lock */,
 				061FF0761E7ED5FF0075F033 /* Sources */,
 				061FF0771E7ED5FF0075F033 /* Frameworks */,
 				061FF0781E7ED5FF0075F033 /* Resources */,
+				89110F95AB29B685E255813A /* [CP] Embed Pods Frameworks */,
+				498CF1D8D70E657A75DC8DF3 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -242,9 +279,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 061FF0941E7ED5FF0075F033 /* Build configuration list for PBXNativeTarget "Yard SaleUITests" */;
 			buildPhases = (
+				C3BAF89FAB4A308486DE2294 /* [CP] Check Pods Manifest.lock */,
 				061FF0811E7ED5FF0075F033 /* Sources */,
 				061FF0821E7ED5FF0075F033 /* Frameworks */,
 				061FF0831E7ED5FF0075F033 /* Resources */,
+				3F3567BEB39ED20741B3D439 /* [CP] Embed Pods Frameworks */,
+				75B9239028B893DFEB0145A8 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -311,6 +351,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				061FF0741E7ED5FF0075F033 /* LaunchScreen.storyboard in Resources */,
+				06A44B541E808380007ECDC0 /* GoogleService-Info.plist in Resources */,
 				061FF0711E7ED5FF0075F033 /* Assets.xcassets in Resources */,
 				061FF06F1E7ED5FF0075F033 /* Main.storyboard in Resources */,
 			);
@@ -333,18 +374,154 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		06A44B501E7F4AE6007ECDC0 /* ShellScript */ = {
+		06A44B501E7F4AE6007ECDC0 /* Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "Run Script";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "bash \"${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework/strip-frameworks.sh\"\n";
+		};
+		244942556386257F181F6E7F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Yard Sale/Pods-Yard Sale-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3F3567BEB39ED20741B3D439 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Yard SaleUITests/Pods-Yard SaleUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		41B86008FA192991F9E0D59F /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Yard Sale/Pods-Yard Sale-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		498CF1D8D70E657A75DC8DF3 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Yard SaleTests/Pods-Yard SaleTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6F77ED511BFD9D2F0CF626C9 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		75B9239028B893DFEB0145A8 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Yard SaleUITests/Pods-Yard SaleUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		89110F95AB29B685E255813A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Yard SaleTests/Pods-Yard SaleTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		987EA1991B453F23021E2842 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		C3BAF89FAB4A308486DE2294 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -502,6 +679,7 @@
 		};
 		061FF08F1E7ED5FF0075F033 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F896DD8403579E103020CD16 /* Pods-Yard Sale.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = HC236JEG46;
@@ -519,6 +697,7 @@
 		};
 		061FF0901E7ED5FF0075F033 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F6E601D115674BFB3AD44103 /* Pods-Yard Sale.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = HC236JEG46;
@@ -536,6 +715,7 @@
 		};
 		061FF0921E7ED5FF0075F033 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 67F2EBF0BE4790C51E97CD54 /* Pods-Yard SaleTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -551,6 +731,7 @@
 		};
 		061FF0931E7ED5FF0075F033 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A172870025ABAA9E171632A2 /* Pods-Yard SaleTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -566,6 +747,7 @@
 		};
 		061FF0951E7ED5FF0075F033 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 197B33F84B91DB4F3471D44F /* Pods-Yard SaleUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = HC236JEG46;
@@ -580,6 +762,7 @@
 		};
 		061FF0961E7ED5FF0075F033 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3731C5412FF82B366F8826BC /* Pods-Yard SaleUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = HC236JEG46;
