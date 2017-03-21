@@ -29,8 +29,8 @@ class SignUpViewController: UIViewController, CLLocationManagerDelegate
     lazy var locationManager: CLLocationManager = {
         var _locationManager = CLLocationManager()
         _locationManager.delegate = self
-        _locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-        _locationManager.allowsBackgroundLocationUpdates = true // allow in background
+        _locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        _locationManager.activityType = .automotiveNavigation
         
         return _locationManager
     }()
@@ -75,24 +75,26 @@ class SignUpViewController: UIViewController, CLLocationManagerDelegate
         if (CLLocationManager.locationServicesEnabled())
         {
             self.locationManager.startUpdatingLocation()
-            
-            func locationManager(manager: CLLocationManager, didUpdateLocations: [CLLocation])
-            {
-                let userLocation: CLLocation = didUpdateLocations[0]
-                let lat = userLocation.coordinate.latitude
-                let lon = userLocation.coordinate.longitude
-                print("Lat: \(lat) and Lon:\(lon)")
-                //add coordinates to the Database
-            }
-            hasLocation = true
-        }else{
+        }else
+        {
             if checkAddressFields()
             {
                 let address = "\(addressField1.text) \(addressField2.text) \(stateField.text) \(zipCodeField.text)"
-                let userLocation = try forwardGeocoding(address: address)
+                let userLocation = forwardGeocoding(address: address)
                 //add coordinates to the Database
             }
         }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations: [CLLocation])
+    {
+        let userLocation: CLLocation = didUpdateLocations[0]
+        let lat = userLocation.coordinate.latitude
+        let lon = userLocation.coordinate.longitude
+        print("Lat: \(lat) and Lon:\(lon)")
+        //add coordinates to the Database
+        hasLocation = true
+        locationManager.stopUpdatingLocation()
     }
     
     func checkAddressFields() -> Bool
