@@ -21,8 +21,8 @@ class SignUpViewController: UIViewController, CLLocationManagerDelegate
     @IBOutlet weak var retypedPasswordField: UITextField!
     
     @IBOutlet weak var addressField1: UITextField!
+    @IBOutlet weak var cityField: UITextField!
     @IBOutlet weak var stateField: UITextField!
-    @IBOutlet weak var zipCodeField: UITextField!
     @IBOutlet weak var currentAddressLabel: UILabel!
     
     lazy var locationManager: CLLocationManager = {
@@ -62,8 +62,8 @@ class SignUpViewController: UIViewController, CLLocationManagerDelegate
     func addressUISetup(isHidden: Bool)
     {
         addressField1.isHidden = isHidden
+        cityField.isHidden = isHidden
         stateField.isHidden = isHidden
-        zipCodeField.isHidden = isHidden
         currentAddressLabel.isHidden = isHidden
     }
     
@@ -77,7 +77,7 @@ class SignUpViewController: UIViewController, CLLocationManagerDelegate
         {
             if checkAddressFields()
             {
-                let address = "\(addressField1.text!), \(stateField.text!), \(zipCodeField.text!)"
+                let address = "\(addressField1.text!), \(cityField.text!), \(stateField.text!)"
                 let userLocation = forwardGeocoding(address: address)
                 print("User Location based off of Address: \(userLocation)")
                 //add coordinates to the Database
@@ -108,9 +108,9 @@ class SignUpViewController: UIViewController, CLLocationManagerDelegate
             return false
         }
         
-        guard stateField.text != "" else
+        guard cityField.text != "" else
         {
-            let alertController = UIAlertController(title: "Missing Info", message: "Please enter your state.", preferredStyle: .alert)
+            let alertController = UIAlertController(title: "Missing Info", message: "Please enter your city.", preferredStyle: .alert)
             let defaultAction = UIAlertAction(title: "Dismiss", style: .cancel, handler: nil)
             alertController.addAction(defaultAction)
             present(alertController, animated: true, completion: nil)
@@ -118,9 +118,9 @@ class SignUpViewController: UIViewController, CLLocationManagerDelegate
             return false
         }
         
-        guard zipCodeField.text != "" else
+        guard stateField.text != "" else
         {
-            let alertController = UIAlertController(title: "Missing Info", message: "Please enter your zip code.", preferredStyle: .alert)
+            let alertController = UIAlertController(title: "Missing Info", message: "Please enter your state.", preferredStyle: .alert)
             let defaultAction = UIAlertAction(title: "Dismiss", style: .cancel, handler: nil)
             alertController.addAction(defaultAction)
             present(alertController, animated: true, completion: nil)
@@ -133,7 +133,7 @@ class SignUpViewController: UIViewController, CLLocationManagerDelegate
     
     func forwardGeocoding(address: String) -> CLLocation
     {
-        var clLocation: CLLocation?
+        var cLLocation: CLLocation?
         CLGeocoder().geocodeAddressString(address, completionHandler: { (placemarks, error) in
             
             guard error == nil else
@@ -154,7 +154,7 @@ class SignUpViewController: UIViewController, CLLocationManagerDelegate
             {
                 let placemark = placemarks?[0]
                 let location = placemark?.location
-                clLocation = location!
+                cLLocation = location!
                 let coordinate = location?.coordinate
                 print("\nlat: \(coordinate!.latitude), long: \(coordinate!.longitude)")
                 
@@ -169,7 +169,7 @@ class SignUpViewController: UIViewController, CLLocationManagerDelegate
             }
         })
         
-        return clLocation!
+        return cLLocation!
     }
     
     @IBAction func createAccount()
