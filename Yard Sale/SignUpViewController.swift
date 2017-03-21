@@ -9,8 +9,9 @@
 import UIKit
 import Firebase
 import FirebaseAuth
+import CoreLocation
 
-class SignUpViewController: UIViewController
+class SignUpViewController: UIViewController, CLLocationManagerDelegate
 {
     @IBOutlet weak var firstNameField: UITextField!
     @IBOutlet weak var lastNameField: UITextField!
@@ -23,11 +24,13 @@ class SignUpViewController: UIViewController
     @IBOutlet weak var stateField: UITextField!
     @IBOutlet weak var zipCodeField: UITextField!
     
+    var locationManager: CLLocationManager!
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
         addressUISetup(hidden: true)
+        locationManager.delegate = self
     }
     @IBAction func returnToLogin()
     {
@@ -39,6 +42,14 @@ class SignUpViewController: UIViewController
         if (sender.titleLabel?.text == "Yes")
         {
             addressUISetup(hidden: true)
+            if CLLocationManager.locationServicesEnabled() {
+                locationManager.requestAlwaysAuthorization()
+                locationManager.requestWhenInUseAuthorization()
+                locationManager.delegate = self
+                locationManager.desiredAccuracy = kCLLocationAccuracyBest
+                locationManager.startUpdatingLocation()
+            }
+            
         }else
         {
             addressUISetup(hidden: false)
