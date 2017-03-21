@@ -26,13 +26,19 @@ class SignUpViewController: UIViewController, CLLocationManagerDelegate
     @IBOutlet weak var zipCodeField: UITextField!
     @IBOutlet weak var currentAddressLabel: UILabel!
     
-    var locationManager = CLLocationManager()
+    lazy var locationManager: CLLocationManager = {
+        var _locationManager = CLLocationManager()
+        _locationManager.delegate = self
+        _locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+        _locationManager.allowsBackgroundLocationUpdates = true // allow in background
+        
+        return _locationManager
+    }()
     var hasLocation: Bool?
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        locationManager.delegate = self
         addressUISetup(isHidden: true)
     }
     @IBAction func returnToLogin()
@@ -47,17 +53,7 @@ class SignUpViewController: UIViewController, CLLocationManagerDelegate
             addressUISetup(isHidden: true)
             locationManager.requestAlwaysAuthorization()
             locationManager.requestWhenInUseAuthorization()
-            
-            if CLLocationManager.locationServicesEnabled()
-            {
-                locationManager.desiredAccuracy = kCLLocationAccuracyBest
-                locationManager.startUpdatingLocation()
-                getCoordinates()
-            }else{
-                addressUISetup(isHidden: false)
-                hasLocation = false
-            }
-            
+            getCoordinates()
         }else
         {
             addressUISetup(isHidden: false)
@@ -76,9 +72,10 @@ class SignUpViewController: UIViewController, CLLocationManagerDelegate
     
     func getCoordinates()
     {
-        let enabledLocation: Bool = CLLocationManager.locationServicesEnabled()
-        print(enabledLocation)
-        if (enabledLocation){
+        if (CLLocationManager.locationServicesEnabled())
+        {
+            self.locationManager.startUpdatingLocation()
+            
             func locationManager(manager: CLLocationManager, didUpdateLocations: [CLLocation])
             {
                 let userLocation: CLLocation = didUpdateLocations[0]
@@ -92,14 +89,8 @@ class SignUpViewController: UIViewController, CLLocationManagerDelegate
             if checkAddressFields()
             {
                 let address = "\(addressField1.text) \(addressField2.text) \(stateField.text) \(zipCodeField.text)"
-                do
-                {
-                    let userLocation = try forwardGeocoding(address: address)
-                    //add coordinates to the Database
-                    hasLocation = true
-                } catch {
-                    hasLocation = false
-                }
+                let userLocation = try forwardGeocoding(address: address)
+                //add coordinates to the Database
             }
         }
     }
@@ -152,6 +143,7 @@ class SignUpViewController: UIViewController, CLLocationManagerDelegate
                     let defaultAction = UIAlertAction(title: "Dismiss", style: .cancel, handler: nil)
                     alertController.addAction(defaultAction)
                     self.present(alertController, animated: true, completion: nil)
+                    self.hasLocation = false
                 }
                 
                 return
