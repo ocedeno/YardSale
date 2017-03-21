@@ -137,7 +137,7 @@ class SignUpViewController: UIViewController, CLLocationManagerDelegate
             {
                 DispatchQueue.main.async
                 {
-                    let alertController = UIAlertController(title: "Incorrect Address", message: "Address information provided did not return a location. Try again.", preferredStyle: .alert)
+                    let alertController = UIAlertController(title: "Address Error", message: "Address information provided did not return a location. Try again.", preferredStyle: .alert)
                     let defaultAction = UIAlertAction(title: "Dismiss", style: .cancel, handler: nil)
                     alertController.addAction(defaultAction)
                     self.present(alertController, animated: true, completion: nil)
@@ -154,7 +154,7 @@ class SignUpViewController: UIViewController, CLLocationManagerDelegate
                     let placemark = placemarks?[0]
                     let location = placemark?.location
                     let coordinate = location?.coordinate
-                    print("\nlat: \(coordinate!.latitude), long: \(coordinate!.longitude)")
+                    print("lat: \(coordinate!.latitude), lon: \(coordinate!.longitude)")
                 }
             }else
             {
