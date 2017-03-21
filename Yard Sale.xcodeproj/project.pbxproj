@@ -14,6 +14,9 @@
 		061FF0741E7ED5FF0075F033 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 061FF0721E7ED5FF0075F033 /* LaunchScreen.storyboard */; };
 		061FF07F1E7ED5FF0075F033 /* Yard_SaleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 061FF07E1E7ED5FF0075F033 /* Yard_SaleTests.swift */; };
 		061FF08A1E7ED5FF0075F033 /* Yard_SaleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 061FF0891E7ED5FF0075F033 /* Yard_SaleUITests.swift */; };
+		065EA8CE1E815BC000CA09F4 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065EA8CD1E815BC000CA09F4 /* SignUpViewController.swift */; };
+		065EA8D01E815C3400CA09F4 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065EA8CF1E815C3400CA09F4 /* LoginViewController.swift */; };
+		065EA8D21E815C4D00CA09F4 /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065EA8D11E815C4D00CA09F4 /* ResetPasswordViewController.swift */; };
 		06A44B541E808380007ECDC0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 06A44B531E808380007ECDC0 /* GoogleService-Info.plist */; };
 		314FBD6D89F76338468C9E6C /* Pods_Yard_Sale.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12F91F444C7A938EACA6AE3D /* Pods_Yard_Sale.framework */; };
 		3410EA02D7526A37F4DAA1CE /* Pods_Yard_SaleUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F67BBF3D063DDA42386B4DF /* Pods_Yard_SaleUITests.framework */; };
@@ -64,6 +67,9 @@
 		061FF0851E7ED5FF0075F033 /* Yard SaleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Yard SaleUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		061FF0891E7ED5FF0075F033 /* Yard_SaleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Yard_SaleUITests.swift; sourceTree = "<group>"; };
 		061FF08B1E7ED5FF0075F033 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		065EA8CD1E815BC000CA09F4 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		065EA8CF1E815C3400CA09F4 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		065EA8D11E815C4D00CA09F4 /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
 		06A44B531E808380007ECDC0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		12F91F444C7A938EACA6AE3D /* Pods_Yard_Sale.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Yard_Sale.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		197B33F84B91DB4F3471D44F /* Pods-Yard SaleUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Yard SaleUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Yard SaleUITests/Pods-Yard SaleUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -181,6 +187,9 @@
 			isa = PBXGroup;
 			children = (
 				061FF06B1E7ED5FF0075F033 /* MainViewController.swift */,
+				065EA8CD1E815BC000CA09F4 /* SignUpViewController.swift */,
+				065EA8CF1E815C3400CA09F4 /* LoginViewController.swift */,
+				065EA8D11E815C4D00CA09F4 /* ResetPasswordViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -530,6 +539,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				065EA8D01E815C3400CA09F4 /* LoginViewController.swift in Sources */,
+				065EA8CE1E815BC000CA09F4 /* SignUpViewController.swift in Sources */,
+				065EA8D21E815C4D00CA09F4 /* ResetPasswordViewController.swift in Sources */,
 				061FF06C1E7ED5FF0075F033 /* MainViewController.swift in Sources */,
 				061FF06A1E7ED5FF0075F033 /* AppDelegate.swift in Sources */,
 			);
