@@ -78,8 +78,7 @@ class SignUpViewController: UIViewController, CLLocationManagerDelegate
             if checkAddressFields()
             {
                 let address = "\(addressField1.text!), \(cityField.text!), \(stateField.text!)"
-                let userLocation = forwardGeocoding(address: address)
-                print("User Location based off of Address: \(userLocation)")
+                forwardGeocoding(address: address)
                 //add coordinates to the Database
             }
         }
@@ -131,11 +130,9 @@ class SignUpViewController: UIViewController, CLLocationManagerDelegate
         return true
     }
     
-    func forwardGeocoding(address: String) -> CLLocation
+    func forwardGeocoding(address: String)
     {
-        var cLLocation: CLLocation?
-        CLGeocoder().geocodeAddressString(address, completionHandler: { (placemarks, error) in
-            
+        CLGeocoder().geocodeAddressString(address) { (placemarks: [CLPlacemark]?,error: Error?) in
             guard error == nil else
             {
                 DispatchQueue.main.async
@@ -144,7 +141,7 @@ class SignUpViewController: UIViewController, CLLocationManagerDelegate
                     let defaultAction = UIAlertAction(title: "Dismiss", style: .cancel, handler: nil)
                     alertController.addAction(defaultAction)
                     self.present(alertController, animated: true, completion: nil)
-                    self.hasLocation = false
+                        self.hasLocation = false
                 }
                 
                 return
@@ -152,24 +149,18 @@ class SignUpViewController: UIViewController, CLLocationManagerDelegate
             
             if (placemarks?.count)! > 0
             {
-                let placemark = placemarks?[0]
-                let location = placemark?.location
-                cLLocation = location!
-                let coordinate = location?.coordinate
-                print("\nlat: \(coordinate!.latitude), long: \(coordinate!.longitude)")
-                
-                if (placemark?.areasOfInterest?.count)! > 0
+                DispatchQueue.main.async
                 {
-                    let areaOfInterest = placemark!.areasOfInterest![0]
-                    print("Areas of Interest: \(areaOfInterest)")
-                }else
-                {
-                    print("No area of interest found.")
+                    let placemark = placemarks?[0]
+                    let location = placemark?.location
+                    let coordinate = location?.coordinate
+                    print("\nlat: \(coordinate!.latitude), long: \(coordinate!.longitude)")
                 }
+            }else
+            {
+                print("No Placemarks")
             }
-        })
-        
-        return cLLocation!
+        }
     }
     
     @IBAction func createAccount()
