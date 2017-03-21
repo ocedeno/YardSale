@@ -276,6 +276,7 @@
                     <connections>
                         <outlet property="addressField1" destination="IAz-Gu-PTT" id="uL7-u1-gla"/>
                         <outlet property="addressField2" destination="x5E-pI-Cmf" id="OOV-ZU-wQC"/>
+                        <outlet property="currentAddressLabel" destination="Mgx-9e-isD" id="Fcm-XW-iJv"/>
                         <outlet property="emailField" destination="EgN-Ie-j1l" id="jwn-3X-pED"/>
                         <outlet property="firstNameField" destination="vCf-9x-lX0" id="YR9-Ki-rPQ"/>
                         <outlet property="lastNameField" destination="X69-Y7-KOE" id="g78-1i-uPx"/>

@@ -24,15 +24,16 @@ class SignUpViewController: UIViewController, CLLocationManagerDelegate
     @IBOutlet weak var addressField2: UITextField!
     @IBOutlet weak var stateField: UITextField!
     @IBOutlet weak var zipCodeField: UITextField!
+    @IBOutlet weak var currentAddressLabel: UILabel!
     
-    var locationManager: CLLocationManager!
+    var locationManager = CLLocationManager()
     var hasLocation: Bool?
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        addressUISetup(hidden: true)
         locationManager.delegate = self
+        addressUISetup(isHidden: true)
     }
     @IBAction func returnToLogin()
     {
@@ -43,40 +44,41 @@ class SignUpViewController: UIViewController, CLLocationManagerDelegate
     {
         if (sender.titleLabel?.text == "Yes")
         {
-            addressUISetup(hidden: true)
+            addressUISetup(isHidden: true)
             locationManager.requestAlwaysAuthorization()
             locationManager.requestWhenInUseAuthorization()
             
             if CLLocationManager.locationServicesEnabled()
             {
-                locationManager.delegate = self
                 locationManager.desiredAccuracy = kCLLocationAccuracyBest
                 locationManager.startUpdatingLocation()
-                //getCoordinates()
+                getCoordinates()
             }else{
-                addressUISetup(hidden: false)
+                addressUISetup(isHidden: false)
                 hasLocation = false
             }
             
         }else
         {
-            addressUISetup(hidden: false)
+            addressUISetup(isHidden: false)
             hasLocation = false
         }
     }
     
-    func addressUISetup(hidden: Bool)
+    func addressUISetup(isHidden: Bool)
     {
-        addressField1.isHidden = hidden
-        addressField2.isHidden = hidden
-        stateField.isHidden = hidden
-        zipCodeField.isHidden = hidden
+        addressField1.isHidden = isHidden
+        addressField2.isHidden = isHidden
+        stateField.isHidden = isHidden
+        zipCodeField.isHidden = isHidden
+        currentAddressLabel.isHidden = isHidden
     }
     
     func getCoordinates()
     {
-        if CLLocationManager.locationServicesEnabled()
-        {
+        let enabledLocation: Bool = CLLocationManager.locationServicesEnabled()
+        print(enabledLocation)
+        if (enabledLocation){
             func locationManager(manager: CLLocationManager, didUpdateLocations: [CLLocation])
             {
                 let userLocation: CLLocation = didUpdateLocations[0]
@@ -84,8 +86,8 @@ class SignUpViewController: UIViewController, CLLocationManagerDelegate
                 let lon = userLocation.coordinate.longitude
                 print("Lat: \(lat) and Lon:\(lon)")
                 //add coordinates to the Database
-                hasLocation = true
             }
+            hasLocation = true
         }else{
             if checkAddressFields()
             {
@@ -181,7 +183,7 @@ class SignUpViewController: UIViewController, CLLocationManagerDelegate
     {
         if (hasLocation!)
         {
-            
+           print("Success")
         }
     }
 }
