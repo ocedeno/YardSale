@@ -174,15 +174,8 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Address" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="x5E-pI-Cmf">
-                                <rect key="frame" x="32" y="495" width="311" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Address" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IAz-Gu-PTT">
-                                <rect key="frame" x="32" y="461" width="311" height="30"/>
+                                <rect key="frame" x="32" y="487" width="311" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -249,7 +242,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Provide Current Address" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mgx-9e-isD">
-                                <rect key="frame" x="85" y="432" width="206" height="21"/>
+                                <rect key="frame" x="85" y="458" width="206" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -275,7 +268,6 @@
                     </view>
                     <connections>
                         <outlet property="addressField1" destination="IAz-Gu-PTT" id="uL7-u1-gla"/>
-                        <outlet property="addressField2" destination="x5E-pI-Cmf" id="OOV-ZU-wQC"/>
                         <outlet property="currentAddressLabel" destination="Mgx-9e-isD" id="Fcm-XW-iJv"/>
                         <outlet property="emailField" destination="EgN-Ie-j1l" id="jwn-3X-pED"/>
                         <outlet property="firstNameField" destination="vCf-9x-lX0" id="YR9-Ki-rPQ"/>

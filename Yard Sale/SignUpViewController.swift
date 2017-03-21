@@ -21,7 +21,6 @@ class SignUpViewController: UIViewController, CLLocationManagerDelegate
     @IBOutlet weak var retypedPasswordField: UITextField!
     
     @IBOutlet weak var addressField1: UITextField!
-    @IBOutlet weak var addressField2: UITextField!
     @IBOutlet weak var stateField: UITextField!
     @IBOutlet weak var zipCodeField: UITextField!
     @IBOutlet weak var currentAddressLabel: UILabel!
@@ -51,7 +50,6 @@ class SignUpViewController: UIViewController, CLLocationManagerDelegate
         if (sender.titleLabel?.text == "Yes")
         {
             addressUISetup(isHidden: true)
-            locationManager.requestAlwaysAuthorization()
             locationManager.requestWhenInUseAuthorization()
             getCoordinates()
         }else
@@ -64,7 +62,6 @@ class SignUpViewController: UIViewController, CLLocationManagerDelegate
     func addressUISetup(isHidden: Bool)
     {
         addressField1.isHidden = isHidden
-        addressField2.isHidden = isHidden
         stateField.isHidden = isHidden
         zipCodeField.isHidden = isHidden
         currentAddressLabel.isHidden = isHidden
@@ -72,15 +69,17 @@ class SignUpViewController: UIViewController, CLLocationManagerDelegate
     
     func getCoordinates()
     {
-        if (CLLocationManager.locationServicesEnabled())
+        if CLLocationManager.authorizationStatus() == CLAuthorizationStatus.authorizedWhenInUse
         {
             self.locationManager.startUpdatingLocation()
+            print("Services Enabled")
         }else
         {
             if checkAddressFields()
             {
-                let address = "\(addressField1.text) \(addressField2.text) \(stateField.text) \(zipCodeField.text)"
+                let address = "\(addressField1.text!), \(stateField.text!), \(zipCodeField.text!)"
                 let userLocation = forwardGeocoding(address: address)
+                print("User Location based off of Address: \(userLocation)")
                 //add coordinates to the Database
             }
         }
@@ -178,6 +177,10 @@ class SignUpViewController: UIViewController, CLLocationManagerDelegate
         if (hasLocation!)
         {
            print("Success")
+        }else
+        {
+            getCoordinates()
+            print("Success through Address Manual")
         }
     }
 }
