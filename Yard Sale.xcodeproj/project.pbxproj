@@ -250,7 +250,6 @@
 				061FF0631E7ED5FE0075F033 /* Frameworks */,
 				061FF0641E7ED5FE0075F033 /* Resources */,
 				06A44B4F1E7F4ABB007ECDC0 /* Embed Frameworks */,
-				06A44B501E7F4AE6007ECDC0 /* Run Script */,
 				244942556386257F181F6E7F /* [CP] Embed Pods Frameworks */,
 				41B86008FA192991F9E0D59F /* [CP] Copy Pods Resources */,
 			);
@@ -383,20 +382,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		06A44B501E7F4AE6007ECDC0 /* Run Script */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Run Script";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "bash \"${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework/strip-frameworks.sh\"\n";
-		};
 		244942556386257F181F6E7F /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
