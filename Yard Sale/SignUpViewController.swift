@@ -20,6 +20,9 @@ class SignUpViewController: UIViewController, CLLocationManagerDelegate
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var retypedPasswordField: UITextField!
     
+    @IBOutlet weak var yesButton: UIButton!
+    @IBOutlet weak var noButton: UIButton!
+    @IBOutlet weak var currentLocationLabel: UILabel!
     @IBOutlet weak var addressField1: UITextField!
     @IBOutlet weak var cityField: UITextField!
     @IBOutlet weak var stateField: UITextField!
@@ -33,7 +36,7 @@ class SignUpViewController: UIViewController, CLLocationManagerDelegate
         
         return _locationManager
     }()
-    var hasLocation: Bool?
+    var hasLocation: Bool = false
     
     override func viewDidLoad()
     {
@@ -50,12 +53,14 @@ class SignUpViewController: UIViewController, CLLocationManagerDelegate
         if (sender.titleLabel?.text == "Yes")
         {
             addressUISetup(isHidden: true)
+            locationManager.requestAlwaysAuthorization()
             locationManager.requestWhenInUseAuthorization()
             getCoordinates()
         }else
         {
             addressUISetup(isHidden: false)
             hasLocation = false
+            hideResponseButtons(true)
         }
     }
     
@@ -67,14 +72,22 @@ class SignUpViewController: UIViewController, CLLocationManagerDelegate
         currentAddressLabel.isHidden = isHidden
     }
     
+    func hideResponseButtons(_ hidden: Bool)
+    {
+        yesButton.isHidden = hidden
+        noButton.isHidden = hidden
+        currentLocationLabel.isHidden = hidden
+    }
+    
     func getCoordinates()
     {
-        if CLLocationManager.authorizationStatus() == CLAuthorizationStatus.authorizedWhenInUse
+        if CLLocationManager.authorizationStatus() == CLAuthorizationStatus.authorizedAlways
         {
+            addressUISetup(isHidden: true)
             self.locationManager.startUpdatingLocation()
-            print("Services Enabled")
         }else
         {
+            addressUISetup(isHidden: false)
             if checkAddressFields()
             {
                 let address = "\(addressField1.text!), \(cityField.text!), \(stateField.text!)"
@@ -165,9 +178,9 @@ class SignUpViewController: UIViewController, CLLocationManagerDelegate
     
     @IBAction func createAccount()
     {
-        if (hasLocation!)
+        if (hasLocation)
         {
-           print("Success")
+           print("Success through Current Location")
         }else
         {
             getCoordinates()
