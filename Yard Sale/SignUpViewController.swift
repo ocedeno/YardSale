@@ -10,6 +10,7 @@ import UIKit
 import Firebase
 import FirebaseAuth
 import CoreLocation
+import AddressBookUI
 
 class SignUpViewController: UIViewController, CLLocationManagerDelegate
 {
@@ -25,6 +26,7 @@ class SignUpViewController: UIViewController, CLLocationManagerDelegate
     @IBOutlet weak var zipCodeField: UITextField!
     
     var locationManager: CLLocationManager!
+    var hasLocation: Bool?
     
     override func viewDidLoad()
     {
@@ -42,17 +44,25 @@ class SignUpViewController: UIViewController, CLLocationManagerDelegate
         if (sender.titleLabel?.text == "Yes")
         {
             addressUISetup(hidden: true)
-            if CLLocationManager.locationServicesEnabled() {
-                locationManager.requestAlwaysAuthorization()
-                locationManager.requestWhenInUseAuthorization()
+            locationManager.requestAlwaysAuthorization()
+            locationManager.requestWhenInUseAuthorization()
+            if CLLocationManager.locationServicesEnabled()
+            {
                 locationManager.delegate = self
                 locationManager.desiredAccuracy = kCLLocationAccuracyBest
                 locationManager.startUpdatingLocation()
+                hasLocation = true
+                //add coordinates to the Database
+                //getCoordinates()
+            }else{
+                addressUISetup(hidden: false)
+                hasLocation = false
             }
             
         }else
         {
             addressUISetup(hidden: false)
+            hasLocation = false
         }
     }
     
@@ -64,9 +74,67 @@ class SignUpViewController: UIViewController, CLLocationManagerDelegate
         zipCodeField.isHidden = hidden
     }
     
+    func getCoordinates()
+    {
+        if CLLocationManager.locationServicesEnabled()
+        {
+            func locationManager(manager: CLLocationManager, didUpdateLocations: [CLLocation])
+            {
+                let userLocation: CLLocation = didUpdateLocations[0]
+                let lat = userLocation.coordinate.latitude
+                let lon = userLocation.coordinate.longitude
+                print("Lat: \(lat) and Lon:\(lon)")
+            }
+        }else{
+            if checkAddressFields()
+            {
+                
+            }
+        }
+    }
+    
+    func checkAddressFields() -> Bool
+    {
+        guard addressField1.text != "" else
+        {
+            let alertController = UIAlertController(title: "Missing Info", message: "Please enter your address.", preferredStyle: .alert)
+            let defaultAction = UIAlertAction(title: "Dismiss", style: .cancel, handler: nil)
+            alertController.addAction(defaultAction)
+            present(alertController, animated: true, completion: nil)
+            
+            return false
+        }
+        
+        guard stateField.text != "" else
+        {
+            let alertController = UIAlertController(title: "Missing Info", message: "Please enter your state.", preferredStyle: .alert)
+            let defaultAction = UIAlertAction(title: "Dismiss", style: .cancel, handler: nil)
+            alertController.addAction(defaultAction)
+            present(alertController, animated: true, completion: nil)
+            
+            return false
+        }
+        
+        guard zipCodeField.text != "" else
+        {
+            let alertController = UIAlertController(title: "Missing Info", message: "Please enter your zip code.", preferredStyle: .alert)
+            let defaultAction = UIAlertAction(title: "Dismiss", style: .cancel, handler: nil)
+            alertController.addAction(defaultAction)
+            present(alertController, animated: true, completion: nil)
+            
+            return false
+        }
+        
+        return true
+    }
+    
     @IBAction func createAccount()
     {
-        
+        //getCoordinates()
+        if (hasLocation!)
+        {
+            
+        }
     }
 }
 
