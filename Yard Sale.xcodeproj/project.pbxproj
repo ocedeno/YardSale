@@ -14,6 +14,7 @@
 		061FF0741E7ED5FF0075F033 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 061FF0721E7ED5FF0075F033 /* LaunchScreen.storyboard */; };
 		061FF07F1E7ED5FF0075F033 /* Yard_SaleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 061FF07E1E7ED5FF0075F033 /* Yard_SaleTests.swift */; };
 		061FF08A1E7ED5FF0075F033 /* Yard_SaleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 061FF0891E7ED5FF0075F033 /* Yard_SaleUITests.swift */; };
+		065DBC261E8431B8002FE5E6 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065DBC251E8431B8002FE5E6 /* Utility.swift */; };
 		065EA8CE1E815BC000CA09F4 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065EA8CD1E815BC000CA09F4 /* SignUpViewController.swift */; };
 		065EA8D01E815C3400CA09F4 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065EA8CF1E815C3400CA09F4 /* LoginViewController.swift */; };
 		065EA8D21E815C4D00CA09F4 /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065EA8D11E815C4D00CA09F4 /* ResetPasswordViewController.swift */; };
@@ -70,6 +71,7 @@
 		061FF0851E7ED5FF0075F033 /* Yard SaleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Yard SaleUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		061FF0891E7ED5FF0075F033 /* Yard_SaleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Yard_SaleUITests.swift; sourceTree = "<group>"; };
 		061FF08B1E7ED5FF0075F033 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		065DBC251E8431B8002FE5E6 /* Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 		065EA8CD1E815BC000CA09F4 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		065EA8CF1E815C3400CA09F4 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		065EA8D11E815C4D00CA09F4 /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
@@ -143,8 +145,8 @@
 		061FF0681E7ED5FF0075F033 /* Yard Sale */ = {
 			isa = PBXGroup;
 			children = (
-				061FF09C1E7F1C710075F033 /* Utility */,
 				061FF0691E7ED5FF0075F033 /* AppDelegate.swift */,
+				061FF09C1E7F1C710075F033 /* Utility */,
 				061FF09A1E7F1C550075F033 /* Model */,
 				061FF0991E7F1C4D0075F033 /* Controllers */,
 				061FF09B1E7F1C5F0075F033 /* Views */,
@@ -193,10 +195,10 @@
 		061FF0991E7F1C4D0075F033 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				061FF06B1E7ED5FF0075F033 /* MainViewController.swift */,
-				065EA8CD1E815BC000CA09F4 /* SignUpViewController.swift */,
 				065EA8CF1E815C3400CA09F4 /* LoginViewController.swift */,
 				065EA8D11E815C4D00CA09F4 /* ResetPasswordViewController.swift */,
+				065EA8CD1E815BC000CA09F4 /* SignUpViewController.swift */,
+				061FF06B1E7ED5FF0075F033 /* MainViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -219,6 +221,7 @@
 		061FF09C1E7F1C710075F033 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				065DBC251E8431B8002FE5E6 /* Utility.swift */,
 			);
 			name = Utility;
 			sourceTree = "<group>";
@@ -543,6 +546,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				065DBC261E8431B8002FE5E6 /* Utility.swift in Sources */,
 				065EA8D01E815C3400CA09F4 /* LoginViewController.swift in Sources */,
 				065EA8CE1E815BC000CA09F4 /* SignUpViewController.swift in Sources */,
 				065EA8D41E8412F900CA09F4 /* User.swift in Sources */,

@@ -8,8 +8,9 @@
 
 import UIKit
 import Firebase
+import MapKit
 
-class MainViewController: UIViewController {
+class MainViewController: UIViewController, MKMapViewDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -16,12 +16,22 @@ class LoginViewController: UIViewController
     @IBOutlet weak var userEmailTextfield: UITextField!
     @IBOutlet weak var userPasswordTextfield: UITextField!
     
+    let utilityClass = Utiliy()
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        FIRAuth.auth()?.addStateDidChangeListener({ (auth, user) in
+            if user != nil
+            {
+                let mainVC = self.storyboard?.instantiateViewController(withIdentifier: "MainVC")
+                self.present(mainVC!, animated: true, completion: {
+                    self.dismiss(animated: true)
+                })
+                
+            }
+        })
     }
     
     @IBAction func signUpAction()
@@ -36,20 +46,17 @@ class LoginViewController: UIViewController
             let emailField = alert.textFields![0]
             let passwordField = alert.textFields![1]
             
-            FIRAuth.auth()?.createUser(withEmail: emailField.text!, password: passwordField.text!, completion: { (user, error) in
+            FIRAuth.auth()?.createUser(withEmail: emailField.text!, password: passwordField.text!, completion:
+            {(user, error) in
                 
-                guard error == nil else {
-                    let alert = UIAlertController(title: "Sign-Up Error", message: error?.localizedDescription, preferredStyle: .alert)
-                    let cancelAction = UIAlertAction(title: "Try Again",
-                                                     style: .default)
-                    alert.addAction(cancelAction)
-                    DispatchQueue.main.async {
-                        self.present(alert, animated: true, completion: nil)
-                    }
+                guard error == nil else
+                {
+                    self.utilityClass.errorAlert(title: "Signup Error", message: (error?.localizedDescription)!, cancelTitle: "Try Again", view: self)
+                    
                     return
                 }
-                    FIRAuth.auth()?.signIn(withEmail: self.userEmailTextfield.text!, password: self.userPasswordTextfield.text!)
-                    print("\(user?.email!)")
+                
+                FIRAuth.auth()?.signIn(withEmail: emailField.text!, password: passwordField.text!)
                
             })
         }
@@ -74,6 +81,20 @@ class LoginViewController: UIViewController
     
     @IBAction func loginAction()
     {
-        
+        FIRAuth.auth()?.signIn(withEmail: self.userEmailTextfield.text!, password: self.userPasswordTextfield.text!)
     }
+}
+
+extension LoginViewController: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == userEmailTextfield {
+            userPasswordTextfield.becomeFirstResponder()
+        }
+        if textField == userPasswordTextfield {
+            textField.resignFirstResponder()
+        }
+        return true
+    }
+    
 }
