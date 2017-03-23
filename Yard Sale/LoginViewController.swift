@@ -29,6 +29,14 @@ class LoginViewController: UIViewController
                 self.present(mainVC!, animated: true)
             }
         })
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        self.view.addGestureRecognizer(tapGesture)
+    }
+    
+    func dismissKeyboard()
+    {
+        self.view.endEditing(true)
     }
     
     @IBAction func signUpAction()
@@ -63,6 +71,7 @@ class LoginViewController: UIViewController
         
         alert.addTextField { textEmail in
             textEmail.placeholder = "Enter your email"
+            textEmail.keyboardType = .emailAddress
         }
         
         alert.addTextField { textPassword in
