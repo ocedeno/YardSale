@@ -36,6 +36,7 @@ class SignUpViewController: UIViewController, CLLocationManagerDelegate
         
         return _locationManager
     }()
+    
     var hasLocation: Bool = false
     
     override func viewDidLoad()
@@ -52,7 +53,6 @@ class SignUpViewController: UIViewController, CLLocationManagerDelegate
     {
         if (sender.titleLabel?.text == "Yes")
         {
-            addressUISetup(isHidden: true)
             locationManager.requestAlwaysAuthorization()
             locationManager.requestWhenInUseAuthorization()
             getCoordinates()
@@ -83,8 +83,8 @@ class SignUpViewController: UIViewController, CLLocationManagerDelegate
     {
         if CLLocationManager.authorizationStatus() == CLAuthorizationStatus.authorizedAlways
         {
-            addressUISetup(isHidden: true)
             self.locationManager.startUpdatingLocation()
+            self.locationManager.stopUpdatingLocation()
         }else
         {
             addressUISetup(isHidden: false)
@@ -102,10 +102,9 @@ class SignUpViewController: UIViewController, CLLocationManagerDelegate
         let userLocation: CLLocation = didUpdateLocations[0]
         let lat = userLocation.coordinate.latitude
         let lon = userLocation.coordinate.longitude
-        print("Lat: \(lat) and Lon:\(lon)")
+        print("*LOCATIONMANAGER* Lat: \(lat) and Lon:\(lon)")
         //add coordinates to the Database
         hasLocation = true
-        locationManager.stopUpdatingLocation()
     }
     
     func checkAddressFields() -> Bool
@@ -167,7 +166,7 @@ class SignUpViewController: UIViewController, CLLocationManagerDelegate
                     let placemark = placemarks?[0]
                     let location = placemark?.location
                     let coordinate = location?.coordinate
-                    print("lat: \(coordinate!.latitude), lon: \(coordinate!.longitude)")
+                    print("*FORWARDGEO* lat: \(coordinate!.latitude), lon: \(coordinate!.longitude)")
                 }
             }else
             {

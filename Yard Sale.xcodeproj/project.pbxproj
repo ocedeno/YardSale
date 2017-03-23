@@ -17,6 +17,9 @@
 		065EA8CE1E815BC000CA09F4 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065EA8CD1E815BC000CA09F4 /* SignUpViewController.swift */; };
 		065EA8D01E815C3400CA09F4 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065EA8CF1E815C3400CA09F4 /* LoginViewController.swift */; };
 		065EA8D21E815C4D00CA09F4 /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065EA8D11E815C4D00CA09F4 /* ResetPasswordViewController.swift */; };
+		065EA8D41E8412F900CA09F4 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065EA8D31E8412F900CA09F4 /* User.swift */; };
+		065EA8D81E8413D100CA09F4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 065EA8D61E8413D100CA09F4 /* Foundation.framework */; };
+		065EA8D91E8413D100CA09F4 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 065EA8D71E8413D100CA09F4 /* Security.framework */; };
 		06A44B541E808380007ECDC0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 06A44B531E808380007ECDC0 /* GoogleService-Info.plist */; };
 		314FBD6D89F76338468C9E6C /* Pods_Yard_Sale.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12F91F444C7A938EACA6AE3D /* Pods_Yard_Sale.framework */; };
 		3410EA02D7526A37F4DAA1CE /* Pods_Yard_SaleUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F67BBF3D063DDA42386B4DF /* Pods_Yard_SaleUITests.framework */; };
@@ -70,6 +73,9 @@
 		065EA8CD1E815BC000CA09F4 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		065EA8CF1E815C3400CA09F4 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		065EA8D11E815C4D00CA09F4 /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
+		065EA8D31E8412F900CA09F4 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		065EA8D61E8413D100CA09F4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		065EA8D71E8413D100CA09F4 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/Security.framework; sourceTree = DEVELOPER_DIR; };
 		06A44B531E808380007ECDC0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		12F91F444C7A938EACA6AE3D /* Pods_Yard_Sale.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Yard_Sale.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		197B33F84B91DB4F3471D44F /* Pods-Yard SaleUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Yard SaleUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Yard SaleUITests/Pods-Yard SaleUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -88,6 +94,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				314FBD6D89F76338468C9E6C /* Pods_Yard_Sale.framework in Frameworks */,
+				065EA8D81E8413D100CA09F4 /* Foundation.framework in Frameworks */,
+				065EA8D91E8413D100CA09F4 /* Security.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,9 +145,10 @@
 			children = (
 				061FF09C1E7F1C710075F033 /* Utility */,
 				061FF0691E7ED5FF0075F033 /* AppDelegate.swift */,
-				061FF09B1E7F1C5F0075F033 /* Views */,
 				061FF09A1E7F1C550075F033 /* Model */,
 				061FF0991E7F1C4D0075F033 /* Controllers */,
+				061FF09B1E7F1C5F0075F033 /* Views */,
+				065EA8D51E84137100CA09F4 /* Layout */,
 				061FF0971E7EDAC90075F033 /* Assets */,
 				061FF0981E7EDAD00075F033 /* Supporting Files */,
 			);
@@ -167,8 +176,6 @@
 		061FF0971E7EDAC90075F033 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
-				061FF06D1E7ED5FF0075F033 /* Main.storyboard */,
-				061FF0721E7ED5FF0075F033 /* LaunchScreen.storyboard */,
 				061FF0701E7ED5FF0075F033 /* Assets.xcassets */,
 			);
 			name = Assets;
@@ -197,6 +204,7 @@
 		061FF09A1E7F1C550075F033 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				065EA8D31E8412F900CA09F4 /* User.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -215,6 +223,15 @@
 			name = Utility;
 			sourceTree = "<group>";
 		};
+		065EA8D51E84137100CA09F4 /* Layout */ = {
+			isa = PBXGroup;
+			children = (
+				061FF06D1E7ED5FF0075F033 /* Main.storyboard */,
+				061FF0721E7ED5FF0075F033 /* LaunchScreen.storyboard */,
+			);
+			name = Layout;
+			sourceTree = "<group>";
+		};
 		835E0D75BD8D2ED5F49355D5 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -231,6 +248,8 @@
 		978134E0C9853DD2250DD5CF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				065EA8D61E8413D100CA09F4 /* Foundation.framework */,
+				065EA8D71E8413D100CA09F4 /* Security.framework */,
 				12F91F444C7A938EACA6AE3D /* Pods_Yard_Sale.framework */,
 				85969B8D32E85771FD84BB2E /* Pods_Yard_SaleTests.framework */,
 				8F67BBF3D063DDA42386B4DF /* Pods_Yard_SaleUITests.framework */,
@@ -526,6 +545,7 @@
 			files = (
 				065EA8D01E815C3400CA09F4 /* LoginViewController.swift in Sources */,
 				065EA8CE1E815BC000CA09F4 /* SignUpViewController.swift in Sources */,
+				065EA8D41E8412F900CA09F4 /* User.swift in Sources */,
 				065EA8D21E815C4D00CA09F4 /* ResetPasswordViewController.swift in Sources */,
 				061FF06C1E7ED5FF0075F033 /* MainViewController.swift in Sources */,
 				061FF06A1E7ED5FF0075F033 /* AppDelegate.swift in Sources */,
