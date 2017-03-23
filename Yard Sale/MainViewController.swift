@@ -12,12 +12,23 @@ import MapKit
 
 class MainViewController: UIViewController, MKMapViewDelegate {
 
-    override func viewDidLoad() {
+    @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var eventTableView: UITableView!
+    
+    var sidePanel: UIView!
+    
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        
-        
     }
     
+    @IBAction func createEvent(_ sender: UIBarButtonItem)
+    {
+        
+    }
+    @IBAction func menuSlideAction(_ sender: UIBarButtonItem)
+    {
+        
+    }
 }
 

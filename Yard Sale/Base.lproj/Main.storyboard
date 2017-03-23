@@ -170,8 +170,16 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <items>
                                     <navigationItem title="Yard Sale" id="lIf-Ox-JIi">
-                                        <barButtonItem key="leftBarButtonItem" title="Menu" id="M8S-3O-0JQ"/>
-                                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="rWe-w7-f9X"/>
+                                        <barButtonItem key="leftBarButtonItem" title="Menu" id="M8S-3O-0JQ">
+                                            <connections>
+                                                <action selector="menuSlideAction:" destination="BYZ-38-t0r" id="zXb-TI-QaE"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="rWe-w7-f9X">
+                                            <connections>
+                                                <action selector="createEvent:" destination="BYZ-38-t0r" id="cXo-y4-1FI"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
@@ -184,6 +192,10 @@
                             <constraint firstAttribute="trailing" secondItem="c2L-0s-UVg" secondAttribute="trailing" id="xIW-AT-rpC"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="eventTableView" destination="mY7-b8-YhS" id="zwi-nx-sf0"/>
+                        <outlet property="mapView" destination="BGg-CY-bAh" id="GSJ-X0-RQ5"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
