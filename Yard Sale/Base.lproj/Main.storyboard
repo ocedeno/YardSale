@@ -109,7 +109,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Sign-Up"/>
                                 <connections>
-                                    <segue destination="mGA-c2-fkR" kind="show" id="JNJ-Nj-Ku4"/>
+                                    <action selector="signUpAction" destination="iAg-j0-zEF" eventType="touchUpInside" id="Ufg-Pv-Lwa"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dj6-sx-SrL">
