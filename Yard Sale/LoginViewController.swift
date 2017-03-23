@@ -26,10 +26,7 @@ class LoginViewController: UIViewController
             if user != nil
             {
                 let mainVC = self.storyboard?.instantiateViewController(withIdentifier: "MainVC")
-                self.present(mainVC!, animated: true, completion: {
-                    self.dismiss(animated: true)
-                })
-                
+                self.present(mainVC!, animated: true)
             }
         })
     }
@@ -81,7 +78,15 @@ class LoginViewController: UIViewController
     
     @IBAction func loginAction()
     {
-        FIRAuth.auth()?.signIn(withEmail: self.userEmailTextfield.text!, password: self.userPasswordTextfield.text!)
+        FIRAuth.auth()?.signIn(withEmail: userEmailTextfield.text!, password: userPasswordTextfield.text!, completion: { (user, error) in
+            
+            guard error == nil else
+            {
+                self.utilityClass.errorAlert(title: "Login Error", message: (error?.localizedDescription)!, cancelTitle: "Try Again", view: self)
+                
+                return
+            }
+        })
     }
 }
 
