@@ -13,7 +13,6 @@ class ResetPasswordViewController: UIViewController
 
     @IBOutlet weak var userEmailTextfield: UITextField!
     
-    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -28,14 +27,5 @@ class ResetPasswordViewController: UIViewController
     @IBAction func returnToLogin()
     {
         dismiss(animated: true, completion: nil)
-    }
-    
-    @IBAction func signUpPage()
-    {
-        dismiss(animated: true)
-    {
-            let signupVC = self.storyboard?.instantiateViewController(withIdentifier: "SignUpVC")
-            self.present(signupVC!, animated: true, completion: nil)
-        }
     }
 }
