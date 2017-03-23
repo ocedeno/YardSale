@@ -32,18 +32,30 @@ class LoginViewController: UIViewController
         
         let saveAction = UIAlertAction(title: "Save",
                                        style: .default)
-                                      {action in
-            let userField = alert.textFields![0]
-            let emailField = alert.textFields![1]
-            let passwordField = alert.textFields![2]
+        {action in
+            let emailField = alert.textFields![0]
+            let passwordField = alert.textFields![1]
+            
+            FIRAuth.auth()?.createUser(withEmail: emailField.text!, password: passwordField.text!, completion: { (user, error) in
+                
+                guard error == nil else {
+                    let alert = UIAlertController(title: "Sign-Up Error", message: error?.localizedDescription, preferredStyle: .alert)
+                    let cancelAction = UIAlertAction(title: "Try Again",
+                                                     style: .default)
+                    alert.addAction(cancelAction)
+                    DispatchQueue.main.async {
+                        self.present(alert, animated: true, completion: nil)
+                    }
+                    return
+                }
+                    FIRAuth.auth()?.signIn(withEmail: self.userEmailTextfield.text!, password: self.userPasswordTextfield.text!)
+                    print("\(user?.email!)")
+               
+            })
         }
         
         let cancelAction = UIAlertAction(title: "Cancel",
                                          style: .default)
-        
-        alert.addTextField { (textUser) in
-            textUser.placeholder = "Enter your first name"
-        }
         
         alert.addTextField { textEmail in
             textEmail.placeholder = "Enter your email"
