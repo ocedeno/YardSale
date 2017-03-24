@@ -12,6 +12,7 @@ import MapKit
 
 class MainViewController: UIViewController, MKMapViewDelegate {
 
+    @IBOutlet weak var sidePanel: UIView!
     @IBOutlet weak var titleBar: UINavigationBar!
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var eventTableView: UITableView!
@@ -25,6 +26,13 @@ class MainViewController: UIViewController, MKMapViewDelegate {
         super.viewDidLoad()
         
         mapView.delegate = self
+    }
+    
+    override func viewWillAppear(_ animated: Bool)
+    {
+        super.viewWillAppear(true)
+        
+        setupSidePanel()
     }
     
     @IBAction func createEvent(_ sender: UIBarButtonItem)
@@ -67,6 +75,13 @@ class MainViewController: UIViewController, MKMapViewDelegate {
                 self.titleBar.frame.origin.x = 0
             })
         }
+    }
+    
+    func setupSidePanel()
+    {
+        viewWidth = view.bounds.maxX * viewWidthConstant
+        sidePanel.frame.size.width = viewWidth
+        sidePanel.frame.size.height = view.bounds.maxY
     }
 }
 
