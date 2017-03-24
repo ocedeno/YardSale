@@ -12,7 +12,6 @@ import MapKit
 
 class MainViewController: BaseViewController, MKMapViewDelegate {
 
-    @IBOutlet weak var titleBar: UINavigationBar!
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var eventTableView: UITableView!
     
@@ -21,7 +20,7 @@ class MainViewController: BaseViewController, MKMapViewDelegate {
         super.viewDidLoad()
         
         mapView.delegate = self
-        addSlideMenuButton()
+        self.addSlideMenuButton()
     }
     
     override func viewWillAppear(_ animated: Bool)
