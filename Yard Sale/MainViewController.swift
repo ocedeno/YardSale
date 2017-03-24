@@ -63,16 +63,11 @@ extension MainViewController
         let lon = currentLocation.coordinate.longitude
         let lat = currentLocation.coordinate.latitude
         let center = CLLocationCoordinate2D(latitude: lat, longitude: lon)
-        let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+        let span = MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02)
         let region = MKCoordinateRegion(center: center, span: span)
         
         mapView.setRegion(region, animated: true)
         mapView.showsUserLocation = true
-        
-//        let cuurentLocationPin = MKPointAnnotation()
-//        cuurentLocationPin.coordinate = CLLocationCoordinate2D(latitude: lat, longitude: lon)
-//        
-//        mapView.addAnnotation(cuurentLocationPin)
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error)
