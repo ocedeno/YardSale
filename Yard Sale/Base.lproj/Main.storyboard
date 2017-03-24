@@ -197,7 +197,9 @@
                             <constraint firstAttribute="trailing" secondItem="ENA-Hz-Iyp" secondAttribute="trailing" id="nd8-dS-fe6"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="aqx-xn-l36"/>
+                    <navigationItem key="navigationItem" id="aqx-xn-l36">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="wfc-SV-sjH"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="eventTableView" destination="mY7-b8-YhS" id="zwi-nx-sf0"/>
                         <outlet property="mapView" destination="BGg-CY-bAh" id="GSJ-X0-RQ5"/>
