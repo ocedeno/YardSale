@@ -161,7 +161,7 @@
                                         <rect key="frame" x="0.0" y="22" width="315" height="54"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="CQG-Hs-bjo" id="aS7-FW-Tq7">
-                                            <rect key="frame" x="0.0" y="0.0" width="315" height="53"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="315" height="53.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" tag="100" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="yIo-HL-PX8">
@@ -221,56 +221,30 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="c2L-0s-UVg">
-                                <rect key="frame" x="0.0" y="28" width="375" height="639"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ENA-Hz-Iyp">
+                                <rect key="frame" x="0.0" y="20" width="375" height="627"/>
                                 <subviews>
-                                    <navigationBar contentMode="scaleToFill" verticalHuggingPriority="245" verticalCompressionResistancePriority="755" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r10-9k-SOi" userLabel="TitleBar">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                                        <items>
-                                            <navigationItem title="Yard Sale" id="lIf-Ox-JIi">
-                                                <barButtonItem key="leftBarButtonItem" title="Menu" id="M8S-3O-0JQ">
-                                                    <connections>
-                                                        <action selector="menuSlideAction:" destination="BYZ-38-t0r" id="zXb-TI-QaE"/>
-                                                    </connections>
-                                                </barButtonItem>
-                                                <barButtonItem key="rightBarButtonItem" systemItem="add" id="rWe-w7-f9X">
-                                                    <connections>
-                                                        <action selector="createEvent:" destination="BYZ-38-t0r" id="cXo-y4-1FI"/>
-                                                    </connections>
-                                                </barButtonItem>
-                                            </navigationItem>
-                                        </items>
-                                    </navigationBar>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ENA-Hz-Iyp">
-                                        <rect key="frame" x="0.0" y="44" width="375" height="595"/>
-                                        <subviews>
-                                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="BGg-CY-bAh">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="234"/>
-                                            </mapView>
-                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="mY7-b8-YhS">
-                                                <rect key="frame" x="0.0" y="234" width="375" height="361"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="361" id="ipx-BX-FRJ"/>
-                                                </constraints>
-                                            </tableView>
-                                        </subviews>
-                                    </stackView>
+                                    <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="749" ambiguous="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="BGg-CY-bAh">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="186"/>
+                                    </mapView>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="751" ambiguous="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="mY7-b8-YhS">
+                                        <rect key="frame" x="0.0" y="186" width="375" height="441"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </tableView>
                                 </subviews>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="c2L-0s-UVg" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="ZYM-V4-n7y"/>
-                            <constraint firstAttribute="bottom" secondItem="c2L-0s-UVg" secondAttribute="bottom" id="dLu-Kc-r8v"/>
-                            <constraint firstItem="c2L-0s-UVg" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="tN0-im-eNS"/>
-                            <constraint firstAttribute="trailing" secondItem="c2L-0s-UVg" secondAttribute="trailing" id="xIW-AT-rpC"/>
+                            <constraint firstItem="ENA-Hz-Iyp" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="LtI-YP-wNU"/>
+                            <constraint firstItem="ENA-Hz-Iyp" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="OWH-2N-AFQ"/>
+                            <constraint firstAttribute="bottom" secondItem="ENA-Hz-Iyp" secondAttribute="bottom" id="UYO-kb-a3T"/>
+                            <constraint firstAttribute="trailing" secondItem="ENA-Hz-Iyp" secondAttribute="trailing" id="nd8-dS-fe6"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="eventTableView" destination="mY7-b8-YhS" id="zwi-nx-sf0"/>
                         <outlet property="mapView" destination="BGg-CY-bAh" id="GSJ-X0-RQ5"/>
-                        <outlet property="titleBar" destination="r10-9k-SOi" id="2fk-I6-mWd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
