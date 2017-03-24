@@ -42,7 +42,10 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
     override func viewDidLoad() {
         super.viewDidLoad()
         tblMenuOptions.tableFooterView = UIView()
-        // Do any additional setup after loading the view.
+        
+        let blurredBackgroundView = BlurredBackgroundView(frame: .zero)
+        tblMenuOptions.backgroundView = blurredBackgroundView
+        tblMenuOptions.separatorEffect = UIVibrancyEffect(blurEffect: blurredBackgroundView.blurView.effect as! UIBlurEffect)
     }
     
     override func didReceiveMemoryWarning() {
@@ -96,6 +99,7 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         imgIcon.image = UIImage(named: arrayMenuOptions[indexPath.row]["icon"]!)
         lblTitle.text = arrayMenuOptions[indexPath.row]["title"]!
+        lblTitle.textColor = UIColor.white
         
         return cell
     }
@@ -112,5 +116,35 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1;
+    }
+}
+
+class BlurredBackgroundView: UIView {
+    let imageView: UIImageView
+    let blurView: UIVisualEffectView
+    
+    override init(frame: CGRect) {
+        let blurEffect = UIBlurEffect(style: .dark)
+        blurView = UIVisualEffectView(effect: blurEffect)
+        imageView = UIImageView(image: UIImage.gorgeousImage())
+        super.init(frame: frame)
+        addSubview(imageView)
+        addSubview(blurView)
+    }
+    
+    convenience required init?(coder aDecoder: NSCoder) {
+        self.init(frame: CGRect.zero)
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        imageView.frame = bounds
+        blurView.frame = bounds
+    }
+}
+
+extension UIImage {
+    class func gorgeousImage() -> UIImage {
+        return UIImage(named: "gorgeousimage")!
     }
 }

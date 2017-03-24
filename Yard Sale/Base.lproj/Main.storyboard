@@ -176,7 +176,7 @@
                                         <rect key="frame" x="0.0" y="300" width="375" height="367"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="eventCell" rowHeight="78" id="W3X-lC-D5r" customClass="EventTableViewCell" customModule="Yard_Sale" customModuleProvider="target">
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="eventCell" rowHeight="78" id="W3X-lC-D5r">
                                                 <rect key="frame" x="0.0" y="28" width="375" height="78"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="W3X-lC-D5r" id="h5S-3Q-2Bu">
@@ -194,13 +194,6 @@
 8:00 AM - 3:00 PM </string>
                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="2.5 mi" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U8b-GJ-VfL">
-                                                            <rect key="frame" x="0.0" y="41" width="119" height="36"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Kids Clothes and Toys!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ofg-s6-e6V">
@@ -226,16 +219,15 @@
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="2.5 mi" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U8b-GJ-VfL">
+                                                            <rect key="frame" x="84" y="1" width="35" height="20"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
                                                     </subviews>
                                                 </tableViewCellContentView>
-                                                <connections>
-                                                    <outlet property="addressLabel" destination="NCL-G4-PqX" id="htO-8Y-kcj"/>
-                                                    <outlet property="categoryLabel" destination="C1V-by-NCY" id="BZL-Zx-DtG"/>
-                                                    <outlet property="dateTimeLabel" destination="2TC-nZ-1nf" id="oco-IC-mxw"/>
-                                                    <outlet property="distanceLabel" destination="U8b-GJ-VfL" id="du7-pG-afx"/>
-                                                    <outlet property="headlineLabel" destination="Ofg-s6-e6V" id="nP9-2A-wDa"/>
-                                                    <outlet property="mapImageView" destination="Sry-Jg-mia" id="333-Tm-OTm"/>
-                                                </connections>
                                             </tableViewCell>
                                         </prototypes>
                                     </tableView>
@@ -256,8 +248,8 @@
                         <constraints>
                             <constraint firstItem="ENA-Hz-Iyp" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="LtI-YP-wNU"/>
                             <constraint firstItem="ENA-Hz-Iyp" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="OWH-2N-AFQ"/>
-                            <constraint firstAttribute="bottom" secondItem="ENA-Hz-Iyp" secondAttribute="bottom" id="UYO-kb-a3T"/>
-                            <constraint firstAttribute="trailing" secondItem="ENA-Hz-Iyp" secondAttribute="trailing" id="nd8-dS-fe6"/>
+                            <constraint firstItem="ENA-Hz-Iyp" firstAttribute="bottom" secondItem="8bC-Xf-vdC" secondAttribute="bottom" id="UYO-kb-a3T"/>
+                            <constraint firstItem="ENA-Hz-Iyp" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailing" id="nd8-dS-fe6"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="aqx-xn-l36">
