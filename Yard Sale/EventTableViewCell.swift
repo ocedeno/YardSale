@@ -17,4 +17,13 @@ class EventTableViewCell: UITableViewCell
     @IBOutlet weak var categoryLabel: UILabel!
     @IBOutlet weak var mapImageView: UIImageView!
     
+    func createEventCell(date: String, distance: String, headline: String, address: String, category: String, image: UIImage)
+    {
+        self.dateTimeLabel.text = date
+        self.distanceLabel.text = distance
+        self.headlineLabel.text = headline
+        self.addressLabel.text = address
+        self.categoryLabel.text = category
+        self.mapImageView.image = image
+    }
 }
