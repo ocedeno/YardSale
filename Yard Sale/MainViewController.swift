@@ -31,12 +31,29 @@ class MainViewController: BaseViewController, MKMapViewDelegate, CLLocationManag
     {
         super.viewWillAppear(true)
         
-        determineCurrentLocation()
+        self.determineCurrentLocation()
     }
     
     @IBAction func createEvent(_ sender: UIBarButtonItem)
     {
         openViewControllerBasedOnIdentifier("DetailVC")
+    }
+}
+
+extension MainViewController
+{
+    func determineCurrentLocation()
+    {
+        locationManager = CLLocationManager()
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
+        locationManager.activityType = .automotiveNavigation
+        locationManager.requestAlwaysAuthorization()
+        
+        if CLLocationManager.locationServicesEnabled()
+        {
+            locationManager.startUpdatingLocation()
+        }
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
@@ -52,23 +69,8 @@ class MainViewController: BaseViewController, MKMapViewDelegate, CLLocationManag
         mapView.setRegion(region, animated: true)
     }
     
-    func determineCurrentLocation()
-    {
-        locationManager = CLLocationManager()
-        locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
-        locationManager.activityType = .automotiveNavigation
-        locationManager.requestAlwaysAuthorization()
-        
-        if CLLocationManager.locationServicesEnabled()
-        {
-            locationManager.startUpdatingLocation()
-        }
-    }
-    
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error)
     {
         utilityClass.errorAlert(title: "Map Error", message: error.localizedDescription, cancelTitle: "Dismiss", view: self)
     }
 }
-
