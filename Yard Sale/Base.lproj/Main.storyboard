@@ -228,6 +228,14 @@
                                                         </label>
                                                     </subviews>
                                                 </tableViewCellContentView>
+                                                <connections>
+                                                    <outlet property="addressLabel" destination="NCL-G4-PqX" id="htO-8Y-kcj"/>
+                                                    <outlet property="categoryLabel" destination="C1V-by-NCY" id="BZL-Zx-DtG"/>
+                                                    <outlet property="dateTimeLabel" destination="2TC-nZ-1nf" id="oco-IC-mxw"/>
+                                                    <outlet property="distanceLabel" destination="U8b-GJ-VfL" id="du7-pG-afx"/>
+                                                    <outlet property="headlineLabel" destination="Ofg-s6-e6V" id="nP9-2A-wDa"/>
+                                                    <outlet property="mapImageView" destination="Sry-Jg-mia" id="333-Tm-OTm"/>
+                                                </connections>
                                             </tableViewCell>
                                         </prototypes>
                                     </tableView>
