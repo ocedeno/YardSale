@@ -31,7 +31,7 @@ class MainViewController: BaseViewController, MKMapViewDelegate {
     
     @IBAction func createEvent(_ sender: UIBarButtonItem)
     {
-        
+        openViewControllerBasedOnIdentifier("DetailVC")
     }
 }
 
