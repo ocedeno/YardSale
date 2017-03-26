@@ -76,7 +76,7 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
             delegate?.slideMenuItemSelectedAtIndex(index)
         }
         
-        UIView.animate(withDuration: 0.5, animations: { () -> Void in
+        UIView.animate(withDuration: 1.0, animations: { () -> Void in
             self.view.frame = CGRect(x: -UIScreen.main.bounds.size.width, y: 0, width: UIScreen.main.bounds.size.width,height: UIScreen.main.bounds.size.height)
             self.view.layoutIfNeeded()
             self.view.backgroundColor = UIColor.clear
@@ -145,6 +145,6 @@ class BlurredBackgroundView: UIView {
 
 extension UIImage {
     class func gorgeousImage() -> UIImage {
-        return UIImage(named: "gorgeousimage")!
+        return UIImage(named: "YardSaleSign")!
     }
 }

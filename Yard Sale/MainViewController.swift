@@ -25,6 +25,8 @@ class MainViewController: BaseViewController, MKMapViewDelegate, CLLocationManag
         
         mapView.delegate = self
         self.addSlideMenuButton()
+        eventTableView.delegate = self
+        eventTableView.dataSource = self
     }
     
     override func viewWillAppear(_ animated: Bool)
@@ -88,8 +90,9 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "eventCell")!
-        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "eventCell")! as! EventTableViewCell
+        let image = UIImage(named: "gorgeousimage")
+        cell.updateEventCell(withDate: "Mar 24", distance: "2.4 mi", headline: "Get the best toys for 4-6", address: "18424 NW 11th CT", category: "*Children Clothes *Children Toys *Household Items *Electronics *Kids Shoes", image: image!)
         
         return cell
     }

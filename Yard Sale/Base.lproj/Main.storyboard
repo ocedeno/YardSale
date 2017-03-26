@@ -176,7 +176,7 @@
                                         <rect key="frame" x="0.0" y="300" width="375" height="367"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="eventCell" rowHeight="78" id="W3X-lC-D5r">
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="eventCell" rowHeight="78" id="W3X-lC-D5r" customClass="EventTableViewCell" customModule="Yard_Sale" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="28" width="375" height="78"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="W3X-lC-D5r" id="h5S-3Q-2Bu">
@@ -228,6 +228,14 @@
                                                         </label>
                                                     </subviews>
                                                 </tableViewCellContentView>
+                                                <connections>
+                                                    <outlet property="addressLabel" destination="NCL-G4-PqX" id="jkB-c2-xr1"/>
+                                                    <outlet property="categoryLabel" destination="C1V-by-NCY" id="sOm-vV-XSa"/>
+                                                    <outlet property="dateLabel" destination="2TC-nZ-1nf" id="Avb-cw-rU9"/>
+                                                    <outlet property="distanceLabel" destination="U8b-GJ-VfL" id="ix2-Vo-bIp"/>
+                                                    <outlet property="eventImageView" destination="Sry-Jg-mia" id="Cv3-p0-m4g"/>
+                                                    <outlet property="headlineLabel" destination="Ofg-s6-e6V" id="FcU-uL-33Y"/>
+                                                </connections>
                                             </tableViewCell>
                                         </prototypes>
                                     </tableView>
