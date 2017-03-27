@@ -207,10 +207,10 @@
 			children = (
 				065EA8CF1E815C3400CA09F4 /* LoginViewController.swift */,
 				065EA8D11E815C4D00CA09F4 /* ResetPasswordViewController.swift */,
-				06E86F4B1E855D8D009E3D75 /* MenuViewController.swift */,
-				06E86F4D1E855E60009E3D75 /* BaseViewController.swift */,
 				061FF06B1E7ED5FF0075F033 /* MainViewController.swift */,
 				06EC2E0B1E89374300F83D6C /* CreateEventViewController.swift */,
+				06E86F4B1E855D8D009E3D75 /* MenuViewController.swift */,
+				06E86F4D1E855E60009E3D75 /* BaseViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
