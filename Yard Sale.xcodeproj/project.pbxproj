@@ -23,6 +23,9 @@
 		06A44B541E808380007ECDC0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 06A44B531E808380007ECDC0 /* GoogleService-Info.plist */; };
 		06E86F4C1E855D8D009E3D75 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E86F4B1E855D8D009E3D75 /* MenuViewController.swift */; };
 		06E86F4E1E855E60009E3D75 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E86F4D1E855E60009E3D75 /* BaseViewController.swift */; };
+		06EC2E091E8936B100F83D6C /* SSRadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06EC2E071E8936B100F83D6C /* SSRadioButton.swift */; };
+		06EC2E0A1E8936B100F83D6C /* SSRadioButtonsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06EC2E081E8936B100F83D6C /* SSRadioButtonsController.swift */; };
+		06EC2E0C1E89374300F83D6C /* CreateEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06EC2E0B1E89374300F83D6C /* CreateEventViewController.swift */; };
 		06F6B7161E859D66009277DE /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06F6B7151E859D66009277DE /* EventTableViewCell.swift */; };
 		314FBD6D89F76338468C9E6C /* Pods_Yard_Sale.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12F91F444C7A938EACA6AE3D /* Pods_Yard_Sale.framework */; };
 		3410EA02D7526A37F4DAA1CE /* Pods_Yard_SaleUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F67BBF3D063DDA42386B4DF /* Pods_Yard_SaleUITests.framework */; };
@@ -82,6 +85,9 @@
 		06A44B531E808380007ECDC0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		06E86F4B1E855D8D009E3D75 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		06E86F4D1E855E60009E3D75 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		06EC2E071E8936B100F83D6C /* SSRadioButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSRadioButton.swift; sourceTree = "<group>"; };
+		06EC2E081E8936B100F83D6C /* SSRadioButtonsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSRadioButtonsController.swift; sourceTree = "<group>"; };
+		06EC2E0B1E89374300F83D6C /* CreateEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventViewController.swift; sourceTree = "<group>"; };
 		06F6B7151E859D66009277DE /* EventTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTableViewCell.swift; sourceTree = "<group>"; };
 		12F91F444C7A938EACA6AE3D /* Pods_Yard_Sale.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Yard_Sale.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		197B33F84B91DB4F3471D44F /* Pods-Yard SaleUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Yard SaleUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Yard SaleUITests/Pods-Yard SaleUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -204,6 +210,7 @@
 				06E86F4B1E855D8D009E3D75 /* MenuViewController.swift */,
 				06E86F4D1E855E60009E3D75 /* BaseViewController.swift */,
 				061FF06B1E7ED5FF0075F033 /* MainViewController.swift */,
+				06EC2E0B1E89374300F83D6C /* CreateEventViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -220,6 +227,8 @@
 			isa = PBXGroup;
 			children = (
 				06F6B7151E859D66009277DE /* EventTableViewCell.swift */,
+				06EC2E071E8936B100F83D6C /* SSRadioButton.swift */,
+				06EC2E081E8936B100F83D6C /* SSRadioButtonsController.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -558,9 +567,12 @@
 				065EA8D41E8412F900CA09F4 /* User.swift in Sources */,
 				06E86F4C1E855D8D009E3D75 /* MenuViewController.swift in Sources */,
 				065EA8D21E815C4D00CA09F4 /* ResetPasswordViewController.swift in Sources */,
+				06EC2E0A1E8936B100F83D6C /* SSRadioButtonsController.swift in Sources */,
 				06E86F4E1E855E60009E3D75 /* BaseViewController.swift in Sources */,
 				061FF06C1E7ED5FF0075F033 /* MainViewController.swift in Sources */,
 				061FF06A1E7ED5FF0075F033 /* AppDelegate.swift in Sources */,
+				06EC2E091E8936B100F83D6C /* SSRadioButton.swift in Sources */,
+				06EC2E0C1E89374300F83D6C /* CreateEventViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

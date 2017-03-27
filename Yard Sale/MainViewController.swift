@@ -91,20 +91,9 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
         let cell = tableView.dequeueReusableCell(withIdentifier: "eventCell")! as! EventTableViewCell
-        let coordinates = CLLocationCoordinate2D(latitude: 26.0960880, longitude: -80.1886040)
-        let image = getMapCellImage(withCoordinates: coordinates, imageView: cell.eventImageView)
-        cell.updateEventCell(withDate: "Mar 24", distance: "2.4 mi", headline: "Get the best toys for 4-6", address: "18424 NW 11th CT", category: "*Children Clothes *Children Toys *Household Items *Electronics *Kids Shoes", image: image)
+        let image = UIImage(named: "gorgeousimage")
+        cell.updateEventCell(withDate: "Mar 24", distance: "2.4 mi", headline: "Get the best toys for 4-6", address: "18424 NW 11th CT", category: "*Children Clothes *Children Toys *Household Items *Electronics *Kids Shoes", image: image!)
         
         return cell
-    }
-    
-    func getMapCellImage(withCoordinates coordinates: CLLocationCoordinate2D, imageView: UIImageView) -> UIImage
-    {
-        let staticMapUrl: String = "http://maps.google.com/maps/api/staticmap?markers=color:blue|\(coordinates.latitude),\(coordinates.longitude)&\("zoom=13&size=\(2 * Int(imageView.frame.size.width))\(2 * Int(imageView.frame.size.height))")&sensor=true"
-        let mapUrl: URL = NSURL(string: staticMapUrl.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!)! as URL
-        let data = try! NSData(contentsOf: mapUrl) as Data
-        let image: UIImage = UIImage(data: data)!
-        
-        return image
     }
 }

@@ -84,7 +84,7 @@
         <!--Create Event VC-->
         <scene sceneID="wxS-mE-h8Y">
             <objects>
-                <viewController storyboardIdentifier="CreateEventVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="J55-xf-ArT" userLabel="Create Event VC" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CreateEventVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="J55-xf-ArT" userLabel="Create Event VC" customClass="CreateEventViewController" customModule="Yard_Sale" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="nVS-2a-6CB"/>
                         <viewControllerLayoutGuide type="bottom" id="kzP-7y-YeR"/>
@@ -92,12 +92,22 @@
                     <view key="view" contentMode="scaleToFill" id="kz6-Kf-PQ7">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ooM-00-BJy">
+                                <rect key="frame" x="16" y="84" width="164" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Use Stored Address?"/>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="useCurrentAddressButton" destination="ooM-00-BJy" id="OKQ-pj-sd7"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3OZ-ZD-99P" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1654" y="139"/>
+            <point key="canvasLocation" x="1653.5999999999999" y="138.98050974512745"/>
         </scene>
         <!--Login VC-->
         <scene sceneID="Hu8-RR-2De">
