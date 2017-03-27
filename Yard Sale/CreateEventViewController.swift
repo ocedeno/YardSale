@@ -10,11 +10,13 @@ import UIKit
 
 class CreateEventViewController: UIViewController, SSRadioButtonControllerDelegate
 {
+    @IBOutlet weak var dateTextField: UITextField!
     @IBOutlet weak var useNewLocation: SSRadioButton!
     @IBOutlet weak var selectNewLocationButton: UIButton!
     @IBOutlet weak var useCurrentAddressButton: SSRadioButton!
     
     var radioButtonController: SSRadioButtonsController?
+    let datePickerView: UIDatePicker = UIDatePicker()
     
     override func viewDidLoad()
     {
@@ -25,9 +27,11 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
         self.navigationItem.rightBarButtonItem = saveButton
         
         radioButtonController = SSRadioButtonsController(buttons: useCurrentAddressButton, useNewLocation)
-        radioButtonController?.setButtonsArray([useCurrentAddressButton, useNewLocation])
         radioButtonController!.delegate = self
         radioButtonController!.shouldLetDeSelect = false
+        
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(dismissPicker))
+        self.view.addGestureRecognizer(gesture)
     }
     
     override func viewWillAppear(_ animated: Bool)
@@ -46,6 +50,28 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
         {
             selectNewLocationButton.isHidden = false
         }
+    }
+    
+    @IBAction func dateTextFieldEditing(_ sender: UITextField)
+    {
+        datePickerView.datePickerMode = UIDatePickerMode.date
+        sender.inputView = datePickerView
+        datePickerView.addTarget(self, action: #selector(datePickerValueChanged), for: .valueChanged)
+    }
+    
+    func datePickerValueChanged(sender: UIDatePicker) {
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = DateFormatter.Style.medium
+        dateFormatter.timeStyle = DateFormatter.Style.none
+        dateTextField.text = dateFormatter.string(from: sender.date)
+        
+    }
+    
+    func dismissPicker()
+    {
+        datePickerView.removeFromSuperview()
+        print("Tapped")
     }
     
     func saveEvent()
