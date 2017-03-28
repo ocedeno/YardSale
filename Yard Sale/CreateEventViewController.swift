@@ -10,14 +10,18 @@ import UIKit
 
 class CreateEventViewController: UIViewController, SSRadioButtonControllerDelegate
 {
+    @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var dateTextField: UITextField!
     @IBOutlet weak var useNewLocation: SSRadioButton!
     @IBOutlet weak var selectNewLocationButton: UIButton!
     @IBOutlet weak var useCurrentAddressButton: SSRadioButton!
+    @IBOutlet weak var startTimeField: UITextField!
+    @IBOutlet weak var stopTimeField: UITextField!
     
     var radioButtonController: SSRadioButtonsController?
     let datePickerView: UIDatePicker = UIDatePicker()
-    
+    let timePickerView: UIDatePicker = UIDatePicker()
+
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -54,24 +58,55 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
     
     @IBAction func dateTextFieldEditing(_ sender: UITextField)
     {
-        datePickerView.datePickerMode = UIDatePickerMode.date
+        datePickerView.datePickerMode = .date
         sender.inputView = datePickerView
         datePickerView.addTarget(self, action: #selector(datePickerValueChanged), for: .valueChanged)
     }
     
-    func datePickerValueChanged(sender: UIDatePicker) {
-        
+    @IBAction func startTimeTextFieldEditing(_ sender: UITextField)
+    {
+        datePickerView.datePickerMode = .time
+        sender.inputView = datePickerView
+        datePickerView.addTarget(self, action: #selector(startTimePickerValueChanged), for: .valueChanged)
+    }
+    
+    func startTimePickerValueChanged(sender: UIDatePicker)
+    {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .none
+        dateFormatter.timeStyle = .short
+        startTimeField.text = dateFormatter.string(from: sender.date)
+    }
+    
+    @IBAction func stopTimeTextFieldEditing(_ sender: UITextField)
+    {
+        timePickerView.datePickerMode = .time
+        sender.inputView = timePickerView
+        timePickerView.addTarget(self, action: #selector(stopTimePickerValueChanged), for: .valueChanged)
+    }
+    
+    func stopTimePickerValueChanged(sender: UIDatePicker)
+    {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .none
+        dateFormatter.timeStyle = .short
+        stopTimeField.text = dateFormatter.string(from: sender.date)
+    }
+    
+    func datePickerValueChanged(sender: UIDatePicker)
+    {
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = DateFormatter.Style.medium
         dateFormatter.timeStyle = DateFormatter.Style.none
         dateTextField.text = dateFormatter.string(from: sender.date)
-        
     }
     
     func dismissPicker()
     {
-        datePickerView.removeFromSuperview()
-        print("Tapped")
+        startTimeField.endEditing(true)
+        stopTimeField.endEditing(true)
+        dateTextField.endEditing(true)
+        titleTextField.endEditing(true)
     }
     
     func saveEvent()
