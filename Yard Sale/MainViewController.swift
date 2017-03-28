@@ -17,11 +17,14 @@ class MainViewController: BaseViewController, MKMapViewDelegate, CLLocationManag
     @IBOutlet weak var eventTableView: UITableView!
     
     var locationManager: CLLocationManager!
+    let ref: FIRDatabaseReference? = nil
     let utilityClass = Utiliy()
+    var events = [Event]()
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        
         
         self.addSlideMenuButton()
         eventTableView.backgroundColor = UIColor.clear

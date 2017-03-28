@@ -13,24 +13,30 @@ struct Event
 {
     static let titleKey = "title"
     static let date = "date"
-    static let time = "time"
+    static let startTime = "startTime"
+    static let stopTime = "stopTime"
     static let description = "description"
     static let active = "active"
+    static let userID = "userID"
     
     let title: String?
     let date: String?
-    let time: String?
+    let startTime: String?
+    let stopTime: String?
     let description: String?
+    let userID: String?
     let active: Bool?
     let ref : FIRDatabaseReference?
     
-    init(withTitle title: String, onDate date: String, atTime time:String, withDescription description: String, activeEvent active: Bool)
+    init(withTitle title: String, onDate date: String, startTime:String, stopTime: String, withDescription description: String, userID uid: String, activeEvent active: Bool)
     {
         self.title = title
         self.date = date
-        self.time = time
+        self.startTime = startTime
+        self.stopTime = stopTime
         self.description = description
         self.active = active
+        self.userID = uid
         self.ref = nil
     }
     
@@ -39,7 +45,9 @@ struct Event
         let snapshotValue = snapshot.value as! [String: Any]
         self.title = snapshotValue[Event.titleKey] as? String
         self.date = snapshotValue[Event.date] as? String
-        self.time = snapshotValue[Event.time] as? String
+        self.startTime = snapshotValue[Event.startTime] as? String
+        self.stopTime = snapshotValue[Event.stopTime] as? String
+        self.userID = snapshotValue[Event.userID] as? String
         self.description = snapshotValue[Event.description] as? String
         self.active = snapshotValue[Event.active] as? Bool
         self.ref = snapshot.ref
@@ -47,11 +55,13 @@ struct Event
     
     func toDictionary() -> Any {
         return [
+            Event.userID : self.userID!,
             Event.titleKey : self.title!,
             Event.date : self.date!,
-            Event.time : self.time!,
+            Event.startTime : self.startTime!,
+            Event.stopTime : self.stopTime!,
             Event.description : self.description!,
-            Event.active : self.active!
+            Event.active : self.active!,
         ]
     }
 }
