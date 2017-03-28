@@ -62,6 +62,7 @@ class LoginViewController: UIViewController
                 }
                 
                 FIRAuth.auth()?.signIn(withEmail: emailField.text!, password: passwordField.text!)
+                _ = User(authData: FIRAuth.auth()!.currentUser!, firstName: "john", lastName: "sanders")
                
             })
         }

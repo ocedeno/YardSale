@@ -7,22 +7,37 @@
 //
 
 import Foundation
-import FirebaseAuth
+import Firebase
 
 struct User
 {
-    let uid: String
-    let email: String
+    static let firstNameKey = "firstName"
+    static let lastNameKey = "lastName"
+    static let emailKey = "email"
+    static let emailConfirmationKey = "emailConfirmation"
+
+    let firstName: String?
+    let lastName: String?
+    let email: String?
+    let emailConfirmation: Bool?
+    let ref : FIRDatabaseReference?
     
-    init(authData: FIRUser)
+    init(authData: FIRUser, firstName: String, lastName: String)
     {
-        uid = authData.uid
         email = authData.email!
+        emailConfirmation = authData.isEmailVerified
+        self.firstName = firstName
+        self.lastName = lastName
+        self.ref = nil
     }
     
-    init(uid: String, email: String) {
-        self.uid = uid
-        self.email = email
+    init(snapshot: FIRDataSnapshot)
+    {
+        let snapshotValue = snapshot.value as! [String:Any]
+        self.firstName = snapshotValue[User.firstNameKey] as? String
+        self.lastName = snapshotValue[User.lastNameKey] as? String
+        self.email = snapshotValue[User.emailKey] as? String
+        self.emailConfirmation = snapshotValue[User.emailConfirmationKey] as? Bool
+        self.ref = snapshot.ref
     }
-    
 }

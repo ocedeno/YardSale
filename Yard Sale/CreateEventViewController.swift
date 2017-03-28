@@ -117,20 +117,23 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
     
     func saveEvent()
     {
-        //let userID = FIRAuth.auth()?.currentUser?.uid
-        //let eventRef = ref.child("users").child(userID!).child("events")
         guardCheck()
-        print("\nSaved Yard Sale Event \n\(updateEvent(withTitle: titleTextField, descript: descriptionText, date: dateTextField, startTime: startTimeField, stopTime: stopTimeField))")
+        dismissPicker()
+        let dic = updateEvent()
+        let userID = FIRAuth.auth()?.currentUser?.uid
+        let event = Event(withTitle: dic["title"] as! String, onDate: dic["date"] as! String, atTime: dic["time"] as! String, withDescription: dic["description"] as! String, activeEvent: true)
+        let taskFirebasePath = self.ref.ref.child("users").child(userID!.lowercased()).child("events")
+        taskFirebasePath.setValue(event.toDictionary())
     }
     
-    func updateEvent(withTitle: UITextField, descript: UITextView, date: UITextField, startTime: UITextField, stopTime: UITextField) -> [String: AnyObject]
+    func updateEvent() -> [String: AnyObject]
     {
         let dic =
             [
-                "title" : withTitle.text! as AnyObject,
-                "date" : date.text! as AnyObject,
-                "time" : "\(startTime.text!) - \(stopTime.text!)" as AnyObject,
-                "description" : descript.text as AnyObject
+                "title" : titleTextField.text! as AnyObject,
+                "date" : dateTextField.text! as AnyObject,
+                "time" : "\(startTimeField.text!) - \(stopTimeField.text!)" as AnyObject,
+                "description" : descriptionText.text as AnyObject
         ]
         
         return dic

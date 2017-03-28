@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		061BF4F31E8AE1B900D3BE21 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 061BF4F21E8AE1B900D3BE21 /* Event.swift */; };
 		061FF06A1E7ED5FF0075F033 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 061FF0691E7ED5FF0075F033 /* AppDelegate.swift */; };
 		061FF06C1E7ED5FF0075F033 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 061FF06B1E7ED5FF0075F033 /* MainViewController.swift */; };
 		061FF06F1E7ED5FF0075F033 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 061FF06D1E7ED5FF0075F033 /* Main.storyboard */; };
@@ -63,6 +64,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		061BF4F21E8AE1B900D3BE21 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		061FF0661E7ED5FF0075F033 /* Yard Sale.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Yard Sale.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		061FF0691E7ED5FF0075F033 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		061FF06B1E7ED5FF0075F033 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -219,6 +221,7 @@
 			isa = PBXGroup;
 			children = (
 				065EA8D31E8412F900CA09F4 /* User.swift */,
+				061BF4F21E8AE1B900D3BE21 /* Event.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -573,6 +576,7 @@
 				061FF06A1E7ED5FF0075F033 /* AppDelegate.swift in Sources */,
 				06EC2E091E8936B100F83D6C /* SSRadioButton.swift in Sources */,
 				06EC2E0C1E89374300F83D6C /* CreateEventViewController.swift in Sources */,
+				061BF4F31E8AE1B900D3BE21 /* Event.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,8 +7,11 @@
 //
 
 import UIKit
+import Firebase
 
-class BaseViewController: UIViewController, SlideMenuDelegate {
+class BaseViewController: UIViewController, SlideMenuDelegate
+{
+    let auth = FIRAuth.auth()?.currentUser
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +37,13 @@ class BaseViewController: UIViewController, SlideMenuDelegate {
             print("Profile\n", terminator: "")
             
             self.openViewControllerBasedOnIdentifier("UserProfileVC")
+            
+            break
+            
+        case 2:
+            print("Sign-Out\n", terminator: "")
+            
+            
             
             break
         default:
