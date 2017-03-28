@@ -126,11 +126,11 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
     func updateEvent(withTitle: UITextField, descript: UITextView, date: UITextField, startTime: UITextField, stopTime: UITextField) -> [String: AnyObject]
     {
         let dic =
-        [
-            "title" : withTitle.text! as AnyObject,
-            "date" : date.text! as AnyObject,
-            "time" : "\(startTime.text!) - \(stopTime.text!)" as AnyObject,
-            "description" : descript.text as AnyObject
+            [
+                "title" : withTitle.text! as AnyObject,
+                "date" : date.text! as AnyObject,
+                "time" : "\(startTime.text!) - \(stopTime.text!)" as AnyObject,
+                "description" : descript.text as AnyObject
         ]
         
         return dic
@@ -189,33 +189,17 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
     func updateBorder(withFrame frame: UITextField)
     {
         let redBorderColor = UIColor.red
-            frame.layer.borderColor = redBorderColor.cgColor
-            frame.layer.borderWidth = 1.0
-            frame.layer.cornerRadius = 5.0
-
-//        }else
-//        {
-//            frame.layer.borderColor = originalBorderColor.cgColor
-//            frame.layer.borderWidth = 1.0
-//            frame.layer.cornerRadius = 5.0;
-//        }
+        frame.layer.borderColor = redBorderColor.cgColor
+        frame.layer.borderWidth = 1.0
+        frame.layer.cornerRadius = 5.0
     }
     
     func updateBorder(withTextView frame: UITextView)
     {
-        let originalBorderColor = UIColor.init(colorLiteralRed: 204.0/255.0, green: 204.0/255.0, blue: 204.0/255.0, alpha: 1.0)
         let redBorderColor = UIColor.red
         
-        if frame.text!.isEmpty
-        {
-            frame.layer.borderColor = redBorderColor.cgColor
-            frame.layer.borderWidth = 1.0
-            frame.layer.cornerRadius = 5.0;
-        }else
-        {
-            frame.layer.borderColor = originalBorderColor.cgColor
-            frame.layer.borderWidth = 1.0
-            frame.layer.cornerRadius = 5.0;
-        }
+        frame.layer.borderColor = redBorderColor.cgColor
+        frame.layer.borderWidth = 1.0
+        frame.layer.cornerRadius = 5.0;
     }
 }
