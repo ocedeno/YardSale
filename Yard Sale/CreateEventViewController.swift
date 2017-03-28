@@ -21,8 +21,6 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
     @IBOutlet weak var descriptionText: UITextView!
     
     var radioButtonController: SSRadioButtonsController?
-    let datePickerView: UIDatePicker = UIDatePicker()
-    let timePickerView: UIDatePicker = UIDatePicker()
     let ref: FIRDatabaseReference = FIRDatabase.database().reference()
     let utility = Utiliy()
     
@@ -62,6 +60,7 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
     
     @IBAction func dateTextFieldEditing(_ sender: UITextField)
     {
+        let datePickerView: UIDatePicker = UIDatePicker()
         datePickerView.datePickerMode = .date
         sender.inputView = datePickerView
         datePickerView.addTarget(self, action: #selector(datePickerValueChanged), for: .valueChanged)
@@ -69,6 +68,7 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
     
     @IBAction func startTimeTextFieldEditing(_ sender: UITextField)
     {
+        let datePickerView: UIDatePicker = UIDatePicker()
         datePickerView.datePickerMode = .time
         sender.inputView = datePickerView
         datePickerView.addTarget(self, action: #selector(startTimePickerValueChanged), for: .valueChanged)
@@ -84,6 +84,7 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
     
     @IBAction func stopTimeTextFieldEditing(_ sender: UITextField)
     {
+        let timePickerView: UIDatePicker = UIDatePicker()
         timePickerView.datePickerMode = .time
         sender.inputView = timePickerView
         timePickerView.addTarget(self, action: #selector(stopTimePickerValueChanged), for: .valueChanged)
@@ -116,15 +117,14 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
     
     func saveEvent()
     {
-        let userID = FIRAuth.auth()?.currentUser?.uid
-        let eventRef = ref.child("users").child(userID!).child("events")
+        //let userID = FIRAuth.auth()?.currentUser?.uid
+        //let eventRef = ref.child("users").child(userID!).child("events")
+        guardCheck()
         print("\nSaved Yard Sale Event \n\(updateEvent(withTitle: titleTextField, descript: descriptionText, date: dateTextField, startTime: startTimeField, stopTime: stopTimeField))")
     }
     
     func updateEvent(withTitle: UITextField, descript: UITextView, date: UITextField, startTime: UITextField, stopTime: UITextField) -> [String: AnyObject]
     {
-        guardCheck(withTitle: withTitle, descript: descript, date: date, startTime: startTime, stopTime: stopTime)
-        
         let dic =
         [
             "title" : withTitle.text! as AnyObject,
@@ -136,36 +136,69 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
         return dic
     }
     
-    fileprivate func guardCheck(withTitle: UITextField, descript: UITextView, date: UITextField, startTime: UITextField, stopTime: UITextField)
+    fileprivate func guardCheck()
     {
-        guard !(withTitle.text?.isEmpty)! || !(date.text?.isEmpty)! || !(startTime.text?.isEmpty)! || !(stopTime.text?.isEmpty)! || !(descript.text?.isEmpty)! else
+        let originalBorderColor = UIColor.init(colorLiteralRed: 204.0/255.0, green: 204.0/255.0, blue: 204.0/255.0, alpha: 1.0)
+        
+        guard !(titleTextField.text!.isEmpty) else
         {
             utility.errorAlert(title: "Save Error", message: "Please make sure the selected fields have been filled.", cancelTitle: "Dismiss", view: self)
-            
             updateBorder(withFrame: titleTextField)
-            updateBorder(withFrame: dateTextField)
-            updateBorder(withFrame: startTime)
-            updateBorder(withFrame: stopTime)
-            updateBorder(withTextView: descriptionText)
-        
             return
         }
+        
+        titleTextField.layer.borderColor = originalBorderColor.cgColor
+        
+        guard !(dateTextField.text!.isEmpty) else
+        {
+            utility.errorAlert(title: "Save Error", message: "Please make sure the selected fields have been filled.", cancelTitle: "Dismiss", view: self)
+            updateBorder(withFrame: dateTextField)
+            return
+        }
+        
+        dateTextField.layer.borderColor = originalBorderColor.cgColor
+        
+        guard !(startTimeField.text!.isEmpty) else
+        {
+            utility.errorAlert(title: "Save Error", message: "Please make sure the selected fields have been filled.", cancelTitle: "Dismiss", view: self)
+            updateBorder(withFrame: startTimeField)
+            return
+        }
+        
+        startTimeField.layer.borderColor = originalBorderColor.cgColor
+        
+        guard !(stopTimeField.text!.isEmpty) else
+        {
+            utility.errorAlert(title: "Save Error", message: "Please make sure the selected fields have been filled.", cancelTitle: "Dismiss", view: self)
+            updateBorder(withFrame: stopTimeField)
+            return
+        }
+        
+        stopTimeField.layer.borderColor = originalBorderColor.cgColor
+        
+        guard !(descriptionText.text.isEmpty) else
+        {
+            utility.errorAlert(title: "Save Error", message: "Please make sure the selected fields have been filled.", cancelTitle: "Dismiss", view: self)
+            updateBorder(withTextView: descriptionText)
+            return
+        }
+        
+        descriptionText.layer.borderColor = originalBorderColor.cgColor
     }
     
     func updateBorder(withFrame frame: UITextField)
     {
-        let originalBorderColor = UIColor.init(colorLiteralRed: 204.0/255.0, green: 204.0/255.0, blue: 204.0/255.0, alpha: 1.0)
         let redBorderColor = UIColor.red
-        
-        if frame.text!.isEmpty
-        {
             frame.layer.borderColor = redBorderColor.cgColor
             frame.layer.borderWidth = 1.0
-        }else
-        {
-            frame.layer.borderColor = originalBorderColor.cgColor
-            frame.layer.borderWidth = 1.0
-        }
+            frame.layer.cornerRadius = 5.0
+
+//        }else
+//        {
+//            frame.layer.borderColor = originalBorderColor.cgColor
+//            frame.layer.borderWidth = 1.0
+//            frame.layer.cornerRadius = 5.0;
+//        }
     }
     
     func updateBorder(withTextView frame: UITextView)
@@ -177,10 +210,12 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
         {
             frame.layer.borderColor = redBorderColor.cgColor
             frame.layer.borderWidth = 1.0
+            frame.layer.cornerRadius = 5.0;
         }else
         {
             frame.layer.borderColor = originalBorderColor.cgColor
             frame.layer.borderWidth = 1.0
+            frame.layer.cornerRadius = 5.0;
         }
     }
 }
