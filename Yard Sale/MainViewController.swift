@@ -23,8 +23,9 @@ class MainViewController: BaseViewController, MKMapViewDelegate, CLLocationManag
     {
         super.viewDidLoad()
         
-        mapView.delegate = self
         self.addSlideMenuButton()
+        eventTableView.backgroundColor = UIColor.clear
+        mapView.delegate = self
         eventTableView.delegate = self
         eventTableView.dataSource = self
     }
