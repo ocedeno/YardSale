@@ -20,7 +20,8 @@ class MainViewController: BaseViewController, MKMapViewDelegate, CLLocationManag
     var ref: FIRDatabaseReference? = nil
     let utilityClass = Utiliy()
     var eventsArray = [Event]()
-    
+    var locationOne, locationTwo: CLLocation?
+
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -93,6 +94,13 @@ extension MainViewController
     {
         utilityClass.errorAlert(title: "Map Error", message: error.localizedDescription, cancelTitle: "Dismiss", view: self)
     }
+    
+    func getDistance(locationOne: CLLocation, locationTwo: CLLocation) -> String
+    {
+        let distance = locationTwo.distance(from: locationOne)
+        let distString = Int(distance)
+        return String("\(distString) miles")
+    }
 }
 
 extension MainViewController: UITableViewDelegate, UITableViewDataSource
@@ -106,7 +114,8 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource
         let cell = tableView.dequeueReusableCell(withIdentifier: "eventCell")! as! EventTableViewCell
         let image = UIImage(named: "gorgeousimage")
         let cellAddress: String = "\(eventsArray[indexPath.row].addressDictionary!["City"]!), \(eventsArray[indexPath.row].addressDictionary!["State"]!)"
-        cell.updateEventCell(withDate: eventsArray[indexPath.row].date!, distance: "2.4 mi", headline: eventsArray[indexPath.row].title!, address: cellAddress, category: eventsArray[indexPath.row].description!, image: image!)
+        locationTwo = CLLocation(latitude: eventsArray[indexPath.row].locLat!, longitude: eventsArray[indexPath.row].locLon!)
+        cell.updateEventCell(withDate: eventsArray[indexPath.row].date!, distance: getDistance(locationOne: locationManager.location!, locationTwo: locationTwo!), headline: eventsArray[indexPath.row].title!, address: cellAddress, category: eventsArray[indexPath.row].description!, image: image!)
         
         return cell
     }
