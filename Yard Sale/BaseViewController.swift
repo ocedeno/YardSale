@@ -43,7 +43,7 @@ class BaseViewController: UIViewController, SlideMenuDelegate
         case 2:
             print("Sign-Out\n", terminator: "")
             
-            
+            try! FIRAuth.auth()?.signOut()
             
             break
         default:

@@ -40,6 +40,7 @@ class MainViewController: BaseViewController, MKMapViewDelegate, CLLocationManag
             self.eventTableView.reloadData()
         })
         
+        self.determineCurrentLocation()
         self.addSlideMenuButton()
         eventTableView.backgroundColor = UIColor.clear
         mapView.delegate = self
@@ -50,8 +51,19 @@ class MainViewController: BaseViewController, MKMapViewDelegate, CLLocationManag
     override func viewWillAppear(_ animated: Bool)
     {
         super.viewWillAppear(true)
+    }
+    
+    override func viewDidAppear(_ animated: Bool)
+    {
+        super.viewDidAppear(true)
         
-        self.determineCurrentLocation()
+        FIRAuth.auth()?.addStateDidChangeListener { auth, user in
+            if user != nil {
+                print("User is signed in.")
+            } else {
+                print("User is signed out.")
+            }
+        }
     }
     
     @IBAction func createEvent(_ sender: UIBarButtonItem)
@@ -79,6 +91,7 @@ extension MainViewController
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
     {
         let currentLocation: CLLocation = locations[0] as CLLocation
+        locationOne = currentLocation
         manager.stopUpdatingLocation()
         let lon = currentLocation.coordinate.longitude
         let lat = currentLocation.coordinate.latitude
@@ -95,9 +108,9 @@ extension MainViewController
         utilityClass.errorAlert(title: "Map Error", message: error.localizedDescription, cancelTitle: "Dismiss", view: self)
     }
     
-    func getDistance(locationOne: CLLocation, locationTwo: CLLocation) -> String
+    func getDistance(locationTwo: CLLocation) -> String
     {
-        let distance = locationTwo.distance(from: locationOne)
+        let distance = locationTwo.distance(from: self.locationOne!)
         let distString = Int(distance)
         return String("\(distString) miles")
     }
@@ -115,7 +128,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource
         let image = UIImage(named: "gorgeousimage")
         let cellAddress: String = "\(eventsArray[indexPath.row].addressDictionary!["City"]!), \(eventsArray[indexPath.row].addressDictionary!["State"]!)"
         locationTwo = CLLocation(latitude: eventsArray[indexPath.row].locLat!, longitude: eventsArray[indexPath.row].locLon!)
-        cell.updateEventCell(withDate: eventsArray[indexPath.row].date!, distance: getDistance(locationOne: locationManager.location!, locationTwo: locationTwo!), headline: eventsArray[indexPath.row].title!, address: cellAddress, category: eventsArray[indexPath.row].description!, image: image!)
+        cell.updateEventCell(withDate: eventsArray[indexPath.row].date!, distance: getDistance(locationTwo: locationTwo!), headline: eventsArray[indexPath.row].title!, address: cellAddress, category: eventsArray[indexPath.row].description!, image: image!)
         
         return cell
     }
