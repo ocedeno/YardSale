@@ -17,14 +17,27 @@ class MainViewController: BaseViewController, MKMapViewDelegate, CLLocationManag
     @IBOutlet weak var eventTableView: UITableView!
     
     var locationManager: CLLocationManager!
-    let ref: FIRDatabaseReference? = nil
+    var ref: FIRDatabaseReference? = nil
     let utilityClass = Utiliy()
-    var events = [Event]()
+    var eventsArray = [Event]()
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
         
+        self.ref = FIRDatabase.database().reference().child("events")
+        self.ref?.queryOrdered(byChild: "userID").observe(.value, with: { snapshot in
+            
+            var array: [Event] = []
+            for item in snapshot.children
+            {
+                let event = Event(snapshot: item as! FIRDataSnapshot)
+                array.append(event)
+            }
+            
+            self.eventsArray = array
+            self.eventTableView.reloadData()
+        })
         
         self.addSlideMenuButton()
         eventTableView.backgroundColor = UIColor.clear
@@ -84,19 +97,15 @@ extension MainViewController
 
 extension MainViewController: UITableViewDelegate, UITableViewDataSource
 {
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return eventsArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
         let cell = tableView.dequeueReusableCell(withIdentifier: "eventCell")! as! EventTableViewCell
         let image = UIImage(named: "gorgeousimage")
-        cell.updateEventCell(withDate: "Mar 24", distance: "2.4 mi", headline: "Get the best toys for 4-6", address: "18424 NW 11th CT", category: "*Children Clothes *Children Toys *Household Items *Electronics *Kids Shoes", image: image!)
+        cell.updateEventCell(withDate: eventsArray[indexPath.row].date!, distance: "2.4 mi", headline: eventsArray[indexPath.row].description!, address: "18424 NW 11th CT", category: eventsArray[indexPath.row].date!, image: image!)
         
         return cell
     }
