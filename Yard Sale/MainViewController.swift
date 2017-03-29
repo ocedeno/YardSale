@@ -26,6 +26,7 @@ class MainViewController: BaseViewController, MKMapViewDelegate, CLLocationManag
     {
         super.viewDidLoad()
         
+        self.title = "Yard Sale"
         eventTableView.backgroundColor = UIColor.clear
         mapView.delegate = self
         eventTableView.delegate = self
