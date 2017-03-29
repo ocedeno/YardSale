@@ -16,7 +16,7 @@ class MainViewController: BaseViewController, MKMapViewDelegate, CLLocationManag
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var eventTableView: UITableView!
     
-    var locationManager: CLLocationManager!
+    var locationManager = LocationManager.sharedInstance
     var ref: FIRDatabaseReference? = nil
     let utilityClass = Utiliy()
     var eventsArray = [Event]()
@@ -26,6 +26,37 @@ class MainViewController: BaseViewController, MKMapViewDelegate, CLLocationManag
     {
         super.viewDidLoad()
         
+        eventTableView.backgroundColor = UIColor.clear
+        mapView.delegate = self
+        eventTableView.delegate = self
+        eventTableView.dataSource = self
+        getCurrentLocation()
+        populateEventsArray()
+        addSlideMenuButton()
+    }
+
+    override func viewDidAppear(_ animated: Bool)
+    {
+        super.viewDidAppear(true)
+        
+        FIRAuth.auth()?.addStateDidChangeListener { auth, user in
+            if user != nil {
+                print("User is signed in.")
+            } else {
+                print("User is signed out.")
+                self.locationManager.stopUpdatingLocation()
+            }
+        }
+    }
+    
+    @IBAction func createEvent(_ sender: UIBarButtonItem)
+    {
+        openViewControllerBasedOnIdentifier("CreateEventVC")
+        locationManager.stopUpdatingLocation()
+    }
+    
+    func populateEventsArray()
+    {
         self.ref = FIRDatabase.database().reference().child("events")
         self.ref?.queryOrdered(byChild: "userID").observe(.value, with: { snapshot in
             
@@ -39,80 +70,42 @@ class MainViewController: BaseViewController, MKMapViewDelegate, CLLocationManag
             self.eventsArray = array
             self.eventTableView.reloadData()
         })
-        
-        self.determineCurrentLocation()
-        self.addSlideMenuButton()
-        eventTableView.backgroundColor = UIColor.clear
-        mapView.delegate = self
-        eventTableView.delegate = self
-        eventTableView.dataSource = self
     }
     
-    override func viewWillAppear(_ animated: Bool)
+    func getCurrentLocation()
     {
-        super.viewWillAppear(true)
-    }
-    
-    override func viewDidAppear(_ animated: Bool)
-    {
-        super.viewDidAppear(true)
-        
-        FIRAuth.auth()?.addStateDidChangeListener { auth, user in
-            if user != nil {
-                print("User is signed in.")
-            } else {
-                print("User is signed out.")
+        locationManager.startUpdatingLocationWithCompletionHandler { (lat, lon, status, verboseMessage, error) in
+            
+            guard error == nil else
+            {
+                self.utilityClass.errorAlert(title: "Location Update Error", message: (error?.description)!, cancelTitle: "Dismiss", view: self)
+                return
             }
+            
+            self.setMapRegion(lon: lon, lat: lat)
         }
     }
     
-    @IBAction func createEvent(_ sender: UIBarButtonItem)
+    func setMapRegion(lon: Double, lat: Double)
     {
-        openViewControllerBasedOnIdentifier("CreateEventVC")
-        locationManager.stopUpdatingLocation()
-    }
-}
-
-extension MainViewController
-{
-    func determineCurrentLocation()
-    {
-        locationManager = CLLocationManager()
-        locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
-        locationManager.activityType = .automotiveNavigation
-        locationManager.requestAlwaysAuthorization()
-        
-        if CLLocationManager.locationServicesEnabled()
-        {
-            locationManager.startUpdatingLocation()
-        }
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
-    {
-        let currentLocation: CLLocation = locations[0] as CLLocation
-        locationOne = currentLocation
-        eventTableView.reloadData()
-        let lon = currentLocation.coordinate.longitude
-        let lat = currentLocation.coordinate.latitude
+        let lon = lon
+        let lat = lat
         let center = CLLocationCoordinate2D(latitude: lat, longitude: lon)
         let span = MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02)
         let region = MKCoordinateRegion(center: center, span: span)
         
-        mapView.setRegion(region, animated: true)
-        mapView.showsUserLocation = true
+        self.mapView.setRegion(region, animated: true)
+        self.mapView.showsUserLocation = true
     }
-    
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error)
-    {
-        utilityClass.errorAlert(title: "Map Error", message: error.localizedDescription, cancelTitle: "Dismiss", view: self)
-    }
-    
+
     func getDistance(locationTwo: CLLocation) -> String
     {
-        let distance = locationTwo.distance(from: self.locationOne!)
+        let lat = locationManager.latitude
+        let lon = locationManager.longitude
+        locationOne = CLLocation(latitude: lat, longitude: lon)
+        let distance = locationTwo.distance(from: locationOne!)
         let distString = Int(distance)
+        
         return String("\(distString) miles")
     }
 }

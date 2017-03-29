@@ -74,7 +74,6 @@ class LocationManager: NSObject,CLLocationManagerDelegate {
     var lastKnownLatitudeAsString:String = ""
     var lastKnownLongitudeAsString:String = ""
     
-    
     var keepLastKnownLocation:Bool = true
     var hasLastKnownLocation:Bool = true
     
