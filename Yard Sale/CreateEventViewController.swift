@@ -20,6 +20,7 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
     @IBOutlet weak var startTimeField: UITextField!
     @IBOutlet weak var stopTimeField: UITextField!
     @IBOutlet weak var descriptionText: UITextView!
+    @IBOutlet weak var displayEvent: UISwitch!
     
     var radioButtonController: SSRadioButtonsController?
     let ref: FIRDatabaseReference = FIRDatabase.database().reference()
@@ -162,7 +163,7 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
             let dic = updateEvent()
             let userID = FIRAuth.auth()?.currentUser?.uid
             
-            let event = Event(withTitle: dic["title"] as! String, onDate: dic["date"] as! String, startTime: dic["startTime"] as! String, stopTime: dic["stopTime"] as! String, withDescription: dic["description"] as! String, userID: userID! ,activeEvent: true, locationLatitude: dic["locLat"] as! Double, locationLongitude: dic["locLon"] as! Double, addDict: dic["addressDictionary"] as! [String:AnyObject])
+            let event = Event(withTitle: dic["title"] as! String, onDate: dic["date"] as! String, startTime: dic["startTime"] as! String, stopTime: dic["stopTime"] as! String, withDescription: dic["description"] as! String, userID: userID! ,activeEvent: displayEvent.isOn, locationLatitude: dic["locLat"] as! Double, locationLongitude: dic["locLon"] as! Double, addDict: dic["addressDictionary"] as! [String:AnyObject])
             
             let taskFirebasePath = self.ref.ref.child("events").childByAutoId()
             taskFirebasePath.setValue(event.toDictionary())
