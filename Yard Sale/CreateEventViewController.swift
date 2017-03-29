@@ -162,7 +162,8 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
             dismissPicker()
             let dic = updateEvent()
             let userID = FIRAuth.auth()?.currentUser?.uid
-            
+            determineCurrentLocation()
+            locationManager.stopUpdatingLocation()
             let event = Event(withTitle: dic["title"] as! String, onDate: dic["date"] as! String, startTime: dic["startTime"] as! String, stopTime: dic["stopTime"] as! String, withDescription: dic["description"] as! String, userID: userID! ,activeEvent: displayEvent.isOn, locationLatitude: dic["locLat"] as! Double, locationLongitude: dic["locLon"] as! Double, addDict: dic["addressDictionary"] as! [String:AnyObject])
             
             let taskFirebasePath = self.ref.ref.child("events").childByAutoId()
@@ -262,8 +263,7 @@ extension CreateEventViewController: CLLocationManagerDelegate
     {
         locationManager = CLLocationManager()
         locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
-        locationManager.activityType = .automotiveNavigation
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestAlwaysAuthorization()
         
         if CLLocationManager.locationServicesEnabled()
@@ -275,7 +275,6 @@ extension CreateEventViewController: CLLocationManagerDelegate
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
     {
         let currentLocation: CLLocation = locations[0] as CLLocation
-        manager.stopUpdatingLocation()
         locLon = currentLocation.coordinate.longitude
         locLat = currentLocation.coordinate.latitude
         getCity(withCoordinates: locLat!, lon: locLon!)

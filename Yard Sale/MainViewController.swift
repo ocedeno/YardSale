@@ -21,7 +21,7 @@ class MainViewController: BaseViewController, MKMapViewDelegate, CLLocationManag
     let utilityClass = Utiliy()
     var eventsArray = [Event]()
     var locationOne, locationTwo: CLLocation?
-
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -69,6 +69,7 @@ class MainViewController: BaseViewController, MKMapViewDelegate, CLLocationManag
     @IBAction func createEvent(_ sender: UIBarButtonItem)
     {
         openViewControllerBasedOnIdentifier("CreateEventVC")
+        locationManager.stopUpdatingLocation()
     }
 }
 
@@ -92,7 +93,7 @@ extension MainViewController
     {
         let currentLocation: CLLocation = locations[0] as CLLocation
         locationOne = currentLocation
-        manager.stopUpdatingLocation()
+        eventTableView.reloadData()
         let lon = currentLocation.coordinate.longitude
         let lat = currentLocation.coordinate.latitude
         let center = CLLocationCoordinate2D(latitude: lat, longitude: lon)
@@ -132,6 +133,4 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource
         
         return cell
     }
-    
-    
 }
