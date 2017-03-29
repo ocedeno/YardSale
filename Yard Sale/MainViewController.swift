@@ -89,54 +89,6 @@ extension MainViewController
         mapView.showsUserLocation = true
     }
     
-    func getCity(withCoordinates lat: Double, lon: Double)
-    {
-        let location: CLLocation = CLLocation(latitude: lat , longitude: lon)
-        let geoCoder = CLGeocoder()
-        geoCoder.reverseGeocodeLocation(location, completionHandler: { (placemarks, error) -> Void in
-            
-            // Place details
-            var placeMark: CLPlacemark!
-            placeMark = placemarks?[0]
-            
-            if placeMark != nil
-            {
-                // Address dictionary
-                print("\n*Address Dictionary: \(placeMark.addressDictionary)*")
-                
-                // Location name
-                if let locationName = placeMark.addressDictionary!["Name"] as? NSString {
-                    print("\n**Location Name:\(locationName)**")
-                }
-                
-                // Street address
-                if let street = placeMark.addressDictionary!["Thoroughfare"] as? NSString {
-                    print("\n***Street: \(street)***")
-                }
-                
-                // City
-                if let city = placeMark.addressDictionary!["City"] as? NSString {
-                    print("\n****City: \(city)****")
-                }
-                
-                // Zip code
-                if let zip = placeMark.addressDictionary!["ZIP"] as? NSString {
-                    print("\n***Zip: \(zip)***")
-                }
-                
-                // Country
-                if let country = placeMark.addressDictionary!["Country"] as? NSString {
-                    print("\n**Country: \(country)**\n")
-                }
-            }else
-            {
-                self.utilityClass.errorAlert(title: "Location Error", message: "There was no placemarker near your pin. Please try again.", cancelTitle: "Try Again", view: self)
-            }
-            
-        })
-        
-    }
-    
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error)
     {
         utilityClass.errorAlert(title: "Map Error", message: error.localizedDescription, cancelTitle: "Dismiss", view: self)
@@ -153,8 +105,8 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource
     {
         let cell = tableView.dequeueReusableCell(withIdentifier: "eventCell")! as! EventTableViewCell
         let image = UIImage(named: "gorgeousimage")
-        getCity(withCoordinates: eventsArray[indexPath.row].locLat!, lon: eventsArray[indexPath.row].locLon!)
-        cell.updateEventCell(withDate: eventsArray[indexPath.row].date!, distance: "2.4 mi", headline: eventsArray[indexPath.row].title!, address: "need to figure out", category: eventsArray[indexPath.row].description!, image: image!)
+        let cellAddress: String = "\(eventsArray[indexPath.row].addressDictionary!["City"]!), \(eventsArray[indexPath.row].addressDictionary!["State"]!)"
+        cell.updateEventCell(withDate: eventsArray[indexPath.row].date!, distance: "2.4 mi", headline: eventsArray[indexPath.row].title!, address: cellAddress, category: eventsArray[indexPath.row].description!, image: image!)
         
         return cell
     }

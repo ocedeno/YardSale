@@ -27,6 +27,7 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
     var locationManager: CLLocationManager!
     var locLat: Double?
     var locLon: Double?
+    var addDictionary: [String:AnyObject]?
     
     override func viewDidLoad()
     {
@@ -127,33 +128,62 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
         descriptionText.endEditing(true)
     }
     
+    func getCity(withCoordinates lat: Double, lon: Double)
+    {
+        let location: CLLocation = CLLocation(latitude: lat , longitude: lon)
+        let geoCoder = CLGeocoder()
+        
+        geoCoder.reverseGeocodeLocation(location, completionHandler: { (placemarks, error) -> Void in
+            
+            guard error == nil else
+            {
+                self.utility.errorAlert(title: "Location Error", message: "We could not retrieve a proper location based off the postion selected. Please try again.", cancelTitle: "Dismiss", view: self)
+                return
+            }
+            
+            var placeMark: CLPlacemark!
+            placeMark = placemarks?[0]
+            
+            if placeMark != nil
+            {
+                self.addDictionary = placeMark.addressDictionary! as? [String : AnyObject]
+            }else
+            {
+                self.utility.errorAlert(title: "Location Error", message: "There was no placemarker near your pin. Please try again.", cancelTitle: "Try Again", view: self)
+            }
+        })
+    }
+    
     func saveEvent()
     {
         if guardCheck()
         {
-        dismissPicker()
-        let dic = updateEvent()
-        let userID = FIRAuth.auth()?.currentUser?.uid
-            let event = Event(withTitle: dic["title"] as! String, onDate: dic["date"] as! String, startTime: dic["startTime"] as! String, stopTime: dic["stopTime"] as! String, withDescription: dic["description"] as! String, userID: userID! ,activeEvent: true, locationLatitude: dic["locLat"] as! Double, locationLongitude: dic["locLon"] as! Double)
-        let taskFirebasePath = self.ref.ref.child("events").childByAutoId()
-        taskFirebasePath.setValue(event.toDictionary())
+            dismissPicker()
+            let dic = updateEvent()
+            let userID = FIRAuth.auth()?.currentUser?.uid
+            
+            let event = Event(withTitle: dic["title"] as! String, onDate: dic["date"] as! String, startTime: dic["startTime"] as! String, stopTime: dic["stopTime"] as! String, withDescription: dic["description"] as! String, userID: userID! ,activeEvent: true, locationLatitude: dic["locLat"] as! Double, locationLongitude: dic["locLon"] as! Double, addDict: dic["addressDictionary"] as! [String:AnyObject])
+            
+            let taskFirebasePath = self.ref.ref.child("events").childByAutoId()
+            taskFirebasePath.setValue(event.toDictionary())
         }
     }
     
     fileprivate func updateEvent() -> [String: AnyObject]
     {
         let dic =
-        [
-            "title" : titleTextField.text! as AnyObject,
-            "date" : dateTextField.text! as AnyObject,
-            "startTime" : startTimeField.text! as AnyObject,
-            "stopTime" : stopTimeField.text! as AnyObject,
-            "description" : descriptionText.text as AnyObject,
-            "locLat" : locLat as AnyObject,
-            "locLon" : locLon as AnyObject
-        ]
+            [
+                "title" : titleTextField.text! as AnyObject,
+                "date" : dateTextField.text! as AnyObject,
+                "startTime" : startTimeField.text! as AnyObject,
+                "stopTime" : stopTimeField.text! as AnyObject,
+                "description" : descriptionText.text as AnyObject,
+                "locLat" : locLat as AnyObject,
+                "locLon" : locLon as AnyObject,
+                "addressDictionary" : addDictionary!
+        ] as [String : Any]
         
-        return dic
+        return dic as [String : AnyObject]
     }
     
     fileprivate func guardCheck() -> Bool
@@ -247,6 +277,7 @@ extension CreateEventViewController: CLLocationManagerDelegate
         manager.stopUpdatingLocation()
         locLon = currentLocation.coordinate.longitude
         locLat = currentLocation.coordinate.latitude
+        getCity(withCoordinates: locLat!, lon: locLon!)
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error)
