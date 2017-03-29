@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import CoreLocation
 
 class CreateEventViewController: UIViewController, SSRadioButtonControllerDelegate
 {
@@ -23,6 +24,9 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
     var radioButtonController: SSRadioButtonsController?
     let ref: FIRDatabaseReference = FIRDatabase.database().reference()
     let utility = Utiliy()
+    var locationManager: CLLocationManager!
+    var locLat: Double?
+    var locLon: Double?
     
     override func viewDidLoad()
     {
@@ -50,8 +54,16 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
     {
         if aButton == useCurrentAddressButton
         {
-            print("Works")
-            selectNewLocationButton.isHidden = true
+            if CLLocationManager.locationServicesEnabled()
+            {
+                selectNewLocationButton.isHidden = true
+                determineCurrentLocation()
+            }else
+            {
+                selectNewLocationButton.isHidden = true
+                utility.errorAlert(title: "Location Error", message: "We are not currently using your current location. Please accept our request to use your location for a smoother performance.", cancelTitle: "Okay", view: self)
+                locationManager.requestAlwaysAuthorization()
+            }
         }else
         {
             selectNewLocationButton.isHidden = false
@@ -122,7 +134,7 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
         dismissPicker()
         let dic = updateEvent()
         let userID = FIRAuth.auth()?.currentUser?.uid
-        let event = Event(withTitle: dic["title"] as! String, onDate: dic["date"] as! String, startTime: dic["startTime"] as! String, stopTime: dic["stopTime"] as! String, withDescription: dic["description"] as! String, userID: userID! ,activeEvent: true)
+            let event = Event(withTitle: dic["title"] as! String, onDate: dic["date"] as! String, startTime: dic["startTime"] as! String, stopTime: dic["stopTime"] as! String, withDescription: dic["description"] as! String, userID: userID! ,activeEvent: true, locationLatitude: dic["locLat"] as! Double, locationLongitude: dic["locLon"] as! Double)
         let taskFirebasePath = self.ref.ref.child("events").childByAutoId()
         taskFirebasePath.setValue(event.toDictionary())
         }
@@ -136,7 +148,9 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
             "date" : dateTextField.text! as AnyObject,
             "startTime" : startTimeField.text! as AnyObject,
             "stopTime" : stopTimeField.text! as AnyObject,
-            "description" : descriptionText.text as AnyObject
+            "description" : descriptionText.text as AnyObject,
+            "locLat" : locLat as AnyObject,
+            "locLon" : locLon as AnyObject
         ]
         
         return dic
@@ -211,3 +225,32 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
     }
 }
 
+extension CreateEventViewController: CLLocationManagerDelegate
+{
+    func determineCurrentLocation()
+    {
+        locationManager = CLLocationManager()
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
+        locationManager.activityType = .automotiveNavigation
+        locationManager.requestAlwaysAuthorization()
+        
+        if CLLocationManager.locationServicesEnabled()
+        {
+            locationManager.startUpdatingLocation()
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
+    {
+        let currentLocation: CLLocation = locations[0] as CLLocation
+        manager.stopUpdatingLocation()
+        locLon = currentLocation.coordinate.longitude
+        locLat = currentLocation.coordinate.latitude
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error)
+    {
+        utility.errorAlert(title: "Map Error", message: error.localizedDescription, cancelTitle: "Dismiss", view: self)
+    }
+}

@@ -19,6 +19,8 @@ struct Event
     static let active = "active"
     static let userID = "userID"
     static let address = "address"
+    static let locLat = "locationLatitude"
+    static let locLon = "locationLongitude"
     
     let title: String?
     let date: String?
@@ -27,10 +29,11 @@ struct Event
     let description: String?
     let userID: String?
     let active: Bool?
-    let address: String?
+    let locLat: Double?
+    let locLon: Double?
     let ref : FIRDatabaseReference?
     
-    init(withTitle title: String, onDate date: String, startTime:String, stopTime: String, withDescription description: String, userID uid: String, activeEvent active: Bool, withAddress address: String)
+    init(withTitle title: String, onDate date: String, startTime:String, stopTime: String, withDescription description: String, userID uid: String, activeEvent active: Bool, locationLatitude: Double, locationLongitude: Double)
     {
         self.title = title
         self.date = date
@@ -40,7 +43,8 @@ struct Event
         self.active = active
         self.userID = uid
         self.ref = nil
-        self.address = address
+        self.locLat = locationLatitude
+        self.locLon = locationLongitude
     }
     
     init(snapshot: FIRDataSnapshot)
@@ -54,7 +58,8 @@ struct Event
         self.description = snapshotValue[Event.description] as? String
         self.active = snapshotValue[Event.active] as? Bool
         self.ref = snapshot.ref
-        self.address = snapshotValue[Event.address] as? String
+        self.locLat = snapshotValue[Event.locLat] as? Double
+        self.locLon = snapshotValue[Event.locLon] as? Double
     }
     
     func toDictionary() -> Any {
@@ -66,7 +71,8 @@ struct Event
             Event.stopTime : self.stopTime!,
             Event.description : self.description!,
             Event.active : self.active!,
-            Event.address : self.address!
+            Event.locLat : self.locLat!,
+            Event.locLon : self.locLon!
         ]
     }
 }
