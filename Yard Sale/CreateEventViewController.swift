@@ -25,7 +25,7 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
     var radioButtonController: SSRadioButtonsController?
     let ref: FIRDatabaseReference = FIRDatabase.database().reference()
     let utility = Utiliy()
-    var locationManager: CLLocationManager!
+    let locationManager = LocationManager.sharedInstance
     var locLat: Double?
     var locLon: Double?
     var addDictionary: [String:AnyObject]?
@@ -59,17 +59,42 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
             if CLLocationManager.locationServicesEnabled()
             {
                 selectNewLocationButton.isHidden = true
-                determineCurrentLocation()
+                startLocationUpdater()
             }else
             {
                 selectNewLocationButton.isHidden = true
                 utility.errorAlert(title: "Location Error", message: "We are not currently using your current location. Please accept our request to use your location for a smoother performance.", cancelTitle: "Okay", view: self)
-                locationManager.requestAlwaysAuthorization()
             }
         }else
         {
             selectNewLocationButton.isHidden = false
         }
+    }
+    
+    func startLocationUpdater()
+    {
+        locationManager.startUpdatingLocationWithCompletionHandler({ (lat, lon, status, verboseMessage, error) in
+            
+            guard error == nil else
+            {
+                self.utility.errorAlert(title: "Location Update Error", message: (error?.description)!, cancelTitle: "Dismiss", view: self)
+                return
+            }
+            
+            self.locLat = lat
+            self.locLon = lon
+            
+            self.locationManager.reverseGeocodeLocationWithLatLon(latitude: lat, longitude: lon, onReverseGeocodingCompletionHandler: { (dictionary, placemark, error) in
+                
+                guard error == nil else
+                {
+                    self.utility.errorAlert(title: "Location Update Error", message: (error?.description)!, cancelTitle: "Dismiss", view: self)
+                    return
+                }
+                
+                self.addDictionary = dictionary as? [String:AnyObject]
+            })
+        })
     }
     
     @IBAction func dateTextFieldEditing(_ sender: UITextField)
@@ -129,32 +154,6 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
         descriptionText.endEditing(true)
     }
     
-    func getCity(withCoordinates lat: Double, lon: Double)
-    {
-        let location: CLLocation = CLLocation(latitude: lat , longitude: lon)
-        let geoCoder = CLGeocoder()
-        
-        geoCoder.reverseGeocodeLocation(location, completionHandler: { (placemarks, error) -> Void in
-            
-            guard error == nil else
-            {
-                self.utility.errorAlert(title: "Location Error", message: "We could not retrieve a proper location based off the postion selected. Please try again.", cancelTitle: "Dismiss", view: self)
-                return
-            }
-            
-            var placeMark: CLPlacemark!
-            placeMark = placemarks?[0]
-            
-            if placeMark != nil
-            {
-                self.addDictionary = placeMark.addressDictionary! as? [String : AnyObject]
-            }else
-            {
-                self.utility.errorAlert(title: "Location Error", message: "There was no placemarker near your pin. Please try again.", cancelTitle: "Try Again", view: self)
-            }
-        })
-    }
-    
     func saveEvent()
     {
         if guardCheck()
@@ -162,7 +161,6 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
             dismissPicker()
             let dic = updateEvent()
             let userID = FIRAuth.auth()?.currentUser?.uid
-            determineCurrentLocation()
             locationManager.stopUpdatingLocation()
             let event = Event(withTitle: dic["title"] as! String, onDate: dic["date"] as! String, startTime: dic["startTime"] as! String, stopTime: dic["stopTime"] as! String, withDescription: dic["description"] as! String, userID: userID! ,activeEvent: displayEvent.isOn, locationLatitude: dic["locLat"] as! Double, locationLongitude: dic["locLon"] as! Double, addDict: dic["addressDictionary"] as! [String:AnyObject])
             
@@ -183,7 +181,7 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
                 "locLat" : locLat as AnyObject,
                 "locLon" : locLon as AnyObject,
                 "addressDictionary" : addDictionary!
-        ] as [String : Any]
+                ] as [String : Any]
         
         return dic as [String : AnyObject]
     }
@@ -254,34 +252,5 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
         frame.layer.borderColor = redBorderColor.cgColor
         frame.layer.borderWidth = 1.0
         frame.layer.cornerRadius = 5.0;
-    }
-}
-
-extension CreateEventViewController: CLLocationManagerDelegate
-{
-    func determineCurrentLocation()
-    {
-        locationManager = CLLocationManager()
-        locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.requestAlwaysAuthorization()
-        
-        if CLLocationManager.locationServicesEnabled()
-        {
-            locationManager.startUpdatingLocation()
-        }
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
-    {
-        let currentLocation: CLLocation = locations[0] as CLLocation
-        locLon = currentLocation.coordinate.longitude
-        locLat = currentLocation.coordinate.latitude
-        getCity(withCoordinates: locLat!, lon: locLon!)
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error)
-    {
-        utility.errorAlert(title: "Map Error", message: error.localizedDescription, cancelTitle: "Dismiss", view: self)
     }
 }

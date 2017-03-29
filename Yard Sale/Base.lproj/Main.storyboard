@@ -126,6 +126,9 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                 <state key="normal" title="Select Location"/>
+                                <connections>
+                                    <segue destination="HZw-rc-uQu" kind="show" id="NHm-LK-Rzq"/>
+                                </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Title/Header" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bde-Ss-6JJ">
                                 <rect key="frame" x="16" y="158" width="343" height="30"/>
@@ -200,6 +203,43 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3OZ-ZD-99P" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1653.5999999999999" y="138.98050974512745"/>
+        </scene>
+        <!--Address Selection VC-->
+        <scene sceneID="yV0-Mf-WYN">
+            <objects>
+                <viewController storyboardIdentifier="AddressSelectionVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="HZw-rc-uQu" userLabel="Address Selection VC" customClass="AddressSelectionViewController" customModule="Yard_Sale" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="jZg-gQ-4eP"/>
+                        <viewControllerLayoutGuide type="bottom" id="uVq-d3-AtE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Ak3-H9-k9D">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="blO-qE-x2q">
+                                <rect key="frame" x="0.0" y="110" width="375" height="557"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </mapView>
+                            <searchBar contentMode="redraw" fixedFrame="YES" placeholder="Search for a place or address" translatesAutoresizingMaskIntoConstraints="NO" id="ZCH-H8-9gL">
+                                <rect key="frame" x="0.0" y="66" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <scopeButtonTitles>
+                                    <string>Title</string>
+                                    <string>Title</string>
+                                </scopeButtonTitles>
+                            </searchBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="mapView" destination="blO-qE-x2q" id="9Wg-PB-y9S"/>
+                        <outlet property="searchBar" destination="ZCH-H8-9gL" id="PFc-XW-FkF"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Bh2-D4-hqM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2560.8000000000002" y="138.98050974512745"/>
         </scene>
         <!--Login VC-->
         <scene sceneID="Hu8-RR-2De">
@@ -389,7 +429,7 @@
         <!--Detail VC-->
         <scene sceneID="y3d-Dt-8OG">
             <objects>
-                <viewController storyboardIdentifier="DetailVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="No7-g4-Y6K" userLabel="Detail VC" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DetailVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="No7-g4-Y6K" userLabel="Detail VC" customClass="DetailViewController" customModule="Yard_Sale" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="rTy-wt-8k9"/>
                         <viewControllerLayoutGuide type="bottom" id="jdO-dv-9yh"/>

@@ -69,6 +69,7 @@ class MainViewController: BaseViewController, MKMapViewDelegate, CLLocationManag
             
             self.eventsArray = array
             self.eventTableView.reloadData()
+            self.reloadEventsToMapView()
         })
     }
     
@@ -97,16 +98,32 @@ class MainViewController: BaseViewController, MKMapViewDelegate, CLLocationManag
         self.mapView.setRegion(region, animated: true)
         self.mapView.showsUserLocation = true
     }
+    
+    func reloadEventsToMapView()
+    {
+        for event in eventsArray
+        {
+            let latitude = event.locLat
+            let longitude = event.locLon
+            let pin = MKPointAnnotation()
+            pin.coordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(latitude!), longitude: CLLocationDegrees(longitude!))
+            pin.title = event.title!
+            
+            mapView.addAnnotation(pin)
+        }
+    }
 
     func getDistance(locationTwo: CLLocation) -> String
     {
         let lat = locationManager.latitude
         let lon = locationManager.longitude
         locationOne = CLLocation(latitude: lat, longitude: lon)
-        let distance = locationTwo.distance(from: locationOne!)
-        let distString = Int(distance)
-        
-        return String("\(distString) miles")
+        let distanceMeters = locationTwo.distance(from: locationOne!)
+        let milesConversion = 0.000621371192
+        let distanceMiles = distanceMeters * milesConversion
+        let distanceString = String(format: "%.2f", distanceMiles)
+
+        return String("\(distanceString) miles")
     }
 }
 
@@ -120,7 +137,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource
     {
         let cell = tableView.dequeueReusableCell(withIdentifier: "eventCell")! as! EventTableViewCell
         let image = UIImage(named: "gorgeousimage")
-        let cellAddress: String = "\(eventsArray[indexPath.row].addressDictionary!["City"]!), \(eventsArray[indexPath.row].addressDictionary!["State"]!)"
+        let cellAddress: String = "\(eventsArray[indexPath.row].addressDictionary!["locality"]!), \(eventsArray[indexPath.row].addressDictionary!["administrativeArea"]!)"
         locationTwo = CLLocation(latitude: eventsArray[indexPath.row].locLat!, longitude: eventsArray[indexPath.row].locLon!)
         cell.updateEventCell(withDate: eventsArray[indexPath.row].date!, distance: getDistance(locationTwo: locationTwo!), headline: eventsArray[indexPath.row].title!, address: cellAddress, category: eventsArray[indexPath.row].description!, image: image!)
         
