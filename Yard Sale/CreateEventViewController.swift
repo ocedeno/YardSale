@@ -14,8 +14,8 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var dateTextField: UITextField!
     @IBOutlet weak var useNewLocation: SSRadioButton!
-    @IBOutlet weak var selectNewLocationButton: UIButton!
     @IBOutlet weak var useCurrentAddressButton: SSRadioButton!
+    @IBOutlet weak var selectNewLocationButton: UIButton!
     @IBOutlet weak var startTimeField: UITextField!
     @IBOutlet weak var stopTimeField: UITextField!
     @IBOutlet weak var descriptionText: UITextView!

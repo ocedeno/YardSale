@@ -105,7 +105,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource
     {
         let cell = tableView.dequeueReusableCell(withIdentifier: "eventCell")! as! EventTableViewCell
         let image = UIImage(named: "gorgeousimage")
-        cell.updateEventCell(withDate: eventsArray[indexPath.row].date!, distance: "2.4 mi", headline: eventsArray[indexPath.row].description!, address: "18424 NW 11th CT", category: eventsArray[indexPath.row].date!, image: image!)
+        cell.updateEventCell(withDate: eventsArray[indexPath.row].date!, distance: "2.4 mi", headline: eventsArray[indexPath.row].title!, address: "18424 NW 11th CT", category: eventsArray[indexPath.row].description!, image: image!)
         
         return cell
     }
