@@ -13,15 +13,15 @@ struct Event
 {
     static let titleKey = "title"
     static let date = "date"
-    static let startTime = "startTime"
-    static let stopTime = "stopTime"
+    static let startTime = "startDateTime"
+    static let stopTime = "stopDateTime"
     static let description = "description"
     static let active = "active"
     static let userID = "userID"
     static let address = "address"
     static let locLat = "locationLatitude"
     static let locLon = "locationLongitude"
-    static let addressDictionary = "addressDictionary"
+    static let addressDictionary = "address"
     
     let title: String?
     let date: String?
