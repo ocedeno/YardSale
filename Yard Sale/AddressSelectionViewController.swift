@@ -79,14 +79,6 @@ class AddressSelectionViewController: UIViewController, UISearchBarDelegate, MKM
         }
     }
     
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
-//    {
-//        let destinationVC = segue.destination as! CreateEventViewController
-//        let sender = sender as! CLLocationCoordinate2D
-//        destinationVC.locLat = sender.latitude
-//        destinationVC.locLon = sender.longitude
-//    }
-    
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView?
     {
         var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "pinView")
@@ -107,6 +99,7 @@ class AddressSelectionViewController: UIViewController, UISearchBarDelegate, MKM
         let createVC = navigationController?.viewControllers[1] as! CreateEventViewController
         createVC.locLon = pin?.longitude
         createVC.locLat = pin?.latitude
+        createVC.addDictCompleted = true
         _ = navigationController?.popViewController(animated: true)
 
     }

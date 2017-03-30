@@ -199,7 +199,7 @@
                         <outlet property="titleTextField" destination="bde-Ss-6JJ" id="TFP-fg-mmn"/>
                         <outlet property="useCurrentAddressButton" destination="ooM-00-BJy" id="OKQ-pj-sd7"/>
                         <outlet property="useNewLocation" destination="ZtO-kp-v7M" id="aGn-fD-MjX"/>
-                        <segue destination="HZw-rc-uQu" kind="push" identifier="getLocationSegue" id="7Zh-xH-6rh"/>
+                        <segue destination="HZw-rc-uQu" kind="show" identifier="getLocationSegue" id="7Zh-xH-6rh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3OZ-ZD-99P" userLabel="First Responder" sceneMemberID="firstResponder"/>

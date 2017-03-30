@@ -29,6 +29,7 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
     var locLat: Double?
     var locLon: Double?
     var addDictionary: [String:AnyObject]?
+    var addDictCompleted: Bool = false
     
     override func viewDidLoad()
     {
@@ -49,7 +50,15 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
     override func viewWillAppear(_ animated: Bool)
     {
         super.viewWillAppear(true)
-        selectNewLocationButton.isHidden = true
+        if addDictCompleted
+        {
+            selectNewLocationButton.isHidden = false
+            selectNewLocationButton.titleLabel?.text = "Location Selected!"
+            createAddressDictionary(latitude: locLat!, longitude: locLon!)
+        }else
+        {
+            selectNewLocationButton.isHidden = true
+        }
     }
     
     internal func didSelectButton(_ aButton: UIButton?)
@@ -84,16 +93,28 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
             self.locLat = lat
             self.locLon = lon
             
-            self.locationManager.reverseGeocodeLocationWithLatLon(latitude: lat, longitude: lon, onReverseGeocodingCompletionHandler: { (dictionary, placemark, error) in
-                
-                guard error == nil else
-                {
-                    self.utility.errorAlert(title: "Location Update Error", message: (error?.description)!, cancelTitle: "Dismiss", view: self)
-                    return
+            self.createAddressDictionary(latitude: lat, longitude: lon)
+        })
+    }
+    
+    fileprivate func createAddressDictionary(latitude: Double, longitude: Double)
+    {
+        self.locationManager.reverseGeocodeLocationWithLatLon(latitude: latitude, longitude: longitude, onReverseGeocodingCompletionHandler: { (dictionary, placemark, error) in
+            
+            guard error == nil else
+            {
+                DispatchQueue.main.async
+                    {
+                        self.utility.errorAlert(title: "Location Update Error", message: (error?.description)!, cancelTitle: "Dismiss", view: self)
                 }
-                
-                self.addDictionary = dictionary as? [String:AnyObject]
-            })
+                return
+            }
+            
+            DispatchQueue.main.async
+                {
+                    self.addDictionary = dictionary as? [String:AnyObject]
+                    print("***\nCompleted Dictionary Addition***")
+            }
         })
     }
     
@@ -164,10 +185,21 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
         if guardCheck()
         {
             dismissPicker()
-            let dic = updateEvent()
+            let dic: [String:AnyObject] = updateEvent()
             let userID = FIRAuth.auth()?.currentUser?.uid
             locationManager.stopUpdatingLocation()
-            let event = Event(withTitle: dic["title"] as! String, onDate: dic["date"] as! String, startTime: dic["startTime"] as! String, stopTime: dic["stopTime"] as! String, withDescription: dic["description"] as! String, userID: userID! ,activeEvent: displayEvent.isOn, locationLatitude: dic["locLat"] as! Double, locationLongitude: dic["locLon"] as! Double, addDict: dic["addressDictionary"] as! [String:AnyObject])
+            
+            let event = Event(withTitle: dic["title"] as! String,
+                              onDate: dic["date"] as! String,
+                              startTime: dic["startTime"] as! String,
+                              stopTime: dic["stopTime"] as! String,
+                              withDescription: dic["description"] as! String,
+                              userID: userID! ,
+                              activeEvent: displayEvent.isOn,
+                              locationLatitude: dic["locLat"] as! Double,
+                              locationLongitude: dic["locLon"] as! Double,
+                              addDict: dic["addressDictionary"] as! [String:AnyObject]
+                        )
             
             let taskFirebasePath = self.ref.ref.child("events").childByAutoId()
             taskFirebasePath.setValue(event.toDictionary())
