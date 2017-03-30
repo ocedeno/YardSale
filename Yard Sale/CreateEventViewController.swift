@@ -205,6 +205,7 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
             
             let taskFirebasePath = self.ref.ref.child("events").childByAutoId()
             taskFirebasePath.setValue(event.toDictionary())
+            performSegue(withIdentifier: "segueToDetailView", sender: taskFirebasePath.key)
         }
     }
     
@@ -291,5 +292,14 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
         frame.layer.borderColor = redBorderColor.cgColor
         frame.layer.borderWidth = 1.0
         frame.layer.cornerRadius = 5.0;
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+    {
+        if segue.identifier == "segueToDetailView"
+        {
+            let destinationVC = segue.destination as! DetailViewController
+            destinationVC.uniqueID = sender as? String
+        }
     }
 }

@@ -219,8 +219,8 @@
 				06E86F4B1E855D8D009E3D75 /* MenuViewController.swift */,
 				06E86F4D1E855E60009E3D75 /* BaseViewController.swift */,
 				06EC2E0B1E89374300F83D6C /* CreateEventViewController.swift */,
-				06FDEEB71E8C4143006D0567 /* DetailViewController.swift */,
 				06FDEEB91E8C42AB006D0567 /* AddressSelectionViewController.swift */,
+				06FDEEB71E8C4143006D0567 /* DetailViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";

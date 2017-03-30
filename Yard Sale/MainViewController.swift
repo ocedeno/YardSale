@@ -20,6 +20,7 @@ class MainViewController: BaseViewController, MKMapViewDelegate, CLLocationManag
     var ref: FIRDatabaseReference? = nil
     let utilityClass = Utiliy()
     var eventsArray = [Event]()
+    var idArray: [String]?
     var locationOne, locationTwo: CLLocation?
     
     override func viewDidLoad()
@@ -63,13 +64,17 @@ class MainViewController: BaseViewController, MKMapViewDelegate, CLLocationManag
         self.ref?.queryOrdered(byChild: "userID").observe(.value, with: { snapshot in
             
             var array: [Event] = []
+            var arrayID: [String] = []
             for item in snapshot.children
             {
-                let event = Event(snapshot: item as! FIRDataSnapshot)
+                let snap = item as! FIRDataSnapshot
+                let event = Event(snapshot: snap)
                 array.append(event)
+                arrayID.append(snap.key)
             }
             
             self.eventsArray = array
+            self.idArray = arrayID
             self.eventTableView.reloadData()
             self.reloadEventsToMapView()
         })
@@ -157,5 +162,16 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource
                             )
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
+    {
+        performSegue(withIdentifier: "segueToDetailView", sender: idArray?[indexPath.row])
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+    {
+        let destinationVC = segue.destination as! DetailViewController
+        destinationVC.uniqueID = sender as? String
     }
 }
