@@ -137,13 +137,14 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "eventCell")! as! EventTableViewCell
         let image = UIImage(named: "gorgeousimage")
         let cellAddress: String = "\(eventsArray[indexPath.row].addressDictionary!["locality"]!), \(eventsArray[indexPath.row].addressDictionary!["administrativeArea"]!)"
-        var eventLat = eventsArray[indexPath.row].addressDictionary!["latitude"]! as! String
-        var eventLon = eventsArray[indexPath.row].addressDictionary!["longitude"]! as! String
-        var doubleLat = Double(eventLat)
-        var doubleLon = Double(eventLon)
+        let eventLat = eventsArray[indexPath.row].addressDictionary!["latitude"]! as! String
+        let eventLon = eventsArray[indexPath.row].addressDictionary!["longitude"]! as! String
+        let doubleLat = Double(eventLat)
+        let doubleLon = Double(eventLon)
         
         locationTwo = CLLocation(latitude: doubleLat!, longitude: doubleLon!)
         

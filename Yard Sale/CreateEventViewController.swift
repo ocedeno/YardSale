@@ -58,6 +58,8 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
         }else
         {
             selectNewLocationButton.isHidden = true
+            useNewLocation.isSelected = false
+            useNewLocation.toggleButon()
         }
     }
     
