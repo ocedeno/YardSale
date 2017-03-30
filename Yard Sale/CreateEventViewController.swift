@@ -300,6 +300,8 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
         {
             let destinationVC = segue.destination as! DetailViewController
             destinationVC.uniqueID = sender as? String
+            
+            destinationVC.navigationItem.setHidesBackButton(true, animated: true)
         }
     }
 }

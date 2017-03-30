@@ -26,7 +26,6 @@ class DetailViewController: UIViewController, MKMapViewDelegate
     {
         super.viewDidLoad()
         
-        print(uniqueID!)
         getUserEvent()
     }
     
@@ -38,8 +37,8 @@ class DetailViewController: UIViewController, MKMapViewDelegate
             self.userEvent = Event(snapshot: snapshot)
             DispatchQueue.main.async
                 {
-                    self.populateValues()
                     self.populateMap()
+                    self.populateValues()
                 }
         })
     }
@@ -64,9 +63,12 @@ class DetailViewController: UIViewController, MKMapViewDelegate
         
         pointAnnotation.coordinate = coordinates
         var addressString = userEvent?.addressDictionary?["formattedAddress"] as! String
-        if let dotRange = addressString.range(of: ",") {
+        
+        if let dotRange = addressString.range(of: ",")
+        {
             addressString.removeSubrange(dotRange.lowerBound..<addressString.endIndex)
         }
+        
         pointAnnotation.title = addressString
         
         let yourAnnotationAtIndex = 0
