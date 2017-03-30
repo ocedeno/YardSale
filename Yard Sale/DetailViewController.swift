@@ -12,6 +12,7 @@ import Firebase
 
 class DetailViewController: UIViewController, MKMapViewDelegate
 {
+    @IBOutlet weak var doneButton: UIBarButtonItem!
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var eventTitleLabel: UILabel!
     @IBOutlet weak var eventTimeLabel: UILabel!
@@ -25,6 +26,11 @@ class DetailViewController: UIViewController, MKMapViewDelegate
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        
+        if self == navigationController?.viewControllers[1] as? DetailViewController
+        {
+            self.navigationItem.rightBarButtonItem = nil
+        }
         
         getUserEvent()
     }
@@ -79,5 +85,9 @@ class DetailViewController: UIViewController, MKMapViewDelegate
         mapView.addAnnotation(pointAnnotation)
         mapView.selectAnnotation(mapView.annotations[yourAnnotationAtIndex], animated: true)
         
+    }
+    @IBAction func dismissViewController(_ sender: UIBarButtonItem)
+    {
+        _ = navigationController?.popToRootViewController(animated: true)
     }
 }
