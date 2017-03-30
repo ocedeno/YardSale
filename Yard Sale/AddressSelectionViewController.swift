@@ -70,7 +70,7 @@ class AddressSelectionViewController: UIViewController, UISearchBarDelegate, MKM
             self.mapView.addAnnotation(self.pinAnnotationView.annotation!)
             
             let coordinate:CLLocationCoordinate2D = self.pointAnnotation.coordinate
-            let span = MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2)
+            let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
             let region = MKCoordinateRegionMake(coordinate, span)
             DispatchQueue.main.async
                 {

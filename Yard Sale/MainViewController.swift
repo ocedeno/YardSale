@@ -31,6 +31,7 @@ class MainViewController: BaseViewController, MKMapViewDelegate, CLLocationManag
         mapView.delegate = self
         eventTableView.delegate = self
         eventTableView.dataSource = self
+        
         getCurrentLocation()
         populateEventsArray()
         addSlideMenuButton()
@@ -116,8 +117,8 @@ class MainViewController: BaseViewController, MKMapViewDelegate, CLLocationManag
 
     func getDistance(locationTwo: CLLocation) -> String
     {
-        let lat = locationManager.latitude
-        let lon = locationManager.longitude
+        let lat = locationManager.lastKnownLatitude
+        let lon = locationManager.lastKnownLongitude
         locationOne = CLLocation(latitude: lat, longitude: lon)
         let distanceMeters = locationTwo.distance(from: locationOne!)
         let milesConversion = 0.000621371192
@@ -139,8 +140,20 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource
         let cell = tableView.dequeueReusableCell(withIdentifier: "eventCell")! as! EventTableViewCell
         let image = UIImage(named: "gorgeousimage")
         let cellAddress: String = "\(eventsArray[indexPath.row].addressDictionary!["locality"]!), \(eventsArray[indexPath.row].addressDictionary!["administrativeArea"]!)"
-        locationTwo = CLLocation(latitude: eventsArray[indexPath.row].locLat!, longitude: eventsArray[indexPath.row].locLon!)
-        cell.updateEventCell(withDate: eventsArray[indexPath.row].date!, distance: getDistance(locationTwo: locationTwo!), headline: eventsArray[indexPath.row].title!, address: cellAddress, category: eventsArray[indexPath.row].description!, image: image!)
+        var eventLat = eventsArray[indexPath.row].addressDictionary!["latitude"]! as! String
+        var eventLon = eventsArray[indexPath.row].addressDictionary!["longitude"]! as! String
+        var doubleLat = Double(eventLat)
+        var doubleLon = Double(eventLon)
+        
+        locationTwo = CLLocation(latitude: doubleLat!, longitude: doubleLon!)
+        
+        cell.updateEventCell(withDate: eventsArray[indexPath.row].date!,
+                             distance: getDistance(locationTwo: locationTwo!),
+                             headline: eventsArray[indexPath.row].title!,
+                             address: cellAddress,
+                             category: eventsArray[indexPath.row].description!,
+                             image: image!
+                            )
         
         return cell
     }
