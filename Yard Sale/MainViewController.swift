@@ -34,7 +34,6 @@ class MainViewController: BaseViewController, MKMapViewDelegate, CLLocationManag
         eventTableView.dataSource = self
         
         getCurrentLocation()
-        populateEventsArray()
         addSlideMenuButton()
     }
 
@@ -91,6 +90,8 @@ class MainViewController: BaseViewController, MKMapViewDelegate, CLLocationManag
             }
             
             self.setMapRegion(lon: lon, lat: lat)
+            self.populateEventsArray()
+
         }
     }
     
@@ -130,7 +131,7 @@ class MainViewController: BaseViewController, MKMapViewDelegate, CLLocationManag
         let distanceMiles = distanceMeters * milesConversion
         let distanceString = String(format: "%.2f", distanceMiles)
 
-        return String("\(distanceString) miles")
+        return String(distanceString)
     }
 }
 
@@ -142,21 +143,22 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: "eventCell")! as! EventTableViewCell
-        let image = UIImage(named: "gorgeousimage")
-        let cellAddress: String = "\(eventsArray[indexPath.row].addressDictionary!["locality"]!), \(eventsArray[indexPath.row].addressDictionary!["administrativeArea"]!)"
+
         let eventLat = eventsArray[indexPath.row].addressDictionary!["latitude"]! as! String
         let eventLon = eventsArray[indexPath.row].addressDictionary!["longitude"]! as! String
         let doubleLat = Double(eventLat)
         let doubleLon = Double(eventLon)
-        
         locationTwo = CLLocation(latitude: doubleLat!, longitude: doubleLon!)
-        
+        let distance = getDistance(locationTwo: locationTwo!)
+        eventsArray[indexPath.row].distance = distance
+        eventsArray.sort { Double($0.distance) ?? 0.00 < Double($1.distance) ?? 0.00}
+
+        let cell = tableView.dequeueReusableCell(withIdentifier: "eventCell")! as! EventTableViewCell
+        let image = UIImage(named: "gorgeousimage")
         cell.updateEventCell(withDate: eventsArray[indexPath.row].date!,
-                             distance: getDistance(locationTwo: locationTwo!),
+                             distance: "\(eventsArray[indexPath.row].distance) mi.",
                              headline: eventsArray[indexPath.row].title!,
-                             address: cellAddress,
+                             address: "\(eventsArray[indexPath.row].addressDictionary!["locality"]!), \(eventsArray[indexPath.row].addressDictionary!["administrativeArea"]!)",
                              category: eventsArray[indexPath.row].description!,
                              image: image!
                             )

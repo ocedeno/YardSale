@@ -23,6 +23,8 @@ struct Event
     static let locLon = "locationLongitude"
     static let addressDictionary = "address"
     
+    var distance = String()
+    
     let title: String?
     let date: String?
     let startTime: String?
