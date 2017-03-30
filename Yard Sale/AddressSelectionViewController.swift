@@ -29,6 +29,10 @@ class AddressSelectionViewController: UIViewController, UISearchBarDelegate, MKM
         super.viewDidLoad()
         
         mapView.delegate = self
+        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(addAnnotationOnLongPress(gesture:)))
+        longPressGesture.minimumPressDuration = 0.6
+        self.mapView.addGestureRecognizer(longPressGesture)
+
     }
     
     @IBAction func showSearchBar(_ sender: UIBarButtonItem)
@@ -66,6 +70,7 @@ class AddressSelectionViewController: UIViewController, UISearchBarDelegate, MKM
             self.pointAnnotation.coordinate = CLLocationCoordinate2D(latitude:localSearchResponse!.boundingRegion.center.latitude, longitude: localSearchResponse!.boundingRegion.center.longitude)
             
             self.pinAnnotationView = MKPinAnnotationView(annotation: self.pointAnnotation, reuseIdentifier: nil)
+            self.pinAnnotationView.animatesDrop = true
             self.mapView.centerCoordinate = self.pointAnnotation.coordinate
             self.mapView.addAnnotation(self.pinAnnotationView.annotation!)
             
@@ -92,6 +97,50 @@ class AddressSelectionViewController: UIViewController, UISearchBarDelegate, MKM
         
         return annotationView
     }
+    
+    func addAnnotationOnLongPress(gesture: UILongPressGestureRecognizer)
+    {
+        if self.mapView.annotations.count != 0
+        {
+            annotation = self.mapView.annotations[0]
+            self.mapView.removeAnnotation(annotation)
+        }
+        
+        switch gesture.state
+        {
+        case .began:
+            pointAnnotation = MKPointAnnotation()
+            let touchCoord = gesture.location(in: self.mapView)
+            pointAnnotation!.coordinate = mapView.convert(touchCoord, toCoordinateFrom: self.mapView)
+            self.mapView.addAnnotation(pointAnnotation)
+            
+            break
+            
+        case .changed:
+            if let pin = pointAnnotation
+            {
+                let touchCoord = gesture.location(in: mapView)
+                pin.coordinate = mapView.convert(touchCoord, toCoordinateFrom: mapView)
+                self.mapView.addAnnotation(pin)
+            }
+            
+            break
+            
+        case .ended:
+            let point = gesture.location(in: self.mapView)
+            let coordinate = self.mapView.convert(point, toCoordinateFrom: self.mapView)
+            let annotation = MKPointAnnotation()
+            annotation.coordinate = coordinate
+            annotation.title = "Use this location? Select here."
+            self.mapView.addAnnotation(annotation)
+            
+            break
+            
+        default:
+            break
+        }
+    }
+    
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl)
     {
