@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -127,7 +128,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                 <state key="normal" title="Select Location"/>
                                 <connections>
-                                    <segue destination="HZw-rc-uQu" kind="show" id="NHm-LK-Rzq"/>
+                                    <action selector="selectLocationAction" destination="J55-xf-ArT" eventType="touchUpInside" id="gyh-5u-RQc"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Title/Header" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bde-Ss-6JJ">
@@ -198,6 +199,7 @@
                         <outlet property="titleTextField" destination="bde-Ss-6JJ" id="TFP-fg-mmn"/>
                         <outlet property="useCurrentAddressButton" destination="ooM-00-BJy" id="OKQ-pj-sd7"/>
                         <outlet property="useNewLocation" destination="ZtO-kp-v7M" id="aGn-fD-MjX"/>
+                        <segue destination="HZw-rc-uQu" kind="push" identifier="getLocationSegue" id="7Zh-xH-6rh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3OZ-ZD-99P" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -207,7 +209,7 @@
         <!--Address Selection VC-->
         <scene sceneID="yV0-Mf-WYN">
             <objects>
-                <viewController storyboardIdentifier="AddressSelectionVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="HZw-rc-uQu" userLabel="Address Selection VC" customClass="AddressSelectionViewController" customModule="Yard_Sale" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddressSelectionVC" title="Select Location" useStoryboardIdentifierAsRestorationIdentifier="YES" id="HZw-rc-uQu" userLabel="Address Selection VC" customClass="AddressSelectionViewController" customModule="Yard_Sale" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jZg-gQ-4eP"/>
                         <viewControllerLayoutGuide type="bottom" id="uVq-d3-AtE"/>
@@ -216,30 +218,35 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="blO-qE-x2q">
-                                <rect key="frame" x="0.0" y="110" width="375" height="557"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="blO-qE-x2q">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </mapView>
-                            <searchBar contentMode="redraw" fixedFrame="YES" placeholder="Search for a place or address" translatesAutoresizingMaskIntoConstraints="NO" id="ZCH-H8-9gL">
-                                <rect key="frame" x="0.0" y="66" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <scopeButtonTitles>
-                                    <string>Title</string>
-                                    <string>Title</string>
-                                </scopeButtonTitles>
-                            </searchBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="blO-qE-x2q" firstAttribute="top" secondItem="Ak3-H9-k9D" secondAttribute="topMargin" id="K5z-oA-ElV"/>
+                            <constraint firstItem="blO-qE-x2q" firstAttribute="leading" secondItem="Ak3-H9-k9D" secondAttribute="leading" id="Rzh-rW-xl0"/>
+                            <constraint firstAttribute="trailing" secondItem="blO-qE-x2q" secondAttribute="trailing" id="hpI-US-jLL"/>
+                            <constraint firstItem="blO-qE-x2q" firstAttribute="bottom" secondItem="Ak3-H9-k9D" secondAttribute="bottom" id="qvl-kE-ZXr"/>
+                        </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="Map Location" id="xdN-hu-aIe" userLabel="Map Location">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="s3B-aI-F9m"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="9Hf-n8-rk6">
+                            <connections>
+                                <action selector="showSearchBar:" destination="HZw-rc-uQu" id="8aZ-Q4-F5c"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="mapView" destination="blO-qE-x2q" id="9Wg-PB-y9S"/>
-                        <outlet property="searchBar" destination="ZCH-H8-9gL" id="PFc-XW-FkF"/>
+                        <segue destination="J55-xf-ArT" kind="show" identifier="segueWithNewLocation" id="Lkr-Na-Qzz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bh2-D4-hqM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2560.8000000000002" y="138.98050974512745"/>
+            <point key="canvasLocation" x="2559.4202898550725" y="138.58695652173915"/>
         </scene>
         <!--Login VC-->
         <scene sceneID="Hu8-RR-2De">

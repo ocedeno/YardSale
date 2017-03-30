@@ -97,6 +97,11 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
         })
     }
     
+    @IBAction func selectLocationAction()
+    {
+        performSegue(withIdentifier: "getLocationSegue", sender: nil)
+    }
+    
     @IBAction func dateTextFieldEditing(_ sender: UITextField)
     {
         let datePickerView: UIDatePicker = UIDatePicker()
