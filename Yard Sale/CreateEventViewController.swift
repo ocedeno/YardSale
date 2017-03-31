@@ -30,6 +30,9 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
     var locLon: Double?
     var addDictionary: [String:AnyObject]?
     var addDictCompleted: Bool = false
+    var imagesDirectoryPath:String?
+    var images:[UIImage]?
+    var titles:[String]?
     
     override func viewDidLoad()
     {
@@ -303,5 +306,15 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
             
             destinationVC.navigationItem.setHidesBackButton(true, animated: true)
         }
+    }
+}
+
+extension CreateEventViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate
+{
+    @IBAction func choosePhoto(_ sender: UIButton)
+    {
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        present(imagePicker, animated: true, completion: nil)
     }
 }

@@ -141,6 +141,16 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource
         return eventsArray.count
     }
     
+//    func createImage() -> UIImage?
+//    {
+//        let address = "https://maps.googleapis.com/maps/api/streetview?size=400x400&location=40.720032,-73.988354&fov=90&heading=235&pitch=10&key=AIzaSyBAnHzetmeFz81XUgyVFhHxlxMzxp3eLsA"
+//        let url = URL(string: address)
+//        let data = try? Data(contentsOf: url!)
+//        let image = UIImage(data: data!)
+//        
+//        return image!
+//    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
 
@@ -152,15 +162,14 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource
         let distance = getDistance(locationTwo: locationTwo!)
         eventsArray[indexPath.row].distance = distance
         eventsArray.sort { Double($0.distance) ?? 0.00 < Double($1.distance) ?? 0.00}
-
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "eventCell")! as! EventTableViewCell
-        let image = UIImage(named: "gorgeousimage")
         cell.updateEventCell(withDate: eventsArray[indexPath.row].date!,
                              distance: "\(eventsArray[indexPath.row].distance) mi.",
                              headline: eventsArray[indexPath.row].title!,
                              address: "\(eventsArray[indexPath.row].addressDictionary!["locality"]!), \(eventsArray[indexPath.row].addressDictionary!["administrativeArea"]!)",
                              category: eventsArray[indexPath.row].description!,
-                             image: image!
+                             image: UIImage(named: "gorgeousimage")!
                             )
         
         return cell
