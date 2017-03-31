@@ -21,6 +21,7 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
     @IBOutlet weak var stopTimeField: UITextField!
     @IBOutlet weak var descriptionText: UITextView!
     @IBOutlet weak var displayEvent: UISwitch!
+    @IBOutlet weak var eventPhotCollectionView: UICollectionView!
     
     var radioButtonController: SSRadioButtonsController?
     let ref: FIRDatabaseReference = FIRDatabase.database().reference()
@@ -422,5 +423,19 @@ extension CreateEventViewController: UINavigationControllerDelegate, UIImagePick
         {
             print("\nError adding images to images array.")
         }
+    }
+}
+
+extension CreateEventViewController: UICollectionViewDataSource, UICollectionViewDelegate
+{
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return dataArray.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionCell", for: indexPath) as UICollectionViewCell
+        
+        
+        return cell
     }
 }

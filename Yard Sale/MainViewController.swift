@@ -57,6 +57,34 @@ class MainViewController: BaseViewController, MKMapViewDelegate, CLLocationManag
         locationManager.stopUpdatingLocation()
     }
     
+    func getCurrentLocation()
+    {
+        locationManager.startUpdatingLocationWithCompletionHandler { (lat, lon, status, verboseMessage, error) in
+            
+            guard error == nil else
+            {
+                self.utilityClass.errorAlert(title: "Location Update Error", message: (error?.description)!, cancelTitle: "Dismiss", view: self)
+                return
+            }
+            
+            self.setMapRegion(lon: lon, lat: lat)
+            self.populateEventsArray()
+            self.eventTableView.reloadData()
+        }
+    }
+    
+    func setMapRegion(lon: Double, lat: Double)
+    {
+        let lon = lon
+        let lat = lat
+        let center = CLLocationCoordinate2D(latitude: lat, longitude: lon)
+        let span = MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02)
+        let region = MKCoordinateRegion(center: center, span: span)
+        
+        self.mapView.setRegion(region, animated: true)
+        self.mapView.showsUserLocation = true
+    }
+    
     func populateEventsArray()
     {
         self.ref = FIRDatabase.database().reference().child("events")
@@ -77,34 +105,6 @@ class MainViewController: BaseViewController, MKMapViewDelegate, CLLocationManag
             self.eventTableView.reloadData()
             self.reloadEventsToMapView()
         })
-    }
-    
-    func getCurrentLocation()
-    {
-        locationManager.startUpdatingLocationWithCompletionHandler { (lat, lon, status, verboseMessage, error) in
-            
-            guard error == nil else
-            {
-                self.utilityClass.errorAlert(title: "Location Update Error", message: (error?.description)!, cancelTitle: "Dismiss", view: self)
-                return
-            }
-            
-            self.setMapRegion(lon: lon, lat: lat)
-            self.populateEventsArray()
-
-        }
-    }
-    
-    func setMapRegion(lon: Double, lat: Double)
-    {
-        let lon = lon
-        let lat = lat
-        let center = CLLocationCoordinate2D(latitude: lat, longitude: lon)
-        let span = MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02)
-        let region = MKCoordinateRegion(center: center, span: span)
-        
-        self.mapView.setRegion(region, animated: true)
-        self.mapView.showsUserLocation = true
     }
     
     func reloadEventsToMapView()
@@ -140,16 +140,6 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return eventsArray.count
     }
-    
-//    func createImage() -> UIImage?
-//    {
-//        let address = "https://maps.googleapis.com/maps/api/streetview?size=400x400&location=40.720032,-73.988354&fov=90&heading=235&pitch=10&key=AIzaSyBAnHzetmeFz81XUgyVFhHxlxMzxp3eLsA"
-//        let url = URL(string: address)
-//        let data = try? Data(contentsOf: url!)
-//        let image = UIImage(data: data!)
-//        
-//        return image!
-//    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
