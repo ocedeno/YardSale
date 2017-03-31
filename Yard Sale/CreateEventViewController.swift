@@ -58,6 +58,9 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
         uniqueEventID = taskFirebasePath?.key
         self.createImagePath()
         self.createImageStorageReference()
+        
+        eventPhotCollectionView.delegate = self
+        eventPhotCollectionView.dataSource = self
     }
     
     override func viewWillAppear(_ animated: Bool)
@@ -416,6 +419,7 @@ extension CreateEventViewController: UINavigationControllerDelegate, UIImagePick
                 dataArray.append(data!)
                 let image = UIImage(data: data!)
                 images!.append(image!)
+                eventPhotCollectionView.reloadData()
             }
             print((images?.count)!)
             print(imagesDirectoryPath!)
@@ -433,8 +437,9 @@ extension CreateEventViewController: UICollectionViewDataSource, UICollectionVie
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionCell", for: indexPath) as UICollectionViewCell
-        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionCell", for: indexPath) as! EventPhotoCollectionViewCell
+        let image = UIImage(data: dataArray[indexPath.row])
+        cell.imageView.image = image!
         
         return cell
     }

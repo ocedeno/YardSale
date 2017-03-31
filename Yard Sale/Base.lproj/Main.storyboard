@@ -205,14 +205,28 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="fHv-Yx-xYW">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="collectionCell" id="fHv-Yx-xYW" customClass="EventPhotoCollectionViewCell" customModule="Yard_Sale" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="103" height="103"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="103" height="103"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bX9-zV-RsN">
+                                                    <rect key="frame" x="0.0" y="0.0" width="103" height="103"/>
+                                                </imageView>
+                                            </subviews>
                                         </view>
+                                        <constraints>
+                                            <constraint firstItem="bX9-zV-RsN" firstAttribute="top" secondItem="fHv-Yx-xYW" secondAttribute="top" id="5vf-7o-pGH"/>
+                                            <constraint firstItem="bX9-zV-RsN" firstAttribute="leading" secondItem="fHv-Yx-xYW" secondAttribute="leading" id="Bhe-aT-2VQ"/>
+                                            <constraint firstAttribute="trailing" secondItem="bX9-zV-RsN" secondAttribute="trailing" id="vje-uJ-YgL"/>
+                                            <constraint firstAttribute="bottom" secondItem="bX9-zV-RsN" secondAttribute="bottom" id="ywv-FK-KpS"/>
+                                        </constraints>
                                         <size key="customSize" width="103" height="103"/>
+                                        <connections>
+                                            <outlet property="imageView" destination="bX9-zV-RsN" id="6Vl-dQ-gNa"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
