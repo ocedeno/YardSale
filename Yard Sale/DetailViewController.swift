@@ -12,6 +12,7 @@ import Firebase
 
 class DetailViewController: UIViewController, MKMapViewDelegate
 {
+    @IBOutlet weak var eventPhotoCollectionView: UICollectionView!
     @IBOutlet weak var doneButton: UIBarButtonItem!
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var eventTitleLabel: UILabel!

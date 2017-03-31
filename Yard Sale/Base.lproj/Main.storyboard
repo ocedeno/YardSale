@@ -568,6 +568,41 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceHorizontal="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="z1X-30-Bw3">
+                                <rect key="frame" x="16" y="467" width="343" height="104"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="uQw-vZ-cd3">
+                                    <size key="itemSize" width="103" height="103"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="collectionCell" id="0x9-rx-PVg" customClass="EventPhotoCollectionViewCell" customModule="Yard_Sale" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.5" width="103" height="103"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="103" height="103"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aBB-d4-cAM">
+                                                    <rect key="frame" x="0.0" y="0.0" width="103" height="103"/>
+                                                </imageView>
+                                            </subviews>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="aBB-d4-cAM" firstAttribute="top" secondItem="0x9-rx-PVg" secondAttribute="top" id="Ec1-AK-oCN"/>
+                                            <constraint firstItem="aBB-d4-cAM" firstAttribute="leading" secondItem="0x9-rx-PVg" secondAttribute="leading" id="WMh-47-3KD"/>
+                                            <constraint firstAttribute="trailing" secondItem="aBB-d4-cAM" secondAttribute="trailing" id="hpL-42-zf7"/>
+                                            <constraint firstAttribute="bottom" secondItem="aBB-d4-cAM" secondAttribute="bottom" id="vIY-bJ-xOW"/>
+                                        </constraints>
+                                        <size key="customSize" width="103" height="103"/>
+                                        <connections>
+                                            <outlet property="imageView" destination="aBB-d4-cAM" id="6Ao-eP-TYE"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
                         </subviews>
                         <color key="backgroundColor" red="0.98160523929999999" green="1" blue="0.30922617029999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
@@ -582,6 +617,7 @@
                         <outlet property="doneButton" destination="QzZ-0t-Xb9" id="udY-ea-6Pq"/>
                         <outlet property="eventDateLabel" destination="e62-oE-XqS" id="Vy1-jC-oel"/>
                         <outlet property="eventDescriptionTextView" destination="qCJ-LE-oBG" id="j16-MZ-jdM"/>
+                        <outlet property="eventPhotoCollectionView" destination="z1X-30-Bw3" id="I2l-GM-TvH"/>
                         <outlet property="eventTimeLabel" destination="sM1-7U-3Tb" id="GbK-ar-4ri"/>
                         <outlet property="eventTitleLabel" destination="M5J-ot-Axh" id="5cf-Ci-y4o"/>
                         <outlet property="mapView" destination="e1H-DY-75e" id="HPk-BY-lAh"/>
@@ -699,7 +735,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="i5n-Ig-cWB"/>
+        <segue reference="VvK-Xs-1tN"/>
         <segue reference="KWd-Vb-nPs"/>
     </inferredMetricsTieBreakers>
 </document>
