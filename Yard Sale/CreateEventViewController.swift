@@ -33,8 +33,10 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
     var imagesDirectoryPath:String?
     var images:[UIImage]?
     var titles:[String]?
+    var dataArray: [Data] = []
     var taskFirebasePath: FIRDatabaseReference? = nil
     var uniqueEventID: String?
+    var eventImageRef: FIRStorageReference?
     
     override func viewDidLoad()
     {
@@ -54,6 +56,7 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
         taskFirebasePath = self.ref.ref.child("events").childByAutoId()
         uniqueEventID = taskFirebasePath?.key
         self.createImagePath()
+        self.createImageStorageReference()
     }
     
     override func viewWillAppear(_ animated: Bool)
@@ -210,10 +213,39 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
                               locationLatitude: dic["locLat"] as! Double,
                               locationLongitude: dic["locLon"] as! Double,
                               addDict: dic["addressDictionary"] as! [String:AnyObject]
-                        )
+            )
             
             taskFirebasePath?.setValue(event.toDictionary())
+            if !dataArray.isEmpty
+            {
+                savePhotosToFirebase(dataArray: dataArray)
+            }
+            
             performSegue(withIdentifier: "segueToDetailView", sender: taskFirebasePath?.key)
+        }
+    }
+    
+    func createImageStorageReference()
+    {
+        let storage = FIRStorage.storage()
+        let storageRef = storage.reference()
+        let imageRef = storageRef.child("images")
+        eventImageRef = imageRef.child(uniqueEventID!)
+    }
+    
+    func savePhotosToFirebase(dataArray: [Data])
+    {
+        for image in dataArray
+        {
+            let localFile = image
+            _ = eventImageRef?.child(image.description).put(localFile, metadata: nil, completion: { (metadata, error) in
+                guard let metadata = metadata else
+                {
+                    return
+                }
+                
+                _ = metadata.downloadURL
+            })
         }
     }
     
@@ -375,10 +407,12 @@ extension CreateEventViewController: UINavigationControllerDelegate, UIImagePick
         do
         {
             images?.removeAll()
+            dataArray.removeAll()
             titles = try FileManager.default.contentsOfDirectory(atPath: imagesDirectoryPath!)
             for image in titles!
             {
                 let data = FileManager.default.contents(atPath: (imagesDirectoryPath?.appending("/\(image)"))!)
+                dataArray.append(data!)
                 let image = UIImage(data: data!)
                 images!.append(image!)
             }
