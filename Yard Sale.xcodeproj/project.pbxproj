@@ -29,6 +29,7 @@
 		06EC2E0C1E89374300F83D6C /* CreateEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06EC2E0B1E89374300F83D6C /* CreateEventViewController.swift */; };
 		06F6B7161E859D66009277DE /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06F6B7151E859D66009277DE /* EventTableViewCell.swift */; };
 		06FA29AD1E8EA6B000A5DD28 /* EventPhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06FA29AC1E8EA6B000A5DD28 /* EventPhotoCollectionViewCell.swift */; };
+		06FA29AF1E8EAB7600A5DD28 /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06FA29AE1E8EAB7600A5DD28 /* ImageViewController.swift */; };
 		06FDEEB61E8C27D8006D0567 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06FDEEB51E8C27D8006D0567 /* LocationManager.swift */; };
 		06FDEEB81E8C4143006D0567 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06FDEEB71E8C4143006D0567 /* DetailViewController.swift */; };
 		06FDEEBA1E8C42AB006D0567 /* AddressSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06FDEEB91E8C42AB006D0567 /* AddressSelectionViewController.swift */; };
@@ -96,6 +97,7 @@
 		06EC2E0B1E89374300F83D6C /* CreateEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventViewController.swift; sourceTree = "<group>"; };
 		06F6B7151E859D66009277DE /* EventTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTableViewCell.swift; sourceTree = "<group>"; };
 		06FA29AC1E8EA6B000A5DD28 /* EventPhotoCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventPhotoCollectionViewCell.swift; sourceTree = "<group>"; };
+		06FA29AE1E8EAB7600A5DD28 /* ImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
 		06FDEEB51E8C27D8006D0567 /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		06FDEEB71E8C4143006D0567 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		06FDEEB91E8C42AB006D0567 /* AddressSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressSelectionViewController.swift; sourceTree = "<group>"; };
@@ -223,6 +225,7 @@
 				06EC2E0B1E89374300F83D6C /* CreateEventViewController.swift */,
 				06FDEEB91E8C42AB006D0567 /* AddressSelectionViewController.swift */,
 				06FDEEB71E8C4143006D0567 /* DetailViewController.swift */,
+				06FA29AE1E8EAB7600A5DD28 /* ImageViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -586,6 +589,7 @@
 				06E86F4E1E855E60009E3D75 /* BaseViewController.swift in Sources */,
 				061FF06C1E7ED5FF0075F033 /* MainViewController.swift in Sources */,
 				061FF06A1E7ED5FF0075F033 /* AppDelegate.swift in Sources */,
+				06FA29AF1E8EAB7600A5DD28 /* ImageViewController.swift in Sources */,
 				06FA29AD1E8EA6B000A5DD28 /* EventPhotoCollectionViewCell.swift in Sources */,
 				06FDEEBA1E8C42AB006D0567 /* AddressSelectionViewController.swift in Sources */,
 				06FDEEB61E8C27D8006D0567 /* LocationManager.swift in Sources */,

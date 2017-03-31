@@ -82,6 +82,52 @@
             </objects>
             <point key="canvasLocation" x="1654" y="858"/>
         </scene>
+        <!--Image View-->
+        <scene sceneID="c77-gA-j5W">
+            <objects>
+                <viewController title="Image View" id="RWO-zY-qMQ" customClass="ImageViewController" customModule="Yard_Sale" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="3Gy-We-soG"/>
+                        <viewControllerLayoutGuide type="bottom" id="E8b-wx-Cy5"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="0if-w9-STw">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lQZ-5C-dSC">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="lQZ-5C-dSC" firstAttribute="leading" secondItem="0if-w9-STw" secondAttribute="leading" id="4jS-0U-H26"/>
+                            <constraint firstAttribute="trailing" secondItem="lQZ-5C-dSC" secondAttribute="trailing" id="CWn-rT-OP7"/>
+                            <constraint firstItem="lQZ-5C-dSC" firstAttribute="top" secondItem="3Gy-We-soG" secondAttribute="bottom" id="jKV-7B-yIX"/>
+                            <constraint firstItem="E8b-wx-Cy5" firstAttribute="top" secondItem="lQZ-5C-dSC" secondAttribute="bottom" id="nFy-A0-rjX"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Photo View" id="cUd-5S-prL">
+                        <barButtonItem key="leftBarButtonItem" systemItem="save" id="FE3-6s-tbp">
+                            <connections>
+                                <action selector="saveImage:" destination="RWO-zY-qMQ" id="UEq-qm-27E"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="trash" id="jnJ-xH-6EM">
+                            <connections>
+                                <action selector="deleteImage" destination="RWO-zY-qMQ" id="HeD-21-aKn"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="imageView" destination="lQZ-5C-dSC" id="v23-Zb-PEQ"/>
+                        <segue destination="J55-xf-ArT" kind="show" identifier="fromPhotoViewtoCreateView" id="khS-td-bPW"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cX3-Ja-Wdr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2559" y="-594"/>
+        </scene>
         <!--Create Event VC-->
         <scene sceneID="wxS-mE-h8Y">
             <objects>
@@ -197,8 +243,7 @@
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="G0c-L7-Fu0">
                                 <rect key="frame" x="16" y="472" width="343" height="104"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="9h0-6Z-xJ9">
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="9h0-6Z-xJ9">
                                     <size key="itemSize" width="103" height="103"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -206,7 +251,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="collectionCell" id="fHv-Yx-xYW" customClass="EventPhotoCollectionViewCell" customModule="Yard_Sale" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="103" height="103"/>
+                                        <rect key="frame" x="0.0" y="0.5" width="103" height="103"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="103" height="103"/>
@@ -246,6 +291,7 @@
                         <outlet property="useNewLocation" destination="ZtO-kp-v7M" id="aGn-fD-MjX"/>
                         <segue destination="HZw-rc-uQu" kind="show" identifier="getLocationSegue" id="7Zh-xH-6rh"/>
                         <segue destination="No7-g4-Y6K" kind="show" identifier="segueToDetailView" id="KWd-Vb-nPs"/>
+                        <segue destination="RWO-zY-qMQ" kind="show" identifier="segueToImageDetail" id="i5n-Ig-cWB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3OZ-ZD-99P" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -539,6 +585,7 @@
                         <outlet property="eventTimeLabel" destination="sM1-7U-3Tb" id="GbK-ar-4ri"/>
                         <outlet property="eventTitleLabel" destination="M5J-ot-Axh" id="5cf-Ci-y4o"/>
                         <outlet property="mapView" destination="e1H-DY-75e" id="HPk-BY-lAh"/>
+                        <segue destination="RWO-zY-qMQ" kind="show" identifier="segueToImageDetail" id="VvK-Xs-1tN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZPq-39-UFF" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -652,6 +699,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="KWd-Vb-nPs"/>
+        <segue reference="igD-jS-SD2"/>
+        <segue reference="i5n-Ig-cWB"/>
     </inferredMetricsTieBreakers>
 </document>
