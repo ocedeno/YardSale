@@ -38,6 +38,7 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
     var taskFirebasePath: FIRDatabaseReference? = nil
     var uniqueEventID: String?
     var eventImageRef: FIRStorageReference?
+    var lastImagePath: String?
     
     override func viewDidLoad()
     {
@@ -59,13 +60,16 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
         self.createImagePath()
         self.createImageStorageReference()
         
-        eventPhotCollectionView.delegate = self
         eventPhotCollectionView.dataSource = self
+        eventPhotCollectionView.backgroundColor = UIColor.clear
+        
+        updateTextView()        
     }
     
     override func viewWillAppear(_ animated: Bool)
     {
         super.viewWillAppear(true)
+        
         if addDictCompleted
         {
             selectNewLocationButton.isHidden = false
@@ -96,6 +100,13 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
         {
             selectNewLocationButton.isHidden = false
         }
+    }
+    
+    internal func updateTextView()
+    {
+        let placeholderText = "Pleaes provide a description of your event here..."
+        descriptionText.text = placeholderText
+        descriptionText.textColor = UIColor.lightGray
     }
     
     func startLocationUpdater()
@@ -346,6 +357,12 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
             destinationVC.uniqueID = sender as? String
             
             destinationVC.navigationItem.setHidesBackButton(true, animated: true)
+        } else if segue.identifier == "segueToImageDetail"
+        {
+            let destinationVC = segue.destination as! ImageViewController
+            let image = sender as? UIImage
+            destinationVC.image = image!
+            destinationVC.imagePath = lastImagePath
         }
     }
 }
@@ -396,13 +413,11 @@ extension CreateEventViewController: UINavigationControllerDelegate, UIImagePick
         imagePath = (imagesDirectoryPath?.appending("/\(imagePath).png"))!
         let data = UIImagePNGRepresentation(imageRecieved!)
         let success = FileManager.default.createFile(atPath: imagePath, contents: data, attributes: nil)
-        dismiss(animated: true)
+        if success
         {
-            if success
-            {
-                self.reloadImages()
-                print("Successfully appended image.")
-            }
+            self.reloadImages()
+            self.performSegue(withIdentifier: "segueToImageDetail", sender: imageRecieved!)
+            self.dismiss(animated: true)
         }
     }
     
@@ -415,7 +430,8 @@ extension CreateEventViewController: UINavigationControllerDelegate, UIImagePick
             titles = try FileManager.default.contentsOfDirectory(atPath: imagesDirectoryPath!)
             for image in titles!
             {
-                let data = FileManager.default.contents(atPath: (imagesDirectoryPath?.appending("/\(image)"))!)
+                lastImagePath = imagesDirectoryPath?.appending("/\(image)")
+                let data = FileManager.default.contents(atPath: lastImagePath!)
                 dataArray.append(data!)
                 let image = UIImage(data: data!)
                 images!.append(image!)
@@ -430,16 +446,19 @@ extension CreateEventViewController: UINavigationControllerDelegate, UIImagePick
     }
 }
 
-extension CreateEventViewController: UICollectionViewDataSource, UICollectionViewDelegate
+extension CreateEventViewController: UICollectionViewDataSource
 {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
+    {
         return dataArray.count
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
+    {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionCell", for: indexPath) as! EventPhotoCollectionViewCell
         let image = UIImage(data: dataArray[indexPath.row])
         cell.imageView.image = image!
+        
         
         return cell
     }
