@@ -33,6 +33,8 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
     var imagesDirectoryPath:String?
     var images:[UIImage]?
     var titles:[String]?
+    var taskFirebasePath: FIRDatabaseReference? = nil
+    var uniqueEventID: String?
     
     override func viewDidLoad()
     {
@@ -48,6 +50,10 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
         
         let gesture = UITapGestureRecognizer(target: self, action: #selector(dismissPicker))
         self.view.addGestureRecognizer(gesture)
+        
+        taskFirebasePath = self.ref.ref.child("events").childByAutoId()
+        uniqueEventID = taskFirebasePath?.key
+        self.createImagePath()
     }
     
     override func viewWillAppear(_ animated: Bool)
@@ -206,9 +212,8 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
                               addDict: dic["addressDictionary"] as! [String:AnyObject]
                         )
             
-            let taskFirebasePath = self.ref.ref.child("events").childByAutoId()
-            taskFirebasePath.setValue(event.toDictionary())
-            performSegue(withIdentifier: "segueToDetailView", sender: taskFirebasePath.key)
+            taskFirebasePath?.setValue(event.toDictionary())
+            performSegue(withIdentifier: "segueToDetailView", sender: taskFirebasePath?.key)
         }
     }
     
@@ -316,5 +321,72 @@ extension CreateEventViewController: UINavigationControllerDelegate, UIImagePick
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
         present(imagePicker, animated: true, completion: nil)
+    }
+    
+    func createImagePath()
+    {
+        images = []
+        
+        let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
+        let documentDirectorPath: String = paths[0]
+        imagesDirectoryPath = documentDirectorPath.appending("/ImagePicker/\(uniqueEventID!)")
+        var objcBool: ObjCBool = true
+        let isExist = FileManager.default.fileExists(atPath: imagesDirectoryPath!, isDirectory: &objcBool)
+        
+        if isExist == false
+        {
+            do
+            {
+                try FileManager.default.createDirectory(atPath: imagesDirectoryPath!, withIntermediateDirectories: true, attributes: nil)
+            }catch
+            {
+                print("\nSomething went wrong while creating a new folder")
+            }
+        }
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any])
+    {
+        let imageRecieved: UIImage?
+        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage
+        {
+            imageRecieved = image
+        } else{
+            print("Something went wrong")
+            return
+        }
+        var imagePath = NSDate().description
+        imagePath = imagePath.replacingOccurrences(of: " ", with: "")
+        imagePath = (imagesDirectoryPath?.appending("/\(imagePath).png"))!
+        let data = UIImagePNGRepresentation(imageRecieved!)
+        let success = FileManager.default.createFile(atPath: imagePath, contents: data, attributes: nil)
+        dismiss(animated: true)
+        {
+            if success
+            {
+                self.reloadImages()
+                print("Successfully appended image.")
+            }
+        }
+    }
+    
+    func reloadImages()
+    {
+        do
+        {
+            images?.removeAll()
+            titles = try FileManager.default.contentsOfDirectory(atPath: imagesDirectoryPath!)
+            for image in titles!
+            {
+                let data = FileManager.default.contents(atPath: (imagesDirectoryPath?.appending("/\(image)"))!)
+                let image = UIImage(data: data!)
+                images!.append(image!)
+            }
+            print((images?.count)!)
+            print(imagesDirectoryPath!)
+        }catch
+        {
+            print("\nError adding images to images array.")
+        }
     }
 }
