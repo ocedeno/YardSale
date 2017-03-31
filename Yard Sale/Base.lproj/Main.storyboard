@@ -107,14 +107,14 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Photo View" id="cUd-5S-prL">
-                        <barButtonItem key="leftBarButtonItem" systemItem="save" id="FE3-6s-tbp">
+                        <barButtonItem key="leftBarButtonItem" systemItem="trash" id="FE3-6s-tbp">
                             <connections>
-                                <action selector="saveImage:" destination="RWO-zY-qMQ" id="UEq-qm-27E"/>
+                                <action selector="deleteImage" destination="RWO-zY-qMQ" id="067-GX-W0X"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="trash" id="jnJ-xH-6EM">
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="jnJ-xH-6EM">
                             <connections>
-                                <action selector="deleteImage" destination="RWO-zY-qMQ" id="HeD-21-aKn"/>
+                                <action selector="saveImage:" destination="RWO-zY-qMQ" id="eAx-E5-lVP"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -240,7 +240,7 @@
                                     <action selector="choosePhoto:" destination="J55-xf-ArT" eventType="touchUpInside" id="Pig-wp-4od"/>
                                 </connections>
                             </button>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="G0c-L7-Fu0">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceHorizontal="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="G0c-L7-Fu0">
                                 <rect key="frame" x="16" y="472" width="343" height="104"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="9h0-6Z-xJ9">
@@ -257,7 +257,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="103" height="103"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bX9-zV-RsN">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bX9-zV-RsN">
                                                     <rect key="frame" x="0.0" y="0.0" width="103" height="103"/>
                                                 </imageView>
                                             </subviews>
@@ -699,7 +699,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="igD-jS-SD2"/>
         <segue reference="i5n-Ig-cWB"/>
+        <segue reference="KWd-Vb-nPs"/>
     </inferredMetricsTieBreakers>
 </document>

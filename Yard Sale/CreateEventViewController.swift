@@ -63,7 +63,7 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
         eventPhotCollectionView.dataSource = self
         eventPhotCollectionView.backgroundColor = UIColor.clear
         
-        updateTextView()        
+        updateTextView()
     }
     
     override func viewWillAppear(_ animated: Bool)
@@ -371,9 +371,15 @@ extension CreateEventViewController: UINavigationControllerDelegate, UIImagePick
 {
     @IBAction func choosePhoto(_ sender: UIButton)
     {
-        let imagePicker = UIImagePickerController()
-        imagePicker.delegate = self
-        present(imagePicker, animated: true, completion: nil)
+        if dataArray.count < 6
+        {
+            let imagePicker = UIImagePickerController()
+            imagePicker.delegate = self
+            present(imagePicker, animated: true, completion: nil)
+        }else
+        {
+            utility.errorAlert(title: "Image Selection Alert", message: "You can only select 6 images at most.", cancelTitle: "Dismiss", view: self)
+        }
     }
     
     func createImagePath()
@@ -459,7 +465,22 @@ extension CreateEventViewController: UICollectionViewDataSource
         let image = UIImage(data: dataArray[indexPath.row])
         cell.imageView.image = image!
         
-        
         return cell
+    }
+}
+
+extension UIImage
+{
+    func correctlyOrientedImage() -> UIImage {
+        if self.imageOrientation == UIImageOrientation.up {
+            return self
+        }
+        
+        UIGraphicsBeginImageContextWithOptions(self.size, false, self.scale)
+        self.draw(in: CGRect(x: 0, y: 0, width: self.size.width, height: self.size.height))
+        let normalizedImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+        
+        return normalizedImage;
     }
 }
