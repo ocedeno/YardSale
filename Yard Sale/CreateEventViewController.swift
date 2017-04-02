@@ -227,7 +227,8 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
                               activeEvent: displayEvent.isOn,
                               locationLatitude: dic["locLat"] as! Double,
                               locationLongitude: dic["locLon"] as! Double,
-                              addDict: dic["addressDictionary"] as! [String:AnyObject]
+                              addDict: dic["addressDictionary"] as! [String:AnyObject],
+                              imageTitleDict: dic["imageTitleDictionary"] as! [String:String]
             )
             
             taskFirebasePath?.setValue(event.toDictionary())
@@ -264,6 +265,23 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
         }
     }
     
+    func createImageTitleDictionary() -> [String:String]?
+    {
+        var stringDict: [String:String] = [:]
+        if dataArray.count != 0
+        {
+            var count = 0
+            for item in dataArray
+            {
+                count += 1
+                let stringKey = "item\(count)"
+                stringDict[stringKey] = item.description
+            }
+        }
+        print(stringDict)
+        return stringDict
+    }
+    
     fileprivate func updateEvent() -> [String: AnyObject]
     {
         let dic =
@@ -273,9 +291,10 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
                 "startTime" : startTimeField.text! as AnyObject,
                 "stopTime" : stopTimeField.text! as AnyObject,
                 "description" : descriptionText.text as AnyObject,
-                "locLat" : locLat as AnyObject,
+                "locLat": locLat as AnyObject,
                 "locLon" : locLon as AnyObject,
-                "addressDictionary" : addDictionary!
+                "addressDictionary" : addDictionary! as [String : AnyObject],
+                "imageTitleDictionary" : createImageTitleDictionary()!
                 ] as [String : Any]
         
         return dic as [String : AnyObject]

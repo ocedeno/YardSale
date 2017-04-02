@@ -41,6 +41,7 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         tblMenuOptions.tableFooterView = UIView()
         
         let blurredBackgroundView = BlurredBackgroundView(frame: .zero)
@@ -125,7 +126,7 @@ class BlurredBackgroundView: UIView {
     let blurView: UIVisualEffectView
     
     override init(frame: CGRect) {
-        let blurEffect = UIBlurEffect(style: .dark)
+        let blurEffect = UIBlurEffect(style: .light)
         blurView = UIVisualEffectView(effect: blurEffect)
         imageView = UIImageView(image: UIImage.gorgeousImage())
         super.init(frame: frame)

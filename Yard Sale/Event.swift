@@ -22,6 +22,7 @@ struct Event
     static let locLat = "locationLatitude"
     static let locLon = "locationLongitude"
     static let addressDictionary = "address"
+    static let imageTitleDictionary = "imageTitleDictionary"
     
     var distance = String()
     
@@ -35,9 +36,10 @@ struct Event
     let locLat: Double?
     let locLon: Double?
     let addressDictionary: [String:AnyObject]?
+    let imageTitleDictionary: [String:String]?
     let ref : FIRDatabaseReference?
     
-    init(withTitle title: String, onDate date: String, startTime:String, stopTime: String, withDescription description: String, userID uid: String, activeEvent active: Bool, locationLatitude: Double, locationLongitude: Double, addDict: [String:AnyObject])
+    init(withTitle title: String, onDate date: String, startTime:String, stopTime: String, withDescription description: String, userID uid: String, activeEvent active: Bool, locationLatitude: Double, locationLongitude: Double, addDict: [String:AnyObject], imageTitleDict: [String: String])
     {
         self.title = title
         self.date = date
@@ -50,6 +52,7 @@ struct Event
         self.locLat = locationLatitude
         self.locLon = locationLongitude
         self.addressDictionary = addDict
+        self.imageTitleDictionary = imageTitleDict
     }
     
     init(snapshot: FIRDataSnapshot)
@@ -66,6 +69,7 @@ struct Event
         self.locLat = snapshotValue[Event.locLat] as? Double
         self.locLon = snapshotValue[Event.locLon] as? Double
         self.addressDictionary = snapshotValue[Event.addressDictionary] as? [String:AnyObject]
+        self.imageTitleDictionary = snapshotValue[Event.imageTitleDictionary] as? [String:String]
     }
     
     func toDictionary() -> Any {
@@ -79,7 +83,8 @@ struct Event
             Event.active : self.active!,
             Event.locLat : self.locLat!,
             Event.locLon : self.locLon!,
-            Event.addressDictionary : self.addressDictionary!
+            Event.addressDictionary : self.addressDictionary!,
+            Event.imageTitleDictionary : self.imageTitleDictionary!
         ]
     }
 }

@@ -22,7 +22,12 @@ class DetailViewController: UIViewController, MKMapViewDelegate
     
     var userEvent: Event?
     var ref: FIRDatabaseReference? = nil
+    var eventImageRef: FIRStorageReference? = nil
     var uniqueID: String?
+    var dataArray: [Data] = []
+    var dataStringArray: [String] = []
+    var uniqueEventID: String?
+    let utilityClass = Utiliy()
     
     override func viewDidLoad()
     {
@@ -34,6 +39,39 @@ class DetailViewController: UIViewController, MKMapViewDelegate
         }
         
         getUserEvent()
+        eventPhotoCollectionView.dataSource = self
+    }
+    
+    func createImageStorageReference()
+    {
+        eventImageRef = nil
+        let storage = FIRStorage.storage()
+        let storageRef = storage.reference()
+        let imageRef = storageRef.child("images")
+        eventImageRef = imageRef.child(uniqueID!)
+        print(eventImageRef!)
+    }
+    
+    func populateDataArray()
+    {
+        for item in (userEvent?.imageTitleDictionary)!
+        {
+            eventImageRef?.child(item.value).data(withMaxSize: 18752501, completion: { (data, error) in
+                
+                guard error == nil else
+                {
+                    DispatchQueue.main.async
+                        {
+                            self.utilityClass.errorAlert(title: "Image Error", message: (error?.localizedDescription)!, cancelTitle: "Dismiss", view: self)
+                            print("\n\(error.debugDescription)")
+                    }
+                    return
+                }
+                
+                self.dataArray.append(data!)
+                self.eventPhotoCollectionView.reloadData()
+            })
+        }
     }
     
     func getUserEvent()
@@ -46,8 +84,18 @@ class DetailViewController: UIViewController, MKMapViewDelegate
                 {
                     self.populateMap()
                     self.populateValues()
-                }
+                    self.getuserImages()
+            }
         })
+    }
+    
+    func getuserImages()
+    {
+        if userEvent?.imageTitleDictionary?.count != 0
+        {
+            createImageStorageReference()
+            populateDataArray()
+        }
     }
     
     func populateValues()
@@ -87,8 +135,29 @@ class DetailViewController: UIViewController, MKMapViewDelegate
         mapView.selectAnnotation(mapView.annotations[yourAnnotationAtIndex], animated: true)
         
     }
+    
     @IBAction func dismissViewController(_ sender: UIBarButtonItem)
     {
         _ = navigationController?.popToRootViewController(animated: true)
+    }
+}
+
+extension DetailViewController: UICollectionViewDataSource
+{
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
+    {
+        return dataArray.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
+    {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionCell", for: indexPath) as! EventPhotoCollectionViewCell
+        let image = UIImage(data: dataArray[indexPath.row])
+        DispatchQueue.main.async
+            {
+                cell.imageView.image = image!
+        }
+        
+        return cell
     }
 }

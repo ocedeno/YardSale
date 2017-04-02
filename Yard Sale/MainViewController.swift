@@ -35,12 +35,16 @@ class MainViewController: BaseViewController, MKMapViewDelegate, CLLocationManag
         
         getCurrentLocation()
         addSlideMenuButton()
+        
+        setupBackgroundView()
     }
 
-    override func viewDidAppear(_ animated: Bool)
+    override func viewWillAppear(_ animated: Bool)
     {
-        super.viewDidAppear(true)
+        super.viewWillAppear(true)
         
+        eventTableView.reloadData()
+        reloadEventsToMapView()
         FIRAuth.auth()?.addStateDidChangeListener { auth, user in
             if user != nil {
                 print("User is signed in.")
@@ -49,6 +53,14 @@ class MainViewController: BaseViewController, MKMapViewDelegate, CLLocationManag
                 self.locationManager.stopUpdatingLocation()
             }
         }
+    }
+    
+    func setupBackgroundView()
+    {
+        eventTableView.tableFooterView = UIView()
+        let blurredBackgroundView = BlurredBackgroundView(frame: .zero)
+        eventTableView.backgroundView = blurredBackgroundView
+        eventTableView.separatorEffect = UIVibrancyEffect(blurEffect: blurredBackgroundView.blurView.effect as! UIBlurEffect)
     }
     
     @IBAction func createEvent(_ sender: UIBarButtonItem)
@@ -154,6 +166,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource
         eventsArray.sort { Double($0.distance) ?? 0.00 < Double($1.distance) ?? 0.00}
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "eventCell")! as! EventTableViewCell
+        cell.backgroundColor = UIColor.clear
         cell.updateEventCell(withDate: eventsArray[indexPath.row].date!,
                              distance: "\(eventsArray[indexPath.row].distance) mi.",
                              headline: eventsArray[indexPath.row].title!,
@@ -174,5 +187,6 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource
     {
         let destinationVC = segue.destination as! DetailViewController
         destinationVC.uniqueID = sender as? String
+        
     }
 }
