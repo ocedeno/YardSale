@@ -26,8 +26,8 @@ class LoginViewController: UIViewController
         FIRAuth.auth()?.addStateDidChangeListener({ (auth, user) in
             if user != nil
             {
-                let mainVC = self.storyboard?.instantiateViewController(withIdentifier: "MainVC")
-                self.present(mainVC!, animated: true)
+                let navVC = self.storyboard?.instantiateViewController(withIdentifier: "NavController")
+                self.present(navVC!, animated: true)
             }
         })
         

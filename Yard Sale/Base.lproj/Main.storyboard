@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="blh-kB-2hn">
-    <device id="retina5_5" orientation="portrait">
+    <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -24,7 +24,7 @@
                         <viewControllerLayoutGuide type="bottom" id="wyF-SP-Jbx"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="RUn-z4-J0R">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.98160523929999999" green="1" blue="0.30922617029999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
@@ -42,11 +42,11 @@
                         <viewControllerLayoutGuide type="bottom" id="E8b-wx-Cy5"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="0if-w9-STw">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lQZ-5C-dSC">
-                                <rect key="frame" x="0.0" y="64" width="414" height="672"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -88,7 +88,7 @@
                         <viewControllerLayoutGuide type="bottom" id="kzP-7y-YeR"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="kz6-Kf-PQ7">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ooM-00-BJy" userLabel="Current Address Button" customClass="SSRadioButton" customModule="Yard_Sale" customModuleProvider="target">
@@ -202,7 +202,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="collectionCell" id="fHv-Yx-xYW" customClass="EventPhotoCollectionViewCell" customModule="Yard_Sale" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.66666666666666663" width="103" height="103"/>
+                                        <rect key="frame" x="0.0" y="0.5" width="103" height="103"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="103" height="103"/>
@@ -258,11 +258,11 @@
                         <viewControllerLayoutGuide type="bottom" id="uVq-d3-AtE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Ak3-H9-k9D">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="blO-qE-x2q">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="667"/>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="blO-qE-x2q">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -299,17 +299,17 @@
                         <viewControllerLayoutGuide type="bottom" id="7jY-y5-nFh"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="maK-FM-4K4">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="VintageWoodBackground" translatesAutoresizingMaskIntoConstraints="NO" id="VoR-1n-XGT">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Ihw-YJ-P56">
-                                <rect key="frame" x="20" y="20" width="374" height="716"/>
+                                <rect key="frame" x="16" y="20" width="343" height="647"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalCompressionResistancePriority="749" text="Yard Sale" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FT5-ds-fwB">
-                                        <rect key="frame" x="44.666666666666686" y="0.0" width="285" height="179.66666666666666"/>
+                                        <rect key="frame" x="29" y="0.0" width="285" height="162.5"/>
                                         <fontDescription key="fontDescription" name="YardSale" family="Yard Sale" pointSize="50"/>
                                         <color key="textColor" red="0.62030875682830811" green="0.83040165901184082" blue="0.9226345419883728" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -317,17 +317,17 @@
                                         <size key="shadowOffset" width="3" height="1"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="lhD-7X-ykc">
-                                        <rect key="frame" x="30" y="178.66666666666669" width="314" height="180.00000000000006"/>
+                                        <rect key="frame" x="30" y="161.5" width="283" height="162.5"/>
                                         <subviews>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" textAlignment="center" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="WqV-dK-lcq">
-                                                <rect key="frame" x="0.0" y="0.0" width="314" height="86.000000000000028"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="283" height="77.5"/>
                                                 <color key="backgroundColor" red="0.90820181369781494" green="0.62147766351699829" blue="0.36636394262313843" alpha="0.48338505993150682" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <color key="textColor" red="0.61470085382461548" green="0.49109011888504028" blue="0.39766314625740051" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" name="YardSale" family="Yard Sale" pointSize="26"/>
                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress"/>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="center" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="0zP-7r-3lg">
-                                                <rect key="frame" x="0.0" y="94.000000000000028" width="314" height="86"/>
+                                                <rect key="frame" x="0.0" y="85.5" width="283" height="77"/>
                                                 <color key="backgroundColor" red="0.90820181369781494" green="0.62147766351699829" blue="0.36636394262313843" alpha="0.48338505990000002" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <color key="textColor" red="0.61470085379999995" green="0.49109011889999998" blue="0.39766314629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" name="YardSale" family="Yard Sale" pointSize="26"/>
@@ -336,10 +336,10 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="8iJ-a1-maA">
-                                        <rect key="frame" x="60.666666666666686" y="357.66666666666663" width="253" height="179.66666666666663"/>
+                                        <rect key="frame" x="45" y="323" width="253" height="162.5"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dj6-sx-SrL">
-                                                <rect key="frame" x="0.0" y="0.0" width="253" height="85.666666666666629"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="253" height="77.5"/>
                                                 <fontDescription key="fontDescription" name="YardSale" family="Yard Sale" pointSize="14"/>
                                                 <size key="titleShadowOffset" width="3" height="1"/>
                                                 <state key="normal" title="Forgot Password? Reset Here.">
@@ -351,7 +351,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Naz-II-N2X">
-                                                <rect key="frame" x="0.0" y="93.666666666666629" width="253" height="86.000000000000057"/>
+                                                <rect key="frame" x="0.0" y="85.5" width="253" height="77"/>
                                                 <fontDescription key="fontDescription" name="YardSale" family="Yard Sale" pointSize="14"/>
                                                 <size key="titleShadowOffset" width="3" height="1"/>
                                                 <state key="normal" title="Sign-Up">
@@ -365,7 +365,7 @@
                                         </subviews>
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gii-L3-CtP">
-                                        <rect key="frame" x="139.66666666666666" y="536.33333333333348" width="95" height="179.66666666666663"/>
+                                        <rect key="frame" x="124" y="484.5" width="95" height="162.5"/>
                                         <fontDescription key="fontDescription" name="YardSale" family="Yard Sale" pointSize="30"/>
                                         <size key="titleShadowOffset" width="3" height="1"/>
                                         <state key="normal" title="Login">
@@ -412,7 +412,7 @@
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="78" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="mY7-b8-YhS">
@@ -528,7 +528,7 @@
                         <viewControllerLayoutGuide type="bottom" id="jdO-dv-9yh"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Iu8-tG-792">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Yard Sale Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M5J-ot-Axh">
@@ -573,7 +573,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="collectionCell" id="0x9-rx-PVg" customClass="EventPhotoCollectionViewCell" customModule="Yard_Sale" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.66666666666666663" width="103" height="103"/>
+                                        <rect key="frame" x="0.0" y="0.5" width="103" height="103"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="103" height="103"/>
@@ -625,7 +625,7 @@
         <!--Navigation Controller-->
         <scene sceneID="CKZ-F8-sbs">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="blh-kB-2hn" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="NavController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="blh-kB-2hn" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="oe0-Qw-Rww">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -649,11 +649,11 @@
                         <viewControllerLayoutGuide type="bottom" id="HvB-UK-wvf"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="EoM-du-dbW">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HOf-vA-z1P">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" red="0.66666668650000005" green="0.66666668650000005" blue="0.66666668650000005" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal">
                                     <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -663,15 +663,15 @@
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="54" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="plW-6h-LdL">
-                                <rect key="frame" x="0.0" y="64" width="354" height="672"/>
+                                <rect key="frame" x="0.0" y="64" width="315" height="603"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cellMenu" id="9RG-V2-2OL">
-                                        <rect key="frame" x="0.0" y="22" width="354" height="54"/>
+                                        <rect key="frame" x="0.0" y="22" width="315" height="54"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9RG-V2-2OL" id="RgF-BZ-1rg">
-                                            <rect key="frame" x="0.0" y="0.0" width="354" height="53.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="315" height="53.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" tag="100" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="b2p-5r-XG2">
@@ -682,7 +682,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="101" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KJV-t8-wIi">
-                                                    <rect key="frame" x="54" y="16" width="292" height="21"/>
+                                                    <rect key="frame" x="54" y="16" width="253" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="OnD-hc-Whx"/>
                                                     </constraints>
@@ -732,7 +732,7 @@
         <image name="VintageWoodBackground" width="438" height="600"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="KWd-Vb-nPs"/>
+        <segue reference="igD-jS-SD2"/>
         <segue reference="i5n-Ig-cWB"/>
     </inferredMetricsTieBreakers>
 </document>
