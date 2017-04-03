@@ -26,8 +26,7 @@ class MainViewController: BaseViewController, MKMapViewDelegate, CLLocationManag
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        
-        self.title = "Yard Sale"
+
         eventTableView.backgroundColor = UIColor.clear
         mapView.delegate = self
         eventTableView.delegate = self
@@ -36,7 +35,8 @@ class MainViewController: BaseViewController, MKMapViewDelegate, CLLocationManag
         getCurrentLocation()
         addSlideMenuButton()
         
-        setupBackgroundView()
+        setupBackgroundTableView()
+        setupBackgroundNavView()
     }
 
     override func viewWillAppear(_ animated: Bool)
@@ -55,10 +55,20 @@ class MainViewController: BaseViewController, MKMapViewDelegate, CLLocationManag
         }
     }
     
-    func setupBackgroundView()
+    func setupBackgroundNavView()
+    {
+        self.title = "Yard Sale"
+        let nav = self.navigationController?.navigationBar
+        nav?.titleTextAttributes = [NSFontAttributeName: UIFont(name: "YardSale", size: 20)!]
+        let image = UIImage(named: "GrassBackground")
+        nav?.setBackgroundImage(image, for: .default)
+    }
+    
+    func setupBackgroundTableView()
     {
         eventTableView.tableFooterView = UIView()
         let blurredBackgroundView = BlurredBackgroundView(frame: .zero)
+        blurredBackgroundView.imageView.image = UIImage.vintageWoodBackground()
         eventTableView.backgroundView = blurredBackgroundView
         eventTableView.separatorEffect = UIVibrancyEffect(blurEffect: blurredBackgroundView.blurView.effect as! UIBlurEffect)
     }
@@ -172,7 +182,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource
                              headline: eventsArray[indexPath.row].title!,
                              address: "\(eventsArray[indexPath.row].addressDictionary!["locality"]!), \(eventsArray[indexPath.row].addressDictionary!["administrativeArea"]!)",
                              category: eventsArray[indexPath.row].description!,
-                             image: UIImage(named: "gorgeousimage")!
+                             image: UIImage(named: "GorgeousImage")!
                             )
         
         return cell

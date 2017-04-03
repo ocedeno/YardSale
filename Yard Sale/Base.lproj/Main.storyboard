@@ -82,7 +82,7 @@
         <!--Create Event VC-->
         <scene sceneID="wxS-mE-h8Y">
             <objects>
-                <viewController storyboardIdentifier="CreateEventVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="J55-xf-ArT" userLabel="Create Event VC" customClass="CreateEventViewController" customModule="Yard_Sale" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CreateEventVC" title="Create Event" useStoryboardIdentifierAsRestorationIdentifier="YES" id="J55-xf-ArT" userLabel="Create Event VC" customClass="CreateEventViewController" customModule="Yard_Sale" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="nVS-2a-6CB"/>
                         <viewControllerLayoutGuide type="bottom" id="kzP-7y-YeR"/>
@@ -91,143 +91,191 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ooM-00-BJy" userLabel="Current Address Button" customClass="SSRadioButton" customModule="Yard_Sale" customModuleProvider="target">
-                                <rect key="frame" x="16" y="84" width="178" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <state key="normal" title="Use Current Location?"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="circleColor">
-                                        <color key="value" red="0.17227077727483861" green="0.88870223445595853" blue="0.86801466518883375" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="circleRadius">
-                                        <integer key="value" value="10"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZtO-kp-v7M" userLabel="New Location Button" customClass="SSRadioButton" customModule="Yard_Sale" customModuleProvider="target">
-                                <rect key="frame" x="192" y="84" width="167" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <state key="normal" title="Select a New Location?"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="circleColor">
-                                        <color key="value" red="0.33429405089999997" green="0.84323388340000005" blue="0.91159653659999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="circleRadius">
-                                        <real key="value" value="10"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vXU-2X-0V4" userLabel="Select Location">
-                                <rect key="frame" x="220" y="110" width="110" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                                <state key="normal" title="Select Location"/>
-                                <connections>
-                                    <action selector="selectLocationAction" destination="J55-xf-ArT" eventType="touchUpInside" id="gyh-5u-RQc"/>
-                                </connections>
-                            </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Title/Header" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bde-Ss-6JJ">
-                                <rect key="frame" x="16" y="158" width="343" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Date" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mUb-xI-N9C">
-                                <rect key="frame" x="16" y="196" width="343" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <action selector="dateTextFieldEditing:" destination="J55-xf-ArT" eventType="editingDidBegin" id="ddZ-Pe-sBw"/>
-                                </connections>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Start Time of Event" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8M1-gT-m0G" userLabel="Start Time">
-                                <rect key="frame" x="16" y="234" width="168" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <action selector="startTimeTextFieldEditing:" destination="J55-xf-ArT" eventType="editingDidBegin" id="etf-hd-Bmx"/>
-                                </connections>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Stop Time of Event" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ysY-ne-hCG" userLabel="End Time">
-                                <rect key="frame" x="192" y="234" width="167" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <action selector="stopTimeTextFieldEditing:" destination="J55-xf-ArT" eventType="editingDidBegin" id="wC1-j1-qR3"/>
-                                </connections>
-                            </textField>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ggJ-V5-AOx">
-                                <rect key="frame" x="16" y="272" width="343" height="102"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Display your Event?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9ci-My-cHM">
-                                <rect key="frame" x="16" y="382" width="150" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="5Ka-NJ-9BL">
-                                <rect key="frame" x="191" y="382" width="51" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </switch>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nSG-ED-aLx">
-                                <rect key="frame" x="103" y="434" width="167" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Add Images to your Sale"/>
-                                <connections>
-                                    <action selector="choosePhoto:" destination="J55-xf-ArT" eventType="touchUpInside" id="Pig-wp-4od"/>
-                                </connections>
-                            </button>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceHorizontal="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="G0c-L7-Fu0">
-                                <rect key="frame" x="16" y="472" width="343" height="104"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="9h0-6Z-xJ9">
-                                    <size key="itemSize" width="103" height="103"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                </collectionViewFlowLayout>
-                                <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="collectionCell" id="fHv-Yx-xYW" customClass="EventPhotoCollectionViewCell" customModule="Yard_Sale" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.5" width="103" height="103"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="103" height="103"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bX9-zV-RsN">
-                                                    <rect key="frame" x="0.0" y="0.0" width="103" height="103"/>
-                                                </imageView>
-                                            </subviews>
-                                        </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="7An-J3-Wlr">
+                                <rect key="frame" x="8" y="84" width="359" height="575"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Ipw-6W-6VH">
+                                        <rect key="frame" x="8" y="0.0" width="343.5" height="275"/>
+                                        <subviews>
+                                            <stackView opaque="NO" multipleTouchEnabled="YES" contentMode="scaleAspectFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="xow-RO-M92" userLabel="LocationButtonStackView">
+                                                <rect key="frame" x="0.0" y="0.0" width="343.5" height="51"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ooM-00-BJy" userLabel="Current Address Button" customClass="SSRadioButton" customModule="Yard_Sale" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="167.5" height="51"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                        <state key="normal" title="Current Location?"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="circleColor">
+                                                                <color key="value" red="0.17227077727483861" green="0.88870223445595853" blue="0.86801466518883375" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="circleRadius">
+                                                                <integer key="value" value="10"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </button>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Yei-tY-rPV" userLabel="SelectLocationStackView">
+                                                        <rect key="frame" x="175.5" y="0.0" width="168" height="51"/>
+                                                        <subviews>
+                                                            <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZtO-kp-v7M" userLabel="New Location Button" customClass="SSRadioButton" customModule="Yard_Sale" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="168" height="27"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                                <state key="normal" title="New Location?"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="color" keyPath="circleColor">
+                                                                        <color key="value" red="0.33429405089999997" green="0.84323388340000005" blue="0.91159653659999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="circleRadius">
+                                                                        <real key="value" value="10"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vXU-2X-0V4" userLabel="Select Location">
+                                                                <rect key="frame" x="0.0" y="27" width="168" height="24"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                                <state key="normal" title="Select Location"/>
+                                                                <connections>
+                                                                    <action selector="selectLocationAction" destination="J55-xf-ArT" eventType="touchUpInside" id="gyh-5u-RQc"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                    </stackView>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="7ve-qy-XvB" userLabel="TextStackView">
+                                                <rect key="frame" x="0.0" y="59" width="343.5" height="216"/>
+                                                <subviews>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="TeX-Ex-BXS" userLabel="TextfieldStackView">
+                                                        <rect key="frame" x="0.0" y="0.0" width="343.5" height="106"/>
+                                                        <subviews>
+                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Title/Header" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bde-Ss-6JJ">
+                                                                <rect key="frame" x="0.0" y="0.0" width="343.5" height="30"/>
+                                                                <nil key="textColor"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
+                                                            </textField>
+                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Date" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mUb-xI-N9C">
+                                                                <rect key="frame" x="0.0" y="38" width="343.5" height="30"/>
+                                                                <nil key="textColor"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                <textInputTraits key="textInputTraits"/>
+                                                                <connections>
+                                                                    <action selector="dateTextFieldEditing:" destination="J55-xf-ArT" eventType="editingDidBegin" id="ddZ-Pe-sBw"/>
+                                                                </connections>
+                                                            </textField>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="CFW-Yp-Ujp" userLabel="TimeStackView">
+                                                                <rect key="frame" x="0.0" y="76" width="343.5" height="30"/>
+                                                                <subviews>
+                                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Start Time of Event" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8M1-gT-m0G" userLabel="Start Time">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="191.5" height="30"/>
+                                                                        <nil key="textColor"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                        <textInputTraits key="textInputTraits"/>
+                                                                        <connections>
+                                                                            <action selector="startTimeTextFieldEditing:" destination="J55-xf-ArT" eventType="editingDidBegin" id="etf-hd-Bmx"/>
+                                                                        </connections>
+                                                                    </textField>
+                                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Stop Time of Event" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ysY-ne-hCG" userLabel="End Time">
+                                                                        <rect key="frame" x="199.5" y="0.0" width="144" height="30"/>
+                                                                        <nil key="textColor"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                        <textInputTraits key="textInputTraits"/>
+                                                                        <connections>
+                                                                            <action selector="stopTimeTextFieldEditing:" destination="J55-xf-ArT" eventType="editingDidBegin" id="wC1-j1-qR3"/>
+                                                                        </connections>
+                                                                    </textField>
+                                                                </subviews>
+                                                            </stackView>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ggJ-V5-AOx">
+                                                        <rect key="frame" x="0.0" y="114" width="343.5" height="102"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                    </textView>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
                                         <constraints>
-                                            <constraint firstItem="bX9-zV-RsN" firstAttribute="top" secondItem="fHv-Yx-xYW" secondAttribute="top" id="5vf-7o-pGH"/>
-                                            <constraint firstItem="bX9-zV-RsN" firstAttribute="leading" secondItem="fHv-Yx-xYW" secondAttribute="leading" id="Bhe-aT-2VQ"/>
-                                            <constraint firstAttribute="trailing" secondItem="bX9-zV-RsN" secondAttribute="trailing" id="vje-uJ-YgL"/>
-                                            <constraint firstAttribute="bottom" secondItem="bX9-zV-RsN" secondAttribute="bottom" id="ywv-FK-KpS"/>
+                                            <constraint firstItem="xow-RO-M92" firstAttribute="top" secondItem="Ipw-6W-6VH" secondAttribute="top" id="3xq-j1-I8p"/>
+                                            <constraint firstAttribute="trailing" secondItem="xow-RO-M92" secondAttribute="trailing" id="PfL-1v-si2"/>
+                                            <constraint firstItem="xow-RO-M92" firstAttribute="leading" secondItem="Ipw-6W-6VH" secondAttribute="leading" id="dst-Mp-IOY"/>
                                         </constraints>
-                                        <size key="customSize" width="103" height="103"/>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="9o6-5k-caZ">
+                                        <rect key="frame" x="76.5" y="283" width="206.5" height="146"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Display your Event?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9ci-My-cHM">
+                                                <rect key="frame" x="0.0" y="63" width="149.5" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="5Ka-NJ-9BL">
+                                                <rect key="frame" x="157.5" y="57.5" width="51" height="31"/>
+                                            </switch>
+                                        </subviews>
+                                    </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nSG-ED-aLx">
+                                        <rect key="frame" x="96" y="437" width="167" height="30"/>
+                                        <state key="normal" title="Add Images to your Sale"/>
                                         <connections>
-                                            <outlet property="imageView" destination="bX9-zV-RsN" id="6Vl-dQ-gNa"/>
+                                            <action selector="choosePhoto:" destination="J55-xf-ArT" eventType="touchUpInside" id="Pig-wp-4od"/>
                                         </connections>
-                                    </collectionViewCell>
-                                </cells>
-                            </collectionView>
+                                    </button>
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="G0c-L7-Fu0">
+                                        <rect key="frame" x="0.0" y="475" width="359" height="100"/>
+                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.48697024828767121" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="100" id="yYA-7F-5hb"/>
+                                        </constraints>
+                                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="9h0-6Z-xJ9">
+                                            <size key="itemSize" width="103" height="103"/>
+                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        </collectionViewFlowLayout>
+                                        <cells>
+                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="collectionCell" id="fHv-Yx-xYW" customClass="EventPhotoCollectionViewCell" customModule="Yard_Sale" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="-1.5" width="103" height="103"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                                    <rect key="frame" x="0.0" y="0.0" width="103" height="103"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bX9-zV-RsN">
+                                                            <rect key="frame" x="0.0" y="0.0" width="103" height="103"/>
+                                                        </imageView>
+                                                    </subviews>
+                                                </view>
+                                                <constraints>
+                                                    <constraint firstItem="bX9-zV-RsN" firstAttribute="top" secondItem="fHv-Yx-xYW" secondAttribute="top" id="5vf-7o-pGH"/>
+                                                    <constraint firstItem="bX9-zV-RsN" firstAttribute="leading" secondItem="fHv-Yx-xYW" secondAttribute="leading" id="Bhe-aT-2VQ"/>
+                                                    <constraint firstAttribute="trailing" secondItem="bX9-zV-RsN" secondAttribute="trailing" id="vje-uJ-YgL"/>
+                                                    <constraint firstAttribute="bottom" secondItem="bX9-zV-RsN" secondAttribute="bottom" id="ywv-FK-KpS"/>
+                                                </constraints>
+                                                <size key="customSize" width="103" height="103"/>
+                                                <connections>
+                                                    <outlet property="imageView" destination="bX9-zV-RsN" id="6Vl-dQ-gNa"/>
+                                                </connections>
+                                            </collectionViewCell>
+                                        </cells>
+                                    </collectionView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="G0c-L7-Fu0" firstAttribute="bottom" secondItem="7An-J3-Wlr" secondAttribute="bottomMargin" id="4tr-DM-uTE"/>
+                                    <constraint firstItem="G0c-L7-Fu0" firstAttribute="trailing" secondItem="7An-J3-Wlr" secondAttribute="trailingMargin" id="EuK-j6-dOl"/>
+                                    <constraint firstItem="G0c-L7-Fu0" firstAttribute="leading" secondItem="7An-J3-Wlr" secondAttribute="leadingMargin" id="oDZ-Xe-PUD"/>
+                                </constraints>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" red="0.98160523929999999" green="1" blue="0.30922617029999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="kzP-7y-YeR" firstAttribute="top" secondItem="7An-J3-Wlr" secondAttribute="bottom" constant="8" id="FgK-ZO-fMc"/>
+                            <constraint firstAttribute="trailing" secondItem="7An-J3-Wlr" secondAttribute="trailing" constant="8" id="fqd-6n-1VO"/>
+                            <constraint firstItem="7An-J3-Wlr" firstAttribute="leading" secondItem="kz6-Kf-PQ7" secondAttribute="leading" constant="8" id="iUT-B9-A7u"/>
+                            <constraint firstItem="7An-J3-Wlr" firstAttribute="top" secondItem="nVS-2a-6CB" secondAttribute="bottom" constant="20" id="pKQ-wF-Uaz"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="dateTextField" destination="mUb-xI-N9C" id="q6a-FW-MZ4"/>
@@ -302,14 +350,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="VintageWoodBackground" translatesAutoresizingMaskIntoConstraints="NO" id="VoR-1n-XGT">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="GrassBackground" translatesAutoresizingMaskIntoConstraints="NO" id="VoR-1n-XGT">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Ihw-YJ-P56">
                                 <rect key="frame" x="16" y="20" width="343" height="647"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalCompressionResistancePriority="749" text="Yard Sale" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FT5-ds-fwB">
-                                        <rect key="frame" x="64.5" y="0.0" width="214.5" height="162.5"/>
+                                        <rect key="frame" x="29" y="0.0" width="285" height="162.5"/>
                                         <fontDescription key="fontDescription" name="YardSale" family="Yard Sale" pointSize="50"/>
                                         <color key="textColor" red="0.62030875682830811" green="0.83040165901184082" blue="0.9226345419883728" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -336,10 +384,10 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="8iJ-a1-maA">
-                                        <rect key="frame" x="75.5" y="323" width="192" height="162.5"/>
+                                        <rect key="frame" x="45" y="323" width="253" height="162.5"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dj6-sx-SrL">
-                                                <rect key="frame" x="0.0" y="0.0" width="192" height="77.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="253" height="77.5"/>
                                                 <fontDescription key="fontDescription" name="YardSale" family="Yard Sale" pointSize="14"/>
                                                 <size key="titleShadowOffset" width="3" height="1"/>
                                                 <state key="normal" title="Forgot Password? Reset Here.">
@@ -351,7 +399,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Naz-II-N2X">
-                                                <rect key="frame" x="0.0" y="85.5" width="192" height="77"/>
+                                                <rect key="frame" x="0.0" y="85.5" width="253" height="77"/>
                                                 <fontDescription key="fontDescription" name="YardSale" family="Yard Sale" pointSize="14"/>
                                                 <size key="titleShadowOffset" width="3" height="1"/>
                                                 <state key="normal" title="Sign-Up">
@@ -365,7 +413,7 @@
                                         </subviews>
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gii-L3-CtP">
-                                        <rect key="frame" x="134" y="484.5" width="75" height="162.5"/>
+                                        <rect key="frame" x="124" y="484.5" width="95" height="162.5"/>
                                         <fontDescription key="fontDescription" name="YardSale" family="Yard Sale" pointSize="30"/>
                                         <size key="titleShadowOffset" width="3" height="1"/>
                                         <state key="normal" title="Login">
@@ -567,76 +615,97 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Yard Sale Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M5J-ot-Axh">
-                                <rect key="frame" x="16" y="72" width="343" height="62"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="e1H-DY-75e">
-                                <rect key="frame" x="67" y="142" width="240" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </mapView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="From 8:00 AM to 3:00 PM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sM1-7U-3Tb">
-                                <rect key="frame" x="67" y="278" width="240" height="33"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="On Mar 30, 2017" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e62-oE-XqS">
-                                <rect key="frame" x="67" y="319" width="240" height="33"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Description" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="qCJ-LE-oBG">
-                                <rect key="frame" x="67" y="360" width="240" height="99"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceHorizontal="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="z1X-30-Bw3">
-                                <rect key="frame" x="16" y="467" width="343" height="104"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="uQw-vZ-cd3">
-                                    <size key="itemSize" width="103" height="103"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                </collectionViewFlowLayout>
-                                <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="collectionCell" id="0x9-rx-PVg" customClass="EventPhotoCollectionViewCell" customModule="Yard_Sale" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.5" width="103" height="103"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="103" height="103"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aBB-d4-cAM">
-                                                    <rect key="frame" x="0.0" y="0.0" width="103" height="103"/>
-                                                </imageView>
-                                            </subviews>
-                                        </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="DJf-mn-BcQ">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalCompressionResistancePriority="751" text="Yard Sale Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M5J-ot-Axh">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="89"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="751" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="e1H-DY-75e">
+                                        <rect key="frame" x="0.0" y="97" width="375" height="200"/>
                                         <constraints>
-                                            <constraint firstItem="aBB-d4-cAM" firstAttribute="top" secondItem="0x9-rx-PVg" secondAttribute="top" id="Ec1-AK-oCN"/>
-                                            <constraint firstItem="aBB-d4-cAM" firstAttribute="leading" secondItem="0x9-rx-PVg" secondAttribute="leading" id="WMh-47-3KD"/>
-                                            <constraint firstAttribute="trailing" secondItem="aBB-d4-cAM" secondAttribute="trailing" id="hpL-42-zf7"/>
-                                            <constraint firstAttribute="bottom" secondItem="aBB-d4-cAM" secondAttribute="bottom" id="vIY-bJ-xOW"/>
+                                            <constraint firstAttribute="height" constant="200" id="JxZ-A7-LTV"/>
                                         </constraints>
-                                        <size key="customSize" width="103" height="103"/>
-                                        <connections>
-                                            <outlet property="imageView" destination="aBB-d4-cAM" id="6Ao-eP-TYE"/>
-                                        </connections>
-                                    </collectionViewCell>
-                                </cells>
-                            </collectionView>
+                                    </mapView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="JN7-dr-CTE">
+                                        <rect key="frame" x="0.0" y="305" width="375" height="190"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="799-wc-THQ">
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="On Mar 30, 2017" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e62-oE-XqS">
+                                                        <rect key="frame" x="124" y="0.0" width="127" height="20.5"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="From 8:00 AM to 3:00 PM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sM1-7U-3Tb">
+                                                        <rect key="frame" x="88.5" y="28.5" width="198.5" height="20.5"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="251" text="Description" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="qCJ-LE-oBG">
+                                                <rect key="frame" x="0.0" y="57" width="375" height="133"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                            </textView>
+                                        </subviews>
+                                    </stackView>
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="751" alwaysBounceHorizontal="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="z1X-30-Bw3">
+                                        <rect key="frame" x="0.0" y="503" width="375" height="100"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="100" id="7ZV-O8-W7C"/>
+                                        </constraints>
+                                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="uQw-vZ-cd3">
+                                            <size key="itemSize" width="103" height="103"/>
+                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        </collectionViewFlowLayout>
+                                        <cells>
+                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="collectionCell" id="0x9-rx-PVg" customClass="EventPhotoCollectionViewCell" customModule="Yard_Sale" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="-1.5" width="103" height="103"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                                    <rect key="frame" x="0.0" y="0.0" width="103" height="103"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aBB-d4-cAM">
+                                                            <rect key="frame" x="0.0" y="0.0" width="103" height="103"/>
+                                                        </imageView>
+                                                    </subviews>
+                                                </view>
+                                                <constraints>
+                                                    <constraint firstItem="aBB-d4-cAM" firstAttribute="top" secondItem="0x9-rx-PVg" secondAttribute="top" id="Ec1-AK-oCN"/>
+                                                    <constraint firstItem="aBB-d4-cAM" firstAttribute="leading" secondItem="0x9-rx-PVg" secondAttribute="leading" id="WMh-47-3KD"/>
+                                                    <constraint firstAttribute="trailing" secondItem="aBB-d4-cAM" secondAttribute="trailing" id="hpL-42-zf7"/>
+                                                    <constraint firstAttribute="bottom" secondItem="aBB-d4-cAM" secondAttribute="bottom" id="vIY-bJ-xOW"/>
+                                                </constraints>
+                                                <size key="customSize" width="103" height="103"/>
+                                                <connections>
+                                                    <outlet property="imageView" destination="aBB-d4-cAM" id="6Ao-eP-TYE"/>
+                                                </connections>
+                                            </collectionViewCell>
+                                        </cells>
+                                    </collectionView>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" red="0.98160523929999999" green="1" blue="0.30922617029999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="DJf-mn-BcQ" secondAttribute="trailing" id="I87-AL-BEG"/>
+                            <constraint firstItem="DJf-mn-BcQ" firstAttribute="top" secondItem="rTy-wt-8k9" secondAttribute="bottom" id="djl-5a-xCb"/>
+                            <constraint firstItem="jdO-dv-9yh" firstAttribute="top" secondItem="DJf-mn-BcQ" secondAttribute="bottom" id="pff-Kb-K82"/>
+                            <constraint firstItem="DJf-mn-BcQ" firstAttribute="leading" secondItem="Iu8-tG-792" secondAttribute="leading" id="zG5-j5-uW8"/>
+                        </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Yard Sale Details" id="sRO-k6-lQ6">
+                    <navigationItem key="navigationItem" title="Sale Details" id="sRO-k6-lQ6">
                         <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="QzZ-0t-Xb9">
                             <connections>
                                 <action selector="dismissViewController:" destination="No7-g4-Y6K" id="TVY-Nb-mqN"/>
@@ -663,7 +732,7 @@
             <objects>
                 <navigationController storyboardIdentifier="NavController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="blh-kB-2hn" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="oe0-Qw-Rww">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="oe0-Qw-Rww">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -722,8 +791,11 @@
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="OnD-hc-Whx"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" name="YardSale" family="Yard Sale" pointSize="17"/>
+                                                    <color key="textColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
+                                                    <color key="shadowColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <size key="shadowOffset" width="1" height="1"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
@@ -765,10 +837,10 @@
         </scene>
     </scenes>
     <resources>
-        <image name="VintageWoodBackground" width="438" height="600"/>
+        <image name="GrassBackground" width="2560" height="1600"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="igD-jS-SD2"/>
         <segue reference="i5n-Ig-cWB"/>
+        <segue reference="KWd-Vb-nPs"/>
     </inferredMetricsTieBreakers>
 </document>
