@@ -147,6 +147,6 @@ class BlurredBackgroundView: UIView {
 
 extension UIImage {
     class func gorgeousImage() -> UIImage {
-        return UIImage(named: "YardSaleSign")!
+        return UIImage(named: "VintageWoodBackground")!
     }
 }

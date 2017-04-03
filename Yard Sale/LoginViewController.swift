@@ -13,6 +13,7 @@ import FirebaseAuth
 class LoginViewController: UIViewController
 {
 
+    @IBOutlet weak var backgroundImage: UIImageView!
     @IBOutlet weak var userEmailTextfield: UITextField!
     @IBOutlet weak var userPasswordTextfield: UITextField!
     
@@ -79,8 +80,8 @@ class LoginViewController: UIViewController
             textPassword.placeholder = "Enter your password"
         }
         
-        alert.addAction(saveAction)
         alert.addAction(cancelAction)
+        alert.addAction(saveAction)
         
         present(alert, animated: true, completion: nil)
     }
@@ -96,6 +97,24 @@ class LoginViewController: UIViewController
                 return
             }
         })
+    }
+    @IBAction func forgetPasswordAction()
+    {
+        let alert = UIAlertController(title: "Request New Password?", message: "If you forgot your password and would like to request a new one, please provide your email address below and instructions will be emailed to you.", preferredStyle: .alert)
+        let cancel = UIAlertAction(title: "Cancel", style: .default)
+        let send = UIAlertAction(title: "Send Request", style: .default) { (alert) in
+            
+            
+        }
+        alert.addTextField { (email) in
+            email.placeholder = "Enter your email."
+            email.keyboardType = .emailAddress
+        }
+        
+        alert.addAction(cancel)
+        alert.addAction(send)
+        
+        present(alert, animated: true)
     }
 }
 
