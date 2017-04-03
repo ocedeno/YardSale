@@ -27,6 +27,7 @@
 		06EC2E091E8936B100F83D6C /* SSRadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06EC2E071E8936B100F83D6C /* SSRadioButton.swift */; };
 		06EC2E0A1E8936B100F83D6C /* SSRadioButtonsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06EC2E081E8936B100F83D6C /* SSRadioButtonsController.swift */; };
 		06EC2E0C1E89374300F83D6C /* CreateEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06EC2E0B1E89374300F83D6C /* CreateEventViewController.swift */; };
+		06F1AF421E92D922000F55B6 /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06F1AF411E92D922000F55B6 /* UserProfileViewController.swift */; };
 		06F6B7161E859D66009277DE /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06F6B7151E859D66009277DE /* EventTableViewCell.swift */; };
 		06FA29AD1E8EA6B000A5DD28 /* EventPhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06FA29AC1E8EA6B000A5DD28 /* EventPhotoCollectionViewCell.swift */; };
 		06FA29AF1E8EAB7600A5DD28 /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06FA29AE1E8EAB7600A5DD28 /* ImageViewController.swift */; };
@@ -96,6 +97,7 @@
 		06EC2E071E8936B100F83D6C /* SSRadioButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSRadioButton.swift; sourceTree = "<group>"; };
 		06EC2E081E8936B100F83D6C /* SSRadioButtonsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSRadioButtonsController.swift; sourceTree = "<group>"; };
 		06EC2E0B1E89374300F83D6C /* CreateEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventViewController.swift; sourceTree = "<group>"; };
+		06F1AF411E92D922000F55B6 /* UserProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
 		06F6B7151E859D66009277DE /* EventTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTableViewCell.swift; sourceTree = "<group>"; };
 		06FA29AC1E8EA6B000A5DD28 /* EventPhotoCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventPhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		06FA29AE1E8EAB7600A5DD28 /* ImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
@@ -229,6 +231,7 @@
 				06FDEEB91E8C42AB006D0567 /* AddressSelectionViewController.swift */,
 				06FDEEB71E8C4143006D0567 /* DetailViewController.swift */,
 				06FA29AE1E8EAB7600A5DD28 /* ImageViewController.swift */,
+				06F1AF411E92D922000F55B6 /* UserProfileViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -585,6 +588,7 @@
 			files = (
 				06F6B7161E859D66009277DE /* EventTableViewCell.swift in Sources */,
 				065DBC261E8431B8002FE5E6 /* Utility.swift in Sources */,
+				06F1AF421E92D922000F55B6 /* UserProfileViewController.swift in Sources */,
 				065EA8D01E815C3400CA09F4 /* LoginViewController.swift in Sources */,
 				065EA8D41E8412F900CA09F4 /* User.swift in Sources */,
 				06E86F4C1E855D8D009E3D75 /* MenuViewController.swift in Sources */,
