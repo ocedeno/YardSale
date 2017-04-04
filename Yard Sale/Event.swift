@@ -9,7 +9,7 @@
 import Foundation
 import Firebase
 
-struct Event
+class Event
 {
     static let titleKey = "title"
     static let date = "date"
@@ -23,6 +23,7 @@ struct Event
     static let locLon = "locationLongitude"
     static let addressDictionary = "address"
     static let imageTitleDictionary = "imageTitleDictionary"
+    static let imageKey = "imagePathKey"
     
     var distance = String()
     
@@ -37,9 +38,10 @@ struct Event
     let locLon: Double?
     let addressDictionary: [String:AnyObject]?
     let imageTitleDictionary: [String:String]?
+    let imageKey: String?
     let ref : FIRDatabaseReference?
     
-    init(withTitle title: String, onDate date: String, startTime:String, stopTime: String, withDescription description: String, userID uid: String, activeEvent active: Bool, locationLatitude: Double, locationLongitude: Double, addDict: [String:AnyObject], imageTitleDict: [String: String])
+    init(withTitle title: String, onDate date: String, startTime:String, stopTime: String, withDescription description: String, userID uid: String, activeEvent active: Bool, locationLatitude: Double, locationLongitude: Double, addDict: [String:AnyObject], imageTitleDict: [String: String], imagePathKey: String)
     {
         self.title = title
         self.date = date
@@ -53,6 +55,7 @@ struct Event
         self.locLon = locationLongitude
         self.addressDictionary = addDict
         self.imageTitleDictionary = imageTitleDict
+        self.imageKey = imagePathKey
     }
     
     init(snapshot: FIRDataSnapshot)
@@ -70,6 +73,7 @@ struct Event
         self.locLon = snapshotValue[Event.locLon] as? Double
         self.addressDictionary = snapshotValue[Event.addressDictionary] as? [String:AnyObject]
         self.imageTitleDictionary = snapshotValue[Event.imageTitleDictionary] as? [String:String]
+        self.imageKey = snapshotValue[Event.imageKey] as? String
     }
     
     func toDictionary() -> Any {
@@ -84,7 +88,8 @@ struct Event
             Event.locLat : self.locLat!,
             Event.locLon : self.locLon!,
             Event.addressDictionary : self.addressDictionary!,
-            Event.imageTitleDictionary : self.imageTitleDictionary!
+            Event.imageTitleDictionary : self.imageTitleDictionary!,
+            Event.imageKey : self.imageKey!
         ]
     }
 }

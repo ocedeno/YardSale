@@ -46,7 +46,6 @@ class MainViewController: BaseViewController, MKMapViewDelegate, CLLocationManag
         
         eventTableView.backgroundColor = UIColor.clear
         getCurrentLocation()
-        eventTableView.reloadData()
         reloadEventsToMapView()
         FIRAuth.auth()?.addStateDidChangeListener { auth, user in
             if user != nil {
@@ -92,11 +91,10 @@ class MainViewController: BaseViewController, MKMapViewDelegate, CLLocationManag
                 return
             }
             DispatchQueue.main.async
-            {
-                print("\n***updated Location***")
-                self.setMapRegion(lon: lon, lat: lat)
-                self.populateEventsArray()
-                self.eventTableView.reloadData()
+                {
+                    print("\n***updated Location***")
+                    self.setMapRegion(lon: lon, lat: lat)
+                    self.populateEventsArray()
             }
         }
     }
@@ -172,45 +170,54 @@ class MainViewController: BaseViewController, MKMapViewDelegate, CLLocationManag
 
 extension MainViewController: UITableViewDelegate, UITableViewDataSource
 {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    {
         return eventsArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
+        appendDistanceToEventsArray(location: indexPath.row)
         let cell = tableView.dequeueReusableCell(withIdentifier: "eventCell")! as! EventTableViewCell
         cell.backgroundColor = UIColor.clear
-        appendDistanceToEventsArray(location: indexPath.row)
-        DispatchQueue.main.async {
-            cell.updateEventCell(withDate: self.eventsArray[indexPath.row].date!,
-                                 distance: "\(self.eventsArray[indexPath.row].distance) mi.",
-                headline: self.eventsArray[indexPath.row].title!,
-                address: "\(self.eventsArray[indexPath.row].addressDictionary!["locality"]!), \(self.eventsArray[indexPath.row].addressDictionary!["administrativeArea"]!)",
-                category: self.eventsArray[indexPath.row].description!,
-                image: UIImage(named: "GorgeousImage")!
-            )
-        }
-        
+        cell.updateEventCell(withDate: self.eventsArray[indexPath.row].date!,
+                             distance: "\(self.eventsArray[indexPath.row].distance) mi.",
+            headline: self.eventsArray[indexPath.row].title!,
+            address: "\(self.eventsArray[indexPath.row].addressDictionary!["locality"]!), \(self.eventsArray[indexPath.row].addressDictionary!["administrativeArea"]!)",
+            category: self.eventsArray[indexPath.row].description!,
+            image: UIImage(named: "GorgeousImage")!
+        )
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
-        let selectedEvent = eventsArray[indexPath.row]
-        selectedEvent.
-        performSegue(withIdentifier: "segueToDetailView", sender: idArray?[indexPath.row])
+        performSegue(withIdentifier: "segueToDetailView", sender: eventsArray[indexPath.row].imageKey!)
     }
     
     func appendDistanceToEventsArray(location: Int)
     {
-        let eventLat = eventsArray[location].addressDictionary!["latitude"]! as! String
-        let eventLon = eventsArray[location].addressDictionary!["longitude"]! as! String
-        let doubleLat = Double(eventLat)
-        let doubleLon = Double(eventLon)
-        locationTwo = CLLocation(latitude: doubleLat!, longitude: doubleLon!)
-        let distance = getDistance(locationTwo: locationTwo!)
-        eventsArray[location].distance = distance
-        eventsArray.sort { Double($0.distance) ?? 0.00 < Double($1.distance) ?? 0.00}
-        print(location)
+//        let eventLat = eventsArray[location].addressDictionary!["latitude"]! as! String
+//        let eventLon = eventsArray[location].addressDictionary!["longitude"]! as! String
+//        let doubleLat = Double(eventLat)
+//        let doubleLon = Double(eventLon)
+//        locationTwo = CLLocation(latitude: doubleLat!, longitude: doubleLon!)
+//        let distance = getDistance(locationTwo: locationTwo!)
+//        eventsArray[location].distance = distance
+//        eventsArray.sort { Double($0.distance)! < Double($1.distance)!}
+        for event in eventsArray
+        {
+            let eventLat = event.addressDictionary!["latitude"]! as! String
+            let eventLon = event.addressDictionary!["longitude"]! as! String
+            let doubleLat = Double(eventLat)
+            let doubleLon = Double(eventLon)
+            locationTwo = CLLocation(latitude: doubleLat!, longitude: doubleLon!)
+            let newDistance = getDistance(locationTwo: locationTwo!)
+            event.distance = newDistance
+        }
+        
+        eventsArray.sort { Double($0.distance)! < Double($1.distance)!}
     }
+
+    
 }

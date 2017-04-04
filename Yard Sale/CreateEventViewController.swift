@@ -245,7 +245,8 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
                               locationLatitude: dic["locLat"] as! Double,
                               locationLongitude: dic["locLon"] as! Double,
                               addDict: dic["addressDictionary"] as! [String:AnyObject],
-                              imageTitleDict: dic["imageTitleDictionary"] as! [String:String]
+                              imageTitleDict: dic["imageTitleDictionary"] as! [String:String],
+                              imagePathKey: dic["imagePathKey"] as! String
             )
             
             taskFirebasePath?.setValue(event.toDictionary())
@@ -311,8 +312,10 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
                 "locLat": locLat as AnyObject,
                 "locLon" : locLon as AnyObject,
                 "addressDictionary" : addDictionary! as [String : AnyObject],
-                "imageTitleDictionary" : createImageTitleDictionary()!
-                ] as [String : Any]
+                "imageTitleDictionary" : createImageTitleDictionary()!,
+                "imagePathKey" : taskFirebasePath!.key
+            ] as [String : Any]
+        
         
         return dic as [String : AnyObject]
     }
