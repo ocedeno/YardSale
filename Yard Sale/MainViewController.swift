@@ -27,7 +27,6 @@ class MainViewController: BaseViewController, MKMapViewDelegate, CLLocationManag
     {
         super.viewDidLoad()
 
-        eventTableView.backgroundColor = UIColor.clear
         mapView.delegate = self
         eventTableView.delegate = self
         eventTableView.dataSource = self
@@ -37,12 +36,15 @@ class MainViewController: BaseViewController, MKMapViewDelegate, CLLocationManag
         
         setupBackgroundTableView()
         setupBackgroundNavView()
+        
+        populateEventsArray()
     }
 
     override func viewWillAppear(_ animated: Bool)
     {
         super.viewWillAppear(true)
         
+        eventTableView.backgroundColor = UIColor.clear
         eventTableView.reloadData()
         reloadEventsToMapView()
         FIRAuth.auth()?.addStateDidChangeListener { auth, user in
@@ -165,25 +167,18 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
-
-        let eventLat = eventsArray[indexPath.row].addressDictionary!["latitude"]! as! String
-        let eventLon = eventsArray[indexPath.row].addressDictionary!["longitude"]! as! String
-        let doubleLat = Double(eventLat)
-        let doubleLon = Double(eventLon)
-        locationTwo = CLLocation(latitude: doubleLat!, longitude: doubleLon!)
-        let distance = getDistance(locationTwo: locationTwo!)
-        eventsArray[indexPath.row].distance = distance
-        eventsArray.sort { Double($0.distance) ?? 0.00 < Double($1.distance) ?? 0.00}
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: "eventCell")! as! EventTableViewCell
         cell.backgroundColor = UIColor.clear
-        cell.updateEventCell(withDate: eventsArray[indexPath.row].date!,
-                             distance: "\(eventsArray[indexPath.row].distance) mi.",
-                             headline: eventsArray[indexPath.row].title!,
-                             address: "\(eventsArray[indexPath.row].addressDictionary!["locality"]!), \(eventsArray[indexPath.row].addressDictionary!["administrativeArea"]!)",
-                             category: eventsArray[indexPath.row].description!,
-                             image: UIImage(named: "GorgeousImage")!
-                            )
+        appendDistanceToEventsArray(location: indexPath.row)
+        DispatchQueue.main.async {
+            cell.updateEventCell(withDate: self.eventsArray[indexPath.row].date!,
+                                 distance: "\(self.eventsArray[indexPath.row].distance) mi.",
+                headline: self.eventsArray[indexPath.row].title!,
+                address: "\(self.eventsArray[indexPath.row].addressDictionary!["locality"]!), \(self.eventsArray[indexPath.row].addressDictionary!["administrativeArea"]!)",
+                category: self.eventsArray[indexPath.row].description!,
+                image: UIImage(named: "GorgeousImage")!
+            )
+        }
         
         return cell
     }
@@ -191,6 +186,18 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
         performSegue(withIdentifier: "segueToDetailView", sender: idArray?[indexPath.row])
+    }
+    
+    func appendDistanceToEventsArray(location: Int)
+    {
+        let eventLat = eventsArray[location].addressDictionary!["latitude"]! as! String
+        let eventLon = eventsArray[location].addressDictionary!["longitude"]! as! String
+        let doubleLat = Double(eventLat)
+        let doubleLon = Double(eventLon)
+        locationTwo = CLLocation(latitude: doubleLat!, longitude: doubleLon!)
+        let distance = getDistance(locationTwo: locationTwo!)
+        eventsArray[location].distance = distance
+        eventsArray.sort { Double($0.distance) ?? 0.00 < Double($1.distance) ?? 0.00}
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)

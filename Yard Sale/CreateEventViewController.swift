@@ -84,12 +84,19 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
         }
     }
     
-    func setTextFieldDelegate()
+    internal func setTextFieldDelegate()
     {
         dateTextField.delegate = self
         startTimeField.delegate = self
         stopTimeField.delegate = self
         descriptionText.delegate = self
+    }
+    
+    internal func updateTextView()
+    {
+        let placeholderText = "Please provide a description of your event here..."
+        descriptionText.text = placeholderText
+        descriptionText.textColor = UIColor(hex: "BBBAC2")
     }
     
     internal func didSelectButton(_ aButton: UIButton?)
@@ -111,11 +118,13 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
         }
     }
     
-    internal func updateTextView()
+    func dismissPicker()
     {
-        let placeholderText = "Please provide a description of your event here..."
-        descriptionText.text = placeholderText
-        descriptionText.textColor = UIColor(hex: "BBBAC2")
+        startTimeField.endEditing(true)
+        stopTimeField.endEditing(true)
+        dateTextField.endEditing(true)
+        titleTextField.endEditing(true)
+        descriptionText.endEditing(true)
     }
     
     internal func startLocationUpdater()
@@ -169,6 +178,14 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
         datePickerView.addTarget(self, action: #selector(datePickerValueChanged), for: .valueChanged)
     }
     
+    func datePickerValueChanged(sender: UIDatePicker)
+    {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = DateFormatter.Style.medium
+        dateFormatter.timeStyle = DateFormatter.Style.none
+        dateTextField.text = dateFormatter.string(from: sender.date)
+    }
+    
     @IBAction func startTimeTextFieldEditing(_ sender: UITextField)
     {
         let datePickerView: UIDatePicker = UIDatePicker()
@@ -207,23 +224,6 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
         let dateFormatter = DateFormatter()
         dateFormatter.timeStyle = .short
         stopTimeField.text = dateFormatter.string(from: sender.date)
-    }
-    
-    func datePickerValueChanged(sender: UIDatePicker)
-    {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = DateFormatter.Style.medium
-        dateFormatter.timeStyle = DateFormatter.Style.none
-        dateTextField.text = dateFormatter.string(from: sender.date)
-    }
-    
-    func dismissPicker()
-    {
-        startTimeField.endEditing(true)
-        stopTimeField.endEditing(true)
-        dateTextField.endEditing(true)
-        titleTextField.endEditing(true)
-        descriptionText.endEditing(true)
     }
     
     func saveEvent()
@@ -266,22 +266,6 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
         eventImageRef = imageRef.child(uniqueEventID!)
     }
     
-    func savePhotosToFirebase(dataArray: [Data])
-    {
-        for image in dataArray
-        {
-            let localFile = image
-            _ = eventImageRef?.child(image.description).put(localFile, metadata: nil, completion: { (metadata, error) in
-                guard let metadata = metadata else
-                {
-                    return
-                }
-                
-                _ = metadata.downloadURL
-            })
-        }
-    }
-    
     func createImageTitleDictionary() -> [String:String]?
     {
         var stringDict: [String:String] = [:]
@@ -297,6 +281,22 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
         }
         print(stringDict)
         return stringDict
+    }
+    
+    func savePhotosToFirebase(dataArray: [Data])
+    {
+        for image in dataArray
+        {
+            let localFile = image
+            _ = eventImageRef?.child(image.description).put(localFile, metadata: nil, completion: { (metadata, error) in
+                guard let metadata = metadata else
+                {
+                    return
+                }
+                
+                _ = metadata.downloadURL
+            })
+        }
     }
     
     fileprivate func updateEvent() -> [String: AnyObject]
@@ -453,7 +453,8 @@ extension CreateEventViewController: UINavigationControllerDelegate, UIImagePick
         var imagePath = NSDate().description
         imagePath = imagePath.replacingOccurrences(of: " ", with: "")
         imagePath = (imagesDirectoryPath?.appending("/\(imagePath).png"))!
-        let data = UIImagePNGRepresentation(imageRecieved!)
+        //let data = UIImagePNGRepresentation(imageRecieved!)
+        let data = imageRecieved?.jpeg(.medium)
         let success = FileManager.default.createFile(atPath: imagePath, contents: data, attributes: nil)
         if success
         {
@@ -556,5 +557,27 @@ extension UIColor {
             green: CGFloat(g) / 0xff,
             blue: CGFloat(b) / 0xff, alpha: 1
         )
+    }
+}
+
+extension UIImage {
+    enum JPEGQuality: CGFloat {
+        case lowest  = 0
+        case low     = 0.25
+        case medium  = 0.5
+        case high    = 0.75
+        case highest = 1
+    }
+    
+    /// Returns the data for the specified image in PNG format
+    /// If the image object’s underlying image data has been purged, calling this function forces that data to be reloaded into memory.
+    /// - returns: A data object containing the PNG data, or nil if there was a problem generating the data. This function may return nil if the image has no data or if the underlying CGImageRef contains data in an unsupported bitmap format.
+    var png: Data? { return UIImagePNGRepresentation(self) }
+    
+    /// Returns the data for the specified image in JPEG format.
+    /// If the image object’s underlying image data has been purged, calling this function forces that data to be reloaded into memory.
+    /// - returns: A data object containing the JPEG data, or nil if there was a problem generating the data. This function may return nil if the image has no data or if the underlying CGImageRef contains data in an unsupported bitmap format.
+    func jpeg(_ quality: JPEGQuality) -> Data? {
+        return UIImageJPEGRepresentation(self, quality.rawValue)
     }
 }

@@ -24,10 +24,10 @@ struct User
     
     init(authData: FIRUser, firstName: String, lastName: String)
     {
-        email = authData.email!
-        emailConfirmation = authData.isEmailVerified
         self.firstName = firstName
         self.lastName = lastName
+        email = authData.email!
+        emailConfirmation = authData.isEmailVerified
         self.ref = nil
     }
     

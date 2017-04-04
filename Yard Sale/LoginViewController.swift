@@ -74,6 +74,7 @@ class LoginViewController: UIViewController
         
         alert.addTextField { textName in
             textName.placeholder = "Enter your name"
+            textName.autocapitalizationType = .words
         }
         
         alert.addTextField { textEmail in
