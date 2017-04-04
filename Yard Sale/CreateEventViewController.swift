@@ -64,6 +64,7 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
         eventPhotCollectionView.backgroundColor = UIColor.clear
         
         updateTextView()
+        setTextFieldDelegate()
     }
     
     override func viewWillAppear(_ animated: Bool)
@@ -73,7 +74,7 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
         if addDictCompleted
         {
             selectNewLocationButton.isHidden = false
-            selectNewLocationButton.titleLabel?.text = "Location Selected!"
+            selectNewLocationButton.titleLabel?.text = "Selected!"
             createAddressDictionary(latitude: locLat!, longitude: locLon!)
         }else
         {
@@ -81,6 +82,14 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
             useNewLocation.isSelected = false
             useNewLocation.toggleButon()
         }
+    }
+    
+    func setTextFieldDelegate()
+    {
+        startTimeField.delegate = self
+        stopTimeField.delegate = self
+        descriptionText.delegate = self
+        stopTimeField.isSelected = false
     }
     
     internal func didSelectButton(_ aButton: UIButton?)
@@ -104,7 +113,7 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
     
     internal func updateTextView()
     {
-        let placeholderText = "Pleaes provide a description of your event here..."
+        let placeholderText = "Please provide a description of your event here..."
         descriptionText.text = placeholderText
         descriptionText.textColor = UIColor.lightGray
     }
@@ -164,30 +173,38 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
     {
         let datePickerView: UIDatePicker = UIDatePicker()
         datePickerView.datePickerMode = .time
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeStyle = .short
+        let date = dateFormatter.date(from: "8:00 AM")
+        datePickerView.date = date!
         sender.inputView = datePickerView
+        
         datePickerView.addTarget(self, action: #selector(startTimePickerValueChanged), for: .valueChanged)
+    }
+    
+    func startTimePickerValueChanged(sender: UIDatePicker)
+    {
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeStyle = .short
+        startTimeField.text = dateFormatter.string(from: sender.date)
     }
     
     @IBAction func stopTimeTextFieldEditing(_ sender: UITextField)
     {
         let timePickerView: UIDatePicker = UIDatePicker()
         timePickerView.datePickerMode = .time
-        sender.inputView = timePickerView
-        timePickerView.addTarget(self, action: #selector(stopTimePickerValueChanged), for: .valueChanged)
-    }
-    
-    func startTimePickerValueChanged(sender: UIDatePicker)
-    {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .none
         dateFormatter.timeStyle = .short
-        startTimeField.text = dateFormatter.string(from: sender.date)
+        let date = dateFormatter.date(from: "1:00 PM")
+        timePickerView.date = date!
+        sender.inputView = timePickerView
+        
+        timePickerView.addTarget(self, action: #selector(stopTimePickerValueChanged), for: .valueChanged)
     }
     
     func stopTimePickerValueChanged(sender: UIDatePicker)
     {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .none
         dateFormatter.timeStyle = .short
         stopTimeField.text = dateFormatter.string(from: sender.date)
     }
@@ -390,14 +407,14 @@ extension CreateEventViewController: UINavigationControllerDelegate, UIImagePick
 {
     @IBAction func choosePhoto(_ sender: UIButton)
     {
-        if dataArray.count < 6
+        if dataArray.count < 10
         {
             let imagePicker = UIImagePickerController()
             imagePicker.delegate = self
             present(imagePicker, animated: true, completion: nil)
         }else
         {
-            utility.errorAlert(title: "Image Selection Alert", message: "You can only select 6 images at most.", cancelTitle: "Dismiss", view: self)
+            utility.errorAlert(title: "Image Selection Alert", message: "You can only select 10 images at most.", cancelTitle: "Dismiss", view: self)
         }
     }
     
@@ -482,24 +499,34 @@ extension CreateEventViewController: UICollectionViewDataSource
     {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionCell", for: indexPath) as! EventPhotoCollectionViewCell
         let image = UIImage(data: dataArray[indexPath.row])
-        cell.imageView.image = image!
-        
+        DispatchQueue.main.async
+            {
+                cell.imageView.image = image!
+        }
         return cell
     }
 }
 
-extension UIImage
+extension CreateEventViewController: UITextFieldDelegate
 {
-    func correctlyOrientedImage() -> UIImage {
-        if self.imageOrientation == UIImageOrientation.up {
-            return self
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+     
+        if startTimeField == textField
+        {
+            startTimeField.text = "8:00 AM"
+        }else if stopTimeField == textField
+        {
+            stopTimeField.text = "1:00 PM"
         }
-        
-        UIGraphicsBeginImageContextWithOptions(self.size, false, self.scale)
-        self.draw(in: CGRect(x: 0, y: 0, width: self.size.width, height: self.size.height))
-        let normalizedImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
-        UIGraphicsEndImageContext()
-        
-        return normalizedImage;
+    }
+}
+
+extension CreateEventViewController: UITextViewDelegate
+{
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView == descriptionText
+        {
+            descriptionText.text = ""
+        }
     }
 }

@@ -49,8 +49,9 @@ class LoginViewController: UIViewController
         let saveAction = UIAlertAction(title: "Save",
                                        style: .default)
         {action in
-            let emailField = alert.textFields![0]
-            let passwordField = alert.textFields![1]
+            let nameField = alert.textFields![0]
+            let emailField = alert.textFields![1]
+            let passwordField = alert.textFields![2]
             
             FIRAuth.auth()?.createUser(withEmail: emailField.text!, password: passwordField.text!, completion:
             {(user, error) in
@@ -64,11 +65,16 @@ class LoginViewController: UIViewController
                 
                 LocationManager.sharedInstance.startUpdatingLocation()
                 FIRAuth.auth()?.signIn(withEmail: emailField.text!, password: passwordField.text!)
+                self.createUserAccount(name: nameField.text!)
             })
         }
         
         let cancelAction = UIAlertAction(title: "Cancel",
                                          style: .default)
+        
+        alert.addTextField { textName in
+            textName.placeholder = "Enter your name"
+        }
         
         alert.addTextField { textEmail in
             textEmail.placeholder = "Enter your email"
@@ -84,6 +90,18 @@ class LoginViewController: UIViewController
         alert.addAction(saveAction)
         
         present(alert, animated: true, completion: nil)
+    }
+    
+    func createUserAccount(name:String)
+    {
+        let ref: FIRDatabaseReference = FIRDatabase.database().reference()
+        let authData = FIRAuth.auth()?.currentUser
+        let delimiter = " "
+        let token = name.components(separatedBy: delimiter)
+        let firstName = token[0]
+        let lastName = token[1]
+        let user = User(authData: authData!, firstName: firstName, lastName: lastName)
+        ref.ref.child("users").child((authData?.uid)!).setValue(user.toDictionary())
     }
     
     @IBAction func loginAction()
@@ -107,7 +125,7 @@ class LoginViewController: UIViewController
             
         }
         alert.addTextField { (email) in
-            email.placeholder = "Enter your email."
+            email.placeholder = "Enter your email"
             email.keyboardType = .emailAddress
         }
         

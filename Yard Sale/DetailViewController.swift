@@ -9,6 +9,7 @@
 import UIKit
 import MapKit
 import Firebase
+import FirebaseStorageUI
 
 class DetailViewController: UIViewController, MKMapViewDelegate
 {
@@ -42,21 +43,16 @@ class DetailViewController: UIViewController, MKMapViewDelegate
         eventPhotoCollectionView.dataSource = self
     }
     
-    func createImageStorageReference()
-    {
-        eventImageRef = nil
-        let storage = FIRStorage.storage()
-        let storageRef = storage.reference()
-        let imageRef = storageRef.child("images")
-        eventImageRef = imageRef.child(uniqueID!)
-        print(eventImageRef!)
-    }
-    
     func populateDataArray()
     {
+        guard userEvent?.imageTitleDictionary != nil else
+        {
+            print("\nNo images from User.")
+            return
+        }
         for item in (userEvent?.imageTitleDictionary)!
         {
-            eventImageRef?.child(item.value).data(withMaxSize: 18752501, completion: { (data, error) in
+            eventImageRef?.child(item.value).data(withMaxSize: 30000000, completion: { (data, error) in
                 
                 guard error == nil else
                 {
@@ -98,6 +94,15 @@ class DetailViewController: UIViewController, MKMapViewDelegate
         }
     }
     
+    func createImageStorageReference()
+    {
+        eventImageRef = nil
+        let storage = FIRStorage.storage()
+        let storageRef = storage.reference()
+        let imageRef = storageRef.child("images")
+        eventImageRef = imageRef.child(uniqueID!)
+    }
+    
     func populateValues()
     {
         eventTitleLabel.text = userEvent?.title!
@@ -133,7 +138,6 @@ class DetailViewController: UIViewController, MKMapViewDelegate
         mapView.setRegion(region, animated: true)
         mapView.addAnnotation(pointAnnotation)
         mapView.selectAnnotation(mapView.annotations[yourAnnotationAtIndex], animated: true)
-        
     }
     
     @IBAction func dismissViewController(_ sender: UIBarButtonItem)
@@ -152,11 +156,17 @@ extension DetailViewController: UICollectionViewDataSource
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
     {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionCell", for: indexPath) as! EventPhotoCollectionViewCell
-        let image = UIImage(data: dataArray[indexPath.row])
+        let imageView: UIImageView = cell.imageView
+        let placeholderImage = UIImage(named: dataArray[indexPath.row].description)
         DispatchQueue.main.async
             {
-                cell.imageView.image = image!
+                imageView.sd_setImage(with: self.eventImageRef!, placeholderImage: placeholderImage)
         }
+//        let image = UIImage(data: dataArray[indexPath.row])
+//        DispatchQueue.main.async
+//            {
+//                cell.imageView.image = image!
+//        }
         
         return cell
     }

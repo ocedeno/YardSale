@@ -40,4 +40,13 @@ struct User
         self.emailConfirmation = snapshotValue[User.emailConfirmationKey] as? Bool
         self.ref = snapshot.ref
     }
+    
+    func toDictionary() -> Any {
+        return [
+            User.firstNameKey : self.firstName!,
+            User.lastNameKey : self.lastName!,
+            User.emailKey : self.email!,
+            User.emailConfirmationKey : self.emailConfirmation!
+        ]
+    }
 }
