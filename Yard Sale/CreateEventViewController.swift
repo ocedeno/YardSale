@@ -86,10 +86,10 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
     
     func setTextFieldDelegate()
     {
+        dateTextField.delegate = self
         startTimeField.delegate = self
         stopTimeField.delegate = self
         descriptionText.delegate = self
-        stopTimeField.isSelected = false
     }
     
     internal func didSelectButton(_ aButton: UIButton?)
@@ -115,10 +115,10 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
     {
         let placeholderText = "Please provide a description of your event here..."
         descriptionText.text = placeholderText
-        descriptionText.textColor = UIColor.lightGray
+        descriptionText.textColor = UIColor(hex: "BBBAC2")
     }
     
-    func startLocationUpdater()
+    internal func startLocationUpdater()
     {
         locationManager.startUpdatingLocationWithCompletionHandler({ (lat, lon, status, verboseMessage, error) in
             
@@ -517,6 +517,12 @@ extension CreateEventViewController: UITextFieldDelegate
         }else if stopTimeField == textField
         {
             stopTimeField.text = "1:00 PM"
+        }else if textField == dateTextField
+        {
+            let dateFormatter = DateFormatter()
+            let currentDate = Date()
+            dateFormatter.dateStyle = DateFormatter.Style.medium
+            dateTextField.text = dateFormatter.string(from: currentDate)
         }
     }
 }
@@ -527,6 +533,28 @@ extension CreateEventViewController: UITextViewDelegate
         if textView == descriptionText
         {
             descriptionText.text = ""
+            descriptionText.textColor = UIColor.black
         }
+    }
+}
+
+extension UIColor {
+    convenience init(hex: String) {
+        let scanner = Scanner(string: hex)
+        scanner.scanLocation = 0
+        
+        var rgbValue: UInt64 = 0
+        
+        scanner.scanHexInt64(&rgbValue)
+        
+        let r = (rgbValue & 0xff0000) >> 16
+        let g = (rgbValue & 0xff00) >> 8
+        let b = rgbValue & 0xff
+        
+        self.init(
+            red: CGFloat(r) / 0xff,
+            green: CGFloat(g) / 0xff,
+            blue: CGFloat(b) / 0xff, alpha: 1
+        )
     }
 }
