@@ -73,6 +73,8 @@ class AddressSelectionViewController: UIViewController, UISearchBarDelegate, MKM
             self.pinAnnotationView.animatesDrop = true
             self.mapView.centerCoordinate = self.pointAnnotation.coordinate
             self.mapView.addAnnotation(self.pinAnnotationView.annotation!)
+            self.mapView.selectAnnotation(self.mapView.annotations[0], animated: true)
+
             
             let coordinate:CLLocationCoordinate2D = self.pointAnnotation.coordinate
             let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
@@ -133,7 +135,8 @@ class AddressSelectionViewController: UIViewController, UISearchBarDelegate, MKM
             annotation.coordinate = coordinate
             annotation.title = "Use this location? Select here."
             self.mapView.addAnnotation(annotation)
-            
+            mapView.selectAnnotation(mapView.annotations[0], animated: true)
+
             break
             
         default:

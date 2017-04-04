@@ -43,33 +43,6 @@ class DetailViewController: UIViewController, MKMapViewDelegate
         eventPhotoCollectionView.dataSource = self
     }
     
-    func populateDataArray()
-    {
-        guard userEvent?.imageTitleDictionary != nil else
-        {
-            print("\nNo images from User.")
-            return
-        }
-        for item in (userEvent?.imageTitleDictionary)!
-        {
-            eventImageRef?.child(item.value).data(withMaxSize: 30000000, completion: { (data, error) in
-                
-                guard error == nil else
-                {
-                    DispatchQueue.main.async
-                        {
-                            self.utilityClass.errorAlert(title: "Image Error", message: (error?.localizedDescription)!, cancelTitle: "Dismiss", view: self)
-                            print("\n\(error.debugDescription)")
-                    }
-                    return
-                }
-                
-                self.dataArray.append(data!)
-                self.eventPhotoCollectionView.reloadData()
-            })
-        }
-    }
-    
     func getUserEvent()
     {
         self.ref = FIRDatabase.database().reference().child("events").child(uniqueID!)
@@ -103,6 +76,33 @@ class DetailViewController: UIViewController, MKMapViewDelegate
         eventImageRef = imageRef.child(uniqueID!)
     }
     
+    func populateDataArray()
+    {
+        guard userEvent?.imageTitleDictionary != nil else
+        {
+            print("\nNo images from User.")
+            return
+        }
+        for item in (userEvent?.imageTitleDictionary)!
+        {
+            eventImageRef?.child(item.value).data(withMaxSize: 3 * 1024 * 1024, completion: { (data, error) in
+                
+                guard error == nil else
+                {
+                    DispatchQueue.main.async
+                        {
+                            self.utilityClass.errorAlert(title: "Image Error", message: (error?.localizedDescription)!, cancelTitle: "Dismiss", view: self)
+                            print("\n\(error.debugDescription)")
+                    }
+                    return
+                }
+                
+                self.dataArray.append(data!)
+                self.eventPhotoCollectionView.reloadData()
+            })
+        }
+    }
+    
     func populateValues()
     {
         eventTitleLabel.text = userEvent?.title!
@@ -118,7 +118,7 @@ class DetailViewController: UIViewController, MKMapViewDelegate
         let stringLon = userEvent?.addressDictionary?["longitude"] as! String
         let doubleLat = Double(stringLat)
         let doubleLon = Double(stringLon)
-        let mapCenterCoordinates = CLLocationCoordinate2D(latitude: doubleLat! + 0.02, longitude: doubleLon!)
+        let mapCenterCoordinates = CLLocationCoordinate2D(latitude: doubleLat! + 0.01, longitude: doubleLon!)
         let coordinates = CLLocationCoordinate2D(latitude: doubleLat!, longitude: doubleLon!)
         
         pointAnnotation.coordinate = coordinates

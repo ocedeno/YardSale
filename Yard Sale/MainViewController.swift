@@ -26,7 +26,7 @@ class MainViewController: BaseViewController, MKMapViewDelegate, CLLocationManag
     override func viewDidLoad()
     {
         super.viewDidLoad()
-
+        
         mapView.delegate = self
         eventTableView.delegate = self
         eventTableView.dataSource = self
@@ -39,12 +39,13 @@ class MainViewController: BaseViewController, MKMapViewDelegate, CLLocationManag
         
         populateEventsArray()
     }
-
+    
     override func viewWillAppear(_ animated: Bool)
     {
         super.viewWillAppear(true)
         
         eventTableView.backgroundColor = UIColor.clear
+        getCurrentLocation()
         eventTableView.reloadData()
         reloadEventsToMapView()
         FIRAuth.auth()?.addStateDidChangeListener { auth, user in
@@ -70,7 +71,7 @@ class MainViewController: BaseViewController, MKMapViewDelegate, CLLocationManag
     {
         eventTableView.tableFooterView = UIView()
         let blurredBackgroundView = BlurredBackgroundView(frame: .zero)
-        blurredBackgroundView.imageView.image = UIImage.vintageWoodBackground()
+        blurredBackgroundView.imageView.image = UIImage.grassBackground()
         eventTableView.backgroundView = blurredBackgroundView
         eventTableView.separatorEffect = UIVibrancyEffect(blurEffect: blurredBackgroundView.blurView.effect as! UIBlurEffect)
     }
@@ -90,10 +91,13 @@ class MainViewController: BaseViewController, MKMapViewDelegate, CLLocationManag
                 self.utilityClass.errorAlert(title: "Location Update Error", message: (error?.description)!, cancelTitle: "Dismiss", view: self)
                 return
             }
-            
-            self.setMapRegion(lon: lon, lat: lat)
-            self.populateEventsArray()
-            self.eventTableView.reloadData()
+            DispatchQueue.main.async
+            {
+                print("\n***updated Location***")
+                self.setMapRegion(lon: lon, lat: lat)
+                self.populateEventsArray()
+                self.eventTableView.reloadData()
+            }
         }
     }
     
@@ -112,7 +116,7 @@ class MainViewController: BaseViewController, MKMapViewDelegate, CLLocationManag
     func populateEventsArray()
     {
         self.ref = FIRDatabase.database().reference().child("events")
-        self.ref?.queryOrdered(byChild: "userID").observe(.value, with: { snapshot in
+        self.ref?.queryOrdered(byChild: "distance").observe(.value, with: { snapshot in
             
             var array: [Event] = []
             var arrayID: [String] = []
@@ -144,18 +148,25 @@ class MainViewController: BaseViewController, MKMapViewDelegate, CLLocationManag
             mapView.addAnnotation(pin)
         }
     }
-
+    
     func getDistance(locationTwo: CLLocation) -> String
     {
         let lat = locationManager.lastKnownLatitude
         let lon = locationManager.lastKnownLongitude
         locationOne = CLLocation(latitude: lat, longitude: lon)
-        let distanceMeters = locationTwo.distance(from: locationOne!)
+        let distanceMeters = locationOne!.distance(from: locationTwo)
         let milesConversion = 0.000621371192
         let distanceMiles = distanceMeters * milesConversion
         let distanceString = String(format: "%.2f", distanceMiles)
-
+        
         return String(distanceString)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+    {
+        let destinationVC = segue.destination as! DetailViewController
+        destinationVC.uniqueID = sender as? String
+        
     }
 }
 
@@ -185,6 +196,8 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
+        let selectedEvent = eventsArray[indexPath.row]
+        selectedEvent.
         performSegue(withIdentifier: "segueToDetailView", sender: idArray?[indexPath.row])
     }
     
@@ -198,12 +211,6 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource
         let distance = getDistance(locationTwo: locationTwo!)
         eventsArray[location].distance = distance
         eventsArray.sort { Double($0.distance) ?? 0.00 < Double($1.distance) ?? 0.00}
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
-    {
-        let destinationVC = segue.destination as! DetailViewController
-        destinationVC.uniqueID = sender as? String
-        
+        print(location)
     }
 }

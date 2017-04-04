@@ -17,7 +17,6 @@
 		061FF08A1E7ED5FF0075F033 /* Yard_SaleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 061FF0891E7ED5FF0075F033 /* Yard_SaleUITests.swift */; };
 		065DBC261E8431B8002FE5E6 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065DBC251E8431B8002FE5E6 /* Utility.swift */; };
 		065EA8D01E815C3400CA09F4 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065EA8CF1E815C3400CA09F4 /* LoginViewController.swift */; };
-		065EA8D21E815C4D00CA09F4 /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065EA8D11E815C4D00CA09F4 /* ResetPasswordViewController.swift */; };
 		065EA8D41E8412F900CA09F4 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065EA8D31E8412F900CA09F4 /* User.swift */; };
 		065EA8D81E8413D100CA09F4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 065EA8D61E8413D100CA09F4 /* Foundation.framework */; };
 		065EA8D91E8413D100CA09F4 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 065EA8D71E8413D100CA09F4 /* Security.framework */; };
@@ -87,7 +86,6 @@
 		061FF08B1E7ED5FF0075F033 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		065DBC251E8431B8002FE5E6 /* Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 		065EA8CF1E815C3400CA09F4 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		065EA8D11E815C4D00CA09F4 /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
 		065EA8D31E8412F900CA09F4 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		065EA8D61E8413D100CA09F4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		065EA8D71E8413D100CA09F4 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/Security.framework; sourceTree = DEVELOPER_DIR; };
@@ -223,7 +221,6 @@
 			isa = PBXGroup;
 			children = (
 				065EA8CF1E815C3400CA09F4 /* LoginViewController.swift */,
-				065EA8D11E815C4D00CA09F4 /* ResetPasswordViewController.swift */,
 				061FF06B1E7ED5FF0075F033 /* MainViewController.swift */,
 				06E86F4B1E855D8D009E3D75 /* MenuViewController.swift */,
 				06E86F4D1E855E60009E3D75 /* BaseViewController.swift */,
@@ -592,7 +589,6 @@
 				065EA8D01E815C3400CA09F4 /* LoginViewController.swift in Sources */,
 				065EA8D41E8412F900CA09F4 /* User.swift in Sources */,
 				06E86F4C1E855D8D009E3D75 /* MenuViewController.swift in Sources */,
-				065EA8D21E815C4D00CA09F4 /* ResetPasswordViewController.swift in Sources */,
 				06EC2E0A1E8936B100F83D6C /* SSRadioButtonsController.swift in Sources */,
 				06E86F4E1E855E60009E3D75 /* BaseViewController.swift in Sources */,
 				061FF06C1E7ED5FF0075F033 /* MainViewController.swift in Sources */,
