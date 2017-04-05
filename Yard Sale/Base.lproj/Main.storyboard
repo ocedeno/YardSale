@@ -91,7 +91,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" red="0.98160523929999999" green="1" blue="0.30922617029999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.048654697519999998" green="0.77900935910000002" blue="0.037004734820000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
@@ -345,7 +345,7 @@
                                 </constraints>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" red="0.98160523929999999" green="1" blue="0.30922617029999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.048654697524490399" green="0.77900935913705582" blue="0.037004734816665961" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="kzP-7y-YeR" firstAttribute="top" secondItem="7An-J3-Wlr" secondAttribute="bottom" constant="8" id="FgK-ZO-fMc"/>
                             <constraint firstAttribute="trailing" secondItem="7An-J3-Wlr" secondAttribute="trailing" constant="8" id="fqd-6n-1VO"/>
@@ -607,19 +607,19 @@
                                                                     <rect key="frame" x="128" y="0.0" width="247" height="77"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" ambiguous="YES" text="Kids Clothes and Toys!" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ofg-s6-e6V">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="247" height="32"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="247" height="20.5"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="2040 SW 33rd Ave" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NCL-G4-PqX">
-                                                                            <rect key="frame" x="0.0" y="32" width="247" height="16"/>
+                                                                            <rect key="frame" x="0.0" y="20.5" width="247" height="16"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="8" adjustsLetterSpacingToFitWidth="YES" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="C1V-by-NCY">
-                                                                            <rect key="frame" x="0.0" y="48" width="247" height="29"/>
+                                                                            <rect key="frame" x="0.0" y="36.5" width="247" height="40.5"/>
                                                                             <string key="text">*Children Clothes  *Children Toys
 *Tools  *Household Items ...</string>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -777,7 +777,7 @@
                                 </subviews>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" red="0.98160523929999999" green="1" blue="0.30922617029999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.048654697519999998" green="0.77900935910000002" blue="0.037004734820000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="DJf-mn-BcQ" secondAttribute="trailing" id="I87-AL-BEG"/>
                             <constraint firstItem="DJf-mn-BcQ" firstAttribute="top" secondItem="rTy-wt-8k9" secondAttribute="bottom" id="djl-5a-xCb"/>
@@ -921,6 +921,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="KWd-Vb-nPs"/>
-        <segue reference="i5n-Ig-cWB"/>
+        <segue reference="VvK-Xs-1tN"/>
     </inferredMetricsTieBreakers>
 </document>

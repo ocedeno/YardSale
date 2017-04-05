@@ -43,6 +43,10 @@ class DetailViewController: UIViewController, MKMapViewDelegate
         getUserEvent()
         eventPhotoCollectionView.dataSource = self
         eventPhotoCollectionView.delegate = self
+        eventDescriptionTextView.isEditable = false
+        mapView.isZoomEnabled = false
+        mapView.isRotateEnabled = false
+        mapView.isScrollEnabled = false
     }
     
     func getUserEvent()
@@ -172,10 +176,6 @@ extension DetailViewController: UICollectionViewDelegate
 {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath)
     {
-        if view.subviews.last == enlargedImageView
-        {
-            self.view.subviews.last?.removeFromSuperview()
-        }
         UIView.animate(withDuration: 0.7) {
             self.createEnlargedImageView(indexPath: indexPath.row)
         }
@@ -193,6 +193,24 @@ extension DetailViewController: UICollectionViewDelegate
         enlargedImageView?.image = image!
         enlargedImageView?.contentMode = .scaleAspectFit
         
+        let dismissButton = UIButton()
+        let xAdjustment = self.view.bounds.maxX / 4.0
+        dismissButton.frame = CGRect(x: self.view.center.x  - xAdjustment, y: (enlargedImageView?.bounds.maxY)!, width: 25, height: 25)
+        dismissButton.imageView?.image = UIImage.vintageWoodBackground()
+        dismissButton.titleLabel?.text = "X"
+        dismissButton.titleLabel?.textAlignment = .center
+        dismissButton.addTarget(self, action: #selector(dismissImageSubview), for: .touchUpInside)
+        
         self.view.addSubview(enlargedImageView!)
+        self.enlargedImageView?.addSubview(dismissButton)
+
+    }
+    
+    func dismissImageSubview()
+    {
+        if view.subviews.last == enlargedImageView
+        {
+            self.enlargedImageView?.removeFromSuperview()
+        }
     }
 }
