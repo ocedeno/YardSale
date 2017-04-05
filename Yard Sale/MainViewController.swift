@@ -30,13 +30,10 @@ class MainViewController: BaseViewController, MKMapViewDelegate, CLLocationManag
         mapView.delegate = self
         eventTableView.delegate = self
         eventTableView.dataSource = self
-        
         getCurrentLocation()
         addSlideMenuButton()
-        
         setupBackgroundTableView()
         setupBackgroundNavView()
-        
         populateEventsArray()
     }
     
@@ -177,10 +174,10 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource
         cell.backgroundColor = UIColor.clear
         cell.updateEventCell(withDate: self.eventsArray[indexPath.row].date!,
                              distance: "\(self.eventsArray[indexPath.row].distance) mi.",
-            headline: self.eventsArray[indexPath.row].title!,
-            address: "\(self.eventsArray[indexPath.row].addressDictionary!["locality"]!), \(self.eventsArray[indexPath.row].addressDictionary!["administrativeArea"]!)",
-            category: self.eventsArray[indexPath.row].description!,
-            image: UIImage(named: "GorgeousImage")!
+                             headline: self.eventsArray[indexPath.row].title!,
+                              address: "\(self.eventsArray[indexPath.row].addressDictionary!["locality"]!), \(self.eventsArray[indexPath.row].addressDictionary!["administrativeArea"]!)",
+                             category: self.eventsArray[indexPath.row].description!,
+                                image: UIImage(named: "GorgeousImage")!
         )
         return cell
     }
@@ -205,5 +202,5 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource
         
         eventsArray.sort { Double($0.distance)! < Double($1.distance)!}
         eventTableView.reloadData()
-    }    
+    }
 }
