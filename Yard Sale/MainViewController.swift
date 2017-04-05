@@ -102,7 +102,7 @@ class MainViewController: BaseViewController, MKMapViewDelegate, CLLocationManag
         let span = MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02)
         let region = MKCoordinateRegion(center: center, span: span)
         
-        self.mapView.setRegion(region, animated: true)
+        self.mapView.setRegion(region, animated: false)
         self.mapView.showsUserLocation = true
     }
     
@@ -131,10 +131,10 @@ class MainViewController: BaseViewController, MKMapViewDelegate, CLLocationManag
         {
             let latitude = event.locLat
             let longitude = event.locLon
-            let pin = MKPointAnnotation()
+            let pin = MyPointAnnotation()
             pin.coordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(latitude!), longitude: CLLocationDegrees(longitude!))
             pin.title = event.title!
-            pin.subtitle = event.imageKey!
+            pin.imageKey = event.imageKey!
             
             mapView.addAnnotation(pin)
         }
@@ -159,7 +159,8 @@ class MainViewController: BaseViewController, MKMapViewDelegate, CLLocationManag
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl)
     {
-        performSegue(withIdentifier: "segueToDetailView", sender: view.annotation?.subtitle!!)
+        let myPin = view.annotation! as! MyPointAnnotation
+        performSegue(withIdentifier: "segueToDetailView", sender: myPin.imageKey)
     }
     
     func getDistance(locationTwo: CLLocation) -> String
@@ -225,3 +226,10 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource
         eventTableView.reloadData()
     }
 }
+
+class MyPointAnnotation:MKPointAnnotation
+{
+    var imageKey: String?
+}
+
+

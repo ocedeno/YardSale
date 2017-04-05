@@ -29,9 +29,8 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="GreenGrassBackground" translatesAutoresizingMaskIntoConstraints="NO" id="P4L-qM-UNC">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Yard Sale" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wBz-iI-avQ">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Yard Sale" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wBz-iI-avQ">
                                 <rect key="frame" x="16" y="120" width="343" height="106"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="YardSale" family="Yard Sale" pointSize="50"/>
                                 <color key="textColor" red="0.89275659784303274" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -42,6 +41,7 @@
                             <constraint firstItem="P4L-qM-UNC" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="0V2-bk-VHw"/>
                             <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="P4L-qM-UNC" secondAttribute="bottom" id="CmI-OP-lUX"/>
                             <constraint firstItem="P4L-qM-UNC" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="qPg-Tf-0Ga"/>
+                            <constraint firstItem="wBz-iI-avQ" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="uRZ-8Y-ul2"/>
                             <constraint firstAttribute="trailing" secondItem="P4L-qM-UNC" secondAttribute="trailing" id="xB2-fA-q6B"/>
                         </constraints>
                     </view>

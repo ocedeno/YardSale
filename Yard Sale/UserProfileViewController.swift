@@ -22,6 +22,7 @@ class UserProfileViewController: UIViewController
     
     var userInfo: User?
     let utilityClass = Utility()
+    var firUser = FIRAuth.auth()?.currentUser
     
     override func viewDidLoad()
     {
@@ -36,7 +37,7 @@ class UserProfileViewController: UIViewController
     
     func createReferenceToUser()
     {
-        let uniqueID = FIRAuth.auth()?.currentUser?.uid
+        let uniqueID = firUser?.uid
         let ref = FIRDatabase.database().reference().child("users")
         let userRefPath = ref.child(uniqueID!)
         userRefPath.observe(.value, with: { (snapshot) in
@@ -48,7 +49,7 @@ class UserProfileViewController: UIViewController
     
     func createUpdateBarButtonItem()
     {
-        let updateButton = UIBarButtonItem.init(title: "Update", style: .plain, target: self, action: #selector(storeUserAddress))
+        let updateButton = UIBarButtonItem.init(title: "Update", style: .plain, target: self, action: #selector(updateUserInfo))
         self.navigationItem.rightBarButtonItem = updateButton
     }
     
@@ -74,12 +75,20 @@ class UserProfileViewController: UIViewController
     
     func populateUserValues()
     {
-        let firstName = userInfo?.firstName!
-        let lastName = userInfo?.lastName!
-        let fullName = "\(firstName!) \(lastName!)"
-        userNameLabel.text = fullName
+        if firUser?.displayName == nil
+        {
+            let firstName = userInfo?.firstName!
+            let lastName = userInfo?.lastName!
+            let fullName = "\(firstName!) \(lastName!)"
+            userNameLabel.text = fullName
+            userNameField.text = fullName
+            
+        }else
+        {
+            userNameLabel.text = firUser?.displayName!
+            userNameField.text = firUser?.displayName!
+        }
         userEmailField.text = userInfo?.email!
-        userNameField.text = fullName
     }
     
     func dismissKeyboard()
@@ -90,5 +99,44 @@ class UserProfileViewController: UIViewController
         userCityField.endEditing(true)
         userStateField.endEditing(true)
         userZipCodeField.endEditing(true)
+    }
+    
+    func updateUserInfo()
+    {
+        
+        let changeRequest = FIRAuth.auth()?.currentUser?.profileChangeRequest()
+        if userNameField.text != changeRequest?.displayName
+        {
+            changeRequest?.displayName = userNameField.text
+            changeRequest?.commitChanges(completion: { (error) in
+                
+                guard error == nil else
+                {
+                    self.utilityClass.errorAlert(title: "Update Error", message: (error?.localizedDescription)!, cancelTitle: "Dismiss", view: self)
+                    return
+                }
+            })
+        }
+        if self.userEmailField.text == self.userInfo?.email
+        {
+            FIRAuth.auth()?.currentUser?.updateEmail(self.userEmailField.text!, completion: { (error) in
+                
+                guard error == nil else
+                {
+                    self.utilityClass.errorAlert(title: "Update Error", message: (error?.localizedDescription)!, cancelTitle: "Dismiss", view: self)
+                    return
+                }
+                
+                FIRAuth.auth()?.currentUser?.sendEmailVerification(completion: { (error) in
+                    guard error == nil else
+                    {
+                        self.utilityClass.errorAlert(title: "Email Verification Error", message: (error?.localizedDescription)!, cancelTitle: "Dismiss", view: self)
+                        return
+                    }
+                })
+            })
+        }
+        self.utilityClass.errorAlert(title: "Successful Update", message: "Your information was successfully updated!", cancelTitle: "Okay", view: self)
+        dismiss(animated: true, completion: nil)
     }
 }

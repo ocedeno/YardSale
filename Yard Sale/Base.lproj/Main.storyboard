@@ -256,7 +256,7 @@
                                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                         <textInputTraits key="textInputTraits"/>
                                                                         <connections>
-                                                                            <action selector="stopTimeTextFieldEditing:" destination="J55-xf-ArT" eventType="editingDidEnd" id="Fkt-dB-DOe"/>
+                                                                            <action selector="stopTimeTextFieldEditing:" destination="J55-xf-ArT" eventType="editingDidBegin" id="bnU-Li-4n1"/>
                                                                         </connections>
                                                                     </textField>
                                                                 </subviews>
@@ -607,19 +607,19 @@
                                                                     <rect key="frame" x="128" y="0.0" width="247" height="77"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" ambiguous="YES" text="Kids Clothes and Toys!" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ofg-s6-e6V">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="247" height="20.5"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="247" height="32"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="2040 SW 33rd Ave" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NCL-G4-PqX">
-                                                                            <rect key="frame" x="0.0" y="20.5" width="247" height="16"/>
+                                                                            <rect key="frame" x="0.0" y="32" width="247" height="16"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="8" adjustsLetterSpacingToFitWidth="YES" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="C1V-by-NCY">
-                                                                            <rect key="frame" x="0.0" y="36.5" width="247" height="40.5"/>
+                                                                            <rect key="frame" x="0.0" y="48" width="247" height="29"/>
                                                                             <string key="text">*Children Clothes  *Children Toys
 *Tools  *Household Items ...</string>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -920,7 +920,7 @@
         <image name="GreenGrassBackground" width="2560" height="1600"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="VvK-Xs-1tN"/>
         <segue reference="KWd-Vb-nPs"/>
+        <segue reference="i5n-Ig-cWB"/>
     </inferredMetricsTieBreakers>
 </document>

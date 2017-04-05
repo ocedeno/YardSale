@@ -29,6 +29,7 @@ class DetailViewController: UIViewController, MKMapViewDelegate
     var dataStringArray: [String] = []
     var uniqueEventID: String?
     let utilityClass = Utility()
+    var enlargedImageView: UIImageView?
     
     override func viewDidLoad()
     {
@@ -41,6 +42,7 @@ class DetailViewController: UIViewController, MKMapViewDelegate
         
         getUserEvent()
         eventPhotoCollectionView.dataSource = self
+        eventPhotoCollectionView.delegate = self
     }
     
     func getUserEvent()
@@ -135,7 +137,7 @@ class DetailViewController: UIViewController, MKMapViewDelegate
         let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
         let region = MKCoordinateRegion(center: mapCenterCoordinates, span: span)
         
-        mapView.setRegion(region, animated: true)
+        mapView.setRegion(region, animated: false)
         mapView.addAnnotation(pointAnnotation)
         mapView.selectAnnotation(mapView.annotations[yourAnnotationAtIndex], animated: true)
     }
@@ -163,5 +165,34 @@ extension DetailViewController: UICollectionViewDataSource
         }
         
         return cell
+    }
+}
+
+extension DetailViewController: UICollectionViewDelegate
+{
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath)
+    {
+        if view.subviews.last == enlargedImageView
+        {
+            self.view.subviews.last?.removeFromSuperview()
+        }
+        UIView.animate(withDuration: 0.7) {
+            self.createEnlargedImageView(indexPath: indexPath.row)
+        }
+    }
+    
+    func createEnlargedImageView(indexPath: Int)
+    {
+        enlargedImageView = UIImageView()
+        let width = self.view.bounds.width * 0.85
+        let height = self.view.bounds.height * 0.85
+        enlargedImageView?.frame = CGRect(x: self.view.center.x, y: self.view.center.y, width: width, height: height)
+        enlargedImageView?.center = self.view.center
+        
+        let image = UIImage(data: dataArray[indexPath])
+        enlargedImageView?.image = image!
+        enlargedImageView?.contentMode = .scaleAspectFit
+        
+        self.view.addSubview(enlargedImageView!)
     }
 }
