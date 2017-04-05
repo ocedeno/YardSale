@@ -134,10 +134,32 @@ class MainViewController: BaseViewController, MKMapViewDelegate, CLLocationManag
             let pin = MKPointAnnotation()
             pin.coordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(latitude!), longitude: CLLocationDegrees(longitude!))
             pin.title = event.title!
-            
+            pin.subtitle = event.imageKey!
             
             mapView.addAnnotation(pin)
         }
+    }
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView?
+    {
+        if annotation is MKUserLocation {
+            return nil
+        }
+        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "pinView")
+        if annotationView == nil
+        {
+            annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "pinView")
+            annotationView!.canShowCallout = true
+            annotationView!.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+            annotationView!.isDraggable = true
+        }
+        
+        return annotationView
+    }
+    
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl)
+    {
+        performSegue(withIdentifier: "segueToDetailView", sender: view.annotation?.subtitle!!)
     }
     
     func getDistance(locationTwo: CLLocation) -> String
@@ -157,7 +179,6 @@ class MainViewController: BaseViewController, MKMapViewDelegate, CLLocationManag
     {
         let destinationVC = segue.destination as! DetailViewController
         destinationVC.uniqueID = sender as? String
-        
     }
 }
 

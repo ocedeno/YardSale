@@ -64,7 +64,7 @@ class AddressSelectionViewController: UIViewController, UISearchBarDelegate, MKM
                 
                 return
             }
-            //3
+            
             self.pointAnnotation = MKPointAnnotation()
             self.pointAnnotation.title = "Use this location? Select here."
             self.pointAnnotation.coordinate = CLLocationCoordinate2D(latitude:localSearchResponse!.boundingRegion.center.latitude, longitude: localSearchResponse!.boundingRegion.center.longitude)
@@ -80,8 +80,8 @@ class AddressSelectionViewController: UIViewController, UISearchBarDelegate, MKM
             let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
             let region = MKCoordinateRegionMake(coordinate, span)
             DispatchQueue.main.async
-                {
-                    self.mapView.setRegion(region, animated: true)
+            {
+                self.mapView.setRegion(region, animated: true)
             }
         }
     }
