@@ -22,7 +22,7 @@ class AddressSelectionViewController: UIViewController, UISearchBarDelegate, MKM
     var error:NSError!
     var pointAnnotation:MKPointAnnotation!
     var pinAnnotationView:MKPinAnnotationView!
-    let utilityClass = Utiliy()
+    let utilityClass = Utility()
     
     override func viewDidLoad()
     {

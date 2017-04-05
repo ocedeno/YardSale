@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-struct Utiliy
+struct Utility
 {
     func errorAlert(title: String, message: String, cancelTitle: String, view: UIViewController)
     {

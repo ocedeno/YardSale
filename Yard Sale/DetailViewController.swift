@@ -28,7 +28,7 @@ class DetailViewController: UIViewController, MKMapViewDelegate
     var dataArray: [Data] = []
     var dataStringArray: [String] = []
     var uniqueEventID: String?
-    let utilityClass = Utiliy()
+    let utilityClass = Utility()
     
     override func viewDidLoad()
     {

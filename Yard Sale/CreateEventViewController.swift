@@ -25,7 +25,7 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
     
     var radioButtonController: SSRadioButtonsController?
     let ref: FIRDatabaseReference = FIRDatabase.database().reference()
-    let utility = Utiliy()
+    let utility = Utility()
     let locationManager = LocationManager.sharedInstance
     var locLat: Double?
     var locLon: Double?

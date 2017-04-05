@@ -17,7 +17,7 @@ class LoginViewController: UIViewController
     @IBOutlet weak var userEmailTextfield: UITextField!
     @IBOutlet weak var userPasswordTextfield: UITextField!
     
-    let utilityClass = Utiliy()
+    let utilityClass = Utility()
     
     override func viewDidLoad()
     {
@@ -64,6 +64,17 @@ class LoginViewController: UIViewController
                 }
                 
                 LocationManager.sharedInstance.startUpdatingLocation()
+                FIRAuth.auth()?.currentUser?.sendEmailVerification(completion: { (error) in
+                    
+                    guard error == nil else
+                    {
+                        DispatchQueue.main.async
+                        {
+                            self.utilityClass.errorAlert(title: "Email Error", message: (error?.localizedDescription)!, cancelTitle: "Dismiss", view: self)
+                        }
+                        return
+                    }
+                })
                 FIRAuth.auth()?.signIn(withEmail: emailField.text!, password: passwordField.text!)
                 self.createUserAccount(name: nameField.text!)
             })
@@ -99,9 +110,9 @@ class LoginViewController: UIViewController
         let authData = FIRAuth.auth()?.currentUser
         let delimiter = " "
         let token = name.components(separatedBy: delimiter)
-        let firstName = token[0]
-        let lastName = token[1]
-        let user = User(authData: authData!, firstName: firstName, lastName: lastName)
+        let firstName = token.first
+        let lastName = token.last
+        let user = User(authData: authData!, firstName: firstName!, lastName: lastName!)
         ref.ref.child("users").child((authData?.uid)!).setValue(user.toDictionary())
     }
     
@@ -121,9 +132,18 @@ class LoginViewController: UIViewController
     {
         let alert = UIAlertController(title: "Request New Password?", message: "If you forgot your password and would like to request a new one, please provide your email address below and instructions will be emailed to you.", preferredStyle: .alert)
         let cancel = UIAlertAction(title: "Cancel", style: .default)
-        let send = UIAlertAction(title: "Send Request", style: .default) { (alert) in
-            
-            
+        let send = UIAlertAction(title: "Send Request", style: .default) { action in
+            let emailField = alert.textFields![0]
+            FIRAuth.auth()?.sendPasswordReset(withEmail: emailField.text!, completion: { (error) in
+                guard error == nil else
+                {
+                    DispatchQueue.main.async
+                        {
+                            self.utilityClass.errorAlert(title: "Password Request", message: (error?.localizedDescription)!, cancelTitle: "Dismiss", view: self)
+                    }
+                    return
+                }
+            })
         }
         alert.addTextField { (email) in
             email.placeholder = "Enter your email"

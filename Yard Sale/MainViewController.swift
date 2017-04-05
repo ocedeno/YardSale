@@ -18,7 +18,7 @@ class MainViewController: BaseViewController, MKMapViewDelegate, CLLocationManag
     
     var locationManager = LocationManager.sharedInstance
     var ref: FIRDatabaseReference? = nil
-    let utilityClass = Utiliy()
+    let utilityClass = Utility()
     var eventsArray = [Event]()
     var idArray: [String]?
     var locationOne, locationTwo: CLLocation?

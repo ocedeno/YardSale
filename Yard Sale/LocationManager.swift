@@ -329,10 +329,10 @@ class LocationManager: NSObject,CLLocationManagerDelegate {
         
         self.reverseGeocodingCompletionHandler = onReverseGeocodingCompletionHandler
         
-        reverseGocode(coord)
+        reverseGeocode(coord)
     }
     
-    fileprivate func reverseGocode(_ location:CLLocation){
+    fileprivate func reverseGeocode(_ location:CLLocation){
         
         let geocoder: CLGeocoder = CLGeocoder()
         
@@ -357,8 +357,6 @@ class LocationManager: NSObject,CLLocationManagerDelegate {
             }
             
         })
-        
-        
     }
     
     
@@ -371,36 +369,29 @@ class LocationManager: NSObject,CLLocationManagerDelegate {
         
     }
     
-    
     fileprivate func geoCodeAddress(_ address:NSString){
         
         let geocoder = CLGeocoder()
         geocoder.geocodeAddressString(address as String, completionHandler: {(placemarks: [CLPlacemark]?, error: NSError?) -> Void in
             
-            if (error != nil) {
-                
+            if (error != nil)
+            {
                 self.geocodingCompletionHandler!(nil,nil,error!.localizedDescription)
-                
-            }
-            else{
-                
-                if let placemark = placemarks?.first {
-                    
+            }else
+            {
+                if let placemark = placemarks?.first
+                {
                     let address = AddressParser()
                     address.parseAppleLocationData(placemark)
                     let addressDict = address.getAddressDictionary()
                     self.geocodingCompletionHandler!(addressDict,placemark,nil)
-                }
-                else {
-                    
+                }else
+                {
                     self.geocodingCompletionHandler!(nil,nil,"invalid address: \(address)")
-                    
                 }
             }
             
-        } as! CLGeocodeCompletionHandler)
-        
-        
+        } as! CLGeocodeCompletionHandler )
     }
     
     
