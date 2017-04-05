@@ -101,8 +101,6 @@ class MainViewController: BaseViewController, MKMapViewDelegate, CLLocationManag
     
     func setMapRegion(lon: Double, lat: Double)
     {
-        let lon = lon
-        let lat = lat
         let center = CLLocationCoordinate2D(latitude: lat, longitude: lon)
         let span = MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02)
         let region = MKCoordinateRegion(center: center, span: span)
@@ -117,18 +115,15 @@ class MainViewController: BaseViewController, MKMapViewDelegate, CLLocationManag
         self.ref?.queryOrdered(byChild: "distance").observe(.value, with: { snapshot in
             
             var array: [Event] = []
-            var arrayID: [String] = []
             for item in snapshot.children
             {
                 let snap = item as! FIRDataSnapshot
                 let event = Event(snapshot: snap)
                 array.append(event)
-                arrayID.append(snap.key)
             }
             
             self.eventsArray = array
-            self.idArray = arrayID
-            self.eventTableView.reloadData()
+            self.appendDistanceToEventsArray()
             self.reloadEventsToMapView()
         })
     }
@@ -142,6 +137,7 @@ class MainViewController: BaseViewController, MKMapViewDelegate, CLLocationManag
             let pin = MKPointAnnotation()
             pin.coordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(latitude!), longitude: CLLocationDegrees(longitude!))
             pin.title = event.title!
+            
             
             mapView.addAnnotation(pin)
         }
@@ -177,7 +173,6 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
-        appendDistanceToEventsArray(location: indexPath.row)
         let cell = tableView.dequeueReusableCell(withIdentifier: "eventCell")! as! EventTableViewCell
         cell.backgroundColor = UIColor.clear
         cell.updateEventCell(withDate: self.eventsArray[indexPath.row].date!,
@@ -195,16 +190,8 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource
         performSegue(withIdentifier: "segueToDetailView", sender: eventsArray[indexPath.row].imageKey!)
     }
     
-    func appendDistanceToEventsArray(location: Int)
+    func appendDistanceToEventsArray()
     {
-//        let eventLat = eventsArray[location].addressDictionary!["latitude"]! as! String
-//        let eventLon = eventsArray[location].addressDictionary!["longitude"]! as! String
-//        let doubleLat = Double(eventLat)
-//        let doubleLon = Double(eventLon)
-//        locationTwo = CLLocation(latitude: doubleLat!, longitude: doubleLon!)
-//        let distance = getDistance(locationTwo: locationTwo!)
-//        eventsArray[location].distance = distance
-//        eventsArray.sort { Double($0.distance)! < Double($1.distance)!}
         for event in eventsArray
         {
             let eventLat = event.addressDictionary!["latitude"]! as! String
@@ -217,7 +204,6 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource
         }
         
         eventsArray.sort { Double($0.distance)! < Double($1.distance)!}
-    }
-
-    
+        eventTableView.reloadData()
+    }    
 }
