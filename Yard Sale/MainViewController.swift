@@ -22,6 +22,8 @@ class MainViewController: BaseViewController, MKMapViewDelegate, CLLocationManag
     var eventsArray = [Event]()
     var idArray: [String]?
     var locationOne, locationTwo: CLLocation?
+    var dataArray: [String : Dictionary<String, Data>]?
+    var eventImageRef: FIRStorageReference? = nil
     
     override func viewDidLoad()
     {
@@ -59,7 +61,8 @@ class MainViewController: BaseViewController, MKMapViewDelegate, CLLocationManag
         self.title = "Yard Sale"
         let nav = self.navigationController?.navigationBar
         nav?.titleTextAttributes = [NSFontAttributeName: UIFont(name: "YardSale", size: 20)!]
-        let image = UIImage(named: "GreenGrassBackground")
+        let image = UIImage(named: "NavBarGreenGrassBackground")
+        nav?.contentMode = .scaleAspectFit
         nav?.setBackgroundImage(image, for: .default)
     }
     
@@ -67,7 +70,8 @@ class MainViewController: BaseViewController, MKMapViewDelegate, CLLocationManag
     {
         eventTableView.tableFooterView = UIView()
         let blurredBackgroundView = BlurredBackgroundView(frame: .zero)
-        blurredBackgroundView.imageView.image = UIImage.vintageWoodBackground()
+        blurredBackgroundView.blurView.effect = UIBlurEffect(style: .light)
+        blurredBackgroundView.imageView.image = UIImage.greenGrassBackground()
         eventTableView.backgroundView = blurredBackgroundView
         eventTableView.separatorEffect = UIVibrancyEffect(blurEffect: blurredBackgroundView.blurView.effect as! UIBlurEffect)
     }
@@ -192,15 +196,18 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
+        createImageStorageReference(indexPath: indexPath)
         let cell = tableView.dequeueReusableCell(withIdentifier: "eventCell")! as! EventTableViewCell
         cell.backgroundColor = UIColor.clear
+
         cell.updateEventCell(withDate: self.eventsArray[indexPath.row].date!,
                              distance: "\(self.eventsArray[indexPath.row].distance) mi.",
                              headline: self.eventsArray[indexPath.row].title!,
                               address: "\(self.eventsArray[indexPath.row].addressDictionary!["locality"]!), \(self.eventsArray[indexPath.row].addressDictionary!["administrativeArea"]!)",
                              category: self.eventsArray[indexPath.row].description!,
-                                image: UIImage(named: "GorgeousImage")!
+                                image: UIImage.vintageWoodBackground()
         )
+        
         return cell
     }
     
@@ -224,6 +231,15 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource
         
         eventsArray.sort { Double($0.distance)! < Double($1.distance)!}
         eventTableView.reloadData()
+    }
+    
+    func createImageStorageReference(indexPath: IndexPath)
+    {
+        eventImageRef = nil
+        let storage = FIRStorage.storage()
+        let storageRef = storage.reference()
+        let imageRef = storageRef.child("images")
+        eventImageRef = imageRef.child(eventsArray[indexPath.row].imageKey!)
     }
 }
 

@@ -181,11 +181,8 @@ extension DetailViewController: UICollectionViewDataSource
     {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionCell", for: indexPath) as! EventPhotoCollectionViewCell
         let image = UIImage(data: dataArray[indexPath.row])
-        DispatchQueue.main.async
-            {
-                cell.imageView.image = image!
-        }
-        
+        cell.imageView.image = image!
+                
         return cell
     }
 }
