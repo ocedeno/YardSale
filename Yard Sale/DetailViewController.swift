@@ -20,6 +20,8 @@ class DetailViewController: UIViewController, MKMapViewDelegate
     @IBOutlet weak var eventTimeLabel: UILabel!
     @IBOutlet weak var eventDateLabel: UILabel!
     @IBOutlet weak var eventDescriptionTextView: UITextView!
+    @IBOutlet weak var enlargedImageView: UIImageView!
+    @IBOutlet weak var imageViewOverlay: UIView!
     
     var userEvent: Event?
     var ref: FIRDatabaseReference? = nil
@@ -29,7 +31,6 @@ class DetailViewController: UIViewController, MKMapViewDelegate
     var dataStringArray: [String] = []
     var uniqueEventID: String?
     let utilityClass = Utility()
-    var enlargedImageView: UIImageView?
     
     override func viewDidLoad()
     {
@@ -43,10 +44,27 @@ class DetailViewController: UIViewController, MKMapViewDelegate
         getUserEvent()
         eventPhotoCollectionView.dataSource = self
         eventPhotoCollectionView.delegate = self
+        
+        let tapToDismissgesture = UITapGestureRecognizer(target: self, action: #selector(dismissImageSubview))
+        enlargedImageView.addGestureRecognizer(tapToDismissgesture)
+        imageViewOverlay.addGestureRecognizer(tapToDismissgesture)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
+        utilityClass.createBackgroundImageView(view: self.view)
+        
+        eventPhotoCollectionView.backgroundColor = UIColor.clear
         eventDescriptionTextView.isEditable = false
+        
         mapView.isZoomEnabled = false
         mapView.isRotateEnabled = false
         mapView.isScrollEnabled = false
+        
+        imageViewOverlay.isHidden = true
+        enlargedImageView.isHidden = true
+        
     }
     
     func getUserEvent()
@@ -72,7 +90,7 @@ class DetailViewController: UIViewController, MKMapViewDelegate
             populateDataArray()
         }
     }
-    
+
     func createImageStorageReference()
     {
         eventImageRef = nil
@@ -176,41 +194,25 @@ extension DetailViewController: UICollectionViewDelegate
 {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath)
     {
-        UIView.animate(withDuration: 0.7) {
+        UIView.animate(withDuration: 0.7)
+        {
             self.createEnlargedImageView(indexPath: indexPath.row)
         }
     }
     
     func createEnlargedImageView(indexPath: Int)
     {
-        enlargedImageView = UIImageView()
-        let width = self.view.bounds.width * 0.85
-        let height = self.view.bounds.height * 0.85
-        enlargedImageView?.frame = CGRect(x: self.view.center.x, y: self.view.center.y, width: width, height: height)
-        enlargedImageView?.center = self.view.center
-        
         let image = UIImage(data: dataArray[indexPath])
         enlargedImageView?.image = image!
         enlargedImageView?.contentMode = .scaleAspectFit
         
-        let dismissButton = UIButton()
-        let xAdjustment = self.view.bounds.maxX / 4.0
-        dismissButton.frame = CGRect(x: self.view.center.x  - xAdjustment, y: (enlargedImageView?.bounds.maxY)!, width: 25, height: 25)
-        dismissButton.imageView?.image = UIImage.vintageWoodBackground()
-        dismissButton.titleLabel?.text = "X"
-        dismissButton.titleLabel?.textAlignment = .center
-        dismissButton.addTarget(self, action: #selector(dismissImageSubview), for: .touchUpInside)
-        
-        self.view.addSubview(enlargedImageView!)
-        self.enlargedImageView?.addSubview(dismissButton)
-
+        enlargedImageView.isHidden = false
+        imageViewOverlay.isHidden = false
     }
     
     func dismissImageSubview()
     {
-        if view.subviews.last == enlargedImageView
-        {
-            self.enlargedImageView?.removeFromSuperview()
-        }
+        imageViewOverlay.isHidden = true
+        enlargedImageView.isHidden = true
     }
 }

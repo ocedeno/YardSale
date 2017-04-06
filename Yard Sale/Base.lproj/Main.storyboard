@@ -171,13 +171,13 @@
                                 <rect key="frame" x="8" y="40" width="359" height="619"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Ipw-6W-6VH">
-                                        <rect key="frame" x="8" y="0.0" width="343.5" height="275"/>
+                                        <rect key="frame" x="7.5" y="0.0" width="344" height="275"/>
                                         <subviews>
                                             <stackView opaque="NO" multipleTouchEnabled="YES" contentMode="scaleAspectFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="xow-RO-M92" userLabel="LocationButtonStackView">
-                                                <rect key="frame" x="0.0" y="0.0" width="343.5" height="51"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="344" height="51"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ooM-00-BJy" userLabel="Current Address Button" customClass="SSRadioButton" customModule="Yard_Sale" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="167.5" height="51"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="168" height="51"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                         <state key="normal" title="Current Location?"/>
                                                         <userDefinedRuntimeAttributes>
@@ -190,7 +190,7 @@
                                                         </userDefinedRuntimeAttributes>
                                                     </button>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Yei-tY-rPV" userLabel="SelectLocationStackView">
-                                                        <rect key="frame" x="175.5" y="0.0" width="168" height="51"/>
+                                                        <rect key="frame" x="176" y="0.0" width="168" height="51"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZtO-kp-v7M" userLabel="New Location Button" customClass="SSRadioButton" customModule="Yard_Sale" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="168" height="27"/>
@@ -218,19 +218,19 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="7ve-qy-XvB" userLabel="TextStackView">
-                                                <rect key="frame" x="0.0" y="59" width="343.5" height="216"/>
+                                                <rect key="frame" x="0.0" y="59" width="344" height="216"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="TeX-Ex-BXS" userLabel="TextfieldStackView">
-                                                        <rect key="frame" x="0.0" y="0.0" width="343.5" height="106"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="344" height="106"/>
                                                         <subviews>
                                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Title/Header" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bde-Ss-6JJ">
-                                                                <rect key="frame" x="0.0" y="0.0" width="343.5" height="30"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="344" height="30"/>
                                                                 <nil key="textColor"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                                             </textField>
                                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Date" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mUb-xI-N9C">
-                                                                <rect key="frame" x="0.0" y="38" width="343.5" height="30"/>
+                                                                <rect key="frame" x="0.0" y="38" width="344" height="30"/>
                                                                 <nil key="textColor"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <textInputTraits key="textInputTraits"/>
@@ -239,10 +239,10 @@
                                                                 </connections>
                                                             </textField>
                                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="CFW-Yp-Ujp" userLabel="TimeStackView">
-                                                                <rect key="frame" x="0.0" y="76" width="343.5" height="30"/>
+                                                                <rect key="frame" x="0.0" y="76" width="344" height="30"/>
                                                                 <subviews>
                                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Start Time of Event" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8M1-gT-m0G" userLabel="Start Time">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="191.5" height="30"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="192" height="30"/>
                                                                         <nil key="textColor"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                         <textInputTraits key="textInputTraits"/>
@@ -251,7 +251,7 @@
                                                                         </connections>
                                                                     </textField>
                                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Stop Time of Event" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ysY-ne-hCG" userLabel="End Time">
-                                                                        <rect key="frame" x="199.5" y="0.0" width="144" height="30"/>
+                                                                        <rect key="frame" x="200" y="0.0" width="144" height="30"/>
                                                                         <nil key="textColor"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                         <textInputTraits key="textInputTraits"/>
@@ -264,7 +264,7 @@
                                                         </subviews>
                                                     </stackView>
                                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ggJ-V5-AOx">
-                                                        <rect key="frame" x="0.0" y="114" width="343.5" height="102"/>
+                                                        <rect key="frame" x="0.0" y="114" width="344" height="102"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -540,16 +540,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="dA9-Nw-IcF">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667.5"/>
                                 <subviews>
                                     <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="249" verticalCompressionResistancePriority="751" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="BGg-CY-bAh">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="333.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="334"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="300" id="eMC-g2-LjL"/>
                                         </constraints>
                                     </mapView>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="78" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="mY7-b8-YhS">
-                                        <rect key="frame" x="0.0" y="333.5" width="375" height="333.5"/>
+                                        <rect key="frame" x="0.0" y="334" width="375" height="333.5"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="eventCell" rowHeight="78" id="W3X-lC-D5r" customClass="EventTableViewCell" customModule="Yard_Sale" customModuleProvider="target">
@@ -607,19 +607,19 @@
                                                                     <rect key="frame" x="128" y="0.0" width="247" height="77"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" ambiguous="YES" text="Kids Clothes and Toys!" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ofg-s6-e6V">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="247" height="20.5"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="247" height="32"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="2040 SW 33rd Ave" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NCL-G4-PqX">
-                                                                            <rect key="frame" x="0.0" y="20.5" width="247" height="16"/>
+                                                                            <rect key="frame" x="0.0" y="32" width="247" height="16"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="8" adjustsLetterSpacingToFitWidth="YES" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="C1V-by-NCY">
-                                                                            <rect key="frame" x="0.0" y="36.5" width="247" height="40.5"/>
+                                                                            <rect key="frame" x="0.0" y="48" width="247" height="29"/>
                                                                             <string key="text">*Children Clothes  *Children Toys
 *Tools  *Household Items ...</string>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -776,12 +776,27 @@
                                     </collectionView>
                                 </subviews>
                             </stackView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cQh-Ij-kRs">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" red="0.1511936865482234" green="0.1511936865482234" blue="0.1511936865482234" alpha="0.80297517123287676" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9kr-26-b6B">
+                                <rect key="frame" x="36" y="40" width="303" height="607"/>
+                            </imageView>
                         </subviews>
-                        <color key="backgroundColor" red="0.048654697519999998" green="0.77900935910000002" blue="0.037004734820000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="9kr-26-b6B" firstAttribute="leading" secondItem="Iu8-tG-792" secondAttribute="leadingMargin" constant="20" id="7ND-eD-ivZ"/>
+                            <constraint firstItem="cQh-Ij-kRs" firstAttribute="top" secondItem="Iu8-tG-792" secondAttribute="top" id="9sv-Gp-TGL"/>
                             <constraint firstAttribute="trailing" secondItem="DJf-mn-BcQ" secondAttribute="trailing" id="I87-AL-BEG"/>
+                            <constraint firstItem="9kr-26-b6B" firstAttribute="top" secondItem="rTy-wt-8k9" secondAttribute="bottom" constant="20" id="Idp-gL-g5X"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="9kr-26-b6B" secondAttribute="trailing" constant="20" id="LQL-0l-dGX"/>
+                            <constraint firstItem="9kr-26-b6B" firstAttribute="centerX" secondItem="Iu8-tG-792" secondAttribute="centerX" id="QPO-zR-sa9"/>
+                            <constraint firstAttribute="trailing" secondItem="cQh-Ij-kRs" secondAttribute="trailing" id="U97-ch-aoB"/>
+                            <constraint firstItem="jdO-dv-9yh" firstAttribute="top" secondItem="cQh-Ij-kRs" secondAttribute="bottom" id="ZSg-km-C2y"/>
                             <constraint firstItem="DJf-mn-BcQ" firstAttribute="top" secondItem="rTy-wt-8k9" secondAttribute="bottom" id="djl-5a-xCb"/>
+                            <constraint firstItem="jdO-dv-9yh" firstAttribute="top" secondItem="9kr-26-b6B" secondAttribute="bottom" constant="20" id="ksU-3H-lOk"/>
                             <constraint firstItem="jdO-dv-9yh" firstAttribute="top" secondItem="DJf-mn-BcQ" secondAttribute="bottom" id="pff-Kb-K82"/>
+                            <constraint firstItem="cQh-Ij-kRs" firstAttribute="leading" secondItem="Iu8-tG-792" secondAttribute="leading" id="qIx-4B-mEi"/>
                             <constraint firstItem="DJf-mn-BcQ" firstAttribute="leading" secondItem="Iu8-tG-792" secondAttribute="leading" id="zG5-j5-uW8"/>
                         </constraints>
                     </view>
@@ -794,11 +809,13 @@
                     </navigationItem>
                     <connections>
                         <outlet property="doneButton" destination="QzZ-0t-Xb9" id="udY-ea-6Pq"/>
+                        <outlet property="enlargedImageView" destination="9kr-26-b6B" id="wU3-7q-TNU"/>
                         <outlet property="eventDateLabel" destination="e62-oE-XqS" id="Vy1-jC-oel"/>
                         <outlet property="eventDescriptionTextView" destination="qCJ-LE-oBG" id="j16-MZ-jdM"/>
                         <outlet property="eventPhotoCollectionView" destination="z1X-30-Bw3" id="I2l-GM-TvH"/>
                         <outlet property="eventTimeLabel" destination="sM1-7U-3Tb" id="GbK-ar-4ri"/>
                         <outlet property="eventTitleLabel" destination="M5J-ot-Axh" id="5cf-Ci-y4o"/>
+                        <outlet property="imageViewOverlay" destination="cQh-Ij-kRs" id="sYN-pA-Wzi"/>
                         <outlet property="mapView" destination="e1H-DY-75e" id="HPk-BY-lAh"/>
                         <segue destination="RWO-zY-qMQ" kind="show" identifier="segueToImageDetail" id="VvK-Xs-1tN"/>
                     </connections>
@@ -920,7 +937,7 @@
         <image name="GreenGrassBackground" width="2560" height="1600"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="KWd-Vb-nPs"/>
         <segue reference="VvK-Xs-1tN"/>
+        <segue reference="KWd-Vb-nPs"/>
     </inferredMetricsTieBreakers>
 </document>

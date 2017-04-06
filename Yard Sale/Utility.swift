@@ -21,4 +21,40 @@ struct Utility
             view.present(alert, animated: true, completion: nil)
         }
     }
+    
+    func createBackgroundImageView(view: UIView)
+    {
+        let imageView = UIImageView()
+        imageView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
+        imageView.image = UIImage.greenBlurredBackground()
+        imageView.contentMode = .scaleAspectFill
+        view.addSubview(imageView)
+        view.sendSubview(toBack: imageView)
+    }
+}
+
+extension UIImage {
+    class func gorgeousImage() -> UIImage {
+        return UIImage(named: "GorgeousImage")!
+    }
+    
+    class func grassBackground() -> UIImage {
+        return UIImage(named: "GrassBackground")!
+    }
+    
+    class func vintageWoodBackground() -> UIImage {
+        return UIImage(named: "VintageWoodBackground")!
+    }
+    
+    class func yardSaleSign() -> UIImage {
+        return UIImage(named: "YardSaleSign")!
+    }
+    
+    class func greenGrassBackground() -> UIImage {
+        return UIImage(named: "GreenGrassBackground")!
+    }
+    
+    class func greenBlurredBackground() -> UIImage {
+        return UIImage(named: "GreenBlurredBackground")!
+    }
 }

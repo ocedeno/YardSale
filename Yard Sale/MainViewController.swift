@@ -59,7 +59,7 @@ class MainViewController: BaseViewController, MKMapViewDelegate, CLLocationManag
         self.title = "Yard Sale"
         let nav = self.navigationController?.navigationBar
         nav?.titleTextAttributes = [NSFontAttributeName: UIFont(name: "YardSale", size: 20)!]
-        let image = UIImage(named: "GrassBackground")
+        let image = UIImage(named: "GreenGrassBackground")
         nav?.setBackgroundImage(image, for: .default)
     }
     
@@ -67,7 +67,7 @@ class MainViewController: BaseViewController, MKMapViewDelegate, CLLocationManag
     {
         eventTableView.tableFooterView = UIView()
         let blurredBackgroundView = BlurredBackgroundView(frame: .zero)
-        blurredBackgroundView.imageView.image = UIImage.grassBackground()
+        blurredBackgroundView.imageView.image = UIImage.vintageWoodBackground()
         eventTableView.backgroundView = blurredBackgroundView
         eventTableView.separatorEffect = UIVibrancyEffect(blurEffect: blurredBackgroundView.blurView.effect as! UIBlurEffect)
     }

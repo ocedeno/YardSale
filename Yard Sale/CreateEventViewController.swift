@@ -25,7 +25,7 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
     
     var radioButtonController: SSRadioButtonsController?
     let ref: FIRDatabaseReference = FIRDatabase.database().reference()
-    let utility = Utility()
+    let utilityClass = Utility()
     let locationManager = LocationManager.sharedInstance
     var locLat: Double?
     var locLon: Double?
@@ -70,6 +70,7 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
     override func viewWillAppear(_ animated: Bool)
     {
         super.viewWillAppear(true)
+        utilityClass.createBackgroundImageView(view: self.view)
         
         if addDictCompleted
         {
@@ -110,7 +111,7 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
             }else
             {
                 selectNewLocationButton.isHidden = true
-                utility.errorAlert(title: "Location Error", message: "We are not currently using your current location. Please accept our request to use your location for a smoother performance.", cancelTitle: "Okay", view: self)
+                utilityClass.errorAlert(title: "Location Error", message: "We are not currently using your current location. Please accept our request to use your location for a smoother performance.", cancelTitle: "Okay", view: self)
             }
         }else
         {
@@ -133,7 +134,7 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
             
             guard error == nil else
             {
-                self.utility.errorAlert(title: "Location Update Error", message: (error?.description)!, cancelTitle: "Dismiss", view: self)
+                self.utilityClass.errorAlert(title: "Location Update Error", message: (error?.description)!, cancelTitle: "Dismiss", view: self)
                 return
             }
             
@@ -152,7 +153,7 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
             {
                 DispatchQueue.main.async
                     {
-                        self.utility.errorAlert(title: "Location Update Error", message: (error?.description)!, cancelTitle: "Dismiss", view: self)
+                        self.utilityClass.errorAlert(title: "Location Update Error", message: (error?.description)!, cancelTitle: "Dismiss", view: self)
                 }
                 return
             }
@@ -326,7 +327,7 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
         
         guard !(titleTextField.text!.isEmpty) else
         {
-            utility.errorAlert(title: "Save Error", message: "Please make sure the selected fields have been filled.", cancelTitle: "Dismiss", view: self)
+            utilityClass.errorAlert(title: "Save Error", message: "Please make sure the selected fields have been filled.", cancelTitle: "Dismiss", view: self)
             updateBorder(withFrame: titleTextField)
             return false
         }
@@ -335,7 +336,7 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
         
         guard !(dateTextField.text!.isEmpty) else
         {
-            utility.errorAlert(title: "Save Error", message: "Please make sure the selected fields have been filled.", cancelTitle: "Dismiss", view: self)
+            utilityClass.errorAlert(title: "Save Error", message: "Please make sure the selected fields have been filled.", cancelTitle: "Dismiss", view: self)
             updateBorder(withFrame: dateTextField)
             return false
         }
@@ -344,7 +345,7 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
         
         guard !(startTimeField.text!.isEmpty) else
         {
-            utility.errorAlert(title: "Save Error", message: "Please make sure the selected fields have been filled.", cancelTitle: "Dismiss", view: self)
+            utilityClass.errorAlert(title: "Save Error", message: "Please make sure the selected fields have been filled.", cancelTitle: "Dismiss", view: self)
             updateBorder(withFrame: startTimeField)
             return false
         }
@@ -353,7 +354,7 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
         
         guard !(stopTimeField.text!.isEmpty) else
         {
-            utility.errorAlert(title: "Save Error", message: "Please make sure the selected fields have been filled.", cancelTitle: "Dismiss", view: self)
+            utilityClass.errorAlert(title: "Save Error", message: "Please make sure the selected fields have been filled.", cancelTitle: "Dismiss", view: self)
             updateBorder(withFrame: stopTimeField)
             return false
         }
@@ -362,7 +363,7 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
         
         guard !(descriptionText.text.isEmpty) else
         {
-            utility.errorAlert(title: "Save Error", message: "Please make sure the selected fields have been filled.", cancelTitle: "Dismiss", view: self)
+            utilityClass.errorAlert(title: "Save Error", message: "Please make sure the selected fields have been filled.", cancelTitle: "Dismiss", view: self)
             updateBorder(withTextView: descriptionText)
             return false
         }
@@ -417,7 +418,7 @@ extension CreateEventViewController: UINavigationControllerDelegate, UIImagePick
             present(imagePicker, animated: true, completion: nil)
         }else
         {
-            utility.errorAlert(title: "Image Selection Alert", message: "You can only select 10 images at most.", cancelTitle: "Dismiss", view: self)
+            utilityClass.errorAlert(title: "Image Selection Alert", message: "You can only select 10 images at most.", cancelTitle: "Dismiss", view: self)
         }
     }
     

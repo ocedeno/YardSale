@@ -35,6 +35,12 @@ class UserProfileViewController: UIViewController
         self.view.addGestureRecognizer(gesture)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
+        utilityClass.createBackgroundImageView(view: self.view)
+    }
+    
     func createReferenceToUser()
     {
         let uniqueID = firUser?.uid

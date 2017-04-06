@@ -128,10 +128,12 @@ class BlurredBackgroundView: UIView {
     override init(frame: CGRect) {
         let blurEffect = UIBlurEffect(style: .light)
         blurView = UIVisualEffectView(effect: blurEffect)
-        imageView = UIImageView(image: UIImage.grassBackground())
+        imageView = UIImageView(image: UIImage.greenGrassBackground())
         super.init(frame: frame)
         addSubview(imageView)
         addSubview(blurView)
+        sendSubview(toBack: blurView)
+        sendSubview(toBack: imageView)
     }
     
     convenience required init?(coder aDecoder: NSCoder) {
@@ -145,20 +147,4 @@ class BlurredBackgroundView: UIView {
     }
 }
 
-extension UIImage {
-    class func gorgeousImage() -> UIImage {
-        return UIImage(named: "GorgeousImage")!
-    }
-    
-    class func grassBackground() -> UIImage {
-        return UIImage(named: "GrassBackground")!
-    }
-    
-    class func vintageWoodBackground() -> UIImage {
-        return UIImage(named: "VintageWoodBackground")!
-    }
-    
-    class func yardSaleSign() -> UIImage {
-        return UIImage(named: "YardSaleSign")!
-    }
-}
+
