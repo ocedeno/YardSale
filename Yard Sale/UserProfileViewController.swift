@@ -19,6 +19,7 @@ class UserProfileViewController: UIViewController
     @IBOutlet weak var userStateField: UITextField!
     @IBOutlet weak var userProfileImageView: UIImageView!
     @IBOutlet weak var userZipCodeField: UITextField!
+    @IBOutlet weak var collectionView: UICollectionView!
     
     var userInfo: User?
     let utilityClass = Utility()
@@ -29,8 +30,6 @@ class UserProfileViewController: UIViewController
         super.viewDidLoad()
         
         createReferenceToUser()
-        setupProfileImageView()
-        createUpdateBarButtonItem()
         let gesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         self.view.addGestureRecognizer(gesture)
     }
@@ -39,6 +38,8 @@ class UserProfileViewController: UIViewController
         super.viewWillAppear(true)
         
         utilityClass.createBackgroundImageView(view: self.view)
+        createUpdateBarButtonItem()
+        setupProfileImageView()
     }
     
     func createReferenceToUser()
@@ -76,7 +77,7 @@ class UserProfileViewController: UIViewController
         userProfileImageView.layer.borderColor = UIColor.white.cgColor
         userProfileImageView.layer.cornerRadius = userProfileImageView.frame.size.height/2
         userProfileImageView.clipsToBounds = true
-        userProfileImageView.image = UIImage.vintageWoodBackground()
+        userProfileImageView.image = UIImage(named: "profilePlaceholder")
     }
     
     func populateUserValues()
