@@ -115,6 +115,7 @@ class UserProfileViewController: UIViewController
             print("\nNo images from User.")
             return
         }
+        
         for item in (userEvent?.imageTitleDictionary)!
         {
             print("\nItem from imageTitleDict: \(item)")
@@ -175,7 +176,6 @@ class UserProfileViewController: UIViewController
             let fullName = "\(firstName!) \(lastName!)"
             userNameLabel.text = fullName
             userNameField.text = fullName
-            
         }else
         {
             userNameLabel.text = firUser?.displayName!
@@ -196,7 +196,6 @@ class UserProfileViewController: UIViewController
     
     func updateUserInfo()
     {
-        
         let changeRequest = FIRAuth.auth()?.currentUser?.profileChangeRequest()
         if userNameField.text != changeRequest?.displayName
         {
@@ -231,6 +230,12 @@ class UserProfileViewController: UIViewController
         }
         self.utilityClass.errorAlert(title: "Successful Update", message: "Your information was successfully updated!", cancelTitle: "Okay", view: self)
         dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func editEvents(_ sender: UIButton)
+    {
+        print(userEvent)
+        performSegue(withIdentifier: "fromProfileToCreateEvent", sender: userEvent!)
     }
 }
 

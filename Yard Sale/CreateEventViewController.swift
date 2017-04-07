@@ -72,6 +72,7 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
     {
         super.viewWillAppear(true)
         utilityClass.createBackgroundImageView(view: self.view)
+        populateTextfieldValues()
         
         if addDictCompleted
         {
@@ -103,7 +104,7 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
     
     func populateTextfieldValues()
     {
-        guard userEvent == nil else
+        guard userEvent != nil else
         {
             return
         }
@@ -113,7 +114,7 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
         startTimeField.text = userEvent?.startTime
         stopTimeField.text = userEvent?.stopTime
         descriptionText.text = userEvent?.description
-        
+        reloadImages()
     }
     
     internal func didSelectButton(_ aButton: UIButton?)
@@ -248,7 +249,7 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
         let storage = FIRStorage.storage()
         let storageRef = storage.reference()
         let imageRef = storageRef.child("images")
-        eventImageRef = imageRef.child(uniqueEventID!)
+        eventImageRef = imageRef.child((userEvent?.imageKey)!)
     }
     
     func createImageTitleDictionary() -> [String:String]?
@@ -509,28 +510,21 @@ extension CreateEventViewController: UINavigationControllerDelegate, UIImagePick
             
         }else
         {
-            let userRef = FIRDatabase.database().reference().child("users/\(FIRAuth.auth()?.currentUser?.uid)/events")
-            userRef.observeSingleEvent(of: .value, with: { (snapshot) in
-                
-                self.uniqueEventID = snapshot.value as? String
-                
-                self.createImagePath()
-                for ref in (self.userEvent?.imageTitleDictionary)!
-                {
-                    self.eventImageRef?.child(ref.value).data(withMaxSize: 3 * 1024 * 1024, completion: { (data, error) in
-                        guard error == nil else
-                        {
-                            self.utilityClass.errorAlert(title: "Image Error", message: (error?.localizedDescription)!, cancelTitle: "Dismiss", view: self)
-                            
-                            return
-                        }
+            self.createImageStorageReference()
+            for ref in (self.userEvent?.imageTitleDictionary)!
+            {
+                self.eventImageRef?.child(ref.value).data(withMaxSize: 3 * 1024 * 1024, completion: { (data, error) in
+                    guard error == nil else
+                    {
+                        self.utilityClass.errorAlert(title: "Image Error", message: (error?.localizedDescription)!, cancelTitle: "Dismiss", view: self)
                         
-                        self.dataArray.append(data!)
-                        self.eventPhotCollectionView.reloadData()
-                    })
-                }
-            })
-            
+                        return
+                    }
+                    
+                    self.dataArray.append(data!)
+                    self.eventPhotCollectionView.reloadData()
+                })
+            }
         }
     }
 }
