@@ -60,9 +60,10 @@ class UserProfileViewController: UIViewController
         let ref = FIRDatabase.database().reference().child("users")
         let userRefPath = ref.child(uniqueID!)
         userRefPath.observe(.value, with: { (snapshot) in
-            
+
             self.userInfo = User(snapshot: snapshot)
             self.populateUserValues()
+            
             self.getUserEventImageRef()
         })
     }
@@ -186,6 +187,15 @@ class UserProfileViewController: UIViewController
         userEmailField.text = userInfo?.email!
     }
     
+    func populateUserAddress()
+    {
+        let addressRef = ref?.child("users").child((firUser?.uid)!).child("address")
+        addressRef?.observe(.value, with: { (snapshot) in
+            
+            
+        })
+    }
+    
     func dismissKeyboard()
     {
         userNameField.endEditing(true)
@@ -232,7 +242,25 @@ class UserProfileViewController: UIViewController
             })
         }
         
+        if userAddressField.text != ""
+        {
+            FIRDatabase.database().reference().child("users/\(firUser!.uid)/address").child("street").setValue(userAddressField.text!)
+        }
         
+        if userStateField.text != ""
+        {
+            FIRDatabase.database().reference().child("users/\(firUser!.uid)/address").child("state").setValue(userStateField.text!)
+        }
+        
+        if userCityField.text != ""
+        {
+            FIRDatabase.database().reference().child("users/\(firUser!.uid)/address").child("city").setValue(userCityField.text!)
+        }
+        
+        if userZipCodeField.text != ""
+        {
+            FIRDatabase.database().reference().child("users/\(firUser!.uid)/address").child("zipCode").setValue(userZipCodeField.text!)
+        }
         
         self.utilityClass.errorAlert(title: "Successful Update", message: "Your information was successfully updated!", cancelTitle: "Okay", view: self)
         self.navigationController?.popToRootViewController(animated: true)

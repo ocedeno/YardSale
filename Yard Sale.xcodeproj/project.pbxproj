@@ -15,6 +15,7 @@
 		061FF0741E7ED5FF0075F033 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 061FF0721E7ED5FF0075F033 /* LaunchScreen.storyboard */; };
 		061FF07F1E7ED5FF0075F033 /* Yard_SaleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 061FF07E1E7ED5FF0075F033 /* Yard_SaleTests.swift */; };
 		061FF08A1E7ED5FF0075F033 /* Yard_SaleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 061FF0891E7ED5FF0075F033 /* Yard_SaleUITests.swift */; };
+		0621F00F1E982FE60043F262 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0621F00E1E982FE60043F262 /* Address.swift */; };
 		0653EFFA1E96D9260094C704 /* UserProfileCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0653EFF91E96D9260094C704 /* UserProfileCollectionViewCell.swift */; };
 		065DBC261E8431B8002FE5E6 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065DBC251E8431B8002FE5E6 /* Utility.swift */; };
 		065EA8D01E815C3400CA09F4 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065EA8CF1E815C3400CA09F4 /* LoginViewController.swift */; };
@@ -85,6 +86,7 @@
 		061FF0851E7ED5FF0075F033 /* Yard SaleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Yard SaleUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		061FF0891E7ED5FF0075F033 /* Yard_SaleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Yard_SaleUITests.swift; sourceTree = "<group>"; };
 		061FF08B1E7ED5FF0075F033 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0621F00E1E982FE60043F262 /* Address.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
 		0653EFF91E96D9260094C704 /* UserProfileCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileCollectionViewCell.swift; sourceTree = "<group>"; };
 		065DBC251E8431B8002FE5E6 /* Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 		065EA8CF1E815C3400CA09F4 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -240,6 +242,7 @@
 			children = (
 				065EA8D31E8412F900CA09F4 /* User.swift */,
 				061BF4F21E8AE1B900D3BE21 /* Event.swift */,
+				0621F00E1E982FE60043F262 /* Address.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -600,6 +603,7 @@
 				06FA29AF1E8EAB7600A5DD28 /* ImageViewController.swift in Sources */,
 				06FA29AD1E8EA6B000A5DD28 /* EventPhotoCollectionViewCell.swift in Sources */,
 				06FDEEBA1E8C42AB006D0567 /* AddressSelectionViewController.swift in Sources */,
+				0621F00F1E982FE60043F262 /* Address.swift in Sources */,
 				06FDEEB61E8C27D8006D0567 /* LocationManager.swift in Sources */,
 				06EC2E091E8936B100F83D6C /* SSRadioButton.swift in Sources */,
 				06FDEEB81E8C4143006D0567 /* DetailViewController.swift in Sources */,
