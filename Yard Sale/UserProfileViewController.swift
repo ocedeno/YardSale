@@ -159,12 +159,12 @@ class UserProfileViewController: UIViewController
     
     func setupProfileImageView()
     {
-        userProfileImageView.layer.borderWidth=1.0
+        userProfileImageView.layer.borderWidth=5.0
         userProfileImageView.layer.masksToBounds = false
         userProfileImageView.layer.borderColor = UIColor.white.cgColor
         userProfileImageView.layer.cornerRadius = userProfileImageView.frame.size.height/2
         userProfileImageView.clipsToBounds = true
-        userProfileImageView.image = UIImage(named: "profilePlaceholder")
+        
     }
     
     func populateUserValues()
