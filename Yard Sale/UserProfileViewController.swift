@@ -60,7 +60,7 @@ class UserProfileViewController: UIViewController
         let ref = FIRDatabase.database().reference().child("users")
         let userRefPath = ref.child(uniqueID!)
         userRefPath.observe(.value, with: { (snapshot) in
-
+            
             self.userInfo = User(snapshot: snapshot)
             self.populateUserValues()
             self.populateUserAddress()
@@ -73,7 +73,7 @@ class UserProfileViewController: UIViewController
         print("\n2-GetUserEventImageRef")
         let eventRef = FIRDatabase.database().reference().child("users").child((firUser?.uid)!).child("events").child("event")
         eventRef.observe(.value, with: { (snapshot) in
-
+            
             let value = snapshot.value as! String
             print("\nValue : \(value)")
             self.imageRefArray.append(value)
@@ -105,7 +105,7 @@ class UserProfileViewController: UIViewController
         let imageRef = storageRef.child("images")
         let eventImageRef = imageRef.child(uniqueID!)
         print("\nEventImageRef: \(eventImageRef)")
-
+        
         return eventImageRef
     }
     
@@ -137,8 +137,8 @@ class UserProfileViewController: UIViewController
                 self.imageDataArray.append(data!)
                 print("\nImage Data Array: \(self.imageDataArray.count)")
                 DispatchQueue.main.async
-                {
-                    self.collectionView.reloadData()
+                    {
+                        self.collectionView.reloadData()
                 }
             })
         }
@@ -192,12 +192,14 @@ class UserProfileViewController: UIViewController
         let addressRef = FIRDatabase.database().reference().child("users").child((firUser?.uid)!).child("address")
         addressRef.observe(.value, with: { (snapshot) in
             
-            let userAddress = Address(snapshot: snapshot)
-            print("\n*******\(userAddress)")
-            self.userAddressField.text = userAddress.street
-            self.userCityField.text = userAddress.city
-            self.userStateField.text = userAddress.state
-            self.userZipCodeField.text = userAddress.zipCode
+            if snapshot.exists()
+            {
+                let userAddress = Address(snapshot: snapshot)
+                self.userAddressField.text = userAddress.street
+                self.userCityField.text = userAddress.city
+                self.userStateField.text = userAddress.state
+                self.userZipCodeField.text = userAddress.zipCode
+            }
         })
     }
     
