@@ -40,6 +40,7 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
     var eventImageRef: FIRStorageReference?
     var lastImagePath: String?
     var userEvent: Event?
+    var count = 0
     
     override func viewDidLoad()
     {
@@ -577,8 +578,9 @@ extension CreateEventViewController: UITextFieldDelegate
 extension CreateEventViewController: UITextViewDelegate
 {
     func textViewDidBeginEditing(_ textView: UITextView) {
-        if textView == descriptionText
+        if textView == descriptionText && count == 0
         {
+            count += 1
             descriptionText.text = ""
             descriptionText.textColor = UIColor.black
         }
