@@ -680,7 +680,7 @@
                                                             </constraints>
                                                         </imageView>
                                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="1lj-pj-XrQ">
-                                                            <rect key="frame" x="0.0" y="0.0" width="375" height="77"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="367" height="77"/>
                                                             <subviews>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xZ2-kC-vXV" userLabel="TextOverlayView">
                                                                     <rect key="frame" x="0.0" y="0.0" width="120" height="77"/>
@@ -718,23 +718,23 @@
                                                                     </constraints>
                                                                 </view>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="gbs-KW-Kdc">
-                                                                    <rect key="frame" x="128" y="0.0" width="247" height="77"/>
+                                                                    <rect key="frame" x="128" y="0.0" width="239" height="77"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Kids Clothes and Toys!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ofg-s6-e6V">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="247" height="21.5"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="239" height="21.5"/>
                                                                             <fontDescription key="fontDescription" name="HelveticaNeue-BoldItalic" family="Helvetica Neue" pointSize="17"/>
                                                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                             <nil key="highlightedColor"/>
                                                                             <size key="shadowOffset" width="0.0" height="1"/>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="2040 SW 33rd Ave" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NCL-G4-PqX">
-                                                                            <rect key="frame" x="0.0" y="21.5" width="247" height="19"/>
+                                                                            <rect key="frame" x="0.0" y="21.5" width="239" height="19"/>
                                                                             <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="15"/>
                                                                             <nil key="highlightedColor"/>
                                                                             <size key="shadowOffset" width="0.0" height="1"/>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="8" adjustsLetterSpacingToFitWidth="YES" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="C1V-by-NCY">
-                                                                            <rect key="frame" x="0.0" y="40.5" width="247" height="36.5"/>
+                                                                            <rect key="frame" x="0.0" y="40.5" width="239" height="36.5"/>
                                                                             <string key="text">*Children Clothes  *Children Toys
 *Tools  *Household Items ...</string>
                                                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
@@ -757,7 +757,7 @@
                                                         <constraint firstItem="1lj-pj-XrQ" firstAttribute="leading" secondItem="h5S-3Q-2Bu" secondAttribute="leading" id="CAt-aW-gQH"/>
                                                         <constraint firstItem="Sry-Jg-mia" firstAttribute="top" secondItem="xZ2-kC-vXV" secondAttribute="top" id="UzF-FF-eqy"/>
                                                         <constraint firstAttribute="bottom" secondItem="1lj-pj-XrQ" secondAttribute="bottom" id="fcj-zv-3XS"/>
-                                                        <constraint firstAttribute="trailing" secondItem="1lj-pj-XrQ" secondAttribute="trailing" id="mVW-b9-Pfy"/>
+                                                        <constraint firstAttribute="trailing" secondItem="1lj-pj-XrQ" secondAttribute="trailing" constant="8" id="mVW-b9-Pfy"/>
                                                     </constraints>
                                                 </tableViewCellContentView>
                                                 <connections>
@@ -774,7 +774,6 @@
                                 </subviews>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" red="0.98160523929999999" green="1" blue="0.30922617029999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="dA9-Nw-IcF" secondAttribute="bottom" id="Atb-nu-bst"/>
                             <constraint firstAttribute="trailing" secondItem="dA9-Nw-IcF" secondAttribute="trailing" id="BF3-Iy-HSF"/>
@@ -1056,7 +1055,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="AXa-yV-7mK"/>
-        <segue reference="KWd-Vb-nPs"/>
+        <segue reference="igD-jS-SD2"/>
         <segue reference="VvK-Xs-1tN"/>
     </inferredMetricsTieBreakers>
 </document>
