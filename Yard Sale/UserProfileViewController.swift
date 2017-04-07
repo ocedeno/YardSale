@@ -63,7 +63,7 @@ class UserProfileViewController: UIViewController
 
             self.userInfo = User(snapshot: snapshot)
             self.populateUserValues()
-            
+            self.populateUserAddress()
             self.getUserEventImageRef()
         })
     }
@@ -189,10 +189,15 @@ class UserProfileViewController: UIViewController
     
     func populateUserAddress()
     {
-        let addressRef = ref?.child("users").child((firUser?.uid)!).child("address")
-        addressRef?.observe(.value, with: { (snapshot) in
+        let addressRef = FIRDatabase.database().reference().child("users").child((firUser?.uid)!).child("address")
+        addressRef.observe(.value, with: { (snapshot) in
             
-            
+            let userAddress = Address(snapshot: snapshot)
+            print("\n*******\(userAddress)")
+            self.userAddressField.text = userAddress.street
+            self.userCityField.text = userAddress.city
+            self.userStateField.text = userAddress.state
+            self.userZipCodeField.text = userAddress.zipCode
         })
     }
     
