@@ -509,7 +509,28 @@ extension CreateEventViewController: UINavigationControllerDelegate, UIImagePick
             
         }else
         {
-            let ref = FIRStorage.storage().reference().child("images")
+            let userRef = FIRDatabase.database().reference().child("users/\(FIRAuth.auth()?.currentUser?.uid)/events")
+            userRef.observeSingleEvent(of: .value, with: { (snapshot) in
+                
+                self.uniqueEventID = snapshot.value as? String
+                
+                self.createImagePath()
+                for ref in (self.userEvent?.imageTitleDictionary)!
+                {
+                    self.eventImageRef?.child(ref.value).data(withMaxSize: 3 * 1024 * 1024, completion: { (data, error) in
+                        guard error == nil else
+                        {
+                            self.utilityClass.errorAlert(title: "Image Error", message: (error?.localizedDescription)!, cancelTitle: "Dismiss", view: self)
+                            
+                            return
+                        }
+                        
+                        self.dataArray.append(data!)
+                        self.eventPhotCollectionView.reloadData()
+                    })
+                }
+            })
+            
         }
     }
 }
