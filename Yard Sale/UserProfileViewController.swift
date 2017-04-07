@@ -248,6 +248,8 @@ extension UserProfileViewController: UICollectionViewDataSource, UICollectionVie
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! UserProfileCollectionViewCell
         print("imageDataArray Data: \(imageDataArray[indexPath.row])")
         cell.imageView.image = UIImage(data: imageDataArray[indexPath.row])
+        cell.eventDataLabel.text = userEvent?.date
+        cell.eventTitleLabel.text = userEvent?.title
         
         return cell
     }
