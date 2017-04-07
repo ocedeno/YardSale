@@ -11,7 +11,7 @@ import MapKit
 import Firebase
 import FirebaseStorageUI
 
-class DetailViewController: UIViewController, MKMapViewDelegate
+class DetailViewController: UIViewController
 {
     @IBOutlet weak var eventPhotoCollectionView: UICollectionView!
     @IBOutlet weak var doneButton: UIBarButtonItem!
@@ -61,10 +61,10 @@ class DetailViewController: UIViewController, MKMapViewDelegate
         mapView.isZoomEnabled = false
         mapView.isRotateEnabled = false
         mapView.isScrollEnabled = false
+        mapView.delegate = self
         
         imageViewOverlay.isHidden = true
         enlargedImageView.isHidden = true
-        
     }
     
     func getUserEvent()
@@ -135,6 +135,16 @@ class DetailViewController: UIViewController, MKMapViewDelegate
         eventDescriptionTextView.text = userEvent?.description!
     }
     
+    
+    
+    @IBAction func dismissViewController(_ sender: UIBarButtonItem)
+    {
+        _ = navigationController?.popToRootViewController(animated: true)
+    }
+}
+
+extension DetailViewController: MKMapViewDelegate
+{
     func populateMap()
     {
         let pointAnnotation = MKPointAnnotation()
@@ -152,8 +162,9 @@ class DetailViewController: UIViewController, MKMapViewDelegate
         {
             addressString.removeSubrange(dotRange.lowerBound..<addressString.endIndex)
         }
-        
+            
         pointAnnotation.title = addressString
+        pointAnnotation.subtitle = "Select for Directions"
         
         let yourAnnotationAtIndex = 0
         let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
@@ -164,9 +175,56 @@ class DetailViewController: UIViewController, MKMapViewDelegate
         mapView.selectAnnotation(mapView.annotations[yourAnnotationAtIndex], animated: true)
     }
     
-    @IBAction func dismissViewController(_ sender: UIBarButtonItem)
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView?
     {
-        _ = navigationController?.popToRootViewController(animated: true)
+        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "pinView")
+        if annotationView == nil
+        {
+            annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "pinView")
+            annotationView!.canShowCallout = true
+            annotationView!.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+            annotationView!.isDraggable = true
+        }
+        
+        return annotationView
+    }
+    
+    func openMapForPlace() {
+        
+        let stringLat = userEvent?.addressDictionary?["latitude"] as! String
+        let stringLon = userEvent?.addressDictionary?["longitude"] as! String
+        
+        let lat1 : NSString = stringLat as NSString
+        let lng1 : NSString = stringLon as NSString
+        
+        let latitude:CLLocationDegrees =  lat1.doubleValue
+        let longitude:CLLocationDegrees =  lng1.doubleValue
+        
+        let regionDistance:CLLocationDistance = 10000
+        let coordinates = CLLocationCoordinate2DMake(latitude, longitude)
+        let regionSpan = MKCoordinateRegionMakeWithDistance(coordinates, regionDistance, regionDistance)
+        let options = [
+            MKLaunchOptionsMapCenterKey: NSValue(mkCoordinate: regionSpan.center),
+            MKLaunchOptionsMapSpanKey: NSValue(mkCoordinateSpan: regionSpan.span)
+        ]
+        let placemark = MKPlacemark(coordinate: coordinates, addressDictionary: nil)
+        let mapItem = MKMapItem(placemark: placemark)
+        
+        var addressString = userEvent?.addressDictionary?["formattedAddress"] as! String
+        
+        if let dotRange = addressString.range(of: ",")
+        {
+            addressString.removeSubrange(dotRange.lowerBound..<addressString.endIndex)
+        }
+        
+        mapItem.name = addressString
+        mapItem.openInMaps(launchOptions: options)
+        
+    }
+    
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl)
+    {
+        openMapForPlace()
     }
 }
 

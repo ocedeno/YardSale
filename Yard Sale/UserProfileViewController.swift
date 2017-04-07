@@ -43,7 +43,8 @@ class UserProfileViewController: UIViewController
         collectionView.delegate = self
     }
     
-    override func viewWillAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool)
+    {
         super.viewWillAppear(true)
         
         utilityClass.createBackgroundImageView(view: self.view)
