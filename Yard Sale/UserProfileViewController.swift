@@ -24,6 +24,12 @@ class UserProfileViewController: UIViewController
     var userInfo: User?
     let utilityClass = Utility()
     var firUser = FIRAuth.auth()?.currentUser
+    var ref: FIRDatabaseReference? = nil
+    var imageDataArray: [Data] = []
+    var imageRefArray: [String] = []
+    var userEvent: Event?
+    var userEventArray: [Event]?
+    var uniqueID: String?
     
     override func viewDidLoad()
     {
@@ -32,6 +38,8 @@ class UserProfileViewController: UIViewController
         createReferenceToUser()
         let gesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         self.view.addGestureRecognizer(gesture)
+        collectionView.dataSource = self
+        collectionView.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -40,10 +48,12 @@ class UserProfileViewController: UIViewController
         utilityClass.createBackgroundImageView(view: self.view)
         createUpdateBarButtonItem()
         setupProfileImageView()
+        collectionView.backgroundColor = UIColor.clear
     }
     
     func createReferenceToUser()
     {
+        print("\n1-CreateRef")
         let uniqueID = firUser?.uid
         let ref = FIRDatabase.database().reference().child("users")
         let userRefPath = ref.child(uniqueID!)
@@ -51,7 +61,83 @@ class UserProfileViewController: UIViewController
             
             self.userInfo = User(snapshot: snapshot)
             self.populateUserValues()
+            self.getUserEventImageRef()
         })
+    }
+    
+    func getUserEventImageRef()
+    {
+        print("\n2-GetUserEventImageRef")
+        let eventRef = FIRDatabase.database().reference().child("users").child((firUser?.uid)!).child("events").child("event")
+        eventRef.observe(.value, with: { (snapshot) in
+
+            let value = snapshot.value as! String
+            print("\nValue : \(value)")
+            self.imageRefArray.append(value)
+            self.getUserEvent()
+        })
+    }
+    
+    func getUserEvent()
+    {
+        print("\n3-GetUserEvent")
+        let eventRef = FIRDatabase.database().reference().child("events")
+        for imageRef in imageRefArray
+        {
+            eventRef.child(imageRef).observe(.value, with: { (snapshot) in
+                self.uniqueID = imageRef
+                print("\nUniqueID: \(self.uniqueID!)")
+                self.userEvent = Event(snapshot: snapshot)
+                self.userEventArray?.append(self.userEvent!)
+                self.populateDataArray()
+            })
+        }
+    }
+    
+    func createImageStorageReference() -> FIRStorageReference
+    {
+        print("\n4-CreateImageStorageRef")
+        let storage = FIRStorage.storage()
+        let storageRef = storage.reference()
+        let imageRef = storageRef.child("images")
+        let eventImageRef = imageRef.child(uniqueID!)
+        print("\nEventImageRef: \(eventImageRef)")
+
+        return eventImageRef
+    }
+    
+    func populateDataArray()
+    {
+        let eventImageRef = createImageStorageReference()
+        print("\n5-populateDataArray")
+        guard userEvent?.imageTitleDictionary != nil else
+        {
+            print("\nNo images from User.")
+            return
+        }
+        for item in (userEvent?.imageTitleDictionary)!
+        {
+            print("\nItem from imageTitleDict: \(item)")
+            eventImageRef.child(item.value).data(withMaxSize: 3 * 1024 * 1024, completion: { (data, error) in
+                
+                guard error == nil else
+                {
+                    DispatchQueue.main.async
+                        {
+                            self.utilityClass.errorAlert(title: "Event Image Error", message: (error?.localizedDescription)!, cancelTitle: "Dismiss", view: self)
+                            print("\n\(error.debugDescription)")
+                    }
+                    return
+                }
+                
+                self.imageDataArray.append(data!)
+                print("\nImage Data Array: \(self.imageDataArray.count)")
+                DispatchQueue.main.async
+                {
+                    self.collectionView.reloadData()
+                }
+            })
+        }
     }
     
     func createUpdateBarButtonItem()
@@ -145,5 +231,24 @@ class UserProfileViewController: UIViewController
         }
         self.utilityClass.errorAlert(title: "Successful Update", message: "Your information was successfully updated!", cancelTitle: "Okay", view: self)
         dismiss(animated: true, completion: nil)
+    }
+}
+
+extension UserProfileViewController: UICollectionViewDataSource, UICollectionViewDelegate
+{
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
+    {
+        print("\nCollection View Image Data Array: \(self.imageDataArray.count)")
+        return imageDataArray.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
+    {
+        print("\ncellForItemAt was called")
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! UserProfileCollectionViewCell
+        print("imageDataArray Data: \(imageDataArray[indexPath.row])")
+        cell.imageView.image = UIImage(data: imageDataArray[indexPath.row])
+        
+        return cell
     }
 }

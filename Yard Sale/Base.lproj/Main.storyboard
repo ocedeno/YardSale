@@ -94,17 +94,17 @@
                                             </stackView>
                                         </subviews>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="FOT-vX-vqz">
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="FOT-vX-vqz">
                                         <rect key="frame" x="0.0" y="407.5" width="343" height="195.5"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="249" verticalCompressionResistancePriority="751" text="Current Events:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P9Y-t6-w04">
-                                                <rect key="frame" x="112.5" y="0.0" width="118.5" height="51"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Current Events:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P9Y-t6-w04">
+                                                <rect key="frame" x="0.0" y="0.0" width="343" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" alwaysBounceVertical="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="tJG-Oa-pEH">
-                                                <rect key="frame" x="0.0" y="51" width="343" height="144.5"/>
+                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" alwaysBounceVertical="YES" dataMode="prototypes" prefetchingEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tJG-Oa-pEH">
+                                                <rect key="frame" x="0.0" y="20.5" width="343" height="175"/>
                                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Vw4-gC-qE7">
                                                     <size key="itemSize" width="167" height="148"/>
                                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -112,14 +112,14 @@
                                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                 </collectionViewFlowLayout>
                                                 <cells>
-                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="4Wd-jm-3W9">
+                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="4Wd-jm-3W9" customClass="UserProfileCollectionViewCell" customModule="Yard_Sale" customModuleProvider="target">
                                                         <rect key="frame" x="88" y="0.0" width="167" height="148"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                             <rect key="frame" x="0.0" y="0.0" width="167" height="148"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
-                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ZmX-F7-Iik">
+                                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ZmX-F7-Iik">
                                                                     <rect key="frame" x="0.0" y="0.0" width="167" height="148"/>
                                                                 </imageView>
                                                             </subviews>
@@ -130,6 +130,9 @@
                                                             <constraint firstItem="ZmX-F7-Iik" firstAttribute="width" secondItem="4Wd-jm-3W9" secondAttribute="width" id="wrQ-AC-mHX"/>
                                                             <constraint firstItem="ZmX-F7-Iik" firstAttribute="height" secondItem="4Wd-jm-3W9" secondAttribute="height" id="yGx-am-E1S"/>
                                                         </constraints>
+                                                        <connections>
+                                                            <outlet property="imageView" destination="ZmX-F7-Iik" id="tm4-YV-giV"/>
+                                                        </connections>
                                                     </collectionViewCell>
                                                 </cells>
                                             </collectionView>

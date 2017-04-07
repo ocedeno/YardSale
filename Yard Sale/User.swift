@@ -9,7 +9,7 @@
 import Foundation
 import Firebase
 
-struct User
+class User
 {
     static let firstNameKey = "firstName"
     static let lastNameKey = "lastName"

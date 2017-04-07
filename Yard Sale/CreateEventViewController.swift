@@ -227,6 +227,31 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
         stopTimeField.text = dateFormatter.string(from: sender.date)
     }
     
+    func createImageStorageReference()
+    {
+        let storage = FIRStorage.storage()
+        let storageRef = storage.reference()
+        let imageRef = storageRef.child("images")
+        eventImageRef = imageRef.child(uniqueEventID!)
+    }
+    
+    func createImageTitleDictionary() -> [String:String]?
+    {
+        var stringDict: [String:String] = [:]
+        if dataArray.count != 0
+        {
+            var count = 0
+            for item in dataArray
+            {
+                count += 1
+                let stringKey = "item\(count)"
+                stringDict[stringKey] = item.description
+            }
+        }
+        print(stringDict)
+        return stringDict
+    }
+    
     func saveEvent()
     {
         if guardCheck()
@@ -251,6 +276,7 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
             )
             
             taskFirebasePath?.setValue(event.toDictionary())
+            FIRDatabase.database().reference().child("users/\(userID!)/events").child("event").setValue(event.imageKey!)
             if !dataArray.isEmpty
             {
                 savePhotosToFirebase(dataArray: dataArray)
@@ -258,31 +284,6 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
             
             performSegue(withIdentifier: "segueToDetailView", sender: taskFirebasePath?.key)
         }
-    }
-    
-    func createImageStorageReference()
-    {
-        let storage = FIRStorage.storage()
-        let storageRef = storage.reference()
-        let imageRef = storageRef.child("images")
-        eventImageRef = imageRef.child(uniqueEventID!)
-    }
-    
-    func createImageTitleDictionary() -> [String:String]?
-    {
-        var stringDict: [String:String] = [:]
-        if dataArray.count != 0
-        {
-            var count = 0
-            for item in dataArray
-            {
-                count += 1
-                let stringKey = "item\(count)"
-                stringDict[stringKey] = item.description
-            }
-        }
-        print(stringDict)
-        return stringDict
     }
     
     func savePhotosToFirebase(dataArray: [Data])
