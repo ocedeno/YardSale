@@ -114,6 +114,7 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
         startTimeField.text = userEvent?.startTime
         stopTimeField.text = userEvent?.stopTime
         descriptionText.text = userEvent?.description
+        displayEvent.isOn = (userEvent?.active)!
         reloadImages()
     }
     
@@ -249,7 +250,12 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
         let storage = FIRStorage.storage()
         let storageRef = storage.reference()
         let imageRef = storageRef.child("images")
-        eventImageRef = imageRef.child((userEvent?.imageKey)!)
+        if userEvent == nil {
+            eventImageRef = imageRef.child(uniqueEventID!)
+        }else
+        {
+            eventImageRef = imageRef.child((userEvent?.imageKey)!)
+        }
     }
     
     func createImageTitleDictionary() -> [String:String]?
