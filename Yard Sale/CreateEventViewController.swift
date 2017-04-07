@@ -67,6 +67,12 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
         
         updateTextView()
         setTextFieldDelegate()
+        
+        if userEvent != nil
+        {
+            descriptionText.textColor = UIColor.black
+            count = 1
+        }
     }
     
     override func viewWillAppear(_ animated: Bool)
