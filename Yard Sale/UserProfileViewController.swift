@@ -234,7 +234,7 @@ class UserProfileViewController: UIViewController
     }
 }
 
-extension UserProfileViewController: UICollectionViewDataSource, UICollectionViewDelegate
+extension UserProfileViewController: UICollectionViewDataSource
 {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
     {
@@ -252,5 +252,12 @@ extension UserProfileViewController: UICollectionViewDataSource, UICollectionVie
         cell.eventTitleLabel.text = userEvent?.title
         
         return cell
+    }
+}
+
+extension UserProfileViewController: UICollectionViewDelegate
+{
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
     }
 }
