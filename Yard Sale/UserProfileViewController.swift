@@ -257,7 +257,17 @@ extension UserProfileViewController: UICollectionViewDataSource
 
 extension UserProfileViewController: UICollectionViewDelegate
 {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath)
+    {
+        performSegue(withIdentifier: "fromProfileToCreateEvent", sender: userEvent!)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+    {
+        if segue.identifier == "fromProfileToCreateEvent"
+        {
+            let destinationVC = segue.destination as! CreateEventViewController
+            destinationVC.userEvent = sender as? Event
+        }
     }
 }

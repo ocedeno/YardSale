@@ -39,6 +39,7 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
     var uniqueEventID: String?
     var eventImageRef: FIRStorageReference?
     var lastImagePath: String?
+    var userEvent: Event?
     
     override func viewDidLoad()
     {
@@ -98,6 +99,21 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
         let placeholderText = "Please provide a description of your event here..."
         descriptionText.text = placeholderText
         descriptionText.textColor = UIColor(hex: "BBBAC2")
+    }
+    
+    func populateTextfieldValues()
+    {
+        guard userEvent == nil else
+        {
+            return
+        }
+        
+        titleTextField.text = userEvent?.title
+        dateTextField.text = userEvent?.date
+        startTimeField.text = userEvent?.startTime
+        stopTimeField.text = userEvent?.stopTime
+        descriptionText.text = userEvent?.description
+        
     }
     
     internal func didSelectButton(_ aButton: UIButton?)
@@ -248,7 +264,6 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
                 stringDict[stringKey] = item.description
             }
         }
-        print(stringDict)
         return stringDict
     }
     
@@ -316,7 +331,7 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
                 "addressDictionary" : addDictionary! as [String : AnyObject],
                 "imageTitleDictionary" : createImageTitleDictionary()!,
                 "imagePathKey" : taskFirebasePath!.key
-            ] as [String : Any]
+                ] as [String : Any]
         
         
         return dic as [String : AnyObject]
@@ -471,25 +486,30 @@ extension CreateEventViewController: UINavigationControllerDelegate, UIImagePick
     
     func reloadImages()
     {
-        do
+        if userEvent == nil
         {
-            images?.removeAll()
-            dataArray.removeAll()
-            titles = try FileManager.default.contentsOfDirectory(atPath: imagesDirectoryPath!)
-            for image in titles!
+            do
             {
-                lastImagePath = imagesDirectoryPath?.appending("/\(image)")
-                let data = FileManager.default.contents(atPath: lastImagePath!)
-                dataArray.append(data!)
-                let image = UIImage(data: data!)
-                images!.append(image!)
-                eventPhotCollectionView.reloadData()
+                images?.removeAll()
+                dataArray.removeAll()
+                titles = try FileManager.default.contentsOfDirectory(atPath: imagesDirectoryPath!)
+                for image in titles!
+                {
+                    lastImagePath = imagesDirectoryPath?.appending("/\(image)")
+                    let data = FileManager.default.contents(atPath: lastImagePath!)
+                    dataArray.append(data!)
+                    let image = UIImage(data: data!)
+                    images!.append(image!)
+                    eventPhotCollectionView.reloadData()
+                }
+            }catch
+            {
+                print("\nError adding images to images array.")
             }
-            print((images?.count)!)
-            print(imagesDirectoryPath!)
-        }catch
+            
+        }else
         {
-            print("\nError adding images to images array.")
+            let ref = FIRStorage.storage().reference().child("images")
         }
     }
 }
@@ -516,7 +536,7 @@ extension CreateEventViewController: UICollectionViewDataSource
 extension CreateEventViewController: UITextFieldDelegate
 {
     func textFieldDidBeginEditing(_ textField: UITextField) {
-     
+        
         if startTimeField == textField
         {
             startTimeField.text = "8:00 AM"

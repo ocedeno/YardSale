@@ -202,6 +202,7 @@
                         <outlet property="userProfileImageView" destination="yrg-La-ta5" id="EDm-hd-PSp"/>
                         <outlet property="userStateField" destination="twL-Be-6h9" id="eIp-Ro-F2O"/>
                         <outlet property="userZipCodeField" destination="01N-y3-UvN" id="N0D-Ap-SZY"/>
+                        <segue destination="J55-xf-ArT" kind="show" identifier="fromProfileToCreateEvent" id="AXa-yV-7mK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vdl-Xd-ju3" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -266,7 +267,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="7An-J3-Wlr">
-                                <rect key="frame" x="8" y="40" width="359" height="619"/>
+                                <rect key="frame" x="8" y="84" width="359" height="575"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Ipw-6W-6VH">
                                         <rect key="frame" x="7.5" y="0.0" width="344" height="275"/>
@@ -377,28 +378,28 @@
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="9o6-5k-caZ">
-                                        <rect key="frame" x="76.5" y="283" width="206.5" height="190"/>
+                                        <rect key="frame" x="76.5" y="283" width="206.5" height="146"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Display your Event?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9ci-My-cHM">
-                                                <rect key="frame" x="0.0" y="85" width="149.5" height="20.5"/>
+                                                <rect key="frame" x="0.0" y="63" width="149.5" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="5Ka-NJ-9BL">
-                                                <rect key="frame" x="157.5" y="79.5" width="51" height="31"/>
+                                                <rect key="frame" x="157.5" y="57.5" width="51" height="31"/>
                                             </switch>
                                         </subviews>
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nSG-ED-aLx">
-                                        <rect key="frame" x="96" y="481" width="167" height="30"/>
+                                        <rect key="frame" x="96" y="437" width="167" height="30"/>
                                         <state key="normal" title="Add Images to your Sale"/>
                                         <connections>
                                             <action selector="choosePhoto:" destination="J55-xf-ArT" eventType="touchUpInside" id="Pig-wp-4od"/>
                                         </connections>
                                     </button>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="G0c-L7-Fu0">
-                                        <rect key="frame" x="0.0" y="519" width="359" height="100"/>
+                                        <rect key="frame" x="0.0" y="475" width="359" height="100"/>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.48697024828767121" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="100" id="yYA-7F-5hb"/>
@@ -1038,7 +1039,8 @@
         <image name="profilePlaceholder" width="600" height="600"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="i5n-Ig-cWB"/>
+        <segue reference="AXa-yV-7mK"/>
         <segue reference="KWd-Vb-nPs"/>
+        <segue reference="i5n-Ig-cWB"/>
     </inferredMetricsTieBreakers>
 </document>
