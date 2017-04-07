@@ -92,10 +92,9 @@ class MainViewController: BaseViewController, MKMapViewDelegate, CLLocationManag
                 return
             }
             DispatchQueue.main.async
-                {
-                    print("\n***updated Location***")
-                    self.setMapRegion(lon: lon, lat: lat)
-                    self.populateEventsArray()
+            {
+                self.setMapRegion(lon: lon, lat: lat)
+                self.populateEventsArray()
             }
         }
     }

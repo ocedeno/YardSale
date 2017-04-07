@@ -184,9 +184,8 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
             }
             
             DispatchQueue.main.async
-                {
-                    self.addDictionary = dictionary as? [String:AnyObject]
-                    print("***\nCompleted Dictionary Addition***")
+            {
+                self.addDictionary = dictionary as? [String:AnyObject]
             }
         })
     }

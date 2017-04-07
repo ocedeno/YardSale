@@ -24,30 +24,26 @@ class BaseViewController: UIViewController, SlideMenuDelegate
     }
     
     func slideMenuItemSelectedAtIndex(_ index: Int32) {
-        let topViewController : UIViewController = self.navigationController!.topViewController!
-        print("View Controller is : \(topViewController) \n", terminator: "")
+        let _ : UIViewController = self.navigationController!.topViewController!
         switch(index){
         case 0:
-            print("Home\n", terminator: "")
-            
+           
             self.openViewControllerBasedOnIdentifier("MainVC")
             
             break
         case 1:
-            print("Profile\n", terminator: "")
             
             self.openViewControllerBasedOnIdentifier("UserProfileVC")
             
             break
             
         case 2:
-            print("Sign-Out\n", terminator: "")
             
             try! FIRAuth.auth()?.signOut()
             
             break
         default:
-            print("default\n", terminator: "")
+            break
         }
     }
     
@@ -57,7 +53,6 @@ class BaseViewController: UIViewController, SlideMenuDelegate
         let topViewController : UIViewController = self.navigationController!.topViewController!
         
         if (topViewController.restorationIdentifier! == destViewController.restorationIdentifier!){
-            print("Same VC")
         } else {
             self.navigationController!.pushViewController(destViewController, animated: true)
         }

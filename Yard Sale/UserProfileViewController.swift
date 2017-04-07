@@ -30,6 +30,7 @@ class UserProfileViewController: UIViewController
     var userEvent: Event?
     var userEventArray: [Event]?
     var uniqueID: String?
+    let imagePicker = UIImagePickerController()
     
     override func viewDidLoad()
     {
@@ -49,6 +50,7 @@ class UserProfileViewController: UIViewController
         createUpdateBarButtonItem()
         setupProfileImageView()
         collectionView.backgroundColor = UIColor.clear
+        imagePicker.delegate = self
     }
     
     func createReferenceToUser()
@@ -209,7 +211,8 @@ class UserProfileViewController: UIViewController
                 }
             })
         }
-        if self.userEmailField.text == self.userInfo?.email
+        
+        if self.userEmailField.text != self.userInfo?.email
         {
             FIRAuth.auth()?.currentUser?.updateEmail(self.userEmailField.text!, completion: { (error) in
                 
@@ -228,13 +231,15 @@ class UserProfileViewController: UIViewController
                 })
             })
         }
+        
+        
+        
         self.utilityClass.errorAlert(title: "Successful Update", message: "Your information was successfully updated!", cancelTitle: "Okay", view: self)
-        dismiss(animated: true, completion: nil)
+        self.navigationController?.popToRootViewController(animated: true)
     }
     
     @IBAction func editEvents(_ sender: UIButton)
     {
-        print(userEvent)
         performSegue(withIdentifier: "fromProfileToCreateEvent", sender: userEvent!)
     }
 }
@@ -275,5 +280,54 @@ extension UserProfileViewController: UICollectionViewDelegate
             let destinationVC = segue.destination as! CreateEventViewController
             destinationVC.userEvent = sender as? Event
         }
+    }
+}
+
+extension UserProfileViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate
+{
+    @IBAction func editProfileImage()
+    {
+        let alert = UIAlertController(title: "Edit Profile Image", message: "Where can we get your photo from?", preferredStyle: .alert)
+        let photoSelection = UIAlertAction(title: "Photo Library", style: .default) { (action) in
+            self.photoFromLibrary()
+        }
+        let cameraSelection = UIAlertAction(title: "Camera", style: .default) { (alert) in
+            self.shootPhoto()
+        }
+        
+        alert.addAction(photoSelection)
+        alert.addAction(cameraSelection)
+        present(alert, animated: true, completion: nil)
+    }
+    
+    func photoFromLibrary()
+    {
+        imagePicker.allowsEditing = false
+        imagePicker.sourceType = .photoLibrary
+        imagePicker.mediaTypes = UIImagePickerController.availableMediaTypes(for: .photoLibrary)!
+        
+        present(imagePicker, animated: true, completion: nil)
+    }
+    
+    func shootPhoto()
+    {
+        imagePicker.allowsEditing = false
+        imagePicker.sourceType = UIImagePickerControllerSourceType.camera
+        imagePicker.cameraCaptureMode = .photo
+        imagePicker.modalPresentationStyle = .fullScreen
+        present(imagePicker,animated: true,completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any])
+    {
+        let chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage
+        userProfileImageView.contentMode = .scaleAspectFill
+        userProfileImageView.image = chosenImage
+        dismiss(animated:true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController)
+    {
+        dismiss(animated: true, completion: nil)
     }
 }

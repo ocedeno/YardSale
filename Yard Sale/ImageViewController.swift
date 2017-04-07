@@ -28,7 +28,6 @@ class ImageViewController: UIViewController {
     }
     @IBAction func deleteImage()
     {
-        print(imagePath!)
         let createVC = navigationController?.viewControllers[1] as! CreateEventViewController
         try! fileManager.removeItem(atPath: imagePath!)
         createVC.reloadImages()

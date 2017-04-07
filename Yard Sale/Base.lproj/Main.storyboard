@@ -34,18 +34,29 @@
                                         <rect key="frame" x="85" y="0.0" width="173" height="193"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="User Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FqA-Rg-whl">
-                                                <rect key="frame" x="0.0" y="0.0" width="173" height="117"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="173" height="111"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="35"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" verticalCompressionResistancePriority="751" image="profilePlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="yrg-La-ta5">
-                                                <rect key="frame" x="36.5" y="93" width="100" height="100"/>
+                                                <rect key="frame" x="36.5" y="87" width="100" height="100"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="100" id="hRz-Dt-KBz"/>
                                                     <constraint firstAttribute="width" constant="100" id="y56-3w-zmF"/>
                                                 </constraints>
                                             </imageView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rm5-0z-viT">
+                                                <rect key="frame" x="71.5" y="163" width="30" height="30"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="30" id="W8k-di-nv2"/>
+                                                    <constraint firstAttribute="height" constant="30" id="trt-Wq-qS4"/>
+                                                </constraints>
+                                                <state key="normal" title="Edit"/>
+                                                <connections>
+                                                    <action selector="editProfileImage" destination="xt5-02-2Er" eventType="touchUpInside" id="DZn-fP-KDH"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="751" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="QLo-6D-CHq">
