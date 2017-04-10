@@ -24,6 +24,13 @@ class MainViewController: BaseViewController, MKMapViewDelegate, CLLocationManag
     var locationOne, locationTwo: CLLocation?
     var dataArray: [String : Dictionary<String, Data>]?
     var eventImageRef: FIRStorageReference? = nil
+    var mapOverlayView: UIView?
+    var currentLocationButton: UIButton?
+    var chooseLocationButton: UIButton?
+    var buttonHeight: CGFloat = 0.0
+    var buttonWidth: CGFloat = 0.0
+    var buttonHeightConstant: CGFloat = 0.096
+    var buttonWidthConstant: CGFloat = 0.45
     
     override func viewDidLoad()
     {
@@ -37,6 +44,7 @@ class MainViewController: BaseViewController, MKMapViewDelegate, CLLocationManag
         setupBackgroundTableView()
         setupBackgroundNavView()
         populateEventsArray()
+        setupInitialMapView()
     }
     
     override func viewWillAppear(_ animated: Bool)
@@ -45,7 +53,6 @@ class MainViewController: BaseViewController, MKMapViewDelegate, CLLocationManag
         
         eventTableView.backgroundColor = UIColor.clear
         getCurrentLocation()
-        reloadEventsToMapView()
         FIRAuth.auth()?.addStateDidChangeListener { auth, user in
             if user != nil {
                 print("User is signed in.")
@@ -64,6 +71,95 @@ class MainViewController: BaseViewController, MKMapViewDelegate, CLLocationManag
         let image = UIImage(named: "NavBarGreenGrassBackground")
         nav?.contentMode = .scaleAspectFit
         nav?.setBackgroundImage(image, for: .default)
+    }
+    
+    func setupInitialMapView()
+    {
+        createMapOverlay()
+    }
+    
+    func createMapOverlay()
+    {
+        mapOverlayView = UIView(frame: self.mapView.frame)
+        mapOverlayView?.layer.backgroundColor = UIColor.init(red: 0, green: 0, blue: 0, alpha: 0.6).cgColor
+        mapView.addSubview(mapOverlayView!)
+        
+        currentLocationButton = UIButton()
+        chooseLocationButton = UIButton()
+        setupOverlayButtons(button: currentLocationButton!)
+        setupOverlayButtons(button: chooseLocationButton!)
+    }
+    
+    func setupOverlayButtons(button: UIButton)
+    {
+        buttonHeight = buttonHeightConstant * mapView.frame.height
+        buttonWidth = buttonWidthConstant * mapView.frame.width
+        let mapViewCenterX = mapView.center.x
+        let mapViewCenterY = mapView.center.y
+        
+        button.frame = CGRect(x: 0, y: 0, width: buttonWidth, height: buttonHeight)
+        button.layer.cornerRadius = button.frame.height / 2
+        button.layer.backgroundColor = UIColor.black.cgColor
+        button.center.x = mapViewCenterX
+        button.titleLabel?.textColor = UIColor.green
+        button.titleLabel?.minimumScaleFactor = 0.5
+        button.titleLabel?.numberOfLines = 1
+        button.titleLabel?.adjustsFontSizeToFitWidth = true
+        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
+        
+        if button == currentLocationButton
+        {
+            button.setTitle("Use Current Location", for: .normal)
+            button.center.y = mapViewCenterY
+            button.addTarget(self, action: #selector(useCurrentLocation), for: .touchUpInside)
+        }else
+        {
+            button.setTitle("Select a Location", for: .normal)
+            button.center.y = mapViewCenterY + 50
+            button.addTarget(self, action: #selector(chooseLocation), for: .touchUpInside)
+        }
+        
+        mapOverlayView?.addSubview(button)
+    }
+    
+    func useCurrentLocation()
+    {
+        if LocationManager.sharedInstance.isRunning
+        {
+            reloadEventsToMapView()
+            dismissSubview()
+        }else
+        {
+            LocationManager.sharedInstance.startUpdatingLocationWithCompletionHandler({ (lat, long, status, message, error) in
+                guard error == nil else
+                {
+                    self.utilityClass.errorAlert(title: "Location Error", message: (error?.description)!, cancelTitle: "Dismiss", view: self)
+                    return
+                }
+                
+                if LocationManager.sharedInstance.isRunning
+                {
+                    self.reloadEventsToMapView()
+                    self.dismissSubview()
+                }else
+                {
+                    self.utilityClass.errorAlert(title: "Location Error", message: "Cannot use Current Location unless accepted by user.", cancelTitle: "Dismiss", view: self)
+                }
+            })
+        }
+    }
+    
+    func chooseLocation()
+    {
+        performSegue(withIdentifier: "toLocationSelection", sender: self)
+    }
+    
+    func dismissSubview()
+    {
+        UIView.animate(withDuration: 1.0)
+        {
+            self.mapOverlayView!.frame.origin.y -= self.mapView.frame.maxY
+        }
     }
     
     func setupBackgroundTableView()
@@ -181,8 +277,11 @@ class MainViewController: BaseViewController, MKMapViewDelegate, CLLocationManag
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
-        let destinationVC = segue.destination as! DetailViewController
-        destinationVC.uniqueID = sender as? String
+        if segue.identifier == "segueToDetailView"
+        {
+            let destinationVC = segue.destination as! DetailViewController
+            destinationVC.uniqueID = sender as? String
+        }
     }
 }
 

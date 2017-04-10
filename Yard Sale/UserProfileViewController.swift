@@ -56,7 +56,6 @@ class UserProfileViewController: UIViewController
     
     func createReferenceToUser()
     {
-        print("\n1-CreateRef")
         let uniqueID = firUser?.uid
         let ref = FIRDatabase.database().reference().child("users")
         let userRefPath = ref.child(uniqueID!)
@@ -71,12 +70,10 @@ class UserProfileViewController: UIViewController
     
     func getUserEventImageRef()
     {
-        print("\n2-GetUserEventImageRef")
         let eventRef = FIRDatabase.database().reference().child("users").child((firUser?.uid)!).child("events").child("event")
         eventRef.observe(.value, with: { (snapshot) in
             
             let value = snapshot.value as! String
-            print("\nValue : \(value)")
             self.imageRefArray.append(value)
             self.getUserEvent()
         })
@@ -84,7 +81,6 @@ class UserProfileViewController: UIViewController
     
     func getUserEvent()
     {
-        print("\n3-GetUserEvent")
         let eventRef = FIRDatabase.database().reference().child("events")
         for imageRef in imageRefArray
         {
@@ -100,12 +96,10 @@ class UserProfileViewController: UIViewController
     
     func createImageStorageReference() -> FIRStorageReference
     {
-        print("\n4-CreateImageStorageRef")
         let storage = FIRStorage.storage()
         let storageRef = storage.reference()
         let imageRef = storageRef.child("images")
         let eventImageRef = imageRef.child(uniqueID!)
-        print("\nEventImageRef: \(eventImageRef)")
         
         return eventImageRef
     }
@@ -123,7 +117,6 @@ class UserProfileViewController: UIViewController
     func populateDataArray()
     {
         let eventImageRef = createImageStorageReference()
-        print("\n5-populateDataArray")
         guard userEvent?.imageTitleDictionary != nil else
         {
             print("\nNo images from User.")
@@ -132,7 +125,6 @@ class UserProfileViewController: UIViewController
         
         for item in (userEvent?.imageTitleDictionary)!
         {
-            print("\nItem from imageTitleDict: \(item)")
             eventImageRef.child(item.value).data(withMaxSize: 3 * 1024 * 1024, completion: { (data, error) in
                 
                 guard error == nil else

@@ -62,7 +62,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="751" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="QLo-6D-CHq">
                                         <rect key="frame" x="8" y="201" width="327" height="193"/>
                                         <subviews>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" verticalHuggingPriority="249" verticalCompressionResistancePriority="749" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name / Username" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Xp5-ly-3xZ">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" verticalHuggingPriority="249" verticalCompressionResistancePriority="749" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name / Username" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Xp5-ly-3xZ">
                                                 <rect key="frame" x="0.0" y="0.0" width="327" height="42.5"/>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -802,6 +802,7 @@
                         <outlet property="eventTableView" destination="mY7-b8-YhS" id="zwi-nx-sf0"/>
                         <outlet property="mapView" destination="BGg-CY-bAh" id="GSJ-X0-RQ5"/>
                         <segue destination="No7-g4-Y6K" kind="show" identifier="segueToDetailView" id="igD-jS-SD2"/>
+                        <segue destination="HZw-rc-uQu" kind="show" identifier="toLocationSelection" id="bYv-r9-RLc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -1064,8 +1065,9 @@
         <image name="profilePlaceholder" width="600" height="600"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="AXa-yV-7mK"/>
         <segue reference="igD-jS-SD2"/>
+        <segue reference="bYv-r9-RLc"/>
         <segue reference="VvK-Xs-1tN"/>
+        <segue reference="AXa-yV-7mK"/>
     </inferredMetricsTieBreakers>
 </document>
