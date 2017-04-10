@@ -344,8 +344,13 @@ extension UserProfileViewController: UICollectionViewDataSource
 {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
     {
-        print("\nCollection View Image Data Array: \(self.imageDataArray.count)")
-        return imageDataArray.count
+        if imageDataArray.count > 0
+        {
+            return 1
+        }else
+        {
+            return 0
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
