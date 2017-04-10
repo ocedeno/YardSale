@@ -210,14 +210,7 @@ extension DetailViewController: MKMapViewDelegate
         let placemark = MKPlacemark(coordinate: coordinates, addressDictionary: nil)
         let mapItem = MKMapItem(placemark: placemark)
         
-        var addressString = userEvent?.addressDictionary?["formattedAddress"] as! String
-        
-        if let dotRange = addressString.range(of: ",")
-        {
-            addressString.removeSubrange(dotRange.lowerBound..<addressString.endIndex)
-        }
-        
-        mapItem.name = addressString
+        mapItem.name = userEvent?.title
         mapItem.openInMaps(launchOptions: options)
         
     }

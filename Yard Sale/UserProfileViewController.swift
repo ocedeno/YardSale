@@ -110,6 +110,16 @@ class UserProfileViewController: UIViewController
         return eventImageRef
     }
     
+    func createProfileImageStorageReference() -> FIRStorageReference
+    {
+        let storage = FIRStorage.storage()
+        let storageRef = storage.reference()
+        let imageRef = storageRef.child("userProfile")
+        let profileImageRef = imageRef.child((firUser?.uid)!)
+        
+        return profileImageRef
+    }
+    
     func populateDataArray()
     {
         let eventImageRef = createImageStorageReference()
@@ -136,7 +146,6 @@ class UserProfileViewController: UIViewController
                 }
                 
                 self.imageDataArray.append(data!)
-                print("\nImage Data Array: \(self.imageDataArray.count)")
                 DispatchQueue.main.async
                     {
                         self.collectionView.reloadData()
@@ -169,6 +178,7 @@ class UserProfileViewController: UIViewController
         userProfileImageView.layer.cornerRadius = userProfileImageView.frame.size.height/2
         userProfileImageView.clipsToBounds = true
         
+        populateProfileImage()
     }
     
     func populateUserValues()
@@ -200,6 +210,37 @@ class UserProfileViewController: UIViewController
                 self.userCityField.text = userAddress.city
                 self.userStateField.text = userAddress.state
                 self.userZipCodeField.text = userAddress.zipCode
+            }
+        })
+    }
+    
+    func populateProfileImage()
+    {
+        FIRDatabase.database().reference().child("users").child(firUser!.uid).child("profileImageID").observe(.value, with: { (snapshot) in
+            
+            let imageID = snapshot.value! as! String
+            let ref = self.createProfileImageStorageReference()
+            ref.child(imageID).data(withMaxSize: 3 * 1024 * 1024) { (data, error) in
+                
+                guard error == nil else
+                {
+                    DispatchQueue.main.async
+                        {
+                            self.utilityClass.errorAlert(title: "Image Error", message: (error?.localizedDescription)!, cancelTitle: "Dismiss", view: self)
+                            print("\n\(error.debugDescription)")
+                    }
+                    return
+                }
+                
+                if let data = data
+                {
+                    let image = UIImage(data: data)
+                    DispatchQueue.main.async
+                        {
+                            self.userProfileImageView.contentMode = .scaleAspectFill
+                            self.userProfileImageView.image = image
+                    }
+                }
             }
         })
     }
@@ -268,6 +309,22 @@ class UserProfileViewController: UIViewController
         if userZipCodeField.text != ""
         {
             FIRDatabase.database().reference().child("users/\(firUser!.uid)/address").child("zipCode").setValue(userZipCodeField.text!)
+        }
+        
+        if userProfileImageView.image != UIImage(named: "profilePlaceholder")
+        {
+            let ref = createProfileImageStorageReference()
+            let image = userProfileImageView.image
+            let localFile = image?.jpeg(.medium)
+            FIRDatabase.database().reference().child("users").child(firUser!.uid).child("profileImageID").setValue(localFile!.description)
+            _ = ref.child(localFile!.description).put(localFile!, metadata: nil, completion: { (metadata, error) in
+                guard let metadata = metadata else
+                {
+                    return
+                }
+                
+                _ = metadata.downloadURL
+            })
         }
         
         self.utilityClass.errorAlert(title: "Successful Update", message: "Your information was successfully updated!", cancelTitle: "Okay", view: self)
