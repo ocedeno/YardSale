@@ -27,8 +27,7 @@ class MainViewController: BaseViewController, MKMapViewDelegate, CLLocationManag
     var mapOverlayView: UIView?
     var currentLocationButton: UIButton?
     var chooseLocationButton: UIButton?
-    var buttonHeight: CGFloat = 0.0
-    var buttonWidth: CGFloat = 0.0
+    var searchForLocation: UITextField?
     var buttonHeightConstant: CGFloat = 0.096
     var buttonWidthConstant: CGFloat = 0.45
     
@@ -92,8 +91,8 @@ class MainViewController: BaseViewController, MKMapViewDelegate, CLLocationManag
     
     func setupOverlayButtons(button: UIButton)
     {
-        buttonHeight = buttonHeightConstant * mapView.frame.height
-        buttonWidth = buttonWidthConstant * mapView.frame.width
+        let buttonHeight: CGFloat = buttonHeightConstant * mapView.frame.height
+        let buttonWidth: CGFloat = buttonWidthConstant * mapView.frame.width
         let mapViewCenterX = mapView.center.x
         let mapViewCenterY = mapView.center.y
         
@@ -151,7 +150,27 @@ class MainViewController: BaseViewController, MKMapViewDelegate, CLLocationManag
     
     func chooseLocation()
     {
-        performSegue(withIdentifier: "toLocationSelection", sender: self)
+        dismissTextfields()
+    }
+    
+    func createSearchField()
+    {
+        searchForLocation = UITextField()
+        let textFieldHeight: CGFloat = buttonHeightConstant * mapView.frame.height
+        let textFieldWidth: CGFloat = buttonWidthConstant * mapView.frame.width
+        let mapViewCenterX = mapView.center.x
+        let mapViewCenterY = mapView.center.y
+        searchForLocation!.frame = CGRect(x: 0, y: 0, width: textFieldWidth, height: textFieldHeight)
+        searchForLocation!.layer.cornerRadius = searchForLocation!.frame.height / 2
+        searchForLocation!.center.x = mapViewCenterX
+        searchForLocation!.center.y = mapViewCenterY
+        searchForLocation!.layer.backgroundColor = UIColor.lightGray.cgColor
+        searchForLocation!.placeholder = "Enter City or Zip"
+        searchForLocation!.textColor = UIColor.white
+        searchForLocation!.textAlignment = .center
+        
+        
+        self.mapView.addSubview(searchForLocation!)
     }
     
     func dismissSubview()
@@ -160,6 +179,25 @@ class MainViewController: BaseViewController, MKMapViewDelegate, CLLocationManag
         {
             self.mapOverlayView!.frame.origin.y -= self.mapView.frame.maxY
         }
+    }
+    
+    func dismissTextfields()
+    {
+        UIView.animate(withDuration: 0.5,
+                       animations:
+                        {
+                        self.currentLocationButton?.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
+                        self.chooseLocationButton?.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
+
+                        },
+                       completion: { _ in
+                        UIView.animate(withDuration: 0.6)
+                        {
+                            self.currentLocationButton?.transform = CGAffineTransform(scaleX: 0, y: 0)
+                            self.chooseLocationButton?.transform = CGAffineTransform(scaleX: 0, y: 0)
+                            self.createSearchField()
+                        }
+        })
     }
     
     func setupBackgroundTableView()
