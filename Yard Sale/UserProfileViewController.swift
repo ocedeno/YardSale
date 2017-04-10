@@ -41,6 +41,7 @@ class UserProfileViewController: UIViewController
         self.view.addGestureRecognizer(gesture)
         collectionView.dataSource = self
         collectionView.delegate = self
+        setupProfileImageView()
     }
     
     override func viewWillAppear(_ animated: Bool)
@@ -49,7 +50,6 @@ class UserProfileViewController: UIViewController
         
         utilityClass.createBackgroundImageView(view: self.view)
         createUpdateBarButtonItem()
-        setupProfileImageView()
         collectionView.backgroundColor = UIColor.clear
         imagePicker.delegate = self
     }
@@ -177,7 +177,6 @@ class UserProfileViewController: UIViewController
         userProfileImageView.layer.borderColor = UIColor.white.cgColor
         userProfileImageView.layer.cornerRadius = userProfileImageView.frame.size.height/2
         userProfileImageView.clipsToBounds = true
-        
         populateProfileImage()
     }
     
