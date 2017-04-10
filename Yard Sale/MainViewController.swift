@@ -171,6 +171,7 @@ class MainViewController: BaseViewController, MKMapViewDelegate, CLLocationManag
         searchForLocation!.clearsOnBeginEditing = true
         searchForLocation!.textAlignment = .center
         searchForLocation?.autocorrectionType = .no
+        searchForLocation?.returnKeyType = .go
         
         self.mapView.addSubview(searchForLocation!)
     }
@@ -187,19 +188,49 @@ class MainViewController: BaseViewController, MKMapViewDelegate, CLLocationManag
     {
         UIView.animate(withDuration: 0.5,
                        animations:
-                        {
-                        self.currentLocationButton?.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
-                        self.chooseLocationButton?.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
-
-                        },
+            {
+                self.currentLocationButton?.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
+                self.chooseLocationButton?.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
+                
+        },
                        completion: { _ in
                         UIView.animate(withDuration: 0.6)
                         {
                             self.currentLocationButton?.transform = CGAffineTransform(scaleX: 0, y: 0)
                             self.chooseLocationButton?.transform = CGAffineTransform(scaleX: 0, y: 0)
-                            self.createSearchField()
                         }
         })
+        
+        createSearchField()
+    }
+    
+    func redirectMapRegion()
+    {
+        guard let address = searchForLocation?.text else
+        {
+            utilityClass.errorAlert(title: "Blank Field", message: "Please enter your search location.", cancelTitle: "Dismiss", view: self)
+            return
+        }
+
+        let geoCoder = CLGeocoder()
+        geoCoder.geocodeAddressString(address) { (placemark, error) in
+            
+            guard error == nil else
+            {
+                self.utilityClass.errorAlert(title: "Location Error", message: (error?.localizedDescription)!, cancelTitle: "Dismiss", view: self)
+                return
+            }
+            
+            let selectedPlacemark: CLPlacemark = (placemark?[0])!
+            let searchLat = selectedPlacemark.location?.coordinate.latitude
+            let searchLon = selectedPlacemark.location?.coordinate.longitude
+            self.setMapRegion(lon: searchLon!, lat: searchLat!)
+            self.locationOne = CLLocation(latitude: searchLat!, longitude: searchLon!)
+            self.searchForLocation?.isHidden = true
+            self.dismissSubview()
+            self.appendDistanceToEventsArray(currentLocation: false)
+        }
+        
     }
     
     func setupBackgroundTableView()
@@ -228,9 +259,9 @@ class MainViewController: BaseViewController, MKMapViewDelegate, CLLocationManag
                 return
             }
             DispatchQueue.main.async
-            {
-                self.setMapRegion(lon: lon, lat: lat)
-                self.populateEventsArray()
+                {
+                    self.setMapRegion(lon: lon, lat: lat)
+                    self.populateEventsArray()
             }
         }
     }
@@ -259,7 +290,7 @@ class MainViewController: BaseViewController, MKMapViewDelegate, CLLocationManag
             }
             
             self.eventsArray = array
-            self.appendDistanceToEventsArray()
+            self.appendDistanceToEventsArray(currentLocation: true)
             self.reloadEventsToMapView()
         })
     }
@@ -302,12 +333,9 @@ class MainViewController: BaseViewController, MKMapViewDelegate, CLLocationManag
         performSegue(withIdentifier: "segueToDetailView", sender: myPin.imageKey)
     }
     
-    func getDistance(locationTwo: CLLocation) -> String
+    func getDistance(locationOne: CLLocation, locationTwo: CLLocation) -> String
     {
-        let lat = locationManager.lastKnownLatitude
-        let lon = locationManager.lastKnownLongitude
-        locationOne = CLLocation(latitude: lat, longitude: lon)
-        let distanceMeters = locationOne!.distance(from: locationTwo)
+        let distanceMeters = locationOne.distance(from: locationTwo)
         let milesConversion = 0.000621371192
         let distanceMiles = distanceMeters * milesConversion
         let distanceString = String(format: "%.2f", distanceMiles)
@@ -337,13 +365,13 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource
         createImageStorageReference(indexPath: indexPath)
         let cell = tableView.dequeueReusableCell(withIdentifier: "eventCell")! as! EventTableViewCell
         cell.backgroundColor = UIColor.clear
-
+        
         cell.updateEventCell(withDate: self.eventsArray[indexPath.row].date!,
                              distance: "\(self.eventsArray[indexPath.row].distance) mi.",
-                             headline: self.eventsArray[indexPath.row].title!,
-                              address: "\(self.eventsArray[indexPath.row].addressDictionary!["locality"]!), \(self.eventsArray[indexPath.row].addressDictionary!["administrativeArea"]!)",
-                             category: self.eventsArray[indexPath.row].description!,
-                                image: UIImage.vintageWoodBackground()
+            headline: self.eventsArray[indexPath.row].title!,
+            address: "\(self.eventsArray[indexPath.row].addressDictionary!["locality"]!), \(self.eventsArray[indexPath.row].addressDictionary!["administrativeArea"]!)",
+            category: self.eventsArray[indexPath.row].description!,
+            image: UIImage.vintageWoodBackground()
         )
         
         return cell
@@ -354,8 +382,15 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource
         performSegue(withIdentifier: "segueToDetailView", sender: eventsArray[indexPath.row].imageKey!)
     }
     
-    func appendDistanceToEventsArray()
+    func appendDistanceToEventsArray(currentLocation: Bool)
     {
+        if currentLocation
+        {
+            let locOneLon = locationManager.lastKnownLongitude
+            let locOneLat = locationManager.lastKnownLatitude
+            locationOne = CLLocation(latitude: locOneLat, longitude: locOneLon)
+        }
+        
         for event in eventsArray
         {
             let eventLat = event.addressDictionary!["latitude"]! as! String
@@ -363,7 +398,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource
             let doubleLat = Double(eventLat)
             let doubleLon = Double(eventLon)
             locationTwo = CLLocation(latitude: doubleLat!, longitude: doubleLon!)
-            let newDistance = getDistance(locationTwo: locationTwo!)
+            let newDistance = getDistance(locationOne: locationOne!, locationTwo: locationTwo!)
             event.distance = newDistance
         }
         
@@ -386,6 +421,17 @@ extension MainViewController: UITextFieldDelegate
     func textFieldDidBeginEditing(_ textField: UITextField)
     {
         textField.placeholder = nil
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool
+    {
+        if textField == searchForLocation
+        {
+            textField.resignFirstResponder()
+            redirectMapRegion()
+        }
+        
+        return true
     }
 }
 
