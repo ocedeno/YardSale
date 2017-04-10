@@ -217,7 +217,11 @@ class UserProfileViewController: UIViewController
     {
         FIRDatabase.database().reference().child("users").child(firUser!.uid).child("profileImageID").observe(.value, with: { (snapshot) in
             
-            let imageID = snapshot.value! as! String
+            guard let imageID = snapshot.value! as? String else
+            {
+                return
+            }
+            
             let ref = self.createProfileImageStorageReference()
             ref.child(imageID).data(withMaxSize: 3 * 1024 * 1024) { (data, error) in
                 
