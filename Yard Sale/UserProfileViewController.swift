@@ -384,6 +384,42 @@ extension UserProfileViewController: UICollectionViewDelegate
     }
 }
 
+extension UserProfileViewController: UICollectionViewDelegateFlowLayout
+{
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        
+        //Where elements_count is the count of all your items in that
+        //Collection view...
+        let cellCount = CGFloat(1)
+        
+        //If the cell count is zero, no point in calculating anything.
+        if cellCount > 0 {
+            let flowLayout = collectionViewLayout as! UICollectionViewFlowLayout
+            let cellWidth = flowLayout.itemSize.width + flowLayout.minimumInteritemSpacing
+            
+            //20.00 was just extra spacing I wanted to add to my cell.
+            let totalCellWidth = cellWidth*cellCount + 20.00 * (cellCount-1)
+            let contentWidth = collectionView.frame.size.width - collectionView.contentInset.left - collectionView.contentInset.right
+            
+            if (totalCellWidth < contentWidth) {
+                //If the number of cells that exist take up less room than the
+                // collection view width... then there is an actual point to centering the.
+                
+                //Calculate the right amount of padding to center the cells.
+                let padding = (contentWidth - totalCellWidth) / 2.0
+                return UIEdgeInsetsMake(0, padding, 0, padding)
+            } else {
+                //Pretty much if the number of cells that exist take up
+                // more room than the actual collectionView width there is no
+                // point in trying to center them. So we leave the default behavior.
+                return UIEdgeInsetsMake(0, 40, 0, 40)
+            }
+        }
+        
+        return UIEdgeInsets.zero
+    }
+}
+
 extension UserProfileViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate
 {
     @IBAction func editProfileImage()
