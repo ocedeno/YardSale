@@ -156,6 +156,7 @@ class MainViewController: BaseViewController, MKMapViewDelegate, CLLocationManag
     func createSearchField()
     {
         searchForLocation = UITextField()
+        searchForLocation!.delegate = self
         let textFieldHeight: CGFloat = buttonHeightConstant * mapView.frame.height
         let textFieldWidth: CGFloat = buttonWidthConstant * mapView.frame.width
         let mapViewCenterX = mapView.center.x
@@ -167,8 +168,9 @@ class MainViewController: BaseViewController, MKMapViewDelegate, CLLocationManag
         searchForLocation!.layer.backgroundColor = UIColor.lightGray.cgColor
         searchForLocation!.placeholder = "Enter City or Zip"
         searchForLocation!.textColor = UIColor.white
+        searchForLocation!.clearsOnBeginEditing = true
         searchForLocation!.textAlignment = .center
-        
+        searchForLocation?.autocorrectionType = .no
         
         self.mapView.addSubview(searchForLocation!)
     }
@@ -376,6 +378,14 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource
         let storageRef = storage.reference()
         let imageRef = storageRef.child("images")
         eventImageRef = imageRef.child(eventsArray[indexPath.row].imageKey!)
+    }
+}
+
+extension MainViewController: UITextFieldDelegate
+{
+    func textFieldDidBeginEditing(_ textField: UITextField)
+    {
+        textField.placeholder = nil
     }
 }
 
