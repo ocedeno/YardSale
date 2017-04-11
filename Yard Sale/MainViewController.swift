@@ -63,6 +63,15 @@ class MainViewController: BaseViewController, MKMapViewDelegate, CLLocationManag
         }
     }
     
+    override func viewDidDisappear(_ animated: Bool)
+    {
+        super.viewDidDisappear(true)
+    
+        mapOverlayView?.isHidden = true
+        searchForLocation?.endEditing(true)
+        searchForLocation?.isHidden = true
+    }
+    
     func setupBackgroundNavView()
     {
         self.title = "Yard Sale"
@@ -172,12 +181,13 @@ class MainViewController: BaseViewController, MKMapViewDelegate, CLLocationManag
             UIView.animate(withDuration: 1.0)
             {
                 self.mapOverlayView!.frame.origin.y -= self.mapView.frame.maxY
+                self.searchForLocation?.isHidden = true
+                self.view.endEditing(true)
             }
         }else
         {
             UIView.animate(withDuration: 1.0)
             {
-                //self.mapOverlayView!.frame.origin.y += self.mapView.frame.maxY
                 self.createMapOverlay()
             }
         }
@@ -251,6 +261,7 @@ class MainViewController: BaseViewController, MKMapViewDelegate, CLLocationManag
             {
                 self.utilityClass.errorAlert(title: "Location Error", message: (error?.localizedDescription)!, cancelTitle: "Dismiss", view: self)
                 self.searchForLocation?.isHidden = true
+                self.view.endEditing(true)
                 self.dismissSubview()
                 return
             }
@@ -261,6 +272,7 @@ class MainViewController: BaseViewController, MKMapViewDelegate, CLLocationManag
             self.setMapRegion(lon: searchLon!, lat: searchLat!)
             self.locationOne = CLLocation(latitude: searchLat!, longitude: searchLon!)
             self.searchForLocation?.isHidden = true
+            self.view.endEditing(true)
             self.dismissSubview()
             self.appendDistanceToEventsArray(currentLocation: false)
         }
