@@ -185,14 +185,15 @@ class MainViewController: BaseViewController, CLLocationManagerDelegate {
             dismissSubview()
         }else
         {
-            LocationManager.sharedInstance.startUpdatingLocationWithCompletionHandler({ (lat, long, status, message, error) in
+            locationManager.startUpdatingLocationWithCompletionHandler({ (lat, long, status, message, error) in
+                
                 guard error == nil else
                 {
-                    self.utilityClass.errorAlert(title: "Location Error", message: (error?.description)!, cancelTitle: "Dismiss", view: self)
+                    self.utilityClass.errorAlert(title: "Location Error", message: ("Go to settings and adjust current location setting."), cancelTitle: "Dismiss", view: self)
                     return
                 }
                 
-                if LocationManager.sharedInstance.isRunning
+                if self.locationManager.isRunning
                 {
                     self.reloadEventsToMapView()
                     self.setMapRegion(lon: lon, lat: lat)
@@ -268,7 +269,7 @@ class MainViewController: BaseViewController, CLLocationManagerDelegate {
             
             guard error == nil else
             {
-                self.utilityClass.errorAlert(title: "Location Update Error", message: (error?.description)!, cancelTitle: "Dismiss", view: self)
+                print("\nLocation Update Error: \(error!)")
                 return
             }
             DispatchQueue.main.async

@@ -53,7 +53,9 @@
                                                     <constraint firstAttribute="width" constant="30" id="W8k-di-nv2"/>
                                                     <constraint firstAttribute="height" constant="30" id="trt-Wq-qS4"/>
                                                 </constraints>
-                                                <state key="normal" title="Edit"/>
+                                                <state key="normal" title="Edit">
+                                                    <color key="titleColor" red="0.89275659780000005" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
                                                 <connections>
                                                     <action selector="editProfileImage" destination="xt5-02-2Er" eventType="touchUpInside" id="DZn-fP-KDH"/>
                                                 </connections>
@@ -261,11 +263,13 @@
                     </view>
                     <navigationItem key="navigationItem" title="Photo View" id="cUd-5S-prL">
                         <barButtonItem key="leftBarButtonItem" systemItem="trash" id="FE3-6s-tbp">
+                            <color key="tintColor" red="0.89275659780000005" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="deleteImage" destination="RWO-zY-qMQ" id="067-GX-W0X"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="jnJ-xH-6EM">
+                            <color key="tintColor" red="0.89275659780000005" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="saveImage:" destination="RWO-zY-qMQ" id="eAx-E5-lVP"/>
                             </connections>
@@ -305,7 +309,9 @@
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ooM-00-BJy" userLabel="Current Address Button" customClass="SSRadioButton" customModule="Yard_Sale" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="168" height="27"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                        <state key="normal" title="Current Location"/>
+                                                        <state key="normal" title="Current Location">
+                                                            <color key="titleColor" red="0.89275659780000005" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </state>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="color" keyPath="circleColor">
                                                                 <color key="value" red="0.89275659780000005" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -321,7 +327,9 @@
                                                             <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZtO-kp-v7M" userLabel="New Location Button" customClass="SSRadioButton" customModule="Yard_Sale" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="168" height="27"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                                <state key="normal" title="New Location"/>
+                                                                <state key="normal" title="New Location">
+                                                                    <color key="titleColor" red="0.89275659780000005" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                </state>
                                                                 <userDefinedRuntimeAttributes>
                                                                     <userDefinedRuntimeAttribute type="color" keyPath="circleColor">
                                                                         <color key="value" red="0.89275659780000005" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -410,12 +418,15 @@
                                             </label>
                                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="5Ka-NJ-9BL">
                                                 <rect key="frame" x="157.5" y="69.5" width="51" height="31"/>
+                                                <color key="onTintColor" red="0.89275659780000005" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </switch>
                                         </subviews>
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nSG-ED-aLx">
                                         <rect key="frame" x="96" y="437" width="167" height="30"/>
-                                        <state key="normal" title="Add Images to your Sale"/>
+                                        <state key="normal" title="Add Images to your Sale">
+                                            <color key="titleColor" red="0.89275659780000005" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
                                         <connections>
                                             <action selector="choosePhoto:" destination="J55-xf-ArT" eventType="touchUpInside" id="Pig-wp-4od"/>
                                         </connections>
@@ -519,6 +530,7 @@
                     <navigationItem key="navigationItem" title="Map Location" id="xdN-hu-aIe" userLabel="Map Location">
                         <barButtonItem key="backBarButtonItem" title="Back" id="s3B-aI-F9m"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="search" id="9Hf-n8-rk6">
+                            <color key="tintColor" red="0.89275659780000005" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="showSearchBar:" destination="HZw-rc-uQu" id="8aZ-Q4-F5c"/>
                             </connections>
@@ -790,11 +802,13 @@
                     <navigationItem key="navigationItem" id="aqx-xn-l36">
                         <rightBarButtonItems>
                             <barButtonItem systemItem="add" id="wfc-SV-sjH" userLabel="Create Event Button">
+                                <color key="tintColor" red="0.89275659780000005" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <action selector="createEvent:" destination="BYZ-38-t0r" id="ONl-EF-pg0"/>
                                 </connections>
                             </barButtonItem>
                             <barButtonItem systemItem="search" id="75u-Ff-jf9">
+                                <color key="tintColor" red="0.89275659780000005" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <action selector="searchAction:" destination="BYZ-38-t0r" id="bon-ZQ-xGf"/>
                                 </connections>
@@ -931,6 +945,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Sale Details" id="sRO-k6-lQ6">
                         <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="QzZ-0t-Xb9">
+                            <color key="tintColor" red="0.89275659780000005" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="dismissViewController:" destination="No7-g4-Y6K" id="TVY-Nb-mqN"/>
                             </connections>
@@ -1068,9 +1083,9 @@
         <image name="profilePlaceholder" width="600" height="600"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="bYv-r9-RLc"/>
+        <segue reference="igD-jS-SD2"/>
         <segue reference="i5n-Ig-cWB"/>
         <segue reference="AXa-yV-7mK"/>
-        <segue reference="7Zh-xH-6rh"/>
-        <segue reference="KWd-Vb-nPs"/>
     </inferredMetricsTieBreakers>
 </document>
