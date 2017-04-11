@@ -126,12 +126,14 @@ class MainViewController: BaseViewController, MKMapViewDelegate, CLLocationManag
     
     func useCurrentLocation()
     {
+        let lon = locationManager.lastKnownLongitude
+        let lat = locationManager.lastKnownLatitude
+        
         if locationManager.isRunning
         {
             reloadEventsToMapView()
-            let lon = locationManager.lastKnownLongitude
-            let lat = locationManager.lastKnownLatitude
             setMapRegion(lon: lon, lat: lat)
+            appendDistanceToEventsArray(currentLocation: true)
             dismissSubview()
         }else
         {
@@ -145,6 +147,8 @@ class MainViewController: BaseViewController, MKMapViewDelegate, CLLocationManag
                 if LocationManager.sharedInstance.isRunning
                 {
                     self.reloadEventsToMapView()
+                    self.setMapRegion(lon: lon, lat: lat)
+                    self.appendDistanceToEventsArray(currentLocation: true)
                     self.dismissSubview()
                 }else
                 {
