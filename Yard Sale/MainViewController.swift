@@ -18,7 +18,7 @@ class MainViewController: BaseViewController, CLLocationManagerDelegate {
     
     let utilityClass = Utility()
     var locationManager = LocationManager.sharedInstance
-    var ref: FIRDatabaseReference? = nil
+    var ref: FIRDatabaseReference?
     var eventsArray = [Event]()
     var idArray: [String]?
     var locationOne, locationTwo: CLLocation?
@@ -31,6 +31,13 @@ class MainViewController: BaseViewController, CLLocationManagerDelegate {
     var buttonHeightConstant: CGFloat = 0.096
     var buttonWidthConstant: CGFloat = 0.45
     var searchViewIsDisplayed: Bool = false
+    
+    var imageDataArray: [String:Data] = [:]
+    var imageRefArray: [String] = []
+    var userInfo: User?
+    var uniqueID: String?
+    var userEvent: Event?
+    var userEventArray: [Event]?
     
     override func viewDidLoad()
     {
@@ -421,13 +428,25 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource
         createImageStorageReference(indexPath: indexPath)
         let cell = tableView.dequeueReusableCell(withIdentifier: "eventCell")! as! EventTableViewCell
         cell.backgroundColor = UIColor.clear
+        populateDataArray(indexPath: indexPath)
+        let image: UIImage =
+        {
+            if self.imageDataArray.count != 0
+            {
+                let data = imageDataArray[indexPath.row.description]
+                return UIImage(data: data!)!
+            }else
+            {
+                return UIImage.gorgeousImage()
+            }
+        }()
         
         cell.updateEventCell(withDate: self.eventsArray[indexPath.row].date!,
                              distance: "\(self.eventsArray[indexPath.row].distance) mi.",
             headline: self.eventsArray[indexPath.row].title!,
             address: "\(self.eventsArray[indexPath.row].addressDictionary!["locality"]!), \(self.eventsArray[indexPath.row].addressDictionary!["administrativeArea"]!)",
             category: self.eventsArray[indexPath.row].description!,
-            image: UIImage.vintageWoodBackground()
+            image: image
         )
         
         return cell
@@ -497,4 +516,30 @@ class MyPointAnnotation:MKPointAnnotation
     var imageKey: String?
 }
 
+extension MainViewController
+{
+    func populateDataArray(indexPath: IndexPath)
+    {
+        createImageStorageReference(indexPath: indexPath)
+        guard eventsArray[indexPath.row].imageTitleDictionary != nil else
+        {
+            print("\nNo images from User.")
+            return
+        }
+        
+        for item in (eventsArray[indexPath.row].imageTitleDictionary)!
+        {
+            eventImageRef!.child(item.value).data(withMaxSize: 3 * 1024 * 1024, completion: { (data, error) in
+                
+                guard error == nil else
+                {
+                    print("\nError: \(error!.localizedDescription)")
+                    return
+                }
+                self.imageDataArray[indexPath.row.description] = data!
+                self.eventTableView.reloadData()
+            })
+        }
+    }
+}
 
