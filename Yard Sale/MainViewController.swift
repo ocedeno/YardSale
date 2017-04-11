@@ -16,9 +16,9 @@ class MainViewController: BaseViewController, MKMapViewDelegate, CLLocationManag
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var eventTableView: UITableView!
     
+    let utilityClass = Utility()
     var locationManager = LocationManager.sharedInstance
     var ref: FIRDatabaseReference? = nil
-    let utilityClass = Utility()
     var eventsArray = [Event]()
     var idArray: [String]?
     var locationOne, locationTwo: CLLocation?
@@ -30,6 +30,7 @@ class MainViewController: BaseViewController, MKMapViewDelegate, CLLocationManag
     var searchForLocation: UITextField?
     var buttonHeightConstant: CGFloat = 0.096
     var buttonWidthConstant: CGFloat = 0.45
+    var searchViewIsDisplayed: Bool = false
     
     override func viewDidLoad()
     {
@@ -75,6 +76,7 @@ class MainViewController: BaseViewController, MKMapViewDelegate, CLLocationManag
     func setupInitialMapView()
     {
         createMapOverlay()
+        searchViewIsDisplayed = true
     }
     
     func createMapOverlay()
@@ -145,12 +147,34 @@ class MainViewController: BaseViewController, MKMapViewDelegate, CLLocationManag
                     self.utilityClass.errorAlert(title: "Location Error", message: "Cannot use Current Location unless accepted by user.", cancelTitle: "Dismiss", view: self)
                 }
             })
+            dismissSubview()
         }
+        searchViewIsDisplayed = false
     }
     
     func chooseLocation()
     {
         dismissTextfields()
+    }
+    
+    @IBAction func searchAction(_ sender: UIBarButtonItem)
+    {
+        if searchViewIsDisplayed
+        {
+            UIView.animate(withDuration: 1.0)
+            {
+                self.mapOverlayView!.frame.origin.y -= self.mapView.frame.maxY
+            }
+        }else
+        {
+            UIView.animate(withDuration: 1.0)
+            {
+                //self.mapOverlayView!.frame.origin.y += self.mapView.frame.maxY
+                self.createMapOverlay()
+            }
+        }
+
+        searchViewIsDisplayed = !searchViewIsDisplayed
     }
     
     func createSearchField()
@@ -428,6 +452,7 @@ extension MainViewController: UITextFieldDelegate
         if textField == searchForLocation
         {
             textField.resignFirstResponder()
+            searchViewIsDisplayed = false
             redirectMapRegion()
         }
         
