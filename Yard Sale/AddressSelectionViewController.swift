@@ -23,6 +23,7 @@ class AddressSelectionViewController: UIViewController, UISearchBarDelegate, MKM
     var pointAnnotation:MKPointAnnotation!
     var pinAnnotationView:MKPinAnnotationView!
     let utilityClass = Utility()
+    @IBOutlet weak var searchBarButtonItem: UIBarButtonItem!
     
     override func viewDidLoad()
     {
@@ -35,11 +36,19 @@ class AddressSelectionViewController: UIViewController, UISearchBarDelegate, MKM
 
     }
     
+    override func viewDidAppear(_ animated: Bool)
+    {
+        super.viewDidAppear(true)
+        
+        showSearchBar(searchBarButtonItem)
+    }
+    
     @IBAction func showSearchBar(_ sender: UIBarButtonItem)
     {
         searchController = UISearchController(searchResultsController: nil)
         searchController.hidesNavigationBarDuringPresentation = false
         self.searchController.searchBar.delegate = self
+        self.searchController.searchBar.placeholder = "Search City, State, or Zip"
         present(searchController, animated: true, completion: nil)
     }
     

@@ -527,6 +527,7 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="mapView" destination="blO-qE-x2q" id="9Wg-PB-y9S"/>
+                        <outlet property="searchBarButtonItem" destination="9Hf-n8-rk6" id="6p0-Zv-T5U"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bh2-D4-hqM" userLabel="First Responder" sceneMemberID="firstResponder"/>
