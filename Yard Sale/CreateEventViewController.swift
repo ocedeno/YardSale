@@ -16,7 +16,6 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
     @IBOutlet weak var dateTextField: UITextField!
     @IBOutlet weak var useNewLocation: SSRadioButton!
     @IBOutlet weak var useCurrentAddressButton: SSRadioButton!
-    @IBOutlet weak var selectNewLocationButton: UIButton!
     @IBOutlet weak var startTimeField: UITextField!
     @IBOutlet weak var stopTimeField: UITextField!
     @IBOutlet weak var descriptionText: UITextView!
@@ -83,12 +82,9 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
         
         if addDictCompleted
         {
-            selectNewLocationButton.isHidden = false
-            selectNewLocationButton.titleLabel?.text = "Selected!"
             createAddressDictionary(latitude: locLat!, longitude: locLon!)
         }else
         {
-            selectNewLocationButton.isHidden = true
             useNewLocation.isSelected = false
             useNewLocation.toggleButon()
         }
@@ -131,16 +127,11 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
         {
             if CLLocationManager.locationServicesEnabled()
             {
-                selectNewLocationButton.isHidden = true
                 startLocationUpdater()
             }else
             {
-                selectNewLocationButton.isHidden = true
                 utilityClass.errorAlert(title: "Location Error", message: "We are not currently using your current location. Please accept our request to use your location for a smoother performance.", cancelTitle: "Okay", view: self)
             }
-        }else
-        {
-            selectNewLocationButton.isHidden = false
         }
     }
     
