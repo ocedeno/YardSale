@@ -52,7 +52,6 @@ class MainViewController: BaseViewController, MKMapViewDelegate, CLLocationManag
         super.viewWillAppear(true)
         
         eventTableView.backgroundColor = UIColor.clear
-        getCurrentLocation()
         FIRAuth.auth()?.addStateDidChangeListener { auth, user in
             if user != nil {
                 print("User is signed in.")
