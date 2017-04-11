@@ -97,8 +97,9 @@ class MainViewController: BaseViewController, MKMapViewDelegate, CLLocationManag
         let buttonWidth: CGFloat = buttonWidthConstant * mapView.frame.width
         let mapViewCenterX = mapView.center.x
         let mapViewCenterY = mapView.center.y
+        let centerViewX = self.view.center.x
         
-        button.frame = CGRect(x: 0, y: 0, width: buttonWidth, height: buttonHeight)
+        button.frame = CGRect(x: centerViewX, y: 0, width: buttonWidth, height: buttonHeight)
         button.layer.cornerRadius = button.frame.height / 2
         button.layer.backgroundColor = UIColor.black.cgColor
         button.center.x = mapViewCenterX
@@ -125,9 +126,12 @@ class MainViewController: BaseViewController, MKMapViewDelegate, CLLocationManag
     
     func useCurrentLocation()
     {
-        if LocationManager.sharedInstance.isRunning
+        if locationManager.isRunning
         {
             reloadEventsToMapView()
+            let lon = locationManager.lastKnownLongitude
+            let lat = locationManager.lastKnownLatitude
+            setMapRegion(lon: lon, lat: lat)
             dismissSubview()
         }else
         {
@@ -242,6 +246,8 @@ class MainViewController: BaseViewController, MKMapViewDelegate, CLLocationManag
             guard error == nil else
             {
                 self.utilityClass.errorAlert(title: "Location Error", message: (error?.localizedDescription)!, cancelTitle: "Dismiss", view: self)
+                self.searchForLocation?.isHidden = true
+                self.dismissSubview()
                 return
             }
             
