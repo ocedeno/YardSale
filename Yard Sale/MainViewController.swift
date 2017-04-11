@@ -11,7 +11,7 @@ import Firebase
 import MapKit
 import CoreLocation
 
-class MainViewController: BaseViewController, MKMapViewDelegate, CLLocationManagerDelegate {
+class MainViewController: BaseViewController, CLLocationManagerDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var eventTableView: UITableView!
@@ -81,6 +81,16 @@ class MainViewController: BaseViewController, MKMapViewDelegate, CLLocationManag
         nav?.setBackgroundImage(image, for: .default)
     }
     
+    func setupBackgroundTableView()
+    {
+        eventTableView.tableFooterView = UIView()
+        let blurredBackgroundView = BlurredBackgroundView(frame: .zero)
+        blurredBackgroundView.blurView.effect = UIBlurEffect(style: .light)
+        blurredBackgroundView.imageView.image = UIImage.greenGrassBackground()
+        eventTableView.backgroundView = blurredBackgroundView
+        eventTableView.separatorEffect = UIVibrancyEffect(blurEffect: blurredBackgroundView.blurView.effect as! UIBlurEffect)
+    }
+    
     func setupInitialMapView()
     {
         createMapOverlay()
@@ -130,6 +140,29 @@ class MainViewController: BaseViewController, MKMapViewDelegate, CLLocationManag
         }
         
         mapOverlayView?.addSubview(button)
+    }
+    
+    func createSearchField()
+    {
+        searchForLocation = UITextField()
+        searchForLocation!.delegate = self
+        let textFieldHeight: CGFloat = buttonHeightConstant * mapView.frame.height
+        let textFieldWidth: CGFloat = buttonWidthConstant * mapView.frame.width
+        let mapViewCenterX = mapView.center.x
+        let mapViewCenterY = mapView.center.y
+        searchForLocation!.frame = CGRect(x: 0, y: 0, width: textFieldWidth, height: textFieldHeight)
+        searchForLocation!.layer.cornerRadius = searchForLocation!.frame.height / 2
+        searchForLocation!.center.x = mapViewCenterX
+        searchForLocation!.center.y = mapViewCenterY
+        searchForLocation!.layer.backgroundColor = UIColor.lightGray.cgColor
+        searchForLocation!.placeholder = "Enter City or Zip"
+        searchForLocation!.textColor = UIColor.white
+        searchForLocation!.clearsOnBeginEditing = true
+        searchForLocation!.textAlignment = .center
+        searchForLocation?.autocorrectionType = .no
+        searchForLocation?.returnKeyType = .go
+        
+        self.mapView.addSubview(searchForLocation!)
     }
     
     func useCurrentLocation()
@@ -193,30 +226,7 @@ class MainViewController: BaseViewController, MKMapViewDelegate, CLLocationManag
 
         searchViewIsDisplayed = !searchViewIsDisplayed
     }
-    
-    func createSearchField()
-    {
-        searchForLocation = UITextField()
-        searchForLocation!.delegate = self
-        let textFieldHeight: CGFloat = buttonHeightConstant * mapView.frame.height
-        let textFieldWidth: CGFloat = buttonWidthConstant * mapView.frame.width
-        let mapViewCenterX = mapView.center.x
-        let mapViewCenterY = mapView.center.y
-        searchForLocation!.frame = CGRect(x: 0, y: 0, width: textFieldWidth, height: textFieldHeight)
-        searchForLocation!.layer.cornerRadius = searchForLocation!.frame.height / 2
-        searchForLocation!.center.x = mapViewCenterX
-        searchForLocation!.center.y = mapViewCenterY
-        searchForLocation!.layer.backgroundColor = UIColor.lightGray.cgColor
-        searchForLocation!.placeholder = "Enter City or Zip"
-        searchForLocation!.textColor = UIColor.white
-        searchForLocation!.clearsOnBeginEditing = true
-        searchForLocation!.textAlignment = .center
-        searchForLocation?.autocorrectionType = .no
-        searchForLocation?.returnKeyType = .go
-        
-        self.mapView.addSubview(searchForLocation!)
-    }
-    
+
     func dismissSubview()
     {
         UIView.animate(withDuration: 1.0)
@@ -244,56 +254,7 @@ class MainViewController: BaseViewController, MKMapViewDelegate, CLLocationManag
         
         createSearchField()
     }
-    
-    func redirectMapRegion()
-    {
-        guard let address = searchForLocation?.text else
-        {
-            utilityClass.errorAlert(title: "Blank Field", message: "Please enter your search location.", cancelTitle: "Dismiss", view: self)
-            return
-        }
 
-        let geoCoder = CLGeocoder()
-        geoCoder.geocodeAddressString(address) { (placemark, error) in
-            
-            guard error == nil else
-            {
-                self.utilityClass.errorAlert(title: "Location Error", message: (error?.localizedDescription)!, cancelTitle: "Dismiss", view: self)
-                self.searchForLocation?.isHidden = true
-                self.view.endEditing(true)
-                self.dismissSubview()
-                return
-            }
-            
-            let selectedPlacemark: CLPlacemark = (placemark?[0])!
-            let searchLat = selectedPlacemark.location?.coordinate.latitude
-            let searchLon = selectedPlacemark.location?.coordinate.longitude
-            self.setMapRegion(lon: searchLon!, lat: searchLat!)
-            self.locationOne = CLLocation(latitude: searchLat!, longitude: searchLon!)
-            self.searchForLocation?.isHidden = true
-            self.view.endEditing(true)
-            self.dismissSubview()
-            self.appendDistanceToEventsArray(currentLocation: false)
-        }
-        
-    }
-    
-    func setupBackgroundTableView()
-    {
-        eventTableView.tableFooterView = UIView()
-        let blurredBackgroundView = BlurredBackgroundView(frame: .zero)
-        blurredBackgroundView.blurView.effect = UIBlurEffect(style: .light)
-        blurredBackgroundView.imageView.image = UIImage.greenGrassBackground()
-        eventTableView.backgroundView = blurredBackgroundView
-        eventTableView.separatorEffect = UIVibrancyEffect(blurEffect: blurredBackgroundView.blurView.effect as! UIBlurEffect)
-    }
-    
-    @IBAction func createEvent(_ sender: UIBarButtonItem)
-    {
-        openViewControllerBasedOnIdentifier("CreateEventVC")
-        locationManager.stopUpdatingLocation()
-    }
-    
     func getCurrentLocation()
     {
         locationManager.startUpdatingLocationWithCompletionHandler { (lat, lon, status, verboseMessage, error) in
@@ -319,6 +280,39 @@ class MainViewController: BaseViewController, MKMapViewDelegate, CLLocationManag
         
         self.mapView.setRegion(region, animated: false)
         self.mapView.showsUserLocation = true
+    }
+    
+    func redirectMapRegion()
+    {
+        guard let address = searchForLocation?.text else
+        {
+            utilityClass.errorAlert(title: "Blank Field", message: "Please enter your search location.", cancelTitle: "Dismiss", view: self)
+            return
+        }
+        
+        let geoCoder = CLGeocoder()
+        geoCoder.geocodeAddressString(address) { (placemark, error) in
+            
+            guard error == nil else
+            {
+                self.utilityClass.errorAlert(title: "Location Error", message: (error?.localizedDescription)!, cancelTitle: "Dismiss", view: self)
+                self.searchForLocation?.isHidden = true
+                self.view.endEditing(true)
+                self.dismissSubview()
+                return
+            }
+            
+            let selectedPlacemark: CLPlacemark = (placemark?[0])!
+            let searchLat = selectedPlacemark.location?.coordinate.latitude
+            let searchLon = selectedPlacemark.location?.coordinate.longitude
+            self.setMapRegion(lon: searchLon!, lat: searchLat!)
+            self.locationOne = CLLocation(latitude: searchLat!, longitude: searchLon!)
+            self.searchForLocation?.isHidden = true
+            self.view.endEditing(true)
+            self.dismissSubview()
+            self.appendDistanceToEventsArray(currentLocation: false)
+        }
+        
     }
     
     func populateEventsArray()
@@ -355,6 +349,24 @@ class MainViewController: BaseViewController, MKMapViewDelegate, CLLocationManag
         }
     }
     
+    @IBAction func createEvent(_ sender: UIBarButtonItem)
+    {
+        openViewControllerBasedOnIdentifier("CreateEventVC")
+        locationManager.stopUpdatingLocation()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+    {
+        if segue.identifier == "segueToDetailView"
+        {
+            let destinationVC = segue.destination as! DetailViewController
+            destinationVC.uniqueID = sender as? String
+        }
+    }
+}
+
+extension MainViewController: MKMapViewDelegate
+{
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView?
     {
         if annotation is MKUserLocation {
@@ -388,13 +400,12 @@ class MainViewController: BaseViewController, MKMapViewDelegate, CLLocationManag
         return String(distanceString)
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool)
     {
-        if segue.identifier == "segueToDetailView"
-        {
-            let destinationVC = segue.destination as! DetailViewController
-            destinationVC.uniqueID = sender as? String
-        }
+        let lat = mapView.centerCoordinate.latitude
+        let lon = mapView.centerCoordinate.longitude
+        locationOne = CLLocation(latitude: lat, longitude: lon)
+        appendDistanceToEventsArray(currentLocation: false)
     }
 }
 
