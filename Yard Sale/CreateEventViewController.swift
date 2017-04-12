@@ -345,6 +345,12 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
     {
         let originalBorderColor = UIColor.init(colorLiteralRed: 204.0/255.0, green: 204.0/255.0, blue: 204.0/255.0, alpha: 1.0)
         
+        guard useCurrentAddressButton.isSelected || useNewLocation.isSelected else
+        {
+            utilityClass.errorAlert(title: "Save Error", message: "Please make a location selection.", cancelTitle: "Dismiss", view: self)
+            return false
+        }
+        
         guard !(titleTextField.text!.isEmpty) else
         {
             utilityClass.errorAlert(title: "Save Error", message: "Please make sure the selected fields have been filled.", cancelTitle: "Dismiss", view: self)
