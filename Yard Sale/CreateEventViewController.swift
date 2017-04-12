@@ -21,6 +21,7 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
     @IBOutlet weak var descriptionText: UITextView!
     @IBOutlet weak var displayEvent: UISwitch!
     @IBOutlet weak var eventPhotCollectionView: UICollectionView!
+    @IBOutlet weak var addImageButton: UIButton!
     
     var radioButtonController: SSRadioButtonsController?
     let ref: FIRDatabaseReference = FIRDatabase.database().reference()
@@ -72,6 +73,7 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
         if userEvent != nil
         {
             descriptionText.textColor = UIColor.black
+            addImageButton.setTitle("Remove Old, and Add New Images", for: .normal)
             editingEvent = true
         }
     }
@@ -113,6 +115,8 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
     internal func updateTextView()
     {
         let placeholderText = "Please provide a description of your event here..."
+        descriptionText.clipsToBounds = true
+        descriptionText.layer.cornerRadius = 10.0
         descriptionText.text = placeholderText
         descriptionText.textColor = UIColor(hex: "BBBAC2")
     }
@@ -291,7 +295,6 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
             let dic: [String:AnyObject] = updateEvent()
             let userID = FIRAuth.auth()?.currentUser?.uid
             locationManager.stopUpdatingLocation()
-            print("\nEditing Event: \(editingEvent)")
             if editingEvent
             {
                 let updateRef = FIRDatabase.database().reference().child("events").child(userEvent!.imageKey!)

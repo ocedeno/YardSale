@@ -486,6 +486,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="addImageButton" destination="nSG-ED-aLx" id="mk8-7q-yiy"/>
                         <outlet property="dateTextField" destination="mUb-xI-N9C" id="q6a-FW-MZ4"/>
                         <outlet property="descriptionText" destination="ggJ-V5-AOx" id="wXA-Wj-qKZ"/>
                         <outlet property="displayEvent" destination="5Ka-NJ-9BL" id="Ygj-QQ-Qnm"/>
