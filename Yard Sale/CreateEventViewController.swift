@@ -484,14 +484,34 @@ extension CreateEventViewController: UINavigationControllerDelegate, UIImagePick
 {
     @IBAction func choosePhoto(_ sender: UIButton)
     {
-        if dataArray.count < 10
+        if sender.titleLabel?.text == "Remove Old, and Add New Images"
         {
-            let imagePicker = UIImagePickerController()
-            imagePicker.delegate = self
-            present(imagePicker, animated: true, completion: nil)
+            createImageStorageReference()
+            for item in dataArray
+            {
+                eventImageRef?.child(item.description).delete(completion: { (error) in
+                    
+                    guard error == nil else
+                    {
+                        return self.utilityClass.errorAlert(title: "Image Deletion Error", message: "There was an error deleting your images. Please try again later.", cancelTitle: "Dismiss", view: self)
+                    }
+                })
+            }
+            
+            dataArray.removeAll()
+            self.eventPhotCollectionView.reloadData()
+            addImageButton.setTitle("Add Images", for: .normal)
         }else
         {
-            utilityClass.errorAlert(title: "Image Selection Alert", message: "You can only select 10 images at most.", cancelTitle: "Dismiss", view: self)
+            if dataArray.count < 10
+            {
+                let imagePicker = UIImagePickerController()
+                imagePicker.delegate = self
+                present(imagePicker, animated: true, completion: nil)
+            }else
+            {
+                utilityClass.errorAlert(title: "Image Selection Alert", message: "You can only select 10 images at most.", cancelTitle: "Dismiss", view: self)
+            }
         }
     }
     
