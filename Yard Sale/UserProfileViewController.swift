@@ -310,7 +310,7 @@ class UserProfileViewController: UIViewController
         {
             let ref = createProfileImageStorageReference()
             let image = userProfileImageView.image
-            let localFile = image?.jpeg(.medium)
+            let localFile = image?.jpeg(.low)
             FIRDatabase.database().reference().child("users").child(firUser!.uid).child("profileImageID").setValue(localFile!.description)
             _ = ref.child(localFile!.description).put(localFile!, metadata: nil, completion: { (metadata, error) in
                 guard let metadata = metadata else

@@ -477,7 +477,7 @@ extension CreateEventViewController: UINavigationControllerDelegate, UIImagePick
         var imagePath = NSDate().description
         imagePath = imagePath.replacingOccurrences(of: " ", with: "")
         imagePath = (imagesDirectoryPath?.appending("/\(imagePath).png"))!
-        let data = imageRecieved?.jpeg(.medium)
+        let data = imageRecieved?.jpeg(.low)
         let success = FileManager.default.createFile(atPath: imagePath, contents: data, attributes: nil)
         if success
         {
