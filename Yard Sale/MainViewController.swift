@@ -427,6 +427,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
         createImageStorageReference(indexPath: indexPath)
+        let event = eventsArray[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "eventCell")! as! EventTableViewCell
         cell.backgroundColor = UIColor.clear
         populateDataArray(indexPath: indexPath)
@@ -434,7 +435,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource
         {
             if self.imageDataArray.count != 0
             {
-                let data = imageDataArray[indexPath.row.description]
+                let data = imageDataArray[event.userID!]
                 return UIImage(data: data!)!
             }else
             {
@@ -522,13 +523,14 @@ extension MainViewController
     func populateDataArray(indexPath: IndexPath)
     {
         createImageStorageReference(indexPath: indexPath)
-        guard eventsArray[indexPath.row].imageTitleDictionary != nil else
+        let event = eventsArray[indexPath.row]
+        guard event.imageTitleDictionary != nil else
         {
             print("\nNo images from User.")
             return
         }
         
-        for item in (eventsArray[indexPath.row].imageTitleDictionary)!
+        for item in (event.imageTitleDictionary)!
         {
             eventImageRef!.child(item.value).data(withMaxSize: 3 * 1024 * 1024, completion: { (data, error) in
                 
@@ -537,8 +539,8 @@ extension MainViewController
                     print("\nError: \(error!.localizedDescription)")
                     return
                 }
-                self.imageDataArray[indexPath.row.description] = data!
-                self.eventTableView.reloadData()
+                
+                self.imageDataArray[event.userID!] = data!
             })
         }
     }

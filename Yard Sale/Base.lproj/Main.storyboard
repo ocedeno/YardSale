@@ -561,11 +561,11 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="GreenGrassBackground" translatesAutoresizingMaskIntoConstraints="NO" id="VoR-1n-XGT">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Ihw-YJ-P56">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacing="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Ihw-YJ-P56">
                                 <rect key="frame" x="16" y="20" width="343" height="647"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalCompressionResistancePriority="749" text="Yard Sale" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FT5-ds-fwB">
-                                        <rect key="frame" x="29" y="0.0" width="285" height="162.5"/>
+                                        <rect key="frame" x="29" y="0.0" width="285" height="165.5"/>
                                         <fontDescription key="fontDescription" name="YardSale" family="Yard Sale" pointSize="50"/>
                                         <color key="textColor" red="0.62030875682830811" green="0.83040165901184082" blue="0.9226345419883728" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -573,17 +573,17 @@
                                         <size key="shadowOffset" width="3" height="1"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="lhD-7X-ykc">
-                                        <rect key="frame" x="30" y="161.5" width="283" height="162.5"/>
+                                        <rect key="frame" x="30" y="164.5" width="283" height="192.5"/>
                                         <subviews>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="center" adjustsFontForContentSizeCategory="YES" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="WqV-dK-lcq">
-                                                <rect key="frame" x="0.0" y="0.0" width="283" height="77.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="283" height="92.5"/>
                                                 <color key="backgroundColor" red="0.90820181369781494" green="0.62147766351699829" blue="0.36636394262313843" alpha="0.48338505993150682" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <color key="textColor" red="0.61470085382461548" green="0.49109011888504028" blue="0.39766314625740051" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" name="YardSale" family="Yard Sale" pointSize="26"/>
                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress"/>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="center" adjustsFontForContentSizeCategory="YES" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="0zP-7r-3lg">
-                                                <rect key="frame" x="0.0" y="85.5" width="283" height="77"/>
+                                                <rect key="frame" x="0.0" y="100.5" width="283" height="92"/>
                                                 <color key="backgroundColor" red="0.90820181369781494" green="0.62147766351699829" blue="0.36636394262313843" alpha="0.48338505990000002" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <color key="textColor" red="0.61470085379999995" green="0.49109011889999998" blue="0.39766314629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" name="YardSale" family="Yard Sale" pointSize="26"/>
@@ -591,11 +591,23 @@
                                             </textField>
                                         </subviews>
                                     </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gii-L3-CtP">
+                                        <rect key="frame" x="124" y="356" width="95" height="133.5"/>
+                                        <fontDescription key="fontDescription" name="YardSale" family="Yard Sale" pointSize="30"/>
+                                        <size key="titleShadowOffset" width="3" height="1"/>
+                                        <state key="normal" title="Login">
+                                            <color key="titleColor" red="0.62030875682830811" green="0.83040165901184082" blue="0.9226345419883728" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="titleShadowColor" red="0.1215686275" green="0.12941176469999999" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="loginAction" destination="iAg-j0-zEF" eventType="touchUpInside" id="XuB-0W-sp7"/>
+                                        </connections>
+                                    </button>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="8iJ-a1-maA">
-                                        <rect key="frame" x="45" y="323" width="253" height="162.5"/>
+                                        <rect key="frame" x="45" y="488.5" width="253" height="158.5"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dj6-sx-SrL">
-                                                <rect key="frame" x="0.0" y="0.0" width="253" height="81.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="253" height="79"/>
                                                 <fontDescription key="fontDescription" name="YardSale" family="Yard Sale" pointSize="14"/>
                                                 <size key="titleShadowOffset" width="3" height="1"/>
                                                 <state key="normal" title="Forgot Password? Reset Here.">
@@ -607,7 +619,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Naz-II-N2X">
-                                                <rect key="frame" x="97" y="81.5" width="59" height="81"/>
+                                                <rect key="frame" x="97" y="79" width="59" height="79.5"/>
                                                 <fontDescription key="fontDescription" name="YardSale" family="Yard Sale" pointSize="14"/>
                                                 <size key="titleShadowOffset" width="3" height="1"/>
                                                 <state key="normal" title="Sign-Up">
@@ -620,18 +632,6 @@
                                             </button>
                                         </subviews>
                                     </stackView>
-                                    <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gii-L3-CtP">
-                                        <rect key="frame" x="124" y="484.5" width="95" height="162.5"/>
-                                        <fontDescription key="fontDescription" name="YardSale" family="Yard Sale" pointSize="30"/>
-                                        <size key="titleShadowOffset" width="3" height="1"/>
-                                        <state key="normal" title="Login">
-                                            <color key="titleColor" red="0.62030875682830811" green="0.83040165901184082" blue="0.9226345419883728" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <color key="titleShadowColor" red="0.1215686275" green="0.12941176469999999" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="loginAction" destination="iAg-j0-zEF" eventType="touchUpInside" id="XuB-0W-sp7"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="lhD-7X-ykc" firstAttribute="leading" secondItem="Ihw-YJ-P56" secondAttribute="leading" constant="30" id="Zut-pU-qD0"/>
