@@ -72,6 +72,11 @@ class DetailViewController: UIViewController
         self.ref = FIRDatabase.database().reference().child("events").child(uniqueID!)
         self.ref?.observe(.value, with: { (snapshot) in
             
+            guard snapshot != nil else
+            {
+                return
+            }
+            
             self.userEvent = Event(snapshot: snapshot)
             DispatchQueue.main.async
                 {

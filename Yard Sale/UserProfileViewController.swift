@@ -11,6 +11,7 @@ import Firebase
 
 class UserProfileViewController: UIViewController
 {
+    @IBOutlet weak var editEventButton: UIButton!
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var userNameField: UITextField!
     @IBOutlet weak var userEmailField: UITextField!
@@ -52,6 +53,14 @@ class UserProfileViewController: UIViewController
         createUpdateBarButtonItem()
         collectionView.backgroundColor = UIColor.clear
         imagePicker.delegate = self
+        
+        if imageDataArray.isEmpty
+        {
+            editEventButton.isHidden = true
+        }else
+        {
+            editEventButton.isHidden = false
+        }
     }
     
     func createReferenceToUser()
@@ -73,6 +82,11 @@ class UserProfileViewController: UIViewController
         let eventRef = FIRDatabase.database().reference().child("users").child((firUser?.uid)!).child("events").child("event")
         eventRef.observe(.value, with: { (snapshot) in
             
+            guard snapshot.exists() else
+            {
+                return
+            }
+            
             let value = snapshot.value as! String
             self.imageRefArray.append(value)
             self.getUserEvent()
@@ -82,15 +96,18 @@ class UserProfileViewController: UIViewController
     func getUserEvent()
     {
         let eventRef = FIRDatabase.database().reference().child("events")
-        for imageRef in imageRefArray
+        if imageRefArray.count > 0
         {
-            eventRef.child(imageRef).observe(.value, with: { (snapshot) in
-                self.uniqueID = imageRef
-                print("\nUniqueID: \(self.uniqueID!)")
-                self.userEvent = Event(snapshot: snapshot)
-                self.userEventArray?.append(self.userEvent!)
-                self.populateDataArray()
-            })
+            for imageRef in imageRefArray
+            {
+                eventRef.child(imageRef).observe(.value, with: { (snapshot) in
+                    self.uniqueID = imageRef
+                    print("\nUniqueID: \(self.uniqueID!)")
+                    self.userEvent = Event(snapshot: snapshot)
+                    self.userEventArray?.append(self.userEvent!)
+                    self.populateDataArray()
+                })
+            }
         }
     }
     

@@ -39,6 +39,7 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
     var eventImageRef: FIRStorageReference?
     var lastImagePath: String?
     var userEvent: Event?
+    var editingEvent: Bool = false
     var count = 0
     
     override func viewDidLoad()
@@ -62,6 +63,7 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
         self.createImageStorageReference()
         
         eventPhotCollectionView.dataSource = self
+        eventPhotCollectionView.delegate = self
         eventPhotCollectionView.backgroundColor = UIColor.clear
         
         updateTextView()
@@ -70,7 +72,7 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
         if userEvent != nil
         {
             descriptionText.textColor = UIColor.black
-            count = 1
+            editingEvent = true
         }
     }
     
@@ -87,6 +89,16 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
         {
             useNewLocation.isSelected = false
             useNewLocation.toggleButon()
+        }
+        
+        guard (userEvent?.addressDictionary == nil) else
+        {
+            let lat = (userEvent!.addressDictionary!["latitude"] as! NSString).doubleValue
+            let lon = (userEvent!.addressDictionary!["longitude"] as! NSString).doubleValue
+            locLat = lat
+            locLon = lon
+            useNewLocation.isSelected = true
+            return
         }
     }
     
@@ -175,8 +187,8 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
             }
             
             DispatchQueue.main.async
-            {
-                self.addDictionary = dictionary as? [String:AnyObject]
+                {
+                    self.addDictionary = dictionary as? [String:AnyObject]
             }
         })
     }
@@ -280,27 +292,47 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
             let userID = FIRAuth.auth()?.currentUser?.uid
             locationManager.stopUpdatingLocation()
             
-            let event = Event(withTitle: dic["title"] as! String,
-                              onDate: dic["date"] as! String,
-                              startTime: dic["startTime"] as! String,
-                              stopTime: dic["stopTime"] as! String,
-                              withDescription: dic["description"] as! String,
-                              userID: userID! ,
-                              activeEvent: displayEvent.isOn,
-                              locationLatitude: dic["locLat"] as! Double,
-                              locationLongitude: dic["locLon"] as! Double,
-                              addDict: dic["addressDictionary"] as! [String:AnyObject],
-                              imageTitleDict: dic["imageTitleDictionary"] as! [String:String],
-                              imagePathKey: dic["imagePathKey"] as! String
-            )
-            
-            taskFirebasePath?.setValue(event.toDictionary())
-            FIRDatabase.database().reference().child("users/\(userID!)/events").child("event").setValue(event.imageKey!)
-            if !dataArray.isEmpty
+            if editingEvent
             {
-                savePhotosToFirebase(dataArray: dataArray)
+                let updateRef = FIRDatabase.database().reference().child("events").child((userEvent?.imageKey)!)
+                let event = Event(withTitle: dic["title"] as! String,
+                                  onDate: dic["date"] as! String,
+                                  startTime: dic["startTime"] as! String,
+                                  stopTime: dic["stopTime"] as! String,
+                                  withDescription: dic["description"] as! String,
+                                  userID: userID! ,
+                                  activeEvent: displayEvent.isOn,
+                                  locationLatitude: dic["locLat"] as! Double,
+                                  locationLongitude: dic["locLon"] as! Double,
+                                  addDict: dic["addressDictionary"] as! [String:AnyObject],
+                                  imageTitleDict: dic["imageTitleDictionary"] as! [String:String],
+                                  imagePathKey: dic["imagePathKey"] as! String
+                )
+                
+                updateRef.updateChildValues(event.toDictionary() as! [AnyHashable : Any])
+            }else
+            {
+                let event = Event(withTitle: dic["title"] as! String,
+                                  onDate: dic["date"] as! String,
+                                  startTime: dic["startTime"] as! String,
+                                  stopTime: dic["stopTime"] as! String,
+                                  withDescription: dic["description"] as! String,
+                                  userID: userID! ,
+                                  activeEvent: displayEvent.isOn,
+                                  locationLatitude: dic["locLat"] as! Double,
+                                  locationLongitude: dic["locLon"] as! Double,
+                                  addDict: dic["addressDictionary"] as! [String:AnyObject],
+                                  imageTitleDict: dic["imageTitleDictionary"] as! [String:String],
+                                  imagePathKey: dic["imagePathKey"] as! String
+                )
+                
+                taskFirebasePath?.setValue(event.toDictionary())
+                FIRDatabase.database().reference().child("users/\(userID!)/events").child("event").setValue(event.imageKey!)
+                if !dataArray.isEmpty
+                {
+                    savePhotosToFirebase(dataArray: dataArray)
+                }
             }
-            
             performSegue(withIdentifier: "segueToDetailView", sender: taskFirebasePath?.key)
         }
     }
@@ -323,6 +355,10 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
     
     fileprivate func updateEvent() -> [String: AnyObject]
     {
+        if userEvent?.addressDictionary != nil
+        {
+            addDictionary = userEvent?.addressDictionary
+        }
         let dic =
             [
                 "title" : titleTextField.text! as AnyObject,
@@ -519,6 +555,10 @@ extension CreateEventViewController: UINavigationControllerDelegate, UIImagePick
         }else
         {
             self.createImageStorageReference()
+            guard userEvent?.imageTitleDictionary != nil else
+            {
+                return
+            }
             for ref in (self.userEvent?.imageTitleDictionary)!
             {
                 self.eventImageRef?.child(ref.value).data(withMaxSize: 3 * 1024 * 1024, completion: { (data, error) in
@@ -553,6 +593,14 @@ extension CreateEventViewController: UICollectionViewDataSource
                 cell.imageView.image = image!
         }
         return cell
+    }
+}
+
+extension CreateEventViewController: UICollectionViewDelegate
+{
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath)
+    {
+        print("Did Select")
     }
 }
 

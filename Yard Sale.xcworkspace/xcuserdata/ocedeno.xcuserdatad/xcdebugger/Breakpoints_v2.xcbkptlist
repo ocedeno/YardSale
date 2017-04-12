@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Yard Sale/CreateEventViewController.swift"
-            timestampString = "513696133.704338"
+            timestampString = "513702748.224628"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "487"
-            endingLineNumber = "487"
+            startingLineNumber = "522"
+            endingLineNumber = "522"
             landmarkName = "imagePickerController(_:didFinishPickingMediaWithInfo:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Yard Sale/UserProfileViewController.swift"
-            timestampString = "513693049.029265"
+            timestampString = "513707664.650531"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "313"
-            endingLineNumber = "313"
+            startingLineNumber = "330"
+            endingLineNumber = "330"
             landmarkName = "updateUserInfo()"
             landmarkType = "7">
          </BreakpointContent>

@@ -59,6 +59,7 @@ class MainViewController: BaseViewController, CLLocationManagerDelegate {
         super.viewWillAppear(true)
         
         eventTableView.backgroundColor = UIColor.clear
+        eventTableView.reloadData()
         FIRAuth.auth()?.addStateDidChangeListener { auth, user in
             if user != nil {
                 print("User is signed in.")
@@ -226,9 +227,10 @@ class MainViewController: BaseViewController, CLLocationManagerDelegate {
             }
         }else
         {
+            self.createMapOverlay()
             UIView.animate(withDuration: 1.0)
             {
-                self.createMapOverlay()
+                
             }
         }
 
@@ -326,6 +328,7 @@ class MainViewController: BaseViewController, CLLocationManagerDelegate {
     func populateEventsArray()
     {
         self.ref = FIRDatabase.database().reference().child("events")
+        
         self.ref?.observe(.value, with: { snapshot in
             
             var array: [Event] = []
