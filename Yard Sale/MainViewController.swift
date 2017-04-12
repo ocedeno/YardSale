@@ -326,14 +326,17 @@ class MainViewController: BaseViewController, CLLocationManagerDelegate {
     func populateEventsArray()
     {
         self.ref = FIRDatabase.database().reference().child("events")
-        self.ref?.queryOrdered(byChild: "distance").observe(.value, with: { snapshot in
+        self.ref?.observe(.value, with: { snapshot in
             
             var array: [Event] = []
             for item in snapshot.children
             {
                 let snap = item as! FIRDataSnapshot
                 let event = Event(snapshot: snap)
-                array.append(event)
+                if event.active!
+                {
+                    array.append(event)
+                }
             }
             
             self.eventsArray = array
