@@ -60,8 +60,6 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
         
         taskFirebasePath = self.ref.ref.child("events").childByAutoId()
         uniqueEventID = taskFirebasePath?.key
-        self.createImagePath()
-        self.createImageStorageReference()
         
         eventPhotCollectionView.dataSource = self
         eventPhotCollectionView.delegate = self
@@ -499,10 +497,13 @@ extension CreateEventViewController: UINavigationControllerDelegate, UIImagePick
             }
             
             dataArray.removeAll()
+            userEvent?.imageTitleDictionary?.removeAll()
             self.eventPhotCollectionView.reloadData()
             addImageButton.setTitle("Add Images", for: .normal)
         }else
         {
+            self.createImagePath()
+            self.createImageStorageReference()
             if dataArray.count < 10
             {
                 let imagePicker = UIImagePickerController()
@@ -521,7 +522,13 @@ extension CreateEventViewController: UINavigationControllerDelegate, UIImagePick
         
         let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
         let documentDirectorPath: String = paths[0]
-        imagesDirectoryPath = documentDirectorPath.appending("/ImagePicker/\(uniqueEventID!)")
+        if userEvent == nil
+        {
+            imagesDirectoryPath = documentDirectorPath.appending("/ImagePicker/\(uniqueEventID!)")
+        } else
+        {
+            imagesDirectoryPath = documentDirectorPath.appending("/ImagePicker/\((userEvent?.imageKey)!)")
+        }
         var objcBool: ObjCBool = true
         let isExist = FileManager.default.fileExists(atPath: imagesDirectoryPath!, isDirectory: &objcBool)
         
@@ -588,16 +595,34 @@ extension CreateEventViewController: UINavigationControllerDelegate, UIImagePick
             self.createImageStorageReference()
             guard userEvent?.imageTitleDictionary != nil else
             {
+                do
+                {
+                    images?.removeAll()
+                    dataArray.removeAll()
+                    titles = try? FileManager.default.contentsOfDirectory(atPath: imagesDirectoryPath!)
+                    for image in titles!
+                    {
+                        lastImagePath = imagesDirectoryPath?.appending("/\(image)")
+                        let data = FileManager.default.contents(atPath: lastImagePath!)
+                        dataArray.append(data!)
+                        let image = UIImage(data: data!)
+                        images!.append(image!)
+                        eventPhotCollectionView.reloadData()
+                    }
+                }catch
+                {
+                    print("\nError adding images to images array.")
+                }
+                
                 return
             }
+            
             for ref in (self.userEvent?.imageTitleDictionary)!
             {
                 self.eventImageRef?.child(ref.value).data(withMaxSize: 3 * 1024 * 1024, completion: { (data, error) in
                     guard error == nil else
                     {
-                        self.utilityClass.errorAlert(title: "Image Error", message: (error?.localizedDescription)!, cancelTitle: "Dismiss", view: self)
-                        
-                        return
+                       return self.utilityClass.errorAlert(title: "Image Error", message: (error?.localizedDescription)!, cancelTitle: "Dismiss", view: self)
                     }
                     
                     self.dataArray.append(data!)

@@ -320,8 +320,16 @@ class UserProfileViewController: UIViewController
             let ref = createProfileImageStorageReference()
             let image = userProfileImageView.image
             let localFile = image?.jpeg(.low)
-            FIRDatabase.database().reference().child("users").child(firUser!.uid).child("profileImageID").setValue(localFile!.description)
-            _ = ref.child(localFile!.description).put(localFile!, metadata: nil, completion: { (metadata, error) in
+            
+            ref.child("profileImage").delete(completion: { (error) in
+                
+                guard error == nil else
+                {
+                    return self.utilityClass.errorAlert(title: "Image Deletion Error", message: "There was an error deleting your images. Please try again later.", cancelTitle: "Dismiss", view: self)
+                }
+
+            })
+            _ = ref.child("profileImage").put(localFile!, metadata: nil, completion: { (metadata, error) in
                 guard let metadata = metadata else
                 {
                     return

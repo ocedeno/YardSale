@@ -37,7 +37,7 @@ class Event
     let locLat: Double?
     let locLon: Double?
     let addressDictionary: [String:AnyObject]?
-    let imageTitleDictionary: [String:String]?
+    var imageTitleDictionary: [String:String]?
     let imageKey: String?
     let ref : FIRDatabaseReference?
     
