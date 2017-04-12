@@ -350,6 +350,9 @@ class MainViewController: BaseViewController, CLLocationManagerDelegate {
     
     func reloadEventsToMapView()
     {
+        let annoations = self.mapView.annotations
+        self.mapView.removeAnnotations(annoations)
+        
         for event in eventsArray
         {
             let latitude = event.locLat
@@ -420,6 +423,7 @@ extension MainViewController: MKMapViewDelegate
         let lon = mapView.centerCoordinate.longitude
         locationOne = CLLocation(latitude: lat, longitude: lon)
         appendDistanceToEventsArray(currentLocation: false)
+        reloadEventsToMapView()
     }
 }
 

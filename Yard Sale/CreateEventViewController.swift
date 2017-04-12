@@ -291,10 +291,11 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
             let dic: [String:AnyObject] = updateEvent()
             let userID = FIRAuth.auth()?.currentUser?.uid
             locationManager.stopUpdatingLocation()
-            
+            print("\nEditing Event: \(editingEvent)")
             if editingEvent
             {
-                let updateRef = FIRDatabase.database().reference().child("events").child((userEvent?.imageKey)!)
+                let updateRef = FIRDatabase.database().reference().child("events").child(userEvent!.imageKey!)
+                print(updateRef)
                 let event = Event(withTitle: dic["title"] as! String,
                                   onDate: dic["date"] as! String,
                                   startTime: dic["startTime"] as! String,
@@ -306,10 +307,11 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
                                   locationLongitude: dic["locLon"] as! Double,
                                   addDict: dic["addressDictionary"] as! [String:AnyObject],
                                   imageTitleDict: dic["imageTitleDictionary"] as! [String:String],
-                                  imagePathKey: dic["imagePathKey"] as! String
+                                  imagePathKey: (userEvent?.imageKey!)!
                 )
                 
                 updateRef.updateChildValues(event.toDictionary() as! [AnyHashable : Any])
+                performSegue(withIdentifier: "segueToDetailView", sender: userEvent?.imageKey!)
             }else
             {
                 let event = Event(withTitle: dic["title"] as! String,
@@ -332,8 +334,8 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
                 {
                     savePhotosToFirebase(dataArray: dataArray)
                 }
+                performSegue(withIdentifier: "segueToDetailView", sender: taskFirebasePath?.key)
             }
-            performSegue(withIdentifier: "segueToDetailView", sender: taskFirebasePath?.key)
         }
     }
     
@@ -427,6 +429,12 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
         {
             utilityClass.errorAlert(title: "Save Error", message: "Please make sure the selected fields have been filled.", cancelTitle: "Dismiss", view: self)
             updateBorder(withTextView: descriptionText)
+            return false
+        }
+        
+        guard dataArray.count > 0 else
+        {
+            utilityClass.errorAlert(title: "Save Error", message: "You must have at least one image of your event.", cancelTitle: "Try Again", view: self)
             return false
         }
         

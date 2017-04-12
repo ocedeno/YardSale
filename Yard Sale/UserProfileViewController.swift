@@ -53,14 +53,6 @@ class UserProfileViewController: UIViewController
         createUpdateBarButtonItem()
         collectionView.backgroundColor = UIColor.clear
         imagePicker.delegate = self
-        
-        if imageDataArray.isEmpty
-        {
-            editEventButton.isHidden = true
-        }else
-        {
-            editEventButton.isHidden = false
-        }
     }
     
     func createReferenceToUser()
@@ -345,6 +337,12 @@ class UserProfileViewController: UIViewController
     
     @IBAction func editEvents(_ sender: UIButton)
     {
+        guard userEvent != nil else
+        {
+            utilityClass.errorAlert(title: "Edit Event Error", message: "You currently have no events to edit. Create one today!", cancelTitle: "Dismiss", view: self)
+            return
+        }
+        
         performSegue(withIdentifier: "fromProfileToCreateEvent", sender: userEvent!)
     }
 }

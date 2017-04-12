@@ -72,7 +72,7 @@ class DetailViewController: UIViewController
         self.ref = FIRDatabase.database().reference().child("events").child(uniqueID!)
         self.ref?.observe(.value, with: { (snapshot) in
             
-            guard snapshot != nil else
+            guard snapshot.exists() else
             {
                 return
             }
