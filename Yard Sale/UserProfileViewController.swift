@@ -358,13 +358,16 @@ class UserProfileViewController: UIViewController
             return utilityClass.errorAlert(title: "Edit Event Error", message: "You currently have no events to delete.", cancelTitle: "Dismiss", view: self)
         }
         
-        let alert = UIAlertController()
+        let alert = UIAlertController(title: "Delete Event?", message: "Are you sure you would like to delete the event? This cannot be undone.", preferredStyle: .alert)
         let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { (action) in
             let eventRef = FIRDatabase.database().reference().child("events").child((self.userEvent?.imageKey!)!)
             eventRef.removeValue()
             
             let userRef = FIRDatabase.database().reference().child("users").child((FIRAuth.auth()?.currentUser?.uid)!).child("events")
             userRef.removeValue()
+            
+            self.imageDataArray.removeAll()
+            self.collectionView.reloadData()
         }
         
         let cancelButton = UIAlertAction(title: "Nevermind", style: .cancel, handler: nil)
