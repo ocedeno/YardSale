@@ -11,6 +11,7 @@ import Firebase
 
 class UserProfileViewController: UIViewController
 {
+    @IBOutlet weak var deleteButton: UIButton!
     @IBOutlet weak var editEventButton: UIButton!
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var userNameField: UITextField!
@@ -94,7 +95,11 @@ class UserProfileViewController: UIViewController
             {
                 eventRef.child(imageRef).observe(.value, with: { (snapshot) in
                     self.uniqueID = imageRef
-                    print("\nUniqueID: \(self.uniqueID!)")
+                    guard snapshot.exists() else
+                    {
+                        return
+                    }
+                    
                     self.userEvent = Event(snapshot: snapshot)
                     self.userEventArray?.append(self.userEvent!)
                     self.populateDataArray()
@@ -216,37 +221,29 @@ class UserProfileViewController: UIViewController
     
     func populateProfileImage()
     {
-        FIRDatabase.database().reference().child("users").child(firUser!.uid).child("profileImageID").observe(.value, with: { (snapshot) in
+        let ref = self.createProfileImageStorageReference()
+        ref.child("profileImage").data(withMaxSize: 3 * 1024 * 1024) { (data, error) in
             
-            guard let imageID = snapshot.value! as? String else
+            guard error == nil else
             {
+                DispatchQueue.main.async
+                {
+                    self.utilityClass.errorAlert(title: "Image Error", message: (error?.localizedDescription)!, cancelTitle: "Dismiss", view: self)
+                    print("\n\(error.debugDescription)")
+                }
                 return
             }
             
-            let ref = self.createProfileImageStorageReference()
-            ref.child(imageID).data(withMaxSize: 3 * 1024 * 1024) { (data, error) in
-                
-                guard error == nil else
+            if let data = data
+            {
+                let image = UIImage(data: data)
+                DispatchQueue.main.async
                 {
-                    DispatchQueue.main.async
-                        {
-                            self.utilityClass.errorAlert(title: "Image Error", message: (error?.localizedDescription)!, cancelTitle: "Dismiss", view: self)
-                            print("\n\(error.debugDescription)")
-                    }
-                    return
-                }
-                
-                if let data = data
-                {
-                    let image = UIImage(data: data)
-                    DispatchQueue.main.async
-                        {
-                            self.userProfileImageView.contentMode = .scaleAspectFill
-                            self.userProfileImageView.image = image
-                    }
+                    self.userProfileImageView.contentMode = .scaleAspectFill
+                    self.userProfileImageView.image = image
                 }
             }
-        })
+        }
     }
     
     func dismissKeyboard()
@@ -327,7 +324,7 @@ class UserProfileViewController: UIViewController
                 {
                     return self.utilityClass.errorAlert(title: "Image Deletion Error", message: "There was an error deleting your images. Please try again later.", cancelTitle: "Dismiss", view: self)
                 }
-
+                
             })
             _ = ref.child("profileImage").put(localFile!, metadata: nil, completion: { (metadata, error) in
                 guard let metadata = metadata else
@@ -352,6 +349,30 @@ class UserProfileViewController: UIViewController
         }
         
         performSegue(withIdentifier: "fromProfileToCreateEvent", sender: userEvent!)
+    }
+    
+    @IBAction func deleteAction(_ sender: UIButton)
+    {
+        guard userEvent != nil else
+        {
+            return utilityClass.errorAlert(title: "Edit Event Error", message: "You currently have no events to delete.", cancelTitle: "Dismiss", view: self)
+        }
+        
+        let alert = UIAlertController()
+        let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { (action) in
+            let eventRef = FIRDatabase.database().reference().child("events").child((self.userEvent?.imageKey!)!)
+            eventRef.removeValue()
+            
+            let userRef = FIRDatabase.database().reference().child("users").child((FIRAuth.auth()?.currentUser?.uid)!).child("events")
+            userRef.removeValue()
+        }
+        
+        let cancelButton = UIAlertAction(title: "Nevermind", style: .cancel, handler: nil)
+        
+        alert.addAction(deleteAction)
+        alert.addAction(cancelButton)
+        
+        self.present(alert, animated: true, completion: nil)
     }
 }
 
