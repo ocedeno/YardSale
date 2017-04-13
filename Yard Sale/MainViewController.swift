@@ -51,7 +51,6 @@ class MainViewController: BaseViewController, CLLocationManagerDelegate {
         setupBackgroundTableView()
         setupBackgroundNavView()
         populateEventsArray()
-        setupInitialMapView()
     }
     
     override func viewWillAppear(_ animated: Bool)
@@ -68,6 +67,12 @@ class MainViewController: BaseViewController, CLLocationManagerDelegate {
                 self.locationManager.stopUpdatingLocation()
             }
         }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        
+        setupInitialMapView()
     }
     
     override func viewDidDisappear(_ animated: Bool)

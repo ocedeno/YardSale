@@ -112,6 +112,7 @@ class DetailViewController: UIViewController
             print("\nNo images from User.")
             return
         }
+        
         for item in (userEvent?.imageTitleDictionary)!
         {
             eventImageRef?.child(item.value).data(withMaxSize: 3 * 1024 * 1024, completion: { (data, error) in
@@ -119,9 +120,9 @@ class DetailViewController: UIViewController
                 guard error == nil else
                 {
                     DispatchQueue.main.async
-                        {
-                            self.utilityClass.errorAlert(title: "Image Error", message: (error?.localizedDescription)!, cancelTitle: "Dismiss", view: self)
-                            print("\n\(error.debugDescription)")
+                    {
+                        self.utilityClass.errorAlert(title: "Image Error", message: (error?.localizedDescription)!, cancelTitle: "Dismiss", view: self)
+                        print("\n\(error.debugDescription)")
                     }
                     return
                 }
