@@ -8,10 +8,12 @@
 
 import UIKit
 import Firebase
+import FBSDKLoginKit
 
 class BaseViewController: UIViewController, SlideMenuDelegate
 {
     let auth = FIRAuth.auth()?.currentUser
+    let loginManager = FBSDKLoginManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,6 +42,7 @@ class BaseViewController: UIViewController, SlideMenuDelegate
         case 2:
             
             try! FIRAuth.auth()?.signOut()
+            loginManager.logOut()
             
             break
         default:

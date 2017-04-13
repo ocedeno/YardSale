@@ -21,6 +21,7 @@ class LoginViewController: UIViewController
     
     let utilityClass = Utility()
     let loginButton = FBSDKLoginButton()
+    let loginManager = FBSDKLoginManager()
     
     override func viewDidLoad()
     {
@@ -201,6 +202,7 @@ extension LoginViewController: FBSDKLoginButtonDelegate
                 
                 guard error == nil else
                 {
+                    self.loginManager.logOut()
                     return self.utilityClass.errorAlert(title: "Login Error", message: error!.localizedDescription, cancelTitle: "Dismiss", view: self)
                 }
                 
@@ -214,7 +216,6 @@ extension LoginViewController: FBSDKLoginButtonDelegate
     
     func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!)
     {
-        let loginManager = FBSDKLoginManager()
         loginManager.logOut()
         
         let firebaseAuth = FIRAuth.auth()
