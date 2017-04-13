@@ -38,11 +38,13 @@ class MainViewController: BaseViewController, CLLocationManagerDelegate {
     var uniqueID: String?
     var userEvent: Event?
     var userEventArray: [Event]?
+    var count: Int?
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
         
+        count = 0
         mapView.delegate = self
         eventTableView.delegate = self
         eventTableView.dataSource = self
@@ -72,7 +74,11 @@ class MainViewController: BaseViewController, CLLocationManagerDelegate {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         
-        setupInitialMapView()
+        if count! < 1
+        {
+            setupInitialMapView()
+            count! += 1
+        }
     }
     
     override func viewDidDisappear(_ animated: Bool)
