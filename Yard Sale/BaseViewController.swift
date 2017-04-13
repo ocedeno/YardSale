@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import FBSDKLoginKit
+import GoogleSignIn
 
 class BaseViewController: UIViewController, SlideMenuDelegate
 {
@@ -43,6 +44,7 @@ class BaseViewController: UIViewController, SlideMenuDelegate
             
             try! FIRAuth.auth()?.signOut()
             loginManager.logOut()
+            GIDSignIn.sharedInstance().signOut()
             
             break
         default:

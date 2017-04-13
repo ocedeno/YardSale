@@ -15,21 +15,22 @@ import GoogleSignIn
 
 class LoginViewController: UIViewController
 {
-    
+    @IBOutlet weak var googleLoginButton: UIButton!
+    @IBOutlet weak var facebookLoginButton: FBSDKLoginButton!
     @IBOutlet weak var backgroundImage: UIImageView!
     @IBOutlet weak var userEmailTextfield: UITextField!
     @IBOutlet weak var userPasswordTextfield: UITextField!
     
     let utilityClass = Utility()
-    let loginButton = FBSDKLoginButton()
     let loginManager = FBSDKLoginManager()
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
         
-        createLoginButton()
-        silentGoogleSignIn()
+        createGoogleSignin()
+        GIDSignIn.sharedInstance().delegate = self
+        GIDSignIn.sharedInstance().uiDelegate = self
         FIRAuth.auth()?.addStateDidChangeListener({ (auth, user) in
             if user != nil
             {
@@ -135,6 +136,7 @@ class LoginViewController: UIViewController
             }
         })
     }
+    
     @IBAction func forgetPasswordAction()
     {
         let alert = UIAlertController(title: "Request New Password?", message: "If you forgot your password and would like to request a new one, please provide your email address below and instructions will be emailed to you.", preferredStyle: .alert)
@@ -182,11 +184,11 @@ extension LoginViewController: FBSDKLoginButtonDelegate
 {
     func createLoginButton()
     {
-        loginButton.readPermissions = ["public_profile", "email", "user_friends"]
-        let newCenter = CGPoint(x: self.view.frame.width / 2, y: self.view.frame.height - 70)
-        loginButton.center = newCenter
-        loginButton.delegate = self
-        self.view.addSubview(loginButton)
+        facebookLoginButton.readPermissions = ["public_profile", "email", "user_friends"]
+//        let newCenter = CGPoint(x: self.view.frame.width / 2, y: self.view.frame.height - 70)
+//        facebookLoginButton.center = newCenter
+//        facebookLoginButton.delegate = self
+//        self.view.addSubview(facebookLoginButton)
     }
     
     func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!)
@@ -229,14 +231,8 @@ extension LoginViewController: FBSDKLoginButtonDelegate
     }
 }
 
-extension LoginViewController: GIDSignInUIDelegate
+extension LoginViewController: GIDSignInUIDelegate, GIDSignInDelegate
 {
-    func silentGoogleSignIn()
-    {
-        GIDSignIn.sharedInstance().uiDelegate = self
-        GIDSignIn.sharedInstance().signIn()
-    }
-    
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error?)
     {
         guard error == nil else
@@ -252,5 +248,17 @@ extension LoginViewController: GIDSignInUIDelegate
             guard error == nil else { return }
             self.createUserAccount(name: (user?.displayName!)!)
         }
+    }
+    
+    func createGoogleSignin()
+    {
+        googleLoginButton.setImage(UIImage(named: "google_logo"), for: .normal)
+        googleLoginButton.imageView?.contentMode = .scaleAspectFit
+        googleLoginButton.addTarget(self, action: #selector(btnSignInPressed), for: UIControlEvents.touchUpInside)
+    }
+    
+    func btnSignInPressed()
+    {
+        GIDSignIn.sharedInstance().signIn()
     }
 }
