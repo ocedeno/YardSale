@@ -9,11 +9,6 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <array key="YARDSALE.TTF">
-            <string>YardSale</string>
-        </array>
-    </customFonts>
     <scenes>
         <!--View Controller-->
         <scene sceneID="EHf-IW-A2E">
@@ -31,8 +26,8 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Yard Sale" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wBz-iI-avQ">
-                                <rect key="frame" x="16" y="120" width="343" height="57.5"/>
-                                <fontDescription key="fontDescription" name="YardSale" family="Yard Sale" pointSize="50"/>
+                                <rect key="frame" x="16" y="305.5" width="343" height="57"/>
+                                <fontDescription key="fontDescription" name="Georgia-Bold" family="Georgia" pointSize="50"/>
                                 <color key="textColor" red="0.89275659784303274" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -41,7 +36,7 @@
                         <constraints>
                             <constraint firstItem="P4L-qM-UNC" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="0V2-bk-VHw"/>
                             <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="P4L-qM-UNC" secondAttribute="bottom" id="CmI-OP-lUX"/>
-                            <constraint firstItem="wBz-iI-avQ" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="100" id="Crr-Ob-tur"/>
+                            <constraint firstItem="wBz-iI-avQ" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="fl1-4x-C3f"/>
                             <constraint firstItem="wBz-iI-avQ" firstAttribute="trailing" secondItem="Ze5-6b-2t3" secondAttribute="trailingMargin" id="hrG-QG-VN7"/>
                             <constraint firstItem="wBz-iI-avQ" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" id="mio-Gi-V7z"/>
                             <constraint firstItem="P4L-qM-UNC" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="qPg-Tf-0Ga"/>
