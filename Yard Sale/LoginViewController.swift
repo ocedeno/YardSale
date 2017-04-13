@@ -11,6 +11,7 @@ import Firebase
 import FirebaseAuth
 import FBSDKLoginKit
 import FBSDKCoreKit
+import GoogleSignIn
 
 class LoginViewController: UIViewController
 {
@@ -28,6 +29,7 @@ class LoginViewController: UIViewController
         super.viewDidLoad()
         
         createLoginButton()
+        silentGoogleSignIn()
         FIRAuth.auth()?.addStateDidChangeListener({ (auth, user) in
             if user != nil
             {
@@ -223,6 +225,32 @@ extension LoginViewController: FBSDKLoginButtonDelegate
             try firebaseAuth?.signOut()
         } catch let signOutError as NSError {
             print ("Error signing out: %@", signOutError)
+        }
+    }
+}
+
+extension LoginViewController: GIDSignInUIDelegate
+{
+    func silentGoogleSignIn()
+    {
+        GIDSignIn.sharedInstance().uiDelegate = self
+        GIDSignIn.sharedInstance().signIn()
+    }
+    
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error?)
+    {
+        guard error == nil else
+        {
+            return self.utilityClass.errorAlert(title: "Login Error", message: error!.localizedDescription, cancelTitle: "Dismiss", view: self)
+        }
+        
+        guard let authentication = user.authentication else { return }
+        let credential = FIRGoogleAuthProvider.credential(withIDToken: authentication.idToken,
+                                                          accessToken: authentication.accessToken)
+        FIRAuth.auth()?.signIn(with: credential) { (user, error) in
+            // ...
+            guard error == nil else { return }
+            self.createUserAccount(name: (user?.displayName!)!)
         }
     }
 }

@@ -12,6 +12,7 @@ pod 'FirebaseUI/Storage'
 pod 'FacebookCore'
 pod 'FacebookLogin'
 pod 'FacebookShare'
+pod 'GoogleSignIn'
 
   # Pods for Yard Sale
 
