@@ -9,20 +9,24 @@
 import UIKit
 import Firebase
 import FirebaseAuth
+import FBSDKLoginKit
+import FBSDKCoreKit
 
 class LoginViewController: UIViewController
 {
-
+    
     @IBOutlet weak var backgroundImage: UIImageView!
     @IBOutlet weak var userEmailTextfield: UITextField!
     @IBOutlet weak var userPasswordTextfield: UITextField!
     
     let utilityClass = Utility()
+    let loginButton = FBSDKLoginButton()
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
-
+        
+        createLoginButton()
         FIRAuth.auth()?.addStateDidChangeListener({ (auth, user) in
             if user != nil
             {
@@ -54,29 +58,29 @@ class LoginViewController: UIViewController
             let passwordField = alert.textFields![2]
             
             FIRAuth.auth()?.createUser(withEmail: emailField.text!, password: passwordField.text!, completion:
-            {(user, error) in
-                
-                guard error == nil else
-                {
-                    self.utilityClass.errorAlert(title: "Signup Error", message: (error?.localizedDescription)!, cancelTitle: "Try Again", view: self)
-                    
-                    return
-                }
-                
-                LocationManager.sharedInstance.startUpdatingLocation()
-                FIRAuth.auth()?.currentUser?.sendEmailVerification(completion: { (error) in
+                {(user, error) in
                     
                     guard error == nil else
                     {
-                        DispatchQueue.main.async
-                        {
-                            self.utilityClass.errorAlert(title: "Email Error", message: (error?.localizedDescription)!, cancelTitle: "Dismiss", view: self)
-                        }
+                        self.utilityClass.errorAlert(title: "Signup Error", message: (error?.localizedDescription)!, cancelTitle: "Try Again", view: self)
+                        
                         return
                     }
-                })
-                FIRAuth.auth()?.signIn(withEmail: emailField.text!, password: passwordField.text!)
-                self.createUserAccount(name: nameField.text!)
+                    
+                    LocationManager.sharedInstance.startUpdatingLocation()
+                    FIRAuth.auth()?.currentUser?.sendEmailVerification(completion: { (error) in
+                        
+                        guard error == nil else
+                        {
+                            DispatchQueue.main.async
+                                {
+                                    self.utilityClass.errorAlert(title: "Email Error", message: (error?.localizedDescription)!, cancelTitle: "Dismiss", view: self)
+                            }
+                            return
+                        }
+                    })
+                    FIRAuth.auth()?.signIn(withEmail: emailField.text!, password: passwordField.text!)
+                    self.createUserAccount(name: nameField.text!)
             })
         }
         
@@ -169,4 +173,55 @@ extension LoginViewController: UITextFieldDelegate {
         return true
     }
     
+}
+
+extension LoginViewController: FBSDKLoginButtonDelegate
+{
+    func createLoginButton()
+    {
+        loginButton.readPermissions = ["public_profile", "email", "user_friends"]
+        let newCenter = CGPoint(x: self.view.frame.width / 2, y: self.view.frame.height - 70)
+        loginButton.center = newCenter
+        loginButton.delegate = self
+        self.view.addSubview(loginButton)
+    }
+    
+    func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!)
+    {
+        guard error == nil else
+        {
+            return self.utilityClass.errorAlert(title: "Login Error", message: error.localizedDescription, cancelTitle: "Dismiss", view: self)
+        }
+        
+        if FBSDKAccessToken.current().tokenString != nil
+        {
+            let accessToken = FBSDKAccessToken.current().tokenString
+            let credential = FIRFacebookAuthProvider.credential(withAccessToken: accessToken!)
+            FIRAuth.auth()?.signIn(with: credential, completion: { (user, error) in
+                
+                guard error == nil else
+                {
+                    return self.utilityClass.errorAlert(title: "Login Error", message: error!.localizedDescription, cancelTitle: "Dismiss", view: self)
+                }
+                
+                self.createUserAccount(name: (user?.displayName!)!)
+            })
+        }else
+        {
+            self.utilityClass.errorAlert(title: "Login Error", message: "Login was interrupted. Please try again.", cancelTitle: "Dismiss", view: self)
+        }
+    }
+    
+    func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!)
+    {
+        let loginManager = FBSDKLoginManager()
+        loginManager.logOut()
+        
+        let firebaseAuth = FIRAuth.auth()
+        do {
+            try firebaseAuth?.signOut()
+        } catch let signOutError as NSError {
+            print ("Error signing out: %@", signOutError)
+        }
+    }
 }

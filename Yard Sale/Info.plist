@@ -6,6 +6,27 @@
 	<array>
 		<string>YARDSALE.TTF</string>
 	</array>
+    
+    <key>LSApplicationQueriesSchemes</key>
+    <array>
+        <string>fbapi</string>
+        <string>fb-messenger-api</string>
+        <string>fbauth2</string>
+        <string>fbshareextension</string>
+    </array>
+    <key>CFBundleURLTypes</key>
+    <array>
+        <dict>
+            <key>CFBundleURLSchemes</key>
+            <array>
+                <string>fb215261795617777</string>
+            </array>
+        </dict>
+    </array>
+    <key>FacebookAppID</key>
+    <string>215261795617777</string>
+    <key>FacebookDisplayName</key>
+    <string>Yard Sale</string>
 	<key>NSAppleMusicUsageDescription</key>
 	<string>$(PRODUCT_NAME) requesting permission</string>
 	<key>NSCameraUsageDescription</key>
@@ -46,5 +67,6 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
+
 </dict>
 </plist>
