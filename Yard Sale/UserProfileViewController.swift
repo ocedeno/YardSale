@@ -44,6 +44,7 @@ class UserProfileViewController: UIViewController
         collectionView.dataSource = self
         collectionView.delegate = self
         setupProfileImageView()
+        delegateTextFields()
     }
     
     override func viewWillAppear(_ animated: Bool)
@@ -54,6 +55,16 @@ class UserProfileViewController: UIViewController
         createUpdateBarButtonItem()
         collectionView.backgroundColor = UIColor.clear
         imagePicker.delegate = self
+    }
+    
+    func delegateTextFields()
+    {
+        userNameField.delegate = self
+        userEmailField.delegate = self
+        userAddressField.delegate = self
+        userCityField.delegate = self
+        userStateField.delegate = self
+        userZipCodeField.delegate = self
     }
     
     func createReferenceToUser()
@@ -500,5 +511,58 @@ extension UserProfileViewController: UINavigationControllerDelegate, UIImagePick
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController)
     {
         dismiss(animated: true, completion: nil)
+    }
+}
+
+extension UserProfileViewController: UITextFieldDelegate
+{
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool
+    {
+        switch textField {
+        case userNameField:
+            userEmailField.becomeFirstResponder()
+            break
+            
+        case userEmailField:
+            userAddressField.becomeFirstResponder()
+            break
+            
+        case userAddressField:
+            userCityField.becomeFirstResponder()
+            break
+            
+        case userCityField:
+            userStateField.becomeFirstResponder()
+            break
+            
+        case userStateField:
+            userZipCodeField.becomeFirstResponder()
+            break
+            
+        case userZipCodeField:
+            resignFirstResponder()
+            break
+            
+        default:
+            break
+        }
+        
+        return true
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField)
+    {
+        if textField == userCityField || textField == userStateField || textField == userZipCodeField || textField == userAddressField
+        {
+            self.view.frame.origin.y -= 60
+        }
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField)
+    {
+        if textField == userCityField || textField == userStateField || textField == userZipCodeField || textField == userAddressField
+        {
+            self.view.frame.origin.y += 60
+        }
     }
 }
