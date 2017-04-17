@@ -64,6 +64,7 @@ class MainViewController: BaseViewController, CLLocationManagerDelegate {
         FIRAuth.auth()?.addStateDidChangeListener { auth, user in
             if user != nil {
                 print("User is signed in.")
+                self.locationManager.startUpdatingLocation()
             } else {
                 print("User is signed out.")
                 self.locationManager.stopUpdatingLocation()
@@ -189,8 +190,8 @@ class MainViewController: BaseViewController, CLLocationManagerDelegate {
     
     func useCurrentLocation()
     {
-        let lon = locationManager.lastKnownLongitude
-        let lat = locationManager.lastKnownLatitude
+        let lon = locationManager.longitude
+        let lat = locationManager.latitude
         
         if locationManager.isRunning
         {
