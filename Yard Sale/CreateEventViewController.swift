@@ -47,7 +47,7 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
     {
         super.viewDidLoad()
         
-        self.title = "Create Yard Sale"
+        self.title = "Create Event"
         let saveButton = UIBarButtonItem.init(title: "Save", style: .plain, target: self, action: #selector(saveEvent))
         self.navigationItem.rightBarButtonItem = saveButton
         

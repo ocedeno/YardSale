@@ -71,7 +71,8 @@ class MainViewController: BaseViewController, CLLocationManagerDelegate {
         }
     }
     
-    override func viewDidAppear(_ animated: Bool) {
+    override func viewDidAppear(_ animated: Bool)
+    {
         super.viewDidAppear(true)
         
         if count! < 1
@@ -94,7 +95,9 @@ class MainViewController: BaseViewController, CLLocationManagerDelegate {
     {
         self.title = "Yard Sale"
         let nav = self.navigationController?.navigationBar
-        nav?.titleTextAttributes = [NSFontAttributeName: UIFont(name: "YardSale", size: 20)!]
+        nav?.titleTextAttributes = [NSFontAttributeName: UIFont(name: "Georgia", size: 40)!]
+        nav?.tintColor = UIColor.white
+        nav?.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
         let image = UIImage(named: "NavBarGreenGrassBackground")
         nav?.contentMode = .scaleAspectFit
         nav?.setBackgroundImage(image, for: .default)
