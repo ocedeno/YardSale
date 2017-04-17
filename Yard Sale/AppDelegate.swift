@@ -27,6 +27,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate
         GIDSignIn.sharedInstance().clientID = FIRApp.defaultApp()?.options.clientID
         GIDSignIn.sharedInstance().delegate = self
         
+        FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+        
         FIRAuth.auth()?.addStateDidChangeListener({ (auth, user) in
             if user == nil
             {
@@ -37,18 +39,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate
                 self.window?.makeKeyAndVisible()
             }
         })
-        return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+        
+        return true
     }
     
     func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool
     {
         return FBSDKApplicationDelegate.sharedInstance().application(application, open: url, sourceApplication: sourceApplication, annotation: annotation)
+        
     }
-
+    
     func application(_ application: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any])
         -> Bool
     {
-            return GIDSignIn.sharedInstance().handle(url,
+        FBSDKApplicationDelegate.sharedInstance().application(application, open: url, options: options)
+        return GIDSignIn.sharedInstance().handle(url,
                                                      sourceApplication:options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String,
                                                      annotation: [:])
     }
@@ -61,8 +66,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate
         }
         
         guard let authentication = user.authentication else { return }
-        let credential = FIRGoogleAuthProvider.credential(withIDToken: authentication.idToken,
-                                                          accessToken: authentication.accessToken)
+        _ = FIRGoogleAuthProvider.credential(withIDToken: authentication.idToken,
+                                             accessToken: authentication.accessToken)
     }
     
     func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {

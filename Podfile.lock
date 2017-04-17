@@ -83,6 +83,7 @@ PODS:
   - SDWebImage/Core (4.0.0)
 
 DEPENDENCIES:
+  - Bolts
   - FacebookCore
   - FacebookLogin
   - FacebookShare
@@ -115,6 +116,6 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: 5c046c76a1f859bc9c187e918f18e4fc7bb57b5e
   SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
 
-PODFILE CHECKSUM: 01b369e0f0c286bbb29e247d4849c3ba4523af28
+PODFILE CHECKSUM: 8c7af3be82c5a67ed656d37187cc11e03bce40e7
 
 COCOAPODS: 1.2.0

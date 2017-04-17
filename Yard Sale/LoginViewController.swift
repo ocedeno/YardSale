@@ -15,8 +15,8 @@ import GoogleSignIn
 
 class LoginViewController: UIViewController
 {
+    @IBOutlet weak var fbButtonPlaceholder: UIButton!
     @IBOutlet weak var googleLoginButton: UIButton!
-    @IBOutlet weak var facebookLoginButton: FBSDKLoginButton!
     @IBOutlet weak var backgroundImage: UIImageView!
     @IBOutlet weak var userEmailTextfield: UITextField!
     @IBOutlet weak var userPasswordTextfield: UITextField!
@@ -180,42 +180,39 @@ extension LoginViewController: UITextFieldDelegate {
     
 }
 
-extension LoginViewController: FBSDKLoginButtonDelegate
+extension LoginViewController
 {
-    func createLoginButton()
-    {
-        facebookLoginButton.readPermissions = ["public_profile", "email", "user_friends"]
-//        let newCenter = CGPoint(x: self.view.frame.width / 2, y: self.view.frame.height - 70)
-//        facebookLoginButton.center = newCenter
-//        facebookLoginButton.delegate = self
-//        self.view.addSubview(facebookLoginButton)
-    }
     
-    func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!)
-    {
-        guard error == nil else
-        {
-            return self.utilityClass.errorAlert(title: "Login Error", message: error.localizedDescription, cancelTitle: "Dismiss", view: self)
-        }
-        
-        if FBSDKAccessToken.current().tokenString != nil
-        {
-            let accessToken = FBSDKAccessToken.current().tokenString
-            let credential = FIRFacebookAuthProvider.credential(withAccessToken: accessToken!)
+    @IBAction func facebookLogin(sender: UIButton) {
+        let fbLoginManager = FBSDKLoginManager()
+        fbLoginManager.logIn(withReadPermissions: ["public_profile", "email"], from: self) { (result, error) in
+            if (error != nil) || (result?.isCancelled)!
+            {
+                return print("Failed to login: \(String(describing: error?.localizedDescription))")
+            }
+            
+            guard let accessToken = FBSDKAccessToken.current() else
+            {
+                return print("Failed to get access token")
+            }
+            
+            let credential = FIRFacebookAuthProvider.credential(withAccessToken: accessToken.tokenString)
+            
             FIRAuth.auth()?.signIn(with: credential, completion: { (user, error) in
-                
-                guard error == nil else
-                {
-                    self.loginManager.logOut()
-                    return self.utilityClass.errorAlert(title: "Login Error", message: error!.localizedDescription, cancelTitle: "Dismiss", view: self)
+                if let error = error {
+                    print("Login error: \(error.localizedDescription)")
+                    let alertController = UIAlertController(title: "Login Error", message: error.localizedDescription, preferredStyle: .alert)
+                    let okayAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                    alertController.addAction(okayAction)
+                    self.present(alertController, animated: true, completion: nil)
+                    
+                    return
                 }
                 
                 self.createUserAccount(name: (user?.displayName!)!)
             })
-        }else
-        {
-            self.utilityClass.errorAlert(title: "Login Error", message: "Login was interrupted. Please try again.", cancelTitle: "Dismiss", view: self)
-        }
+            
+        }   
     }
     
     func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!)
@@ -225,6 +222,7 @@ extension LoginViewController: FBSDKLoginButtonDelegate
         let firebaseAuth = FIRAuth.auth()
         do {
             try firebaseAuth?.signOut()
+            FBSDKLoginManager().logOut()
         } catch let signOutError as NSError {
             print ("Error signing out: %@", signOutError)
         }

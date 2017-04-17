@@ -63,10 +63,13 @@ class UserProfileViewController: UIViewController
         let userRefPath = ref.child(uniqueID!)
         userRefPath.observe(.value, with: { (snapshot) in
             
-            self.userInfo = User(snapshot: snapshot)
-            self.populateUserValues()
-            self.populateUserAddress()
-            self.getUserEventImageRef()
+            if snapshot.exists()
+            {
+                self.userInfo = User(snapshot: snapshot)
+                self.populateUserValues()
+                self.populateUserAddress()
+                self.getUserEventImageRef()
+            }
         })
     }
     
@@ -224,15 +227,7 @@ class UserProfileViewController: UIViewController
         let ref = self.createProfileImageStorageReference()
         ref.child("profileImage").data(withMaxSize: 3 * 1024 * 1024) { (data, error) in
             
-            guard error == nil else
-            {
-                DispatchQueue.main.async
-                {
-                    self.utilityClass.errorAlert(title: "Image Error", message: (error?.localizedDescription)!, cancelTitle: "Dismiss", view: self)
-                    print("\n\(error.debugDescription)")
-                }
-                return
-            }
+            guard error == nil else { return }
             
             if let data = data
             {

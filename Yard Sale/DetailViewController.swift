@@ -92,7 +92,6 @@ class DetailViewController: UIViewController
         if userEvent?.imageTitleDictionary?.count != 0
         {
             createImageStorageReference()
-            populateDataArray()
         }
     }
 
@@ -103,15 +102,13 @@ class DetailViewController: UIViewController
         let storageRef = storage.reference()
         let imageRef = storageRef.child("images")
         eventImageRef = imageRef.child(uniqueID!)
+        
+        populateDataArray()
     }
     
     func populateDataArray()
     {
-        guard userEvent?.imageTitleDictionary != nil else
-        {
-            print("\nNo images from User.")
-            return
-        }
+        guard userEvent?.imageTitleDictionary != nil else { return }
         
         for item in (userEvent?.imageTitleDictionary)!
         {
@@ -119,12 +116,7 @@ class DetailViewController: UIViewController
                 
                 guard error == nil else
                 {
-                    DispatchQueue.main.async
-                    {
-                        self.utilityClass.errorAlert(title: "Image Error", message: (error?.localizedDescription)!, cancelTitle: "Dismiss", view: self)
-                        print("\n\(error.debugDescription)")
-                    }
-                    return
+                   return self.populateDataArray()
                 }
                 
                 self.dataArray.append(data!)

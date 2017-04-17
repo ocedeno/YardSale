@@ -675,9 +675,16 @@
                                                 </constraints>
                                                 <state key="normal" title="Button" image="google_logo" backgroundImage="google_logo"/>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1AG-Ep-jzt" customClass="FBSDKLoginButton">
-                                                <rect key="frame" x="148.5" y="47" width="46" height="34.5"/>
-                                                <state key="normal" title="Button"/>
+                                            <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1AG-Ep-jzt">
+                                                <rect key="frame" x="71.5" y="47" width="200" height="34.5"/>
+                                                <rect key="contentStretch" x="0.0" y="0.0" width="0.0" height="0.0"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="200" id="deZ-aQ-i9v"/>
+                                                </constraints>
+                                                <state key="normal" title="Button" image="Facebook_Logo"/>
+                                                <connections>
+                                                    <action selector="facebookLoginWithSender:" destination="iAg-j0-zEF" eventType="touchUpInside" id="1Pb-lc-h9H"/>
+                                                </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pOC-Fe-zY4">
                                                 <rect key="frame" x="0.0" y="93.5" width="343" height="35"/>
@@ -706,7 +713,7 @@
                     </view>
                     <connections>
                         <outlet property="backgroundImage" destination="VoR-1n-XGT" id="Jlg-l5-KLR"/>
-                        <outlet property="facebookLoginButton" destination="1AG-Ep-jzt" id="Ylr-dk-Wb8"/>
+                        <outlet property="fbButtonPlaceholder" destination="1AG-Ep-jzt" id="dcT-7f-Q5m"/>
                         <outlet property="googleLoginButton" destination="Tpq-ZW-NEs" id="JDQ-Fa-8WS"/>
                         <outlet property="userEmailTextfield" destination="WqV-dK-lcq" id="scI-Jt-ygh"/>
                         <outlet property="userPasswordTextfield" destination="0zP-7r-3lg" id="5tc-XJ-v34"/>
@@ -1135,6 +1142,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Facebook_Logo" width="1071" height="205"/>
         <image name="GreenGrassBackground" width="2560" height="1600"/>
         <image name="VintageWoodBackground" width="438" height="600"/>
         <image name="google_logo" width="738" height="156"/>
