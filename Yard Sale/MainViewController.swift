@@ -412,6 +412,13 @@ extension MainViewController: MKMapViewDelegate
         return annotationView
     }
     
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView)
+    {
+        let lat = view.annotation?.coordinate.latitude
+        let lon = view.annotation?.coordinate.longitude
+        setMapRegion(lon: lon!, lat: lat!)
+    }
+    
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl)
     {
         let myPin = view.annotation! as! MyPointAnnotation
