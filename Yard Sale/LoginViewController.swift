@@ -182,7 +182,6 @@ extension LoginViewController: UITextFieldDelegate {
 
 extension LoginViewController
 {
-    
     @IBAction func facebookLogin(sender: UIButton) {
         let fbLoginManager = FBSDKLoginManager()
         fbLoginManager.logIn(withReadPermissions: ["public_profile", "email"], from: self) { (result, error) in
