@@ -807,20 +807,20 @@
                                                                     <rect key="frame" x="128" y="0.0" width="239" height="77"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Kids Clothes and Toys!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ofg-s6-e6V">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="239" height="21.5"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="239" height="22.5"/>
                                                                             <fontDescription key="fontDescription" name="HelveticaNeue-BoldItalic" family="Helvetica Neue" pointSize="17"/>
                                                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                             <nil key="highlightedColor"/>
                                                                             <size key="shadowOffset" width="0.0" height="1"/>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="2040 SW 33rd Ave" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NCL-G4-PqX">
-                                                                            <rect key="frame" x="0.0" y="21.5" width="239" height="19"/>
-                                                                            <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="15"/>
+                                                                            <rect key="frame" x="0.0" y="22.5" width="239" height="16"/>
+                                                                            <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="12"/>
                                                                             <nil key="highlightedColor"/>
                                                                             <size key="shadowOffset" width="0.0" height="1"/>
                                                                         </label>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="8" adjustsLetterSpacingToFitWidth="YES" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="C1V-by-NCY">
-                                                                            <rect key="frame" x="0.0" y="40.5" width="239" height="36.5"/>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsLetterSpacingToFitWidth="YES" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="C1V-by-NCY">
+                                                                            <rect key="frame" x="0.0" y="38.5" width="239" height="38.5"/>
                                                                             <string key="text">*Children Clothes  *Children Toys
 *Tools  *Household Items ...</string>
                                                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
@@ -1041,7 +1041,7 @@
             <objects>
                 <navigationController storyboardIdentifier="NavController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="blh-kB-2hn" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="oe0-Qw-Rww">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="oe0-Qw-Rww">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1153,9 +1153,9 @@
         <image name="profilePlaceholder" width="600" height="600"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="igD-jS-SD2"/>
+        <segue reference="bYv-r9-RLc"/>
         <segue reference="AXa-yV-7mK"/>
-        <segue reference="7Zh-xH-6rh"/>
         <segue reference="i5n-Ig-cWB"/>
-        <segue reference="KWd-Vb-nPs"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -50,7 +50,8 @@ class DetailViewController: UIViewController
         imageViewOverlay.addGestureRecognizer(tapToDismissgesture)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool)
+    {
         super.viewWillAppear(true)
         
         utilityClass.createBackgroundImageView(view: self.view)
@@ -181,7 +182,6 @@ extension DetailViewController: MKMapViewDelegate
             annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "pinView")
             annotationView!.canShowCallout = true
             annotationView!.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
-            annotationView!.isDraggable = true
         }
         
         return annotationView
