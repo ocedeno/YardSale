@@ -28,7 +28,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Yard Sale" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wBz-iI-avQ">
                                 <rect key="frame" x="16" y="305.5" width="343" height="57"/>
                                 <fontDescription key="fontDescription" name="Georgia-Bold" family="Georgia" pointSize="50"/>
-                                <color key="textColor" red="0.89275659784303274" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>

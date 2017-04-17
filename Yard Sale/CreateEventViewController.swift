@@ -104,6 +104,7 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
     
     internal func setTextFieldDelegate()
     {
+        titleTextField.delegate = self
         dateTextField.delegate = self
         startTimeField.delegate = self
         stopTimeField.delegate = self
@@ -678,6 +679,33 @@ extension CreateEventViewController: UITextFieldDelegate
             dateTextField.text = dateFormatter.string(from: currentDate)
         }
     }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool
+    {
+        switch textField
+        {
+        case titleTextField:
+            dateTextField.becomeFirstResponder()
+            break
+            
+        case dateTextField:
+            startTimeField.becomeFirstResponder()
+            break
+            
+        case startTimeField:
+            stopTimeField.becomeFirstResponder()
+            break
+            
+        case stopTimeField:
+            descriptionText.becomeFirstResponder()
+            break
+            
+        default:
+            break
+        }
+        
+        return true
+    }
 }
 
 extension CreateEventViewController: UITextViewDelegate
@@ -689,5 +717,13 @@ extension CreateEventViewController: UITextViewDelegate
             descriptionText.text = ""
             descriptionText.textColor = UIColor.black
         }
+        self.view.frame.origin.y -= 70
     }
+    
+    func textViewDidEndEditing(_ textView: UITextView)
+    {
+        self.view.frame.origin.y += 70
+    }
+    
+    
 }

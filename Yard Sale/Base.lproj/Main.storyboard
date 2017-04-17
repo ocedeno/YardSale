@@ -373,13 +373,13 @@
                                                                 <rect key="frame" x="0.0" y="0.0" width="344" height="30"/>
                                                                 <nil key="textColor"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
+                                                                <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="next"/>
                                                             </textField>
                                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Date" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mUb-xI-N9C">
                                                                 <rect key="frame" x="0.0" y="38" width="344" height="30"/>
                                                                 <nil key="textColor"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                <textInputTraits key="textInputTraits"/>
+                                                                <textInputTraits key="textInputTraits" returnKeyType="next"/>
                                                                 <connections>
                                                                     <action selector="dateTextFieldEditing:" destination="J55-xf-ArT" eventType="editingDidBegin" id="ddZ-Pe-sBw"/>
                                                                 </connections>
@@ -391,7 +391,7 @@
                                                                         <rect key="frame" x="0.0" y="0.0" width="192" height="30"/>
                                                                         <nil key="textColor"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                        <textInputTraits key="textInputTraits"/>
+                                                                        <textInputTraits key="textInputTraits" returnKeyType="next"/>
                                                                         <connections>
                                                                             <action selector="startTimeTextFieldEditing:" destination="J55-xf-ArT" eventType="editingDidBegin" id="etf-hd-Bmx"/>
                                                                         </connections>
@@ -400,7 +400,7 @@
                                                                         <rect key="frame" x="200" y="0.0" width="144" height="30"/>
                                                                         <nil key="textColor"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                        <textInputTraits key="textInputTraits"/>
+                                                                        <textInputTraits key="textInputTraits" returnKeyType="next"/>
                                                                         <connections>
                                                                             <action selector="stopTimeTextFieldEditing:" destination="J55-xf-ArT" eventType="editingDidBegin" id="bnU-Li-4n1"/>
                                                                         </connections>
@@ -1151,9 +1151,9 @@
         <image name="profilePlaceholder" width="600" height="600"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="i5n-Ig-cWB"/>
         <segue reference="AXa-yV-7mK"/>
-        <segue reference="igD-jS-SD2"/>
-        <segue reference="bYv-r9-RLc"/>
+        <segue reference="7Zh-xH-6rh"/>
+        <segue reference="i5n-Ig-cWB"/>
+        <segue reference="KWd-Vb-nPs"/>
     </inferredMetricsTieBreakers>
 </document>
