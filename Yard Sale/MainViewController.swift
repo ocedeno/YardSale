@@ -468,19 +468,26 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource
             if self.imageDataArray.count != 0
             {
                 let data = imageDataArray[event.userID!]
-                return UIImage(data: data!)!
+                if data != nil
+                {
+                    return UIImage(data: data!)!
+                }else
+                {
+                    return UIImage.homePlaceholder()
+                }
             }else
             {
-                return UIImage.gorgeousImage()
+                return UIImage.homePlaceholder()
             }
         }()
         
         cell.updateEventCell(withDate: self.eventsArray[indexPath.row].date!,
                              distance: "\(self.eventsArray[indexPath.row].distance) mi.",
-            headline: self.eventsArray[indexPath.row].title!,
-            address: "\(self.eventsArray[indexPath.row].addressDictionary!["locality"]!), \(self.eventsArray[indexPath.row].addressDictionary!["administrativeArea"]!)",
-            category: self.eventsArray[indexPath.row].description!,
-            image: image
+                                 time: "\(self.eventsArray[indexPath.row].startTime!) - \(self.eventsArray[indexPath.row].stopTime!)",
+                             headline: self.eventsArray[indexPath.row].title!,
+                              address: "\(self.eventsArray[indexPath.row].addressDictionary!["locality"]!), \(self.eventsArray[indexPath.row].addressDictionary!["administrativeArea"]!)",
+                             category: self.eventsArray[indexPath.row].description!,
+                                image: image
         )
         
         return cell

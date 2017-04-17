@@ -763,7 +763,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="77"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="VintageWoodBackground" translatesAutoresizingMaskIntoConstraints="NO" id="Sry-Jg-mia">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="HomePlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="Sry-Jg-mia">
                                                             <rect key="frame" x="0.0" y="0.0" width="120" height="77"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="120" id="8UD-Rc-RRR"/>
@@ -772,7 +772,7 @@
                                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="1lj-pj-XrQ">
                                                             <rect key="frame" x="0.0" y="0.0" width="367" height="77"/>
                                                             <subviews>
-                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xZ2-kC-vXV" userLabel="TextOverlayView">
+                                                                <view alpha="0.59999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xZ2-kC-vXV" userLabel="TextOverlayView">
                                                                     <rect key="frame" x="0.0" y="0.0" width="120" height="77"/>
                                                                     <subviews>
                                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="5Ln-J7-l1W">
@@ -792,14 +792,14 @@
                                                                                 </label>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="8:30AM - 3:00PM" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mFN-SQ-1SO">
                                                                                     <rect key="frame" x="0.0" y="57" width="120" height="20"/>
-                                                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                     <nil key="highlightedColor"/>
                                                                                 </label>
                                                                             </subviews>
                                                                         </stackView>
                                                                     </subviews>
-                                                                    <color key="backgroundColor" red="0.63127597039227656" green="0.63127597039227656" blue="0.63127597039227656" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    <color key="backgroundColor" red="0.1215686275" green="0.12941176469999999" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="trailing" secondItem="5Ln-J7-l1W" secondAttribute="trailing" id="Al9-TO-xJT"/>
                                                                         <constraint firstItem="5Ln-J7-l1W" firstAttribute="top" secondItem="xZ2-kC-vXV" secondAttribute="top" id="iRh-do-eu6"/>
@@ -857,6 +857,7 @@
                                                     <outlet property="distanceLabel" destination="U8b-GJ-VfL" id="ix2-Vo-bIp"/>
                                                     <outlet property="eventImageView" destination="Sry-Jg-mia" id="Cv3-p0-m4g"/>
                                                     <outlet property="headlineLabel" destination="Ofg-s6-e6V" id="FcU-uL-33Y"/>
+                                                    <outlet property="startStopTime" destination="mFN-SQ-1SO" id="gia-Qv-BXr"/>
                                                 </connections>
                                             </tableViewCell>
                                         </prototypes>
@@ -1155,14 +1156,14 @@
     <resources>
         <image name="Facebook_Logo" width="1071" height="205"/>
         <image name="GreenGrassBackground" width="2560" height="1600"/>
-        <image name="VintageWoodBackground" width="438" height="600"/>
+        <image name="HomePlaceholder" width="480" height="360"/>
         <image name="google_logo" width="738" height="156"/>
         <image name="profilePlaceholder" width="600" height="600"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="bYv-r9-RLc"/>
+        <segue reference="igD-jS-SD2"/>
         <segue reference="i5n-Ig-cWB"/>
         <segue reference="khS-td-bPW"/>
-        <segue reference="KWd-Vb-nPs"/>
-        <segue reference="7Zh-xH-6rh"/>
     </inferredMetricsTieBreakers>
 </document>

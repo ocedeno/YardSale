@@ -70,9 +70,13 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
         
         if userEvent != nil
         {
-            descriptionText.textColor = UIColor.black
-            addImageButton.setTitle("Remove Old, and Add New Images", for: .normal)
-            editingEvent = true
+//            descriptionText.textColor = UIColor.black
+//            addImageButton.setTitle("Remove Old, and Add New Images", for: .normal)
+//            editingEvent = true
+            addImageButton.isHidden = true
+        }else
+        {
+            addImageButton.isHidden = false
         }
     }
     

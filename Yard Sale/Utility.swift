@@ -34,8 +34,8 @@ struct Utility
 }
 
 extension UIImage {
-    class func gorgeousImage() -> UIImage {
-        return UIImage(named: "GorgeousImage")!
+    class func homePlaceholder() -> UIImage {
+        return UIImage(named: "HomePlaceholder")!
     }
     
     class func grassBackground() -> UIImage {

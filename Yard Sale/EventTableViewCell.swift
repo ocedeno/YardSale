@@ -17,7 +17,9 @@ class EventTableViewCell: UITableViewCell
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var categoryLabel: UILabel!
   
-    func updateEventCell(withDate: String, distance: String, headline: String, address: String, category: String, image: UIImage)
+    @IBOutlet weak var startStopTime: UILabel!
+    
+    func updateEventCell(withDate: String, distance: String, time: String, headline: String, address: String, category: String, image: UIImage)
     {
         self.eventImageView.image = image
         self.dateLabel.text = withDate
@@ -25,5 +27,6 @@ class EventTableViewCell: UITableViewCell
         self.headlineLabel.text = headline
         self.addressLabel.text = address
         self.categoryLabel.text = category
+        self.startStopTime.text = time
     }
 }
