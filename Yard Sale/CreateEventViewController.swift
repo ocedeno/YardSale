@@ -722,8 +722,22 @@ extension CreateEventViewController: UITextViewDelegate
     
     func textViewDidEndEditing(_ textView: UITextView)
     {
+        if textView.text == ""
+        {
+            count = 0
+            updateTextView()
+        }
         self.view.frame.origin.y += 70
     }
     
-    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool
+    {
+        if(text == "\n")
+        {
+            textView.resignFirstResponder()
+            return false
+        }
+        
+        return true
+    }
 }
