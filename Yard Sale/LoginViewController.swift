@@ -41,6 +41,8 @@ class LoginViewController: UIViewController
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         self.view.addGestureRecognizer(tapGesture)
+        userEmailTextfield.delegate = self
+        userPasswordTextfield.delegate = self
     }
     
     func dismissKeyboard()
@@ -168,16 +170,19 @@ class LoginViewController: UIViewController
 
 extension LoginViewController: UITextFieldDelegate {
     
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if textField == userEmailTextfield {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool
+    {
+        if textField == userEmailTextfield
+        {
             userPasswordTextfield.becomeFirstResponder()
         }
-        if textField == userPasswordTextfield {
+        if textField == userPasswordTextfield
+        {
             textField.resignFirstResponder()
+            loginAction()
         }
         return true
     }
-    
 }
 
 extension LoginViewController
