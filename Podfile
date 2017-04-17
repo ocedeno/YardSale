@@ -12,7 +12,6 @@ target 'Yard Sale' do
     pod 'FacebookCore'
     pod 'FacebookLogin'
     pod 'FacebookShare'
-    pod 'Bolts'
     pod 'GoogleSignIn'
     
     # Pods for Yard Sale
