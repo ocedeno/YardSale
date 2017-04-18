@@ -120,8 +120,15 @@ class DetailViewController: UIViewController
                    return self.populateDataArray()
                 }
                 
-                self.dataArray.append(data!)
-                self.eventPhotoCollectionView.reloadData()
+                if !self.dataArray.contains(data!)
+                {
+                    self.dataArray.append(data!)
+                    DispatchQueue.main.async
+                    {
+                        self.eventPhotoCollectionView.reloadData()
+                    }
+                    
+                }
             })
         }
     }

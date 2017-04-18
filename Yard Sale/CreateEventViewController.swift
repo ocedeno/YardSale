@@ -290,8 +290,17 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
         return stringDict
     }
     
+    func checkForNetworkConnection()
+    {
+        guard utilityClass.isInternetAvailable() else
+        {
+            return utilityClass.errorAlert(title: "No Internet Connection", message: "In order to use this application successfully, please make sure you are connected to the internet.", cancelTitle: "Dismiss", view: self)
+        }
+    }
+    
     func saveEvent()
     {
+        checkForNetworkConnection()
         if guardCheck()
         {
             dismissPicker()

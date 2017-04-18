@@ -44,6 +44,7 @@ class MainViewController: BaseViewController, CLLocationManagerDelegate {
     {
         super.viewDidLoad()
         
+        checkForNetworkConnection()
         count = 0
         mapView.delegate = self
         eventTableView.delegate = self
@@ -90,6 +91,14 @@ class MainViewController: BaseViewController, CLLocationManagerDelegate {
         mapOverlayView?.isHidden = true
         searchForLocation?.endEditing(true)
         searchForLocation?.isHidden = true
+    }
+    
+    func checkForNetworkConnection()
+    {
+        guard utilityClass.isInternetAvailable() else
+        {
+            return utilityClass.errorAlert(title: "No Internet Connection", message: "In order to use this application successfully, please make sure you are connected to the internet.", cancelTitle: "Dismiss", view: self)
+        }
     }
     
     func setupBackgroundNavView()
