@@ -53,7 +53,6 @@ class MainViewController: BaseViewController, CLLocationManagerDelegate {
         addSlideMenuButton()
         setupBackgroundTableView()
         setupBackgroundNavView()
-        populateEventsArray()
     }
     
     override func viewWillAppear(_ animated: Bool)
@@ -71,6 +70,7 @@ class MainViewController: BaseViewController, CLLocationManagerDelegate {
                 self.locationManager.stopUpdatingLocation()
             }
         }
+        populateEventsArray()
     }
     
     override func viewDidAppear(_ animated: Bool)
