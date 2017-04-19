@@ -23,6 +23,7 @@ class LoginViewController: UIViewController
     
     let utilityClass = Utility()
     let loginManager = FBSDKLoginManager()
+    var activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
     
     override func viewDidLoad()
     {
@@ -43,6 +44,7 @@ class LoginViewController: UIViewController
         self.view.addGestureRecognizer(tapGesture)
         userEmailTextfield.delegate = self
         userPasswordTextfield.delegate = self
+        utilityClass.activityIndicator(indicator: activityIndicator, view: self.view)
     }
     
     func dismissKeyboard()
@@ -65,7 +67,7 @@ class LoginViewController: UIViewController
             
             FIRAuth.auth()?.createUser(withEmail: emailField.text!, password: passwordField.text!, completion:
                 {(user, error) in
-                    
+                    self.activityIndicator.startAnimating()
                     guard error == nil else
                     {
                         self.utilityClass.errorAlert(title: "Signup Error", message: (error?.localizedDescription)!, cancelTitle: "Try Again", view: self)
@@ -87,6 +89,7 @@ class LoginViewController: UIViewController
                     })
                     FIRAuth.auth()?.signIn(withEmail: emailField.text!, password: passwordField.text!)
                     self.createUserAccount(name: nameField.text!)
+                    self.activityIndicator.stopAnimating()
             })
         }
         
@@ -130,6 +133,7 @@ class LoginViewController: UIViewController
     {
         FIRAuth.auth()?.signIn(withEmail: userEmailTextfield.text!, password: userPasswordTextfield.text!, completion: { (user, error) in
             
+            self.activityIndicator.startAnimating()
             guard error == nil else
             {
                 self.utilityClass.errorAlert(title: "Login Error", message: (error?.localizedDescription)!, cancelTitle: "Try Again", view: self)
