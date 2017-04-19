@@ -131,15 +131,15 @@ class LoginViewController: UIViewController
     
     @IBAction func loginAction()
     {
+        activityIndicator.startAnimating()
         FIRAuth.auth()?.signIn(withEmail: userEmailTextfield.text!, password: userPasswordTextfield.text!, completion: { (user, error) in
-            
-            self.activityIndicator.startAnimating()
             guard error == nil else
             {
                 self.utilityClass.errorAlert(title: "Login Error", message: (error?.localizedDescription)!, cancelTitle: "Try Again", view: self)
                 
                 return
             }
+            self.activityIndicator.stopAnimating()
         })
     }
     

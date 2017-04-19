@@ -295,8 +295,8 @@ class MainViewController: BaseViewController, CLLocationManagerDelegate {
 
     func getCurrentLocation()
     {
+        self.activityIndicator.startAnimating()
         locationManager.startUpdatingLocationWithCompletionHandler { (lat, lon, status, verboseMessage, error) in
-            self.activityIndicator.startAnimating()
             guard error == nil else
             {
                 print("\nLocation Update Error: \(error!)")
@@ -307,6 +307,7 @@ class MainViewController: BaseViewController, CLLocationManagerDelegate {
                     self.setMapRegion(lon: lon, lat: lat)
                     self.populateEventsArray()
             }
+            self.activityIndicator.stopAnimating()
         }
     }
     
@@ -322,6 +323,7 @@ class MainViewController: BaseViewController, CLLocationManagerDelegate {
     
     func redirectMapRegion()
     {
+        self.activityIndicator.startAnimating()
         guard let address = searchForLocation?.text else
         {
             utilityClass.errorAlert(title: "Blank Field", message: "Please enter your search location.", cancelTitle: "Dismiss", view: self)
@@ -331,7 +333,6 @@ class MainViewController: BaseViewController, CLLocationManagerDelegate {
         let geoCoder = CLGeocoder()
         geoCoder.geocodeAddressString(address) { (placemark, error) in
             
-            self.activityIndicator.startAnimating()
             guard error == nil else
             {
                 self.utilityClass.errorAlert(title: "Location Error", message: "Your location could not be found, please make sure you are allowing us to use your current locaiton.", cancelTitle: "Dismiss", view: self)
@@ -350,15 +351,16 @@ class MainViewController: BaseViewController, CLLocationManagerDelegate {
             self.view.endEditing(true)
             self.dismissSubview()
             self.appendDistanceToEventsArray(currentLocation: false)
+            self.activityIndicator.stopAnimating()
         }
         
     }
     
     func populateEventsArray()
     {
+        self.activityIndicator.startAnimating()
         self.ref = FIRDatabase.database().reference().child("events")
         self.ref?.observe(.value, with: { snapshot in
-            self.activityIndicator.startAnimating()
             var array: [Event] = []
             for item in snapshot.children
             {
@@ -373,10 +375,7 @@ class MainViewController: BaseViewController, CLLocationManagerDelegate {
             self.eventsArray = array
             self.appendDistanceToEventsArray(currentLocation: true)
             self.reloadEventsToMapView()
-            if self.activityIndicator.isAnimating
-            {
-                self.activityIndicator.stopAnimating()
-            }
+            self.activityIndicator.stopAnimating()
         })
     }
     
@@ -537,10 +536,6 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource
         
         eventsArray.sort { Double($0.distance)! < Double($1.distance)!}
         eventTableView.reloadData()
-        if activityIndicator.isAnimating
-        {
-            activityIndicator.stopAnimating()
-        }
     }
     
     func createImageStorageReference(indexPath: IndexPath)
