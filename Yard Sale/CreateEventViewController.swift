@@ -212,6 +212,7 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
     {
         let datePickerView: UIDatePicker = UIDatePicker()
         datePickerView.datePickerMode = .date
+        datePickerView.minimumDate = Date()
         sender.inputView = datePickerView
         datePickerView.addTarget(self, action: #selector(datePickerValueChanged), for: .valueChanged)
     }
