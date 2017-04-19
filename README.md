@@ -2,7 +2,7 @@
 
 **Summary:**
 
-This application was created purposely for the [Udacity iOS Developer Nanodegree](https://www.udacity.com). This project firmed up my knowledge on creating an application that allows users to search/create yard sales in there area.
+This application was created purposely for the [Udacity iOS Developer Nanodegree](https://www.udacity.com). This project firmed up my knowledge on creating an application that allows users to search/create yard sales in their area.
 
 **The application offers the following features:**
 
