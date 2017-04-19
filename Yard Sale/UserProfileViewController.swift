@@ -424,6 +424,7 @@ extension UserProfileViewController: UICollectionViewDelegate
         if segue.identifier == "fromProfileToCreateEvent"
         {
             let destinationVC = segue.destination as! CreateEventViewController
+            destinationVC.editingEvent = true
             destinationVC.userEvent = sender as? Event
         }
     }
