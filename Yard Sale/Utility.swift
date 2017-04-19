@@ -23,6 +23,13 @@ struct Utility
         }
     }
     
+    func activityIndicator(indicator: UIActivityIndicatorView, view: UIView)
+    {
+        indicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.white
+        indicator.center = view.center
+        view.addSubview(indicator)
+    }
+    
     func createBackgroundImageView(view: UIView)
     {
         let imageView = UIImageView()
