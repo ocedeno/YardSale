@@ -41,6 +41,7 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
     var lastImagePath: String?
     var userEvent: Event?
     var editingEvent: Bool = false
+    var activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
     var count = 0
     
     override func viewDidLoad()
@@ -67,6 +68,8 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
         
         updateTextView()
         setTextFieldDelegate()
+        utilityClass.activityIndicator(indicator: activityIndicator, view: self.view)
+        activityIndicator.hidesWhenStopped = true
         
         if userEvent != nil
         {
@@ -300,6 +303,7 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
     
     func saveEvent()
     {
+        activityIndicator.startAnimating()
         checkForNetworkConnection()
         if guardCheck()
         {
@@ -326,6 +330,7 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
                 )
                 
                 updateRef.updateChildValues(event.toDictionary() as! [AnyHashable : Any])
+                self.activityIndicator.stopAnimating()
                 performSegue(withIdentifier: "segueToDetailView", sender: userEvent?.imageKey!)
             }else
             {
@@ -349,6 +354,7 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
                 {
                     savePhotosToFirebase(dataArray: dataArray)
                 }
+                self.activityIndicator.stopAnimating()
                 performSegue(withIdentifier: "segueToDetailView", sender: taskFirebasePath?.key)
             }
         }

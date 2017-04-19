@@ -15,17 +15,15 @@ class BaseViewController: UIViewController, SlideMenuDelegate
 {
     let auth = FIRAuth.auth()?.currentUser
     let loginManager = FBSDKLoginManager()
+    var activityIndicator2 = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
+    let utility = Utility()
     
-    override func viewDidLoad() {
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        utility.activityIndicator(indicator: activityIndicator2, view: self.view)
     }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
+
     func slideMenuItemSelectedAtIndex(_ index: Int32) {
         let _ : UIViewController = self.navigationController!.topViewController!
         switch(index){
@@ -37,16 +35,15 @@ class BaseViewController: UIViewController, SlideMenuDelegate
         case 1:
             
             self.openViewControllerBasedOnIdentifier("UserProfileVC")
-            
-            break
-            
+                        
         case 2:
             
+            activityIndicator2.startAnimating()
             try! FIRAuth.auth()?.signOut()
             loginManager.logOut()
             GIDSignIn.sharedInstance().signOut()
+            activityIndicator2.stopAnimating()
             
-            break
         default:
             break
         }

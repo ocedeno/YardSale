@@ -45,6 +45,7 @@ class LoginViewController: UIViewController
         userEmailTextfield.delegate = self
         userPasswordTextfield.delegate = self
         utilityClass.activityIndicator(indicator: activityIndicator, view: self.view)
+        activityIndicator.hidesWhenStopped = true
     }
     
     func dismissKeyboard()
