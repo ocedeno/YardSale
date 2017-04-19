@@ -168,7 +168,7 @@
                                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="wBF-c6-e3c">
                                                                     <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
                                                                     <subviews>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SiA-Qb-rmt">
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SiA-Qb-rmt">
                                                                             <rect key="frame" x="0.0" y="0.0" width="150" height="75"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -181,6 +181,10 @@
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                     </subviews>
+                                                                    <constraints>
+                                                                        <constraint firstItem="SiA-Qb-rmt" firstAttribute="leading" secondItem="wBF-c6-e3c" secondAttribute="leading" constant="8" id="QAb-vx-HQO"/>
+                                                                        <constraint firstAttribute="trailing" secondItem="SiA-Qb-rmt" secondAttribute="trailing" constant="8" id="SHc-M5-rfr"/>
+                                                                    </constraints>
                                                                 </stackView>
                                                             </subviews>
                                                         </view>
@@ -1160,9 +1164,9 @@
         <image name="profilePlaceholder" width="600" height="600"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="bYv-r9-RLc"/>
-        <segue reference="igD-jS-SD2"/>
         <segue reference="VvK-Xs-1tN"/>
-        <segue reference="khS-td-bPW"/>
+        <segue reference="igD-jS-SD2"/>
+        <segue reference="bYv-r9-RLc"/>
+        <segue reference="AXa-yV-7mK"/>
     </inferredMetricsTieBreakers>
 </document>

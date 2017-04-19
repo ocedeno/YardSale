@@ -270,7 +270,7 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
         let storage = FIRStorage.storage()
         let storageRef = storage.reference()
         let imageRef = storageRef.child("images")
-        if userEvent == nil {
+        if !editingEvent {
             eventImageRef = imageRef.child(uniqueEventID!)
         }else
         {
@@ -331,6 +331,10 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
                 )
                 
                 updateRef.updateChildValues(event.toDictionary() as! [AnyHashable : Any])
+                if !dataArray.isEmpty
+                {
+                    savePhotosToFirebase(dataArray: dataArray)
+                }
                 self.activityIndicator.stopAnimating()
                 performSegue(withIdentifier: "segueToDetailView", sender: userEvent?.imageKey!)
             }else
