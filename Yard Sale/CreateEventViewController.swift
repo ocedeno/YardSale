@@ -71,15 +71,10 @@ class CreateEventViewController: UIViewController, SSRadioButtonControllerDelega
         utilityClass.activityIndicator(indicator: activityIndicator, view: self.view)
         activityIndicator.hidesWhenStopped = true
         
-        if userEvent != nil
+        if editingEvent
         {
-//            descriptionText.textColor = UIColor.black
-//            addImageButton.setTitle("Remove Old, and Add New Images", for: .normal)
-//            editingEvent = true
-            addImageButton.isHidden = true
-        }else
-        {
-            addImageButton.isHidden = false
+            descriptionText.textColor = UIColor.black
+            addImageButton.setTitle("Remove Old, and Add New Images", for: .normal)
         }
     }
     
@@ -618,7 +613,7 @@ extension CreateEventViewController: UINavigationControllerDelegate, UIImagePick
         }else
         {
             self.createImageStorageReference()
-            guard userEvent?.imageTitleDictionary != nil else
+            guard userEvent?.imageTitleDictionary?.count != 0 else
             {
                 do
                 {

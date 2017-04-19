@@ -31,6 +31,7 @@ class DetailViewController: UIViewController
     var dataStringArray: [String] = []
     var uniqueEventID: String?
     let utilityClass = Utility()
+    var activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
     
     override func viewDidLoad()
     {
@@ -48,6 +49,9 @@ class DetailViewController: UIViewController
         let tapToDismissgesture = UITapGestureRecognizer(target: self, action: #selector(dismissImageSubview))
         enlargedImageView.addGestureRecognizer(tapToDismissgesture)
         imageViewOverlay.addGestureRecognizer(tapToDismissgesture)
+        
+        utilityClass.activityIndicator(indicator: activityIndicator, view: self.view)
+        activityIndicator.hidesWhenStopped = true
     }
     
     override func viewWillAppear(_ animated: Bool)
@@ -109,6 +113,7 @@ class DetailViewController: UIViewController
     
     func populateDataArray()
     {
+        activityIndicator.startAnimating()
         guard userEvent?.imageTitleDictionary != nil else { return }
         
         for item in (userEvent?.imageTitleDictionary)!
@@ -128,6 +133,11 @@ class DetailViewController: UIViewController
                         self.eventPhotoCollectionView.reloadData()
                     }
                     
+                }
+                
+                DispatchQueue.main.async
+                {
+                    self.activityIndicator.stopAnimating()
                 }
             })
         }
