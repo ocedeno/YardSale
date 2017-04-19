@@ -25,7 +25,7 @@ struct Utility
     
     func activityIndicator(indicator: UIActivityIndicatorView, view: UIView)
     {
-        indicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+        indicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
         indicator.center = view.center
         view.addSubview(indicator)
     }
