@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Yard Sale/LoginViewController.swift"
-            timestampString = "514295657.467721"
+            timestampString = "514378501.344912"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "276"
-            endingLineNumber = "276">
+            startingLineNumber = "278"
+            endingLineNumber = "278">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

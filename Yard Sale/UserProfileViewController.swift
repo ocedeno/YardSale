@@ -470,7 +470,7 @@ extension UserProfileViewController: UINavigationControllerDelegate, UIImagePick
 {
     @IBAction func editProfileImage()
     {
-        let alert = UIAlertController(title: "Edit Profile Image", message: "Where can we get your photo from?", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Edit Profile Image", message: "Where can we get your photo from?", preferredStyle: .actionSheet)
         let photoSelection = UIAlertAction(title: "Photo Library", style: .default) { (action) in
             self.photoFromLibrary()
         }
@@ -478,8 +478,12 @@ extension UserProfileViewController: UINavigationControllerDelegate, UIImagePick
             self.shootPhoto()
         }
         
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
         alert.addAction(photoSelection)
         alert.addAction(cameraSelection)
+        alert.addAction(cancel)
+        
         present(alert, animated: true, completion: nil)
     }
     
@@ -494,11 +498,17 @@ extension UserProfileViewController: UINavigationControllerDelegate, UIImagePick
     
     func shootPhoto()
     {
-        imagePicker.allowsEditing = false
-        imagePicker.sourceType = UIImagePickerControllerSourceType.camera
-        imagePicker.cameraCaptureMode = .photo
-        imagePicker.modalPresentationStyle = .fullScreen
-        present(imagePicker,animated: true,completion: nil)
+        if (UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera))
+        {
+            imagePicker.allowsEditing = false
+            imagePicker.sourceType = UIImagePickerControllerSourceType.camera
+            imagePicker.cameraCaptureMode = .photo
+            imagePicker.modalPresentationStyle = .fullScreen
+            present(imagePicker,animated: true,completion: nil)
+        } else
+        {
+            utilityClass.errorAlert(title: "Camera Error", message: "We could not present your camera. Please try again later.", cancelTitle: "Dismiss", view: self)
+        }
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any])
@@ -508,6 +518,8 @@ extension UserProfileViewController: UINavigationControllerDelegate, UIImagePick
         userProfileImageView.image = chosenImage
         dismiss(animated:true, completion: nil)
     }
+    
+    
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController)
     {
