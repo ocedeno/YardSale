@@ -27,16 +27,16 @@ class BaseViewController: UIViewController, SlideMenuDelegate
     func slideMenuItemSelectedAtIndex(_ index: Int32) {
         let _ : UIViewController = self.navigationController!.topViewController!
         switch(index){
-        case 0:
+        case 1:
            
             self.openViewControllerBasedOnIdentifier("MainVC")
             
             break
-        case 1:
+        case 2:
             
             self.openViewControllerBasedOnIdentifier("UserProfileVC")
                         
-        case 2:
+        case 3:
             
             activityIndicator2.startAnimating()
             try! FIRAuth.auth()?.signOut()

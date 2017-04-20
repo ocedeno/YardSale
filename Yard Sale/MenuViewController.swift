@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 protocol SlideMenuDelegate {
     func slideMenuItemSelectedAtIndex(_ index : Int32)
@@ -38,6 +39,7 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
      *  Delegate of the MenuVC
      */
     var delegate : SlideMenuDelegate?
+    var profileImage = UIImage.greenGrassBackground()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,15 +53,18 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+        populateProfileImage()
         // Dispose of any resources that can be recreated.
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        populateProfileImage()
         updateArrayMenuOptions()
     }
     
     func updateArrayMenuOptions(){
+        arrayMenuOptions.append(["title":(FIRAuth.auth()?.currentUser?.displayName)!, "icon":"HomeIcon"])
         arrayMenuOptions.append(["title":"Home", "icon":"HomeIcon"])
         arrayMenuOptions.append(["title":"Profile", "icon":"PlayIcon"])
         arrayMenuOptions.append(["title": "Sign-Out", "icon": "PlayIcon"])
@@ -99,9 +104,18 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
         let lblTitle : UILabel = cell.contentView.viewWithTag(101) as! UILabel
         let imgIcon : UIImageView = cell.contentView.viewWithTag(100) as! UIImageView
         
-        imgIcon.image = UIImage(named: arrayMenuOptions[indexPath.row]["icon"]!)
-        lblTitle.text = arrayMenuOptions[indexPath.row]["title"]!
-        lblTitle.textColor = UIColor.white
+        if indexPath.row != 0
+        {
+            imgIcon.image = UIImage(named: arrayMenuOptions[indexPath.row]["icon"]!)
+            lblTitle.text = arrayMenuOptions[indexPath.row]["title"]!
+        	lblTitle.textColor = UIColor.white
+        }else
+        {
+            populateProfileImage()
+            imgIcon.image = profileImage
+            lblTitle.text = arrayMenuOptions[0]["title"]
+            lblTitle.textColor = UIColor.white
+        }
         
         return cell
     }
@@ -147,4 +161,33 @@ class BlurredBackgroundView: UIView {
     }
 }
 
+extension MenuViewController
+{
+    func createProfileImageStorageReference() -> FIRStorageReference
+    {
+        let storage = FIRStorage.storage()
+        let storageRef = storage.reference()
+        let imageRef = storageRef.child("userProfile")
+        let profileImageRef = imageRef.child((FIRAuth.auth()?.currentUser?.uid)!)
+        
+        return profileImageRef
+    }
+    
+    func populateProfileImage()
+    {
+        let ref = self.createProfileImageStorageReference()
+        ref.child("profileImage").data(withMaxSize: 3 * 1024 * 1024) { (data, error) in
+            
+            guard error == nil else { return }
+            
+            if let data = data
+            {
+                self.profileImage = UIImage(data: data)!
+                self.tblMenuOptions.reloadData()
+            }
+        }
+    }
+    
+    
+}
 
