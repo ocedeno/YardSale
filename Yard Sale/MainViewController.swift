@@ -299,7 +299,7 @@ class MainViewController: BaseViewController, CLLocationManagerDelegate {
         locationManager.startUpdatingLocationWithCompletionHandler { (lat, lon, status, verboseMessage, error) in
             guard error == nil else
             {
-                print("\nLocation Update Error: \(error!)")
+                self.activityIndicator.stopAnimating()
                 return
             }
             DispatchQueue.main.async
@@ -339,6 +339,7 @@ class MainViewController: BaseViewController, CLLocationManagerDelegate {
                 self.searchForLocation?.isHidden = true
                 self.view.endEditing(true)
                 self.dismissSubview()
+                self.activityIndicator.stopAnimating()
                 return
             }
             

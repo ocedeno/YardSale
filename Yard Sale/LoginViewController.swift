@@ -72,7 +72,7 @@ class LoginViewController: UIViewController
                     guard error == nil else
                     {
                         self.utilityClass.errorAlert(title: "Signup Error", message: (error?.localizedDescription)!, cancelTitle: "Try Again", view: self)
-                        
+                        self.activityIndicator.stopAnimating()
                         return
                     }
                     
@@ -82,9 +82,11 @@ class LoginViewController: UIViewController
                         guard error == nil else
                         {
                             DispatchQueue.main.async
-                                {
-                                    self.utilityClass.errorAlert(title: "Email Error", message: (error?.localizedDescription)!, cancelTitle: "Dismiss", view: self)
+                            {
+                                self.utilityClass.errorAlert(title: "Email Error", message: (error?.localizedDescription)!, cancelTitle: "Dismiss", view: self)
+                                self.activityIndicator.stopAnimating()
                             }
+
                             return
                         }
                     })
@@ -137,7 +139,7 @@ class LoginViewController: UIViewController
             guard error == nil else
             {
                 self.utilityClass.errorAlert(title: "Login Error", message: (error?.localizedDescription)!, cancelTitle: "Try Again", view: self)
-                
+                self.activityIndicator.stopAnimating()
                 return
             }
             self.activityIndicator.stopAnimating()
