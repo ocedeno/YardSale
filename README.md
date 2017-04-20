@@ -22,6 +22,19 @@ This application was created purposely for the [Udacity iOS Developer Nanodegree
 * Extensions
 * Firebase
 
+**PODS Necessary To Build App:**
+
+* Firebase/Core
+* Firebase/Database
+* Firebase/Auth
+* Firebase/Storage
+* FirebaseUI/Storage
+* FacebookCore
+* FacebookLogin
+* FacebookShare
+* Bolts
+* GoogleSignIn
+
 **Testing The App:**
 
 * Download the project to your computer from this project page.
